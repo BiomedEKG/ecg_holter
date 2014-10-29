@@ -1,16 +1,27 @@
-﻿Build started 2014-10-27 22:40:31.
-     1>Project "C:\Users\hszczouszcz\Documents\Visual Studio 2012\Projects\Agh\DADM\Ekg\Ekg.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I.\GeneratedFiles /I. /IC:\Qt32\Qt5.3.2\5.3\msvc2012_opengl\include /I.\GeneratedFiles\Debug /IC:\Qt32\Qt5.3.2\5.3\msvc2012_opengl\include\QtCore /IC:\Qt32\Qt5.3.2\5.3\msvc2012_opengl\include\QtGui /IC:\Qt32\Qt5.3.2\5.3\msvc2012_opengl\include\QtWidgets /I"C:\Users\hszczouszcz\Documents\Visual Studio 2012\Projects\Agh\DADM\Ekg\\include" /I"C:\Users\hszczouszcz\Documents\Visual Studio 2012\Projects\Agh\DADM\Ekg\\gsl\include" /Zi /nologo /W1 /WX- /Od /Oy- /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_CORE_LIB /D QT_GUI_LIB /D QT_WIDGETS_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t- /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+﻿Build started 2014-10-29 20:50:39.
+     1>Project "D:\Uczelnia 2\BiomedEKG\ecg_holter\Agh\DADM\Ekg\Ekg.vcxproj" on node 2 (Build target(s)).
+     1>CustomBuild:
+         Moc'ing ekg.h...
+         Uic'ing ekg.ui...
+         Rcc'ing ekg.qrc...
+     1>RCC : warning : No resources in 'D:\Uczelnia 2\BiomedEKG\ecg_holter\Agh\DADM\Ekg\ekg.qrc'.
+         
+       ClCompile:
+         D:\Program Files\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I.\GeneratedFiles /I. /ID:\Qt\Qt5.3.2\5.3\msvc2012_opengl\include /I.\GeneratedFiles\Debug /ID:\Qt\Qt5.3.2\5.3\msvc2012_opengl\include\QtCore /ID:\Qt\Qt5.3.2\5.3\msvc2012_opengl\include\QtGui /ID:\Qt\Qt5.3.2\5.3\msvc2012_opengl\include\QtWidgets /I"D:\Uczelnia 2\BiomedEKG\ecg_holter\Agh\DADM\Ekg\\include" /I"D:\Uczelnia 2\BiomedEKG\ecg_holter\Agh\DADM\Ekg\\gsl\include" /Zi /nologo /W1 /WX- /Od /Oy- /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_CORE_LIB /D QT_GUI_LIB /D QT_WIDGETS_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t- /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ekg.cpp GeneratedFiles\Debug\moc_ekg.cpp main.cpp
+         ekg.cpp
+         moc_ekg.cpp
          main.cpp
+         Generating Code...
+         D:\Program Files\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I.\GeneratedFiles /I. /ID:\Qt\Qt5.3.2\5.3\msvc2012_opengl\include /I.\GeneratedFiles\Debug /ID:\Qt\Qt5.3.2\5.3\msvc2012_opengl\include\QtCore /ID:\Qt\Qt5.3.2\5.3\msvc2012_opengl\include\QtGui /ID:\Qt\Qt5.3.2\5.3\msvc2012_opengl\include\QtWidgets /I"D:\Uczelnia 2\BiomedEKG\ecg_holter\Agh\DADM\Ekg\\include" /I"D:\Uczelnia 2\BiomedEKG\ecg_holter\Agh\DADM\Ekg\\gsl\include" /Zi /nologo /W1 /WX- /Od /Oy- /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_CORE_LIB /D QT_GUI_LIB /D QT_WIDGETS_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t- /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt GeneratedFiles\qrc_ekg.cpp
+         qrc_ekg.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\hszczouszcz\Documents\Visual Studio 2012\Projects\Agh\DADM\Win32\Debug\\Ekg.exe" /NOLOGO /LIBPATH:C:\Qt32\Qt5.3.2\5.3\msvc2012_opengl\lib /LIBPATH:"C:\Users\hszczouszcz\Documents\Visual Studio 2012\Projects\Agh\DADM\Ekg\\lib" /LIBPATH:"C:\Users\hszczouszcz\Documents\Visual Studio 2012\Projects\Agh\DADM\Ekg\\gsl\lib" qtmaind.lib Qt5Cored.lib Qt5Guid.lib Qt5Widgetsd.lib "libfftw3-3.lib" "libfftw3f-3.lib" "libfftw3l-3.lib" cblas_d.lib gsl_d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\hszczouszcz\Documents\Visual Studio 2012\Projects\Agh\DADM\Win32\Debug\Ekg.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\hszczouszcz\Documents\Visual Studio 2012\Projects\Agh\DADM\Win32\Debug\Ekg.lib" /MACHINE:X86 /SAFESEH Debug\ekg.obj
+         D:\Program Files\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Uczelnia 2\BiomedEKG\ecg_holter\Agh\DADM\Win32\Debug\\Ekg.exe" /NOLOGO /LIBPATH:D:\Qt\Qt5.3.2\5.3\msvc2012_opengl\lib /LIBPATH:"D:\Uczelnia 2\BiomedEKG\ecg_holter\Agh\DADM\Ekg\\lib" /LIBPATH:"D:\Uczelnia 2\BiomedEKG\ecg_holter\Agh\DADM\Ekg\\gsl\lib" qtmaind.lib Qt5Cored.lib Qt5Guid.lib Qt5Widgetsd.lib "libfftw3-3.lib" "libfftw3f-3.lib" "libfftw3l-3.lib" cblas_d.lib gsl_d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Uczelnia 2\BiomedEKG\ecg_holter\Agh\DADM\Win32\Debug\Ekg.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Uczelnia 2\BiomedEKG\ecg_holter\Agh\DADM\Win32\Debug\Ekg.lib" /MACHINE:X86 /SAFESEH Debug\ekg.obj
          Debug\moc_ekg.obj
          Debug\qrc_ekg.obj
          Debug\main.obj
-         Ekg.vcxproj -> C:\Users\hszczouszcz\Documents\Visual Studio 2012\Projects\Agh\DADM\Win32\Debug\Ekg.exe
-     1>Done Building Project "C:\Users\hszczouszcz\Documents\Visual Studio 2012\Projects\Agh\DADM\Ekg\Ekg.vcxproj" (Build target(s)).
+         Ekg.vcxproj -> D:\Uczelnia 2\BiomedEKG\ecg_holter\Agh\DADM\Win32\Debug\Ekg.exe
+     1>Done Building Project "D:\Uczelnia 2\BiomedEKG\ecg_holter\Agh\DADM\Ekg\Ekg.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.74
+Time Elapsed 00:00:16.04
