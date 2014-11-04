@@ -45,3 +45,6 @@
 /Agh/DADM/Ekg/Debug/CL.read.1.tlog
 
 /Agh/DADM/Ekg/Debug/CL.write.1.tlog
+
+*.tlog
+*.log
