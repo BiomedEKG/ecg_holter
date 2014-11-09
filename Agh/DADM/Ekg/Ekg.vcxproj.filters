@@ -33,6 +33,12 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{8208523c-aceb-4eb0-8869-cc66f243dc0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\NowyFolderNaKazdyModul">
+      <UniqueIdentifier>{be580e47-5a67-469d-bb91-c9b8a3710729}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

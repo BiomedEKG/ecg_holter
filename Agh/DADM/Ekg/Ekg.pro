@@ -6,6 +6,7 @@ TARGET = Ekg
 DESTDIR = ../Win32/Debug
 QT += core widgets gui
 CONFIG += console
+
 DEFINES += WIN64 QT_DLL QT_WIDGETS_LIB
 INCLUDEPATH += ./GeneratedFiles \
     . \
