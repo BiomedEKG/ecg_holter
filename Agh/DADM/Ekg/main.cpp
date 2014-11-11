@@ -1,6 +1,7 @@
 #include "ekg.h"
 #include <QtWidgets/QApplication>
 #include <iostream>
+#include <stdio.h>
 #define FFTW_DLL
 #include <fftw3.h>
 #include <gsl\gsl_sf_bessel.h>
@@ -11,7 +12,7 @@
 #include <qwt_plot_grid.h>
 #include <qwt_symbol.h>
 #include <qwt_legend.h>
-
+#include <wfdb.h>
 
 int main(int argc, char *argv[])
 {
@@ -37,13 +38,16 @@ int main(int argc, char *argv[])
 	std::cout << "ALKO PROJEKT CPP CHLOSTA!";			
 	
 	return a.exec();*/
+	
+
+	//QCoreApplication::addLibraryPath("C: Qt\Qt5.3.2\5.3\msvc2012_opengl\plugins");
 
 	    QApplication a( argc, argv );
  
     QwtPlot plot;
-    plot.setTitle( "Plot Demo" );
+    plot.setTitle( "WFDB is working" );
     plot.setCanvasBackground( Qt::white );
-    plot.setAxisScale( QwtPlot::yLeft, 0.0, 10.0 );
+    plot.setAxisScale( QwtPlot::yLeft, 800.0, 1300.0 );
     plot.insertLegend( new QwtLegend() );
  
     QwtPlotGrid *grid = new QwtPlotGrid();
@@ -59,16 +63,28 @@ int main(int argc, char *argv[])
     curve->setSymbol( symbol );
  
     QPolygonF points;
-    points << QPointF( 0.0, 4.4 ) << QPointF( 1.0, 3.0 )
-        << QPointF( 2.0, 4.5 ) << QPointF( 3.0, 6.8 )
-        << QPointF( 4.0, 7.9 ) << QPointF( 5.0, 7.1 );
+	int i;
+    WFDB_Sample v[2];
+    WFDB_Siginfo s[2];
+
+    if (isigopen("100s", s, 2) < 2)
+        exit(1);
+	
+    for (i = 0; i < 1000; i++) {
+        if (getvec(v) < 0)
+            break;
+		points << QPointF( i, v[0] ) ;
+
+    }
+
     curve->setSamples( points );
  
     curve->attach( &plot );
   
     plot.resize( 600, 400 );
     plot.show(); 
-  
+
+
     return a.exec();
 }
 
