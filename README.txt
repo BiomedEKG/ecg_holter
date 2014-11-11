@@ -1,2 +1,1 @@
-Wszystkie informacje techniczne na bie¿¹co tutaj:
-http://student.agh.edu.pl/~kzet/dadm/app/
+Prosze wszystkich o zapoznanie sie z informacjami w sekcji Klasy na stronie http://student.agh.edu.pl/~kzet/dadm/app/
