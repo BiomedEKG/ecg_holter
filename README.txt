@@ -1,2 +1,2 @@
-Witaj w repozytorium BiomedEKG!
-Proszê wszystkich o wpisanie w opisie GitHub oraz Skype nazwy swojego zespo³u!
+Wszystkie informacje techniczne na bie¿¹co tutaj:
+http://student.agh.edu.pl/~kzet/dadm/app/
