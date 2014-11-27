@@ -1,1 +1,1 @@
-Prosze wszystkich o zapoznanie sie z informacjami w sekcji Klasy na stronie http://student.agh.edu.pl/~kzet/dadm/app/
+!!!TO JEST STARA BRANCH MASTER -> ZRÓB SWITCH NA BRANCH DEVELOP!!!
