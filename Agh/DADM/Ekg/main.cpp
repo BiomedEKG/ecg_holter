@@ -11,6 +11,7 @@
 #include <qwt_plot_grid.h>
 #include <qwt_symbol.h>
 #include <qwt_legend.h>
+#include <wfdb.h>
 
 
 int main(int argc, char *argv[])
