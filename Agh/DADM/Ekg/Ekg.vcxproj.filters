@@ -39,6 +39,9 @@
     <Filter Include="Modules\NowyFolderNaKazdyModul">
       <UniqueIdentifier>{be580e47-5a67-469d-bb91-c9b8a3710729}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Visualization">
+      <UniqueIdentifier>{bc1673cf-7a51-475e-b394-1bf5eba5eede}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
