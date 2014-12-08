@@ -11,7 +11,7 @@
 #include <qwt_plot_grid.h>
 #include <qwt_symbol.h>
 #include <qwt_legend.h>
-#include <wfdb.h>
+#include <Input.h>
 
 
 int main(int argc, char *argv[])
@@ -39,7 +39,50 @@ int main(int argc, char *argv[])
 	
 	return a.exec();*/
 
-	    QApplication a( argc, argv );
+
+	//Sciezka musi byc absolutna !!!!!
+	// Sama nazwa zbioru plikow bez ich rozszerzenia
+
+	char * path = "C:\\Users\\asus\\Downloads\\116"; //USTAW NA SWOJA SCIEZKE
+	//char * path = "C:\\Users\\asus\\Downloads\\wfdb\\wfdb\\wfdb-10.5.23\\data\\100s";//USTAW NA SWOJA SCIEZKE
+	Input Handler; // Nowy obiekt obslugi WFDB
+	Handler.iOpen(path); // Otworz plik, operacja domyslnie ustawia kanal 0
+
+	// Z tego miejsca dostêpne dane to:
+/*
+	Handler.dvData; // Dane z calego kanalu w mV, vector double
+	Handler.ivData; // Dane z calego kanalu w ADU, vector int
+	Handler.iFs;// Fs
+	Handler.iSigLength;// ilosc probek
+	Handler.iSigTotNumber;// calkowita liczba sygnalow w pliku
+	Handler.iSelectedSignal;// aktualnie wybrany sygnal w pliku
+*/
+	/// Wyswietl 10 probek z kanalu 0
+	printf("Signal 0, File %s \n", path);
+	for(int i = 0; i < 10;i++) {
+		printf("ADU: %d\t mV:%f \n",Handler.ivData[i], Handler.dvData[i]);
+	}
+
+	Handler.iSelectSignal(1);// zmien na kanal 1
+	/// WYswietl 10 probek z kanalu 1
+	printf("Signal 1 ,file: %s \n", path );
+	for(int i = 0; i < 10;i++) {
+		printf("ADU: %d\t mV:%f \n",Handler.ivData[i], Handler.dvData[i]);
+	}
+
+	path = "C:\\Users\\asus\\Downloads\\wfdb\\wfdb\\wfdb-10.5.23\\data\\100s"; // Nowa sciezka
+	//path = "C:\\Users\\asus\\Downloads\\116";
+
+	Handler.iOpen(path);//otworz nowy plik
+
+
+	///wyswietl 10 probek z kanalu 0
+	printf("Signal 0,file: %s \n",path);
+	for(int i = 0; i < 10;i++) {
+		printf("ADU: %d\t mV:%f \n",Handler.ivData[i], Handler.dvData[i]);
+	}
+
+	QApplication a( argc, argv );
  
     QwtPlot plot;
     plot.setTitle( "Plot Demo" );
@@ -69,7 +112,9 @@ int main(int argc, char *argv[])
   
     plot.resize( 600, 400 );
     plot.show(); 
-  
+
+   
+
     return a.exec();
 }
 

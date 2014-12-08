@@ -39,6 +39,9 @@
     <Filter Include="Modules\NowyFolderNaKazdyModul">
       <UniqueIdentifier>{be580e47-5a67-469d-bb91-c9b8a3710729}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\NowyFolderNaKazdyModul\I/O">
+      <UniqueIdentifier>{3316bf7f-8511-4fe8-b2f9-d860f24aaafd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -56,6 +59,9 @@
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -71,6 +77,9 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ekg.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

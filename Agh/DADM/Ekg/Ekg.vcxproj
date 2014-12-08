@@ -89,6 +89,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ekg.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ekg.h" />
+    <ClInclude Include="Input.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
