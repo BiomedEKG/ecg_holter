@@ -8,7 +8,26 @@ message("You are running qmake on a generated .pro file. This may not work!")
 
 
 HEADERS += ./ekg.h
-SOURCES += ./ekg.cpp \
-    ./main.cpp
+SOURCES += ./ekg.cpp 
+
 FORMS += ./ekg.ui
 RESOURCES += ekg.qrc
+
+INCLUDEPATH += gui
+
+SOURCES += main.cpp\
+        gui/mainwindow.cpp \
+    gui/graphswidget.cpp \
+    gui/mainwidget.cpp \
+    gui/selectmodulesprivate.cpp \
+    gui/selectmodulemenu.cpp \
+	gui/channelsmenu.cpp \
+	gui/channelsprivate.cpp
+	
+HEADERS  += gui/mainwindow.h \
+    gui/graphswidget.h \
+    gui/mainwidget.h \
+    gui/selectmodulesprivate.h \
+    gui/selectmodulemenu.h \
+	gui/channelsmenu.h \
+	gui/channelsprivate.h
