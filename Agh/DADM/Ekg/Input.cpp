@@ -6,56 +6,97 @@ int Input::iOpen(char *cSignalPath)
 {
 	//Check path if not null !
 	cPath = cSignalPath;
-	ivData.clear();
-	dvData.clear();
-	iSelectedSignal = 0;
-	
+	imChannelID.clear();
+	iSelectedChannelID = -1;
+	iFs = sampfreq(cSignalPath);
+
 	iSigTotNumber = isigopen(cPath, NULL, 0);// Sprawdz liczbe sygnalow
 	
-      if (iSigTotNumber < 1) exit(2008);
+      if (iSigTotNumber < 1) return(2008);//Nie obsluzony blad
 	  if (iCounter == 0){
-		s = (WFDB_Siginfo *)malloc(iSigTotNumber * sizeof(WFDB_Siginfo)); //przydziel pamiec
-		v = (WFDB_Sample *)malloc(iSigTotNumber * sizeof(WFDB_Sample));
+	
+		  s = new WFDB_Siginfo[iSigTotNumber];
+		  v = new WFDB_Sample[iSigTotNumber];
 	  } 
 	  else {
-		free(s);free(v);
-		s = (WFDB_Siginfo *)malloc(iSigTotNumber * sizeof(WFDB_Siginfo)); //przydziel pamiec
-		v = (WFDB_Sample *)malloc(iSigTotNumber * sizeof(WFDB_Sample));
+		  delete s;
+		  delete v;
+		  s = new WFDB_Siginfo[iSigTotNumber];
+		  v = new WFDB_Sample[iSigTotNumber];
+		
 	  }
+
 	  iCounter++;
-      if (s == NULL) {
-          fprintf(stderr, "insufficient memory\n");
-	        exit(3);
-      }
-	  int x;
-	  x = isigopen(cPath, s, iSigTotNumber);
-	if (x != iSigTotNumber)  exit(2009);
+	
+	if (isigopen(cPath, s, iSigTotNumber) != iSigTotNumber)  exit(2009);
 
-	  iSigLength = s[iSelectedSignal].nsamp;
+	  for(int i = 0; i < iSigTotNumber; i++){
 
-	  ivData.reserve(iSigLength); dvData.reserve(iSigLength); // Przydziel miejsce dla vectorow
-	  while(getvec(v) > 0) {
-		  ivData.push_back(v[iSelectedSignal]); // Dane int
-		  dvData.push_back(aduphys(iSelectedSignal,v[iSelectedSignal])); //Dane w mV
+	  imChannelID[s[i].desc] = i+1 ;
+
 	  }
+
 	  return(0);
 }
-int Input::iSelectSignal(int iSigNumber)
+int Input::iSelectChannel( char * cChannelName)
 {
-	//if ((iSigNumber+1) > iSigNumber)
-	//	return(-1);
-	iSelectedSignal = iSigNumber;
-	ivData.clear();
+	iSelectedChannelID = imChannelID[cChannelName];
+	if (iSelectedChannelID > 0 ){
+
+	iSigLength = s[iSelectedChannelID-1].nsamp;
+	this->cChannelName = cChannelName;
+	return(iSelectedChannelID);
+	}
+	else{
+	iSelectedChannelID = -1;
+	return(iSelectedChannelID);
+	}
+}
+vector <double> Input:: vdGetChannelData(void)
+{
 	dvData.clear();
 	isigsettime(0L); // Ustaw sie na poczatku pliku 
-	iSigLength = s[iSelectedSignal].nsamp;
 	ivData.reserve(iSigLength); dvData.reserve(iSigLength); // Przydziel miejsce dla vectorow
-	  while(getvec(v) > 0) {
-		  ivData.push_back(v[iSelectedSignal]); // Dane int
-		  dvData.push_back(aduphys(iSelectedSignal,v[iSelectedSignal])); //Dane w mV
+	while(getvec(v) > 0) {
+		  dvData.push_back(aduphys(iSelectedChannelID-1,v[iSelectedChannelID-1])); //Dane w mV
 	  }
 
-	return(0);
+	return dvData;
+
+}
+vector <int> Input:: viGetChannelData(void)
+{
+	ivData.clear();
+	isigsettime(0L); // Ustaw sie na poczatku pliku 
+	ivData.reserve(iSigLength); dvData.reserve(iSigLength); // Przydziel miejsce dla vectorow
+	while(getvec(v) > 0) {
+		  ivData.push_back(v[iSelectedChannelID-1]); // Dane int
+	  }
+
+	return ivData;
+
+}
+int Input::iGetFs(void)
+{
+	return iFs;
+}
+int Input::iGetNumberOfChannels(void)
+{
+	return iSigTotNumber;
+}
+char * Input::cGetChannelName(void)
+{
+	return cChannelName;
+}
+char ** Input::acGetChannelsNames(void)
+{
+	cChannelNames = new char*[iSigTotNumber];
+	
+	for(int i = 0; i < iSigTotNumber; i++) {
+	
+		cChannelNames[i] = s[i].desc; ;
+	}
+	return cChannelNames;
 }
 void Input::Close(void)
 {

@@ -43,44 +43,39 @@ int main(int argc, char *argv[])
 	//Sciezka musi byc absolutna !!!!!
 	// Sama nazwa zbioru plikow bez ich rozszerzenia
 
-	char * path = "C:\\Users\\asus\\Downloads\\116"; //USTAW NA SWOJA SCIEZKE
-	//char * path = "C:\\Users\\asus\\Downloads\\wfdb\\wfdb\\wfdb-10.5.23\\data\\100s";//USTAW NA SWOJA SCIEZKE
+	char * path1 = "C:\\Users\\asus\\Downloads\\116";
+	char * path2 = "C:\\Users\\asus\\Downloads\\115"; 
+	//char * path2 = "C:\\Users\\asus\\Downloads\\wfdb\\wfdb\\wfdb-10.5.23\\data\\100s";//USTAW NA SWOJA SCIEZKE
 	Input Handler; // Nowy obiekt obslugi WFDB
-	Handler.iOpen(path); // Otworz plik, operacja domyslnie ustawia kanal 0
+	char ** ChannelNames; 	
+	vector <int> viData;
+	vector <double> vdData;
 
-	// Z tego miejsca dostêpne dane to:
-/*
-	Handler.dvData; // Dane z calego kanalu w mV, vector double
-	Handler.ivData; // Dane z calego kanalu w ADU, vector int
-	Handler.iFs;// Fs
-	Handler.iSigLength;// ilosc probek
-	Handler.iSigTotNumber;// calkowita liczba sygnalow w pliku
-	Handler.iSelectedSignal;// aktualnie wybrany sygnal w pliku
-*/
-	/// Wyswietl 10 probek z kanalu 0
-	printf("Signal 0, File %s \n", path);
-	for(int i = 0; i < 10;i++) {
-		printf("ADU: %d\t mV:%f \n",Handler.ivData[i], Handler.dvData[i]);
+	Handler.iOpen(path1); // Otworz plik
+	ChannelNames = Handler.acGetChannelsNames();
+
+	for(int i = 0; i < Handler.iGetNumberOfChannels() ;i++) 
+	{
+		Handler.iSelectChannel(ChannelNames[i]);
+		printf("Channel Name: %s Data: \n", Handler.cGetChannelName() );
+		viData = Handler.viGetChannelData();
+		vdData = Handler.vdGetChannelData();
+		for(int j = 0; j < 10;j++) {printf("ADU: %d\t mV:%f \n",viData[j], vdData[j]);}
 	}
+	printf("Freq: %d Hz \n",Handler.iGetFs());
 
-	Handler.iSelectSignal(1);// zmien na kanal 1
-	/// WYswietl 10 probek z kanalu 1
-	printf("Signal 1 ,file: %s \n", path );
-	for(int i = 0; i < 10;i++) {
-		printf("ADU: %d\t mV:%f \n",Handler.ivData[i], Handler.dvData[i]);
+	Handler.Close();
+	Handler.iOpen(path2);
+	ChannelNames = Handler.acGetChannelsNames();
+	for(int i = 0; i < Handler.iGetNumberOfChannels() ;i++)
+	{
+		Handler.iSelectChannel(ChannelNames[i]);
+		printf("Channel Name: %s \nData: \n", Handler.cGetChannelName() );
+		viData = Handler.viGetChannelData();
+		vdData = Handler.vdGetChannelData();
+		for(int j = 0; j < 10;j++){printf("ADU: %d\t mV:%f \n",viData[j], vdData[j]);}
 	}
-
-	path = "C:\\Users\\asus\\Downloads\\wfdb\\wfdb\\wfdb-10.5.23\\data\\100s"; // Nowa sciezka
-	//path = "C:\\Users\\asus\\Downloads\\116";
-
-	Handler.iOpen(path);//otworz nowy plik
-
-
-	///wyswietl 10 probek z kanalu 0
-	printf("Signal 0,file: %s \n",path);
-	for(int i = 0; i < 10;i++) {
-		printf("ADU: %d\t mV:%f \n",Handler.ivData[i], Handler.dvData[i]);
-	}
+	printf("Freq: %d Hz \n",Handler.iGetFs());
 
 	QApplication a( argc, argv );
  
