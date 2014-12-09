@@ -7,8 +7,8 @@ using namespace std;
 class Input
 {
 private:
-	WFDB_Sample *v;
-    WFDB_Siginfo *s;
+	WFDB_Sample *Sample;
+    WFDB_Siginfo *SignalInfo;
 	char *cPath; 
 	char **cChannelNames;
 	int iCounter;
@@ -19,8 +19,8 @@ private:
 	char * cChannelName;//Opis kanalu/odprowadzenia
 	vector <int>  ivData;//Dane w jednostkach ADU
 	vector <double> dvData;//Dane w mV
-	map< char *, vector <double>> dmData;
-	map< char *, vector <int>> imData;
+	//map< char *, vector <double>> dmData; //Do przyszlego rozwoju
+	//map< char *, vector <int>> imData; // Do przyszlego rozwoju
 	map<char *, int> imChannelID;
 public:
 
@@ -32,6 +32,7 @@ public:
 
 	///Data Accessors
 	int iGetFs(void); 
+	int iGetSignalLength(void);
 	int iGetNumberOfChannels(void);
 	char * cGetChannelName(void);
 	char ** acGetChannelsNames(void);
