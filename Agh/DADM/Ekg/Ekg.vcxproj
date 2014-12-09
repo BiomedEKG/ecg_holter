@@ -56,7 +56,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(ProjectDir)\libs\wfdb;$(QTDIR)\lib;$(ProjectDir)\libs\gsl;$(ProjectDir)\libs\qwt;$(ProjectDir)\libs\fftw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;libfftw3-3.lib;libfftw3f-3.lib;libfftw3l-3.lib;cblas_d.lib;gsl_d.lib;qwtd.lib;WFDB_LIB.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Enginiod.lib;Qt5AxBased.lib;Qt5AxContainerd.lib;Qt5AxServerd.lib;Qt5CLucened.lib;Qt5Concurrentd.lib;Qt5Declaratived.lib;Qt5DesignerComponentsd.lib;Qt5Designerd.lib;Qt5Helpd.lib;Qt5Multimediad.lib;Qt5MultimediaQuick_pd.lib;Qt5MultimediaWidgetsd.lib;Qt5Networkd.lib;Qt5Nfcd.lib;Qt5OpenGLd.lib;Qt5OpenGLExtensionsd.lib;Qt5PlatformSupportd.lib;Qt5Positioningd.lib;Qt5Qmld.lib;Qt5Quickd.lib;Qt5QuickParticlesd.lib;Qt5QuickTestd.lib;Qt5QuickWidgetsd.lib;Qt5Scriptd.lib;Qt5ScriptToolsd.lib;Qt5Svgd.lib;Qt5Testd.lib;Qt5UiTools.lib;Qt5Xmld.lib;libfftw3-3.lib;libfftw3f-3.lib;libfftw3l-3.lib;cblas_d.lib;gsl_d.lib;qwtd.lib;WFDB_LIB.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -258,7 +258,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties UicDir=".\GeneratedFiles" MocDir=".\GeneratedFiles\$(ConfigurationName)" MocOptions="" RccDir=".\GeneratedFiles" lupdateOnBuild="0" lupdateOptions="" lreleaseOptions="" Qt5Version_x0020_Win32="5.3.2" />
+      <UserProperties UicDir=".\GeneratedFiles" MocDir=".\GeneratedFiles\$(ConfigurationName)" MocOptions="" RccDir=".\GeneratedFiles" lupdateOnBuild="0" lupdateOptions="" lreleaseOptions="" Qt5Version_x0020_Win32="msvc2012_opengl" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
