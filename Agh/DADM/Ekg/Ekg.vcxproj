@@ -90,7 +90,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="proba.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -117,7 +116,12 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CurvePlot.h" />
     <ClInclude Include="GeneratedFiles\ui_ekg.h" />
+    <ClInclude Include="HistogramPlot.h" />
+    <ClInclude Include="MajorPlot.h" />
+    <ClInclude Include="ScatterPlot.h" />
+    <ClInclude Include="Table.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">

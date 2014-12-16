@@ -59,9 +59,6 @@
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="proba.cpp">
-      <Filter>Modules\VisualizationModule</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -77,6 +74,21 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ekg.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CurvePlot.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="MajorPlot.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="ScatterPlot.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="HistogramPlot.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Table.h">
+      <Filter>Modules\VisualizationModule</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
