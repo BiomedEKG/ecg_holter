@@ -54,7 +54,8 @@ int main(int argc, char *argv[])
 		
 		ScatterPlot sp; //obiekt2
 		sp.ScatterPlotInit(8, Qt:: red, r_peaks,r_peaks_value,mp.plotarea,"R-Peaks",QwtPlotCurve::CurveStyle::Dots, QwtSymbol::Style::Star2);
-		
+		//Table t0(5,2,mp.plotarea->canvas());	
+
 /***********************Histogram*****************************************************************************/
 		
 		MajorPlot mp2;
@@ -62,8 +63,8 @@ int main(int argc, char *argv[])
 		hp.HistogramPlotInit(hist, mp2.plotarea);
 		hp.setHistogramPlotArea(mp2,0.0,7.0,1.0,0.0,6.0,1.0,"RRx","value","sample Histogram");
 
-		MajorPlot mp4;
-		Table t(6,3,mp4.plotarea->canvas());
+		Table t(5,2,mp2.plotarea->canvas());
+
 
 		return a.exec();
 }
