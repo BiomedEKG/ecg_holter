@@ -42,6 +42,9 @@
     <Filter Include="Modules\gui">
       <UniqueIdentifier>{c7c77964-42ab-4e1b-b341-6f130b9815b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\ECGBaseline">
+      <UniqueIdentifier>{0b26a355-dedc-447b-bb5a-804852293940}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
