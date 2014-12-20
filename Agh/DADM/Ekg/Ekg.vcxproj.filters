@@ -113,6 +113,12 @@
     <ClCompile Include="gui\channelsprivate.cpp">
       <Filter>Modules\gui</Filter>
     </ClCompile>
+    <ClCompile Include="ECGBaseline.cpp">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingAverage.cpp">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -149,6 +155,15 @@
   <ItemGroup>
     <ClInclude Include="gui\channelsprivate.h">
       <Filter>Modules\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="ECGBaseline.h">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClInclude>
+    <ClInclude Include="Methods.h">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingAverage.h">
+      <Filter>Modules\ECGBaseline</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
