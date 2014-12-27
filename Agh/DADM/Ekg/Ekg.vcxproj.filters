@@ -42,6 +42,9 @@
     <Filter Include="Modules\gui">
       <UniqueIdentifier>{c7c77964-42ab-4e1b-b341-6f130b9815b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\HRV1">
+      <UniqueIdentifier>{6f2d56a1-ec55-4a5c-9ab4-ff93ef241b9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
