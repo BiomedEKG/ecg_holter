@@ -15,7 +15,8 @@
 #include <wfdb.h>
 #include "hrv1.cpp"
 #include "hrv1.h"
-
+#include <fstream>
+#include <string>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -74,7 +75,7 @@ int main(int argc, char *argv[])
   
 	w.addGraph(&plot);
 	w.show();
-
+	HRV1 dark;
 	 std::vector < double > tab;
 	    double x = 0;
     for( int i = 0; i < 1000; i++ )
@@ -82,8 +83,13 @@ int main(int argc, char *argv[])
         tab.push_back( x );
         x = x + 2;
     }
-	HRV1 dark;
+	
+
+	//vector <double> data12 =dark.read_from_file("C:/Users/darsonss/Desktop/vector.txt");
+
 	map<string, double> c = dark.compute(tab);
+
+	dark.time_freq_compute(tab);
 
 	std::cout << "RR_mean: " << c["RR_mean"] << "\n";
 	std::cout << "RR_sdnn: " << c["RR_sdnn"] << "\n";
@@ -94,5 +100,18 @@ int main(int argc, char *argv[])
 	std::cout << "RR_sdanni: " << c["RR_sdanni"] << "\n";
 	std::cout << "RR_sdsd: " << c["RR_sdsd"] << "\n";
 
+	map<string, double> d = dark.computeFreq(tab);
+
+	std::cout << "TP: " << d["TP"] << "\n";
+	std::cout << "HF: " << c["HF"] << "\n";
+	std::cout << "LF: " << d["LF"] << "\n";
+	std::cout << "VLF: " << d["VLF"] << "\n";
+	std::cout << "ULF: " << d["ULF"] << "\n";
+	std::cout << "LFHF: " << d["LFHF"] << "\n";
+
     return a.exec();
+
 }
+
+
+

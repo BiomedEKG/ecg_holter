@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <cmath>
 using namespace std;
 
 #endif
