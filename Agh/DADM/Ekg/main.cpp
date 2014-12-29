@@ -17,6 +17,9 @@
 #include "hrv1.h"
 #include <fstream>
 #include <string>
+
+using namespace std;
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -76,7 +79,7 @@ int main(int argc, char *argv[])
 	w.addGraph(&plot);
 	w.show();
 	HRV1 dark;
-	 std::vector < double > tab;
+	 vector < double > tab;
 	    double x = 0;
     for( int i = 0; i < 10; i++ )
     {
@@ -91,23 +94,23 @@ int main(int argc, char *argv[])
 
 	dark.time_freq_compute(tab);
 
-	std::cout << "RR_mean: " << c["RR_mean"] << "\n";
-	std::cout << "RR_sdnn: " << c["SDNN"] << "\n";
-	std::cout << "RR_rmssd: " << c["RMSSD"] << "\n";
-	std::cout << "RR_nn50: " << c["NN50"] << "\n";
-	std::cout << "RR_pnn50: " << c["pNN50"] << "\n";
-	std::cout << "RR_sdann: " << c["SDANN"] << "\n";
-	std::cout << "RR_sdanni: " << c["SDANN_index"] << "\n";
-	std::cout << "RR_sdsd: " << c["SDSD"] << "\n";
+	cout << "RR_mean: " << c["RR_mean"] << "\n";
+	cout << "RR_sdnn: " << c["SDNN"] << "\n";
+	cout << "RR_rmssd: " << c["RMSSD"] << "\n";
+	cout << "RR_nn50: " << c["NN50"] << "\n";
+	cout << "RR_pnn50: " << c["pNN50"] << "\n";
+	cout << "RR_sdann: " << c["SDANN"] << "\n";
+	cout << "RR_sdanni: " << c["SDANN_index"] << "\n";
+	cout << "RR_sdsd: " << c["SDSD"] << "\n";
 
 	map<string, double> d = dark.computeFreq(tab);
 
-	std::cout << "TP: " << d["TP"] << "\n";
-	std::cout << "HF: " << c["HF"] << "\n";
-	std::cout << "LF: " << d["LF"] << "\n";
-	std::cout << "VLF: " << d["VLF"] << "\n";
-	std::cout << "ULF: " << d["ULF"] << "\n";
-	std::cout << "LFHF: " << d["LFHF"] << "\n";
+	cout << "TP: " << d["TP"] << "\n";
+	cout << "HF: " << c["HF"] << "\n";
+	cout << "LF: " << d["LF"] << "\n";
+	cout << "VLF: " << d["VLF"] << "\n";
+	cout << "ULF: " << d["ULF"] << "\n";
+	cout << "LFHF: " << d["LFHF"] << "\n";
 
     return a.exec();
 
