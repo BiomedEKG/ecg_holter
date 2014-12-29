@@ -113,6 +113,9 @@
     <ClCompile Include="gui\channelsprivate.cpp">
       <Filter>Modules\gui</Filter>
     </ClCompile>
+    <ClCompile Include="hrv1.cpp">
+      <Filter>Modules\HRV1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -149,6 +152,9 @@
   <ItemGroup>
     <ClInclude Include="gui\channelsprivate.h">
       <Filter>Modules\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="hrv1.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

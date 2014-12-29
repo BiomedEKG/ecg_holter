@@ -13,7 +13,8 @@
 #include <qwt_symbol.h>
 #include <qwt_legend.h>
 #include <wfdb.h>
-
+#include "hrv1.cpp"
+#include "hrv1.h"
 
 int main(int argc, char *argv[])
 {
@@ -73,6 +74,25 @@ int main(int argc, char *argv[])
   
 	w.addGraph(&plot);
 	w.show();
+
+	 std::vector < double > tab;
+	    double x = 0;
+    for( int i = 0; i < 1000; i++ )
+    {
+        tab.push_back( x );
+        x = x + 2;
+    }
+	HRV1 dark;
+	map<string, double> c = dark.compute(tab);
+
+	std::cout << "RR_mean: " << c["RR_mean"] << "\n";
+	std::cout << "RR_sdnn: " << c["RR_sdnn"] << "\n";
+	std::cout << "RR_rmssd: " << c["RR_rmssd"] << "\n";
+	std::cout << "RR_nn50: " << c["RR_nn50"] << "\n";
+	std::cout << "RR_pnn50: " << c["RR_pnn50"] << "\n";
+	std::cout << "RR_sdann: " << c["RR_sdann"] << "\n";
+	std::cout << "RR_sdanni: " << c["RR_sdanni"] << "\n";
+	std::cout << "RR_sdsd: " << c["RR_sdsd"] << "\n";
 
     return a.exec();
 }

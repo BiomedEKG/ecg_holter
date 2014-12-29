@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'selectmodulemenu.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.3.2)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.4.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'selectmodulemenu.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.3.2. It"
+#error "This file was generated using the moc from 5.4.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -29,13 +29,14 @@ struct qt_meta_stringdata_SelectModuleMenu_t {
     )
 static const qt_meta_stringdata_SelectModuleMenu_t qt_meta_stringdata_SelectModuleMenu = {
     {
-QT_MOC_LITERAL(0, 0, 16),
-QT_MOC_LITERAL(1, 17, 13),
-QT_MOC_LITERAL(2, 31, 0),
-QT_MOC_LITERAL(3, 32, 7),
-QT_MOC_LITERAL(4, 40, 17),
-QT_MOC_LITERAL(5, 58, 8),
-QT_MOC_LITERAL(6, 67, 15)
+QT_MOC_LITERAL(0, 0, 16), // "SelectModuleMenu"
+QT_MOC_LITERAL(1, 17, 13), // "enableModules"
+QT_MOC_LITERAL(2, 31, 0), // ""
+QT_MOC_LITERAL(3, 32, 7), // "enabled"
+QT_MOC_LITERAL(4, 40, 17), // "setActionsChecked"
+QT_MOC_LITERAL(5, 58, 8), // "QAction*"
+QT_MOC_LITERAL(6, 67, 15) // "triggeredAction"
+
     },
     "SelectModuleMenu\0enableModules\0\0enabled\0"
     "setActionsChecked\0QAction*\0triggeredAction"
@@ -91,7 +92,7 @@ void SelectModuleMenu::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
 
 const QMetaObject SelectModuleMenu::staticMetaObject = {
     { &QMenu::staticMetaObject, qt_meta_stringdata_SelectModuleMenu.data,
-      qt_meta_data_SelectModuleMenu,  qt_static_metacall, 0, 0}
+      qt_meta_data_SelectModuleMenu,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
 
@@ -102,7 +103,7 @@ const QMetaObject *SelectModuleMenu::metaObject() const
 
 void *SelectModuleMenu::qt_metacast(const char *_clname)
 {
-    if (!_clname) return 0;
+    if (!_clname) return Q_NULLPTR;
     if (!strcmp(_clname, qt_meta_stringdata_SelectModuleMenu.stringdata))
         return static_cast<void*>(const_cast< SelectModuleMenu*>(this));
     return QMenu::qt_metacast(_clname);

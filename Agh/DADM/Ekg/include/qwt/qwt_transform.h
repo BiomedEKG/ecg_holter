@@ -107,8 +107,8 @@ public:
 
     virtual QwtTransform *copy() const;
 
-    QT_STATIC_CONST double LogMin;
-    QT_STATIC_CONST double LogMax;
+    //QT_STATIC_CONST double LogMin;
+    //QT_STATIC_CONST double LogMax;
 };
 
 /*!
