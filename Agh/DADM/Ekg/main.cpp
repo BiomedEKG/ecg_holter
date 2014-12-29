@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
 	HRV1 dark;
 	 std::vector < double > tab;
 	    double x = 0;
-    for( int i = 0; i < 1000; i++ )
+    for( int i = 0; i < 10; i++ )
     {
         tab.push_back( x );
         x = x + 2;
@@ -92,13 +92,13 @@ int main(int argc, char *argv[])
 	dark.time_freq_compute(tab);
 
 	std::cout << "RR_mean: " << c["RR_mean"] << "\n";
-	std::cout << "RR_sdnn: " << c["RR_sdnn"] << "\n";
-	std::cout << "RR_rmssd: " << c["RR_rmssd"] << "\n";
-	std::cout << "RR_nn50: " << c["RR_nn50"] << "\n";
-	std::cout << "RR_pnn50: " << c["RR_pnn50"] << "\n";
-	std::cout << "RR_sdann: " << c["RR_sdann"] << "\n";
-	std::cout << "RR_sdanni: " << c["RR_sdanni"] << "\n";
-	std::cout << "RR_sdsd: " << c["RR_sdsd"] << "\n";
+	std::cout << "RR_sdnn: " << c["SDNN"] << "\n";
+	std::cout << "RR_rmssd: " << c["RMSSD"] << "\n";
+	std::cout << "RR_nn50: " << c["NN50"] << "\n";
+	std::cout << "RR_pnn50: " << c["pNN50"] << "\n";
+	std::cout << "RR_sdann: " << c["SDANN"] << "\n";
+	std::cout << "RR_sdanni: " << c["SDANN_index"] << "\n";
+	std::cout << "RR_sdsd: " << c["SDSD"] << "\n";
 
 	map<string, double> d = dark.computeFreq(tab);
 

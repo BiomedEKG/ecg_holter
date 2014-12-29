@@ -30,18 +30,18 @@ public:
 	};
 
 			
-	Output time_freq_compute(vector < double > tab){
+	Output time_freq_compute(vector < double > &temp_vec){
 		Output out_data;
-		out_data.timeParameters["RR_mean"]= RR_mean(tab);
-		out_data.timeParameters["RR_sdnn"]= SDNN(tab);
-		out_data.timeParameters["RR_rmssd"]= RMSSD(tab);
-		out_data.timeParameters["RR_nn50"]= NN50(tab);
-		out_data.timeParameters["RR_pnn50"]= pNN50(tab);
-		out_data.timeParameters["RR_sdann"]= SDANN(tab);
-		out_data.timeParameters["RR_sdanni"]= SDANN_index(tab);
-		out_data.timeParameters["RR_sdsd"]= SDSD(tab);
+		out_data.timeParameters["RR_mean"]= RR_mean(temp_vec);
+		out_data.timeParameters["SDNN"]= SDNN(temp_vec);
+		out_data.timeParameters["RMSSD"]= RMSSD(temp_vec);
+		out_data.timeParameters["NN50"]= NN50(temp_vec);
+		out_data.timeParameters["pNN50"]= pNN50(temp_vec);
+		out_data.timeParameters["SDANN"]= SDANN(temp_vec);
+		out_data.timeParameters["SDANN_index"]= SDANN_index(temp_vec);
+		out_data.timeParameters["SDSD"]= SDSD(temp_vec);
 
-		Lomb_pair struct1 = Lomb(tab); //Lomb_pair
+		Lomb_pair struct1 = Lomb(temp_vec); //Lomb_pair
 		out_data.power = struct1.power;
 		out_data.frequency = struct1.frequency;
 
@@ -280,7 +280,7 @@ Lomb_pair Lomb(vector<double> &vec){
     double period = time[vec.size()-1] - time[0]; //length-1-time[0]
 
     double mean = RR_mean(vec); //œrednia
-    double var = RR_sdnn(vec);
+    double var = SDNN(vec);
     var = var * var; //wariancja
 
     double f0 = 1 / (period * ofac); //f0
