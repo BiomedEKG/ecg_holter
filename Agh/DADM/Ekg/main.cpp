@@ -87,12 +87,13 @@ int main(int argc, char *argv[])
         x = x + 2;
     }
 	
+	Output darson;
 
 	//vector <double> data12 =dark.read_from_file("C:/Users/darsonss/Desktop/vector.txt");
 
 	map<string, double> c = dark.compute(tab);
 
-	dark.time_freq_compute(tab);
+	darson = dark.time_freq_compute(tab);
 
 	cout << "RR_mean: " << c["RR_mean"] << "\n";
 	cout << "RR_sdnn: " << c["SDNN"] << "\n";

@@ -13,6 +13,13 @@ using namespace std;
 
 const double PI_const = 3.14;
 
+	struct Output {
+		map<string, double> timeParameters;
+		map<string, double> freqParameters;
+		vector<double> power;
+		vector<double> frequency;
+	};
+
 class HRV1 {
 public:
 	map<string, double> timeParameter;
@@ -21,14 +28,6 @@ public:
 		vector<double> power;
 		vector<double> frequency;
 	};
-
-	struct Output {
-		map<string, double> timeParameters;
-		map<string, double> freqParameters;
-		vector<double> power;
-		vector<double> frequency;
-	};
-
 			
 	Output time_freq_compute(vector < double > &temp_vec){
 		Output out_data;
