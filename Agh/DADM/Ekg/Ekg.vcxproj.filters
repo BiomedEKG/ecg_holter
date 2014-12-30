@@ -36,7 +36,7 @@
     <Filter Include="Modules">
       <UniqueIdentifier>{8208523c-aceb-4eb0-8869-cc66f243dc0e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\NowyFolderNaKazdyModul">
+    <Filter Include="Modules\AtrialFibr">
       <UniqueIdentifier>{be580e47-5a67-469d-bb91-c9b8a3710729}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -56,6 +56,12 @@
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Artial.cpp">
+      <Filter>Modules\AtrialFibr</Filter>
+    </ClCompile>
+    <ClCompile Include="Main_dla_atrial.cpp">
+      <Filter>Modules\AtrialFibr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -71,6 +77,9 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ekg.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Artial.h">
+      <Filter>Modules\AtrialFibr</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
