@@ -125,7 +125,7 @@ public:
 		return inter_rr;
 	}
 
-	vector<double> inter_RRt(vector<double> &temp_vec, double fp){ //zmieniamy wektor probek na odstepy R-R,
+	vector<double> inter_RRt(vector<double> &temp_vec, double fp){
 	/*Zmiana wektora próbek na wektor interwa³ów RR przy czym tutaj interwa³y s¹ liczone wzglêdem pierwszego interwa³u.
 	Tego typu wektor przyda siê podczas obliczania parametrów czêstotliwoœciowych metod¹ periodogramu.*/
 		vector<double> inter_rrt(temp_vec.size()-1);
