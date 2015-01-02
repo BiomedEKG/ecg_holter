@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 	w.addGraph(&plot);
 	w.show();
 	HRV1 dark;
-	 vector < double > tab;
+	vector < double > tab;
 	    double x = 0;
     for( int i = 0; i < 10; i++ )
     {
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 
 	map<string, double> c = dark.compute(tab);
 
-	darson = dark.time_freq_compute(tab);
+	darson = dark.time_freq_compute(tab, 1);
 
 	cout << "RR_mean: " << c["RR_mean"] << "\n";
 	cout << "RR_sdnn: " << c["SDNN"] << "\n";

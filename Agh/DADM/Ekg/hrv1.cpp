@@ -1,13 +1,12 @@
 //#define _USE_MATH_DEFINES
 
-#include "hrv1.h"
+#include "hrv1.h" //plik nag³ówkowy
+#include <fstream> //FUNKCJA DO USUNIÊCIA -> wczytywanie danych z pliku ;P
 #include <numeric> //biblioteka z której u¿yta jest funkcja accumulate
 #include <cmath> //biblioteka zawieraj¹ca potrzebne funkcje matematyczne (pierwiastek,potêga,zaokr¹glanie w górê lub dó³)
 #include <map> //biblioteka zawiraj¹ca operacje, które mo¿na wykonywaæ na mapach
 #include <iostream> //biblioteka operacji wejœcia-wyjœcia
 #include <string> //biblioteka do operacji na stringach (kluczach w mapie)
-#include <fstream>
-#include <string>
 
 using namespace std;
 
@@ -25,7 +24,7 @@ class HRV1 {
 public:
 	map<string, double> timeParameter;
 	map<string, double> freqParameter;
-	struct Lomb_pair {
+	struct Lomb_param {
 		vector<double> power;
 		vector<double> frequency;
 	};
@@ -43,7 +42,7 @@ public:
 	out_data.timeParameters["SDSD"]= SDSD(i_rr);
 
 	vector<double> i_rrt = inter_RRt(temp_vec, fp);
-	Lomb_pair struct1 = Lomb(i_rrt); //Lomb_pair
+	Lomb_param struct1 = Lomb_Scargle(i_rrt); //struktura Lomb_param, która zawiera pary moc czêstotliwoœæ
 	out_data.power = struct1.power;
 	out_data.frequency = struct1.frequency;
 
@@ -52,12 +51,12 @@ public:
 	out_data.freqParameters["LF"] = LF_Power(struct1.power, struct1.frequency);
 	out_data.freqParameters["VLF"] = VLF_Power(struct1.power, struct1.frequency);
 	out_data.freqParameters["ULF"] = ULF_Power(struct1.power, struct1.frequency);
-	out_data.freqParameters["LFHF"] = LowHigh(struct1.power, struct1.frequency);
+	out_data.freqParameters["LFHF"] = LFHF_Power(struct1.power, struct1.frequency);
 
 	return out_data;
 	}
 
-		vector<double> read_from_file(string filepath){
+	vector<double> read_from_file(string filepath){ //funkcja do wczytywania danych z pliku
     
 		 string line;
 		 size_t st;
@@ -77,29 +76,29 @@ public:
 		 else 
 		  cout << "Unable to open file" << endl; 
  
-  return data_input;
+		return data_input;
+	}
 
-}
-	map<string, double> compute (vector <double> &temp_vec){
-		timeParameter["RR_mean"]= RR_mean(temp_vec);
-		timeParameter["SDNN"]= SDNN(temp_vec);
-		timeParameter["RMSSD"]= RMSSD(temp_vec);
+	map<string, double> compute(vector <double> &temp_vec){ //mapa parametrów czasowych
+		timeParameter["RR_mean"]= RR_mean(temp_vec)*1000;
+		timeParameter["SDNN"]= SDNN(temp_vec)*1000;
+		timeParameter["RMSSD"]= RMSSD(temp_vec)*1000;
 		timeParameter["NN50"]= NN50(temp_vec);
 		timeParameter["pNN50"]= pNN50(temp_vec);
-		timeParameter["SDANN"]= SDANN(temp_vec);
-		timeParameter["SDANN_index"]= SDANN_index(temp_vec);
-		timeParameter["SDSD"]= SDSD(temp_vec);
+		timeParameter["SDANN"]= SDANN(temp_vec)*1000;
+		timeParameter["SDANN_index"]= SDANN_index(temp_vec)*1000;
+		timeParameter["SDSD"]= SDSD(temp_vec)*1000;
 		return timeParameter;
 	}
 
-	map<string, double> computeFreq(vector < double > tab){
-		Lomb_pair struct1 = Lomb(tab); //Lomb_pair
+	map<string, double> computeFreq(vector < double > tab){ //mapa parametrów czêstotliwoœciowych
+		Lomb_param struct1 = Lomb_Scargle(tab); //Lomb_param
 		freqParameter["TP"] = TP_Power(struct1.power, struct1.frequency);
 		freqParameter["HF"] = HF_Power(struct1.power, struct1.frequency);
 		freqParameter["LF"] = LF_Power(struct1.power, struct1.frequency);
 		freqParameter["VLF"] = VLF_Power(struct1.power, struct1.frequency);
 		freqParameter["ULF"] = ULF_Power(struct1.power, struct1.frequency);
-		freqParameter["LFHF"] = LowHigh(struct1.power, struct1.frequency);
+		freqParameter["LFHF"] = LFHF_Power(struct1.power, struct1.frequency);
 		return freqParameter;
 	}
 
@@ -118,31 +117,38 @@ public:
 	w zwi¹zku z tym, ¿e potrzebujemy interwa³y w dziedzinie czasu.
 	Niniejsza operacja jest konieczne do dalszego wyliczania parametrów.*/
 		vector<double> inter_rr(temp_vec.size()-1);
+
 		for (unsigned i = 1; i<temp_vec.size(); i++){
             inter_rr[i-1] = (temp_vec[i] - temp_vec[i-1])/fp;
 		}
+
 		return inter_rr;
 	}
 
 	vector<double> inter_RRt(vector<double> &temp_vec, double fp){
 	/*Zmiana wektora próbek na wektor interwa³ów RR przy czym tutaj interwa³y s¹ liczone wzglêdem pierwszego interwa³u.
 	Tego typu wektor przyda siê podczas obliczania parametrów czêstotliwoœciowych metod¹ periodogramu.*/
+		double suma;
 		vector<double> inter_rrt(temp_vec.size()-1);
-		double suma = temp_vec[0]/fp;
+
+		suma = temp_vec[0]/fp;
 		for (unsigned i = 0; i<temp_vec.size()-1; i++){
 			inter_rrt[i] = suma;
 			suma +=(temp_vec[i+1] - temp_vec[i]) /fp;
 		}
+
 		return inter_rrt;
 	}
 
 	double round(double value){
-
+	//funkcja zaokr¹glaj¹ca
 		double round;
+
 		if (value<0)
             round = ceil(value-0.5);
 		else
              round = floor(value+0.5);
+
 		return round;
 	}
 
@@ -153,19 +159,19 @@ public:
 	double RR_mean(vector<double> &temp_vec){
 	//Obliczanie parametru RR_mean, czyli wartoœci œredniej interwa³ów RR
 		double sum;
-		double mean;
+		double rr_mean;
 
 		sum = accumulate(temp_vec.begin(),temp_vec.end(),0.0); //zliczenie sumy wszystkich elementów wektora
-		mean = sum/temp_vec.size(); //wyliczenie œredniej
+		rr_mean = sum/temp_vec.size(); //wyliczenie œredniej
 
-		return mean;
+		return rr_mean;
 	}
 
 	double SDNN(vector<double> &temp_vec){
 	//Obliczenie parametru SDNN, czyli odchylenia standardowego interwa³ów RR
 		double mean;
-		vector<double> temp(temp_vec.size());
 		double sdnn;
+		vector<double> temp(temp_vec.size());
 
 		mean = RR_mean(temp_vec);
 		for (unsigned i = 0; i<temp_vec.size(); i++){
@@ -179,8 +185,8 @@ public:
 
 	double RMSSD(vector<double> &temp_vec){
    //Obliczenie parametru RMSSD, czyli pierwiastka kwadratowego ze œredniej kwadratów ró¿nic pomiêdzy dwoma kolejnymi interwa³ami
-		vector<double> temp(temp_vec.size());
 		double rmssd;
+		vector<double> temp(temp_vec.size());
 
 		for (unsigned i = 0; i<(temp_vec.size()-1); i++){
 			temp[i] = pow(temp_vec[i+1] - temp_vec[i],2);
@@ -215,24 +221,22 @@ public:
 
 	vector<int> index_300(vector<double> &temp_vec){
 	//Wektor indeksów 5 minutowych (przedzia³y 300sekund)
-		int N;  //liczba przedzialow 300-sekundoych
+		int N;  //liczba przedzialow 5 minutowych
 		int i; //indeks calego wektora
-		vector<int> index(N+1); //wektor na indeksy przedzialow co 300 s
 		double sum;
+		vector<int> index(N+1); //wektor indeksów przedzia³ów 5 minutowych (300s)
 
 		sum = 0;
 		i = 0;
 		N = int(floor((accumulate(temp_vec.begin(),temp_vec.end(),0.0))/300));
 		index.clear();
 		index.push_back(0); //poczatek pierwszego przedzialu to pierwsza probka
-		//int k = 1; //indeks tablicy przedzialow
-		for (int j = 0; j <	N; j++){
-			while ( (sum<300) && (i<temp_vec.size())){ //czy tu nie trzeba dodac lub i<vec.size? nie. bo petla j tylko po pelnych przedzialach.
+		for (int j = 0; j <	N; j++){ //iteracja tylko po pe³nych przedzia³ach
+			while ( (sum<300) && (i<temp_vec.size())){
             sum = sum + temp_vec[i];
             i = i + 1;
 			}
-			index.push_back(i-1); //-1 bo zwiêkszylismy przy ostatniej iteracji na nastepna probke
-			//k = k + 1;
+			index.push_back(i-1); //nale¿y tutaj odj¹æ -1 od i, gdy¿ w ostatniej iteracji wylecieliœmy na nastepn¹ próbkê
 		} 
 
 		return index;
@@ -241,9 +245,9 @@ public:
 	double SDANN(vector<double> &temp_vec){
 	/*Obliczenie parametru SDANN - œrednie odchylenie ze wszystkich œrednich interwa³ów RR w 5 minutowych segmentach 
 	ca³ego zapisu*/
+		double sdann;
 		vector<int> tab = index_300(temp_vec);
 		vector<double> srednia;
-		double sdann;
 
 		for (unsigned int i = 1; i < tab.size() ; i++){
         srednia.push_back((accumulate(temp_vec.begin()+tab[i-1],temp_vec.begin()+tab[i],0.0))/(tab[i-1]-tab[i]));
@@ -259,7 +263,7 @@ public:
 	/*Wyznaczenie wspó³czynnika SDANN_index - œrednia z odchyleñ standardowych interwa³ów RR w 5 minutowych segmentach
 	czasowych ca³ego zapisu*/
 		int N;
-		double od;
+		double odchyl;
 		double sdanni;
 		vector <double> odchylenia;
 		vector<double> temp;
@@ -267,9 +271,9 @@ public:
 
 		N = tab.size();
 		for (int i = 1; i<N; i++){
-			temp.assign(temp_vec.begin()+tab[i-1],temp_vec.begin()+tab[i]); //skopiowanie do temp przedzialu 300 s
-			od = SDNN(temp); //policzenie odchylenia standardowego z przedzialu 300 s
-			odchylenia.push_back(od);
+			temp.assign(temp_vec.begin()+tab[i-1],temp_vec.begin()+tab[i]); //kopiowanie do wektora temp_vec zakresu 300s (5minut)
+			odchyl = SDNN(temp); //obliczenie odchylenia standardowego dla przedzialu 5 minut (300s)
+			odchylenia.push_back(odchyl);
 		}
 		sdanni = RR_mean(odchylenia); //srednia z odchylen
 		tab.clear();
@@ -280,8 +284,9 @@ public:
 	}
 
 	double SDSD(vector<double> &temp_vec){
-		vector<double> a;
+	//Wyznaczenie wspó³czynnika SDSD - odchylenie standardowe róznic pomiêdzy s¹siaduj¹cymi interwa³ami RR
 		double sdsd;
+		vector<double> a;
 
 		for (unsigned i = 1; i<temp_vec.size(); i++){
 			a.push_back(temp_vec[i] - temp_vec[i-1]);
@@ -296,37 +301,51 @@ public:
 //******************************     OBLICZANIE PARAMETRÓW CZÊSTOTLIWOŒCIOWYCH     ******************************
 
 
-	Lomb_pair Lomb(vector<double> &vec){
-		vector<double> time(vec.size()); //tworzenie wektora czasu
-		int ofac = 1; //parametr nadpróbkowania czêstotliwoœci
-		int hifac = 4;
-		time.clear();
-		time.push_back(vec[0]);
-		for (unsigned i = 1; i<vec.size(); i++){
-        time.push_back(time[i-1] + vec[i]); //wektor czasu o wymiarze length
-		} 
-		int time_n = vec.size(); //time.size();
-		double period = time[vec.size()-1] - time[0]; //length-1-time[0]
-		double mean = RR_mean(vec); //œrednia
-		double var = SDNN(vec);
-		var = var * var; //wariancja
-		double f0 = 1 / (period * ofac); //f0
-		double step = f0;	
-		int num_freq = (ofac * hifac * time_n) / 2; //number of frequencies int bo hifac=4
+	Lomb_param Lomb_Scargle(vector<double> &temp_vec){
+	//Wyznaczenie parametrów czêstotliwoœciowych meotd¹ Lomba-Scargle'a
+		int over_samp; //parametr nadpróbkowania czêstotliwoœci
+		int hifac;
+		int time_n; //rozmiar wektora temp_vec
+		double period; //d³ugoœæ-1-time[0]
+		double mean;
+		double var;
+		double f0;
+		double num_freq; //by³ int, bo hifac 4, wiêc nie potrzebny double
+		double fd; //normalizacja wektora czêstotliwoœci do 0,5
+		vector<double> time(temp_vec.size()); //tworzenie wektora czasu
 		vector<double> frequency(num_freq); //wektor czêstotliwoœci
-		vector<double> omega(num_freq);
+		vector<double> omega(num_freq); //wektor omega
+		vector<double> tau(num_freq); //wektor tau
+		vector<double> Power_w(num_freq); //power(w)
+		vector<double> Power(num_freq/2);
+		vector<double> frequency2(num_freq/2);
+
+		over_samp = 1;
+		hifac = 4;
+		time.clear();
+		time.push_back(temp_vec[0]);
+		for (unsigned i = 1; i<temp_vec.size(); i++){
+			time.push_back(time[i-1] + temp_vec[i]);
+		} 
+		time_n = temp_vec.size();
+		period = time[temp_vec.size()-1] - time[0];
+		mean = RR_mean(temp_vec); //obliczenie œredniej
+		var = SDNN(temp_vec); //obliczenie odchylenia standardowego - konieczne dla policzenia wariancji
+		var = var * var; //obliczenie wariancji
+		f0 = 1 / (period * over_samp); //f0
+		//double step = f0;	
+		num_freq = (over_samp * hifac * time_n) / 2;
 		frequency.clear();
 		frequency.push_back(f0); //empty() true if empty
 		omega.clear();
 		omega.push_back(frequency[0] * PI_const * 2); //w = 2*PI_const*f;  PI_const = PI_const
 		for (int i = 1; i<num_freq; i++){
-        frequency.push_back(frequency[i-1] + step ); //wektor czêstotliwoœci o wymiarze num_freq //normalizowane
-        omega.push_back(frequency[i] * PI_const * 2); //wektor omega o wymiarze num_freq
+			frequency.push_back(frequency[i-1] + f0 ); //wektor czêstotliwoœci o wymiarze num_freq //normalizowane !!!!f0
+			omega.push_back(frequency[i] * PI_const * 2); //wektor omega o wymiarze num_freq
 		}
-		vector<double> tau(num_freq);
 		tau.clear();
 		for (int i = 0; i < num_freq; i++){  //po omegach w
-			double sinu = 0; //temp
+			double sinu = 0; //temp sin
 			double cosi = 0; //temp
 			double sum1 = 0; //temp
 			double sum2 = 0; //temp
@@ -339,7 +358,6 @@ public:
 			tau.push_back(atan2(sum1,sum2));
 			tau[i] = tau[i]/(2*omega[i]);
 		}
-		vector<double> Power_w(num_freq); //power(w)
 		Power_w.clear();
 		for (int i = 0; i < num_freq; i++){
 			double temp; //temp
@@ -355,85 +373,105 @@ public:
 				sum_mianownik2 = cosi * cosi + sum_mianownik2;
 				sinu = sin(temp);
 				sum_mianownik1 = sinu * sinu + sum_mianownik1;
-				sum_licznik1 = sinu * (vec[j] - mean) + sum_licznik1;
-				sum_licznik2 = cosi * (vec[j] - mean) + sum_licznik2;
+				sum_licznik1 = sinu * (temp_vec[j] - mean) + sum_licznik1;
+				sum_licznik2 = cosi * (temp_vec[j] - mean) + sum_licznik2;
 			}
 			Power_w.push_back(((sum_licznik1 * sum_licznik1)/sum_mianownik1 + (sum_licznik2 * sum_licznik2)/sum_mianownik2)/(2*var));
 		}
-		vector<double> Power(num_freq/2);
 		Power.assign(Power_w.begin(), Power_w.end()-(num_freq/2));
-		vector<double> frequency2(num_freq/2);
 		frequency2.assign(frequency.begin(), frequency.end()-(num_freq/2));
-		double fd= 2*(num_freq/2) * f0; //Normalizacja wektora czêstotliwoœci do 0.5
+		fd= 2*(num_freq/2) * f0; //Normalizacja wektora czêstotliwoœci do 0.5
 		for(int i = 0; i  <frequency2.size(); i++){ 
 			frequency2[i] = frequency2[i] / fd;
 		}
-		Lomb_pair out;
+		Lomb_param out;
 		out.power = Power;
 		out.frequency = frequency2;
+
 		return out;
 	}
 
-	double TP_Power(vector<double> &vec, vector<double> &f){
-		double sumTP = 0;
+	double TP_Power(vector<double> &temp_vec, vector<double> &f){
+	//Wyznaczenie ca³kowitej mocy widma  (zakres poni¿ej 0,4Hz)
+		double TP;
+
+		TP = 0;
 		for(int i = 0; i < f.size(); i++){
 			if (f[i] < 0.4){
-				sumTP = vec[i] + sumTP;
+				TP = temp_vec[i] + TP;
 			}
 		}
-		return (sumTP);
+
+		return (TP);
 	}
-	double HF_Power(vector<double> &vec, vector<double> &f){
-		double sumHF = 0;
+	double HF_Power(vector<double> &temp_vec, vector<double> &f){
+	//Obliczenie mocy widma w zakresie wysokich czêstotliwoœci (0,15-0,4Hz)
+		double HF;
+
+		HF = 0;
 		for(int i = 0; i < f.size(); i++){
 			if(f[i] >= 0.15 && f[i] < 0.4){
-				sumHF = vec[i] + sumHF;
+				HF = temp_vec[i] + HF;
 			}
 		}
-		return (sumHF);
+		return (HF);
 	}
 
-	double LF_Power(vector<double> &vec, vector<double> &f){
-		double sumLF = 0;
+	double LF_Power(vector<double> &temp_vec, vector<double> &f){
+	//Wyznaczenie mocy widma w zakresie niskich czêstotliwoœci (0,04-0,15Hz)
+		double LF;
+
+		LF = 0;
 		for(int i = 0; i < f.size(); i++){
 			if (f[i] > 0.04 && f[i] < 0.15){
-				sumLF = vec[i] + sumLF;
+				LF = temp_vec[i] + LF;
 			}
 		}
-		return (sumLF);
+		return (LF);
 	}
 
-	double VLF_Power(vector<double> &vec, vector<double> &f){
-		double sumVLF = 0;
+	double VLF_Power(vector<double> &temp_vec, vector<double> &f){
+	//Obliczenie mocy widma w zakresie bardzo niskich czêstotliwoœci (0,003-0,04Hz)
+		double VLF;
+
+		VLF = 0;
 		for(int i = 0; i < f.size(); i++){
 			if (f[i] > 0.003 && f[i] < 0.04){
-				sumVLF = vec[i] + sumVLF;
+				VLF = temp_vec[i] + VLF;
 			}
 		}
-		return (sumVLF);
+		return (VLF);
 	}
 
-	double ULF_Power(vector<double> &vec, vector<double> &f){	
-		double sumULF = 0;
+	double ULF_Power(vector<double> &temp_vec, vector<double> &f){	
+	//Wyznaczenie mocy widma w zakresie ultra niskich czêstotliwoœci (poni¿ej 0,003Hz)
+		double ULF = 0;
+
+		ULF = 0;
 		for(int i = 0; i < f.size(); i++){
 			if (f[i] <= 0.003){
-				sumULF = vec[i] + sumULF;
+				ULF = temp_vec[i] + ULF;
 			}
 		}
-		return (sumULF);
+		return (ULF);
 	}
 
-	double LowHigh(vector<double> &vec, vector<double> &f){
-		double sumLF = 0;
-		double sumHF = 0;
+	double LFHF_Power(vector<double> &temp_vec, vector<double> &f){
+	//Obliczenie stosunku mocy widm niskich czêstotliwoœci do mocy widm wysokich czêstotliwoœci
+		double LF;
+		double HF;
+
+		LF = 0;
+		HF = 0;
 		for(int i = 0; i < f.size(); i++){
 			if (f[i] > 0.04 && f[i] < 0.15){
-				sumLF = vec[i] + sumLF;
+				LF = temp_vec[i] + LF;
 			}
 			else if(f[i] >= 0.15 && f[i] < 0.4){
-				sumHF = vec[i] + sumHF;
+				HF = temp_vec[i] + HF;
 			}
 		}
-		return (sumLF/sumHF);
+
+		return (LF/HF);
 	}
 };
