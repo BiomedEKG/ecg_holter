@@ -119,6 +119,24 @@
     <ClCompile Include="MovingAverage.cpp">
       <Filter>Modules\ECGBaseline</Filter>
     </ClCompile>
+    <ClCompile Include="CubicSpline.cpp">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClCompile>
+    <ClCompile Include="LeastMeanSquares.cpp">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClCompile>
+    <ClCompile Include="Chebyshev.cpp">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClCompile>
+    <ClCompile Include="Butterworth.cpp">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClCompile>
+    <ClCompile Include="Filter.cpp">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClCompile>
+    <ClCompile Include="SavitzkyGolay.cpp">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -163,6 +181,24 @@
       <Filter>Modules\ECGBaseline</Filter>
     </ClInclude>
     <ClInclude Include="MovingAverage.h">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClInclude>
+    <ClInclude Include="CubicSpline.h">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClInclude>
+    <ClInclude Include="LeastMeanSquares.h">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClInclude>
+    <ClInclude Include="Chebyshev.h">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClInclude>
+    <ClInclude Include="Butterworth.h">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClInclude>
+    <ClInclude Include="Filter.h">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClInclude>
+    <ClInclude Include="SavitzkyGolay.h">
       <Filter>Modules\ECGBaseline</Filter>
     </ClInclude>
   </ItemGroup>

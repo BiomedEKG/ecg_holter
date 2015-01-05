@@ -76,8 +76,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Butterworth.cpp" />
+    <ClCompile Include="Chebyshev.cpp" />
+    <ClCompile Include="CubicSpline.cpp" />
     <ClCompile Include="ECGBaseline.cpp" />
     <ClCompile Include="ekg.cpp" />
+    <ClCompile Include="Filter.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_channelsmenu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -127,8 +131,10 @@
     <ClCompile Include="gui\mainwindow.cpp" />
     <ClCompile Include="gui\selectmodulemenu.cpp" />
     <ClCompile Include="gui\selectmodulesprivate.cpp" />
+    <ClCompile Include="LeastMeanSquares.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MovingAverage.cpp" />
+    <ClCompile Include="SavitzkyGolay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -253,10 +259,16 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Butterworth.h" />
+    <ClInclude Include="Chebyshev.h" />
+    <ClInclude Include="CubicSpline.h" />
     <ClInclude Include="ECGBaseline.h" />
+    <ClInclude Include="Filter.h" />
     <ClInclude Include="gui\channelsprivate.h" />
+    <ClInclude Include="LeastMeanSquares.h" />
     <ClInclude Include="Methods.h" />
     <ClInclude Include="MovingAverage.h" />
+    <ClInclude Include="SavitzkyGolay.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

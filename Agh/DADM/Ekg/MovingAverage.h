@@ -2,7 +2,7 @@
 
 class MovingAverage{
 	public:
-		vector <double> calculateMovingAverage (vector<double>);
+		std::vector <double> calculateMovingAverage (std::vector<double>* signal);
 	private:
 		const int span = 5;
 		double average;

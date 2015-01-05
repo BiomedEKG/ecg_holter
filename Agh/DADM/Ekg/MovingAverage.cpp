@@ -1,11 +1,14 @@
 #include "MovingAverage.h"
+#include <vector>
+#include <gsl/gsl_vector.h>
+#include <gsl/gsl_statistics.h>
 
-vector <double> MovingAverage::calculateMovingAverage (vector<double> signal){
+std::vector <double> MovingAverage::calculateMovingAverage (std::vector<double>* signal){
 
-	this->averageWholeSignal = gsl_stats_mean(signal); 
-	//this tylko siê u¿ywa ¿eby podkreœliæ, ¿e chodzi w³aœnie o sk³adow¹ tej klasy, 
-	//ale w tym wypadku chyba by siê mog³o obejœæ bez, bo w argumentach funkcji nie ma
-	//zmiennej o tej nazwie.
+	this->averageWholeSignal = gsl_stats_mean(signal);    /// HMMM czy¿by gsl musia³ dostaæ const double *???
+
+	// co do "this" to faktycznie w C++ korzystanie z tego jest opcjonalne, w innych jezykach niekoniecznie :P
+
 	
 	gsl_vector_set(signal, 0,  );
 	
@@ -16,8 +19,8 @@ vector <double> MovingAverage::calculateMovingAverage (vector<double> signal){
 	for (long int j = 0; j<signal.size ; j++ ){
 
 		if (j==0){
-			sum = 2*averageWholeSignal + gsl_vector_get (signal, j) +  // tu ju¿ u¿ywam normalnie sk³adowej klasy bez this i nic nie wywala
-				gsl_vector_get (signal, j+1) +  gsl_vector_get (signal, j+2); //btw te komentarze po przeczytaniu mo¿esz usun¹æ ;-P
+			sum = 2*averageWholeSignal + gsl_vector_get (signal, j) + 
+				gsl_vector_get (signal, j+1) +  gsl_vector_get (signal, j+2); 
 			average = sum/span;
 		}
 		else if (j==1){
@@ -43,5 +46,5 @@ vector <double> MovingAverage::calculateMovingAverage (vector<double> signal){
 
 	gsl_vector_set(signal, j, average);
 	}
-	return signal;
+	return signal; //// hmmm
 }

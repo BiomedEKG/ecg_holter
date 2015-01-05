@@ -1,7 +1,8 @@
 #include "ECGBaseline.h"
 #include "math.h"
+#include <vector>    
 
-vector<double> ECGBaseline::compute (vector<double> *signal){
+std::vector<double> ECGBaseline::compute (std::vector<double>* signal){
 	switch (baselineMethod){
 
 		case  BUTTERWORTH:
@@ -13,7 +14,7 @@ vector<double> ECGBaseline::compute (vector<double> *signal){
 		case  LMS:
 			leastMeanSquares (signal);
 			break;
-		case  MOVINGAVERAGES:
+		case  MOVINGAVERAGE:
 			movingAverage (signal);
 			break;
 		case  CUBICSPLINE:
@@ -26,38 +27,41 @@ vector<double> ECGBaseline::compute (vector<double> *signal){
 			movingAverage (signal);
 			break;
 	} 
-	return signal;
+	return signal;   //// hmmm
 }
 
 
 
-vector<double> ECGBaseline::butterworthFilter (vector<double> *signal){
-
-
-}
-
-
-vector<double> ECGBaseline::chebyshevFilter (vector<double> *signal){
-
-
-}
-
-vector<double> ECGBaseline::leastMeanSquares (vector<double> *signal){
+std::vector<double> ECGBaseline::butterworthFilter (std::vector<double>* signal){
 
 
 }
 
 
-vector<double> ECGBaseline::movingAverage (std::vector<double> *signal){
+std::vector<double> ECGBaseline::chebyshevFilter (std::vector<double>* signal){
+
+
+}
+
+std::vector<double> ECGBaseline::leastMeanSquares (std::vector<double>* signal){
+
+
+}
+
+
+std::vector<double> ECGBaseline::movingAverage (std::vector<double>* signal){
 	MovingAverage movingAverage;
+	movingAverage.calculateMovingAverage(signal);
+
+	
 }
 
-vector<double> ECGBaseline::cubicSpline (vector<double> *signal){
+std::vector<double> ECGBaseline::cubicSpline (std::vector<double>* signal){
 	
 }
 
 
-vector<double> ECGBaseline::savitzkyGolay (vector<double> *signal){
+std::vector<double> ECGBaseline::savitzkyGolay (std::vector<double>* signal){
 
 
 }
