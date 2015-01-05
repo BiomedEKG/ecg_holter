@@ -38,11 +38,17 @@ public:
 	/*read data from file*/
 	void readData();
 
+	/*find 8th min value in sorted signal128*/
+	double minValue(vector <double> rawSeparateSignal);
+
+	/*find 8th max value in sorted signal128*/
+	double maxValue(vector <double> rawSeparateSignal);
+
 	/*Seperate data into many vectors with 128 values*/
 	void separateSegments();
 
 	/*Prepare segments without outliers*/
-	//void separateSegmentsWithoutOutlieres();
+	void prepareSegmentsWithoutOutlieres();
 
 	/*calculate mean from each segment*/
 	void meanSegment();
@@ -63,7 +69,7 @@ public:
 	/*shows the dividded siganl vector using cout*/
 	void showsignal128();
 
-	//void showsignal112();
+	void showsignal112();
 
 	void showAverage();
 
@@ -75,7 +81,7 @@ public:
 
 	void showAF();
 
-
+	
 };
 
 #endif 
