@@ -15,7 +15,7 @@ std::vector<double> ECGBaseline::compute (std::vector<double>* signal){
 			output = chebyshevFilter (signal, samplingFrequency, filterType);
 			break;
 		case  LMS:
-			leastMeanSquares (signal);
+			leastMeanSquares (signal, samplingFrequency, filterType);
 			break;
 		case  MOVINGAVERAGE:
 			output = movingAverage (signal);
@@ -52,9 +52,10 @@ std::vector<double> ECGBaseline::chebyshevFilter (std::vector<double>* signal, i
 	return output;
 }
 
-std::vector<double> ECGBaseline::leastMeanSquares (std::vector<double>* signal){
-
-	return *signal;
+std::vector<double> ECGBaseline::leastMeanSquares (std::vector<double>* signal, int samplingFrequency, FILTERTYPE filterType){
+	LeastMeanSquares leastMeanSquares;
+	std::vector <double> output = leastMeanSquares.calculateLeastMeanSquares(signal, samplingFrequency, filterType);
+	return output;
 }
 
 

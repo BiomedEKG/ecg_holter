@@ -1,13 +1,11 @@
 #pragma once
 
+#include "FilterType.h"
 #include <vector>
 
 class LeastMeanSquares{
 	public:
-		std::vector <double> calculateLeastMeanSquares (std::vector<double>* );
+		std::vector <double> calculateLeastMeanSquares (std::vector<double>*, int samplingFrequency, FILTERTYPE filterType);
 
-		static double stepSize()    // dziwne rzeczy bo nie mozna zadeklarowac static const double :P
-        { return 0.5; }
-	
 
 };
