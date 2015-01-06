@@ -6,6 +6,6 @@ std::vector <double> CubicSpline::calculateCubicSpline (std::vector<double>* sig
 
 
 
-
+	return *signal;
 
 }

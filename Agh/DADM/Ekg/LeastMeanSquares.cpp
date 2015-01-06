@@ -6,6 +6,6 @@ std::vector <double> LeastMeanSquares::calculateLeastMeanSquares (std::vector<do
 
 
 
-
+	return *signal;
 
 }

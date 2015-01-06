@@ -1,7 +1,11 @@
 #pragma once
 
-class Chebyshev : public Filter  {
+#include "Filter.h"
+#include "FilterType.h"
+
+class ChebyshevFilter : public Filter   {
 	
-	///tutaj tylko wrzucic juz konkretne wspolczynniki
+public:
+	std::vector<std::vector<double>> setParameters (int samplingFrequency, FILTERTYPE filterType);
 
 };

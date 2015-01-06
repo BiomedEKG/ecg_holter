@@ -264,6 +264,7 @@
     <ClInclude Include="CubicSpline.h" />
     <ClInclude Include="ECGBaseline.h" />
     <ClInclude Include="Filter.h" />
+    <ClInclude Include="FilterType.h" />
     <ClInclude Include="gui\channelsprivate.h" />
     <ClInclude Include="LeastMeanSquares.h" />
     <ClInclude Include="Methods.h" />

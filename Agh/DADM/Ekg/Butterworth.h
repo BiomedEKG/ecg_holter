@@ -1,9 +1,11 @@
 #pragma once
 
 #include "Filter.h"
+#include "FilterType.h"
 
-class Butterworth : public Filter   {
+class ButterworthFilter : public Filter   {
 	
-	///tutaj tylko wrzucic juz konkretne wspolczynniki
+public:
+	std::vector<std::vector<double>> setParameters (int samplingFrequency, FILTERTYPE filterType);
 
 };

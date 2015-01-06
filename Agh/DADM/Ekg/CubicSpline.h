@@ -1,9 +1,11 @@
 #pragma once
 
+#include <vector>
+
 class CubicSpline{
 	public:
 		std::vector <double> calculateCubicSpline (std::vector<double>* );
 	private:
-		const int xxxxx = 0.5;
+		static const int stepSize = 0.5;
 
 };

@@ -201,5 +201,8 @@
     <ClInclude Include="SavitzkyGolay.h">
       <Filter>Modules\ECGBaseline</Filter>
     </ClInclude>
+    <ClInclude Include="FilterType.h">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

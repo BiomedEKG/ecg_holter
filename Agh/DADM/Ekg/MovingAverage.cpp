@@ -5,9 +5,13 @@
 
 std::vector <double> MovingAverage::calculateMovingAverage (std::vector<double>* signal){
 
-	this->averageWholeSignal = gsl_stats_mean(signal);    /// HMMM czy¿by gsl musia³ dostaæ const double *???
 
-	// co do "this" to faktycznie w C++ korzystanie z tego jest opcjonalne, w innych jezykach niekoniecznie :P
+
+
+
+	averageWholeSignal = gsl_stats_mean(signal);   
+
+	
 
 	
 	gsl_vector_set(signal, 0,  );
@@ -46,5 +50,8 @@ std::vector <double> MovingAverage::calculateMovingAverage (std::vector<double>*
 
 	gsl_vector_set(signal, j, average);
 	}
-	return signal; //// hmmm
+
+
+
+	return *signal;
 }

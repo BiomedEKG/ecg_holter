@@ -2,14 +2,13 @@
 
 #include <vector>   
 
+
 class Filter{
 	public:
-		std::vector <double> calculateFilter (std::vector<double>);
+		std::vector <double> filterSignal (std::vector<double>, std::vector<double>, std::vector<double>* );
+		std::vector <double> zeroPhaseFiltering (std::vector<double>, std::vector<double>, std::vector<double>* );
+		int numberOfSamples;
 	private:
-		const double bandStop = 50;
-		const double highPass = 0.5;
-		const double lowPass = 100;
+	static const int filterOrder = 6;	
 
-		double samplingFrequency;
-		double cutoffFrequency;
 };
