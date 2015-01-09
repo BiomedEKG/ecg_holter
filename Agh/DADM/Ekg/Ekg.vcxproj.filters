@@ -62,6 +62,9 @@
     <ClCompile Include="Input.cpp">
       <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
     </ClCompile>
+    <ClCompile Include="PdfGenerator.cpp">
+      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -79,6 +82,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
+      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
+    </ClInclude>
+    <ClInclude Include="PdfGenerator.h">
       <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
     </ClInclude>
   </ItemGroup>

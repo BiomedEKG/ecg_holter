@@ -54,9 +54,9 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(ProjectDir)\libs\wfdb;$(QTDIR)\lib;$(ProjectDir)\libs\gsl;$(ProjectDir)\libs\qwt;$(ProjectDir)\libs\fftw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(QTDIR)\bin;$(ProjectDir)\libs\wfdb;$(QTDIR)\lib;$(ProjectDir)\libs\gsl;$(ProjectDir)\libs\qwt;$(ProjectDir)\libs\fftw;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;libfftw3-3.lib;libfftw3f-3.lib;libfftw3l-3.lib;cblas_d.lib;gsl_d.lib;qwtd.lib;WFDB_LIB.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5PrintSupportd.lib;libfftw3-3.lib;libfftw3f-3.lib;libfftw3l-3.lib;cblas_d.lib;gsl_d.lib;qwtd.lib;WFDB_LIB.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -91,6 +91,7 @@
     </ClCompile>
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PdfGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -119,6 +120,7 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ekg.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="PdfGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">

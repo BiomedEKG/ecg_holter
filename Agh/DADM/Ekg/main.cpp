@@ -41,10 +41,10 @@ int main(int argc, char *argv[])
 
 
 	//Sciezka musi byc absolutna !!!!!
-	// Sama nazwa zbioru plikow bez ich rozszerzenia
+	 //Sama nazwa zbioru plikow bez ich rozszerzenia
 
-	char * path1 = "C:\\Users\\asus\\Downloads\\116";
-	char * path2 = "C:\\Users\\asus\\Downloads\\115"; 
+	char * path1 = "C:\\Users\\Magdalena\\Desktop\\116";
+	char * path2 = "C:\\Users\\Magdalena\\Desktop\\115"; 
 	//char * path2 = "C:\\Users\\asus\\Downloads\\wfdb\\wfdb\\wfdb-10.5.23\\data\\100s";//USTAW NA SWOJA SCIEZKE
 	Input Handler; // Nowy obiekt obslugi WFDB
 	char ** ChannelNames; 	
@@ -76,6 +76,8 @@ int main(int argc, char *argv[])
 		for(int j = 0; j < 10;j++){printf("ADU: %d\t mV:%f \n",viData[j], vdData[j]);}
 	}
 	printf("Freq: %d Hz \n",Handler.iGetFs());
+
+	//QApplication::addLibraryPath("C:\\Qt\\Qt5.3.2\\5.3\\msvc2012_opengl\\plugins");
 
 	QApplication a( argc, argv );
  
@@ -111,6 +113,7 @@ int main(int argc, char *argv[])
    
 
     return a.exec();
+	
 }
 
 
