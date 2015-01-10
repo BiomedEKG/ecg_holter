@@ -3,55 +3,38 @@
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_statistics.h>
 
+unsigned int MovingAverage::span = 5;
+
 std::vector <double> MovingAverage::calculateMovingAverage (std::vector<double>* signal){
 
+	inputSignal = *signal;
+	double sumSignal = 0.0;
 
-
-
-
-	averageWholeSignal = gsl_stats_mean(signal);   
-
+	for (unsigned int n = 0; n < inputSignal.size(); n++){
 	
-
+		sumSignal += inputSignal[n]; 
+	}
 	
-	gsl_vector_set(signal, 0,  );
-	
+	averageWholeSignal = sumSignal / inputSignal.size();
 
-	double sum = 0; 
-	double average;
-
-	for (long int j = 0; j<signal.size ; j++ ){
-
-		if (j==0){
-			sum = 2*averageWholeSignal + gsl_vector_get (signal, j) + 
-				gsl_vector_get (signal, j+1) +  gsl_vector_get (signal, j+2); 
-			average = sum/span;
-		}
-		else if (j==1){
-			sum = averageWholeSignal + gsl_vector_get (signal, j-1) + gsl_vector_get (signal, j) + 
-				gsl_vector_get (signal, j+1) +  gsl_vector_get (signal, j+2); 
-			average = sum/span;
-		}
-		else if (j==(signal.size-1)){
-			sum = 2*averageWholeSignal + gsl_vector_get (signal, j-2) +  
-				gsl_vector_get (signal, j-1) +  gsl_vector_get (signal, j); 
-			average = sum/span;
-		}
-		else if (j==(signal.size-2)){
-			sum = averageWholeSignal + gsl_vector_get (signal, j-2) + gsl_vector_get (signal, j-1) + 
-				gsl_vector_get (signal, j) +  gsl_vector_get (signal, j+1); 
-			average = sum/span;
-		}
-		else{
-			sum = gsl_vector_get (signal, j-2) + gsl_vector_get (signal, j-1) + gsl_vector_get (signal, j)
-				+ gsl_vector_get (signal, j+1) +  gsl_vector_get (signal, j+2); 
-			average = sum/span;
-		}
-
-	gsl_vector_set(signal, j, average);
+	for (unsigned int a = 0; a < (span-1)/2 ; a++){
+		
+		inputSignal.push_back(averageWholeSignal);
+		inputSignal.insert(inputSignal.begin(), averageWholeSignal);
 	}
 
+	for (unsigned long int j = (span-1)/2; j < (inputSignal.size - (span-1)) ; j++ ){
+		double sum = inputSignal[j]; 
+		double average;
 
+		for(int i = 1 ; i <= (span-1)/2; i++){
+			sum += inputSignal[j-i];
+			sum += inputSignal[j+i];
+		}
 
-	return *signal;
+		average = sum/span;
+		outputSignal.push_back(average);
+	}
+
+	return outputSignal;
 }

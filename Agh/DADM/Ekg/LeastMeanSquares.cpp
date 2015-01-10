@@ -15,7 +15,11 @@ std::vector <double> referenceSignal = butterworthFilter.zeroPhaseFiltering(butt
 //e errorValue
 //w adaptiveCoefficients
 
-std::vector<double> inputSignal = *signal;
+/* od MZS: nie chcia³am Ci robiæ konfliktu i poprawiaæ, ale mo¿e lepiej by by³o te zmienne poni¿ej 
+	zadeklarowaæ jako prywatne w nag³ówku, a w pliku .cpp w tej metodzie tylko ich u¿ywaæ albo do nich coœ przypisaæ
+*/
+
+std::vector<double> inputSignal = *signal;    
 std::vector<double> outputSignal(numberOfSamples);
 std::vector<double> errorValue(numberOfSamples);
 std::vector<double> adaptiveCoefficients(numberOfSamples);

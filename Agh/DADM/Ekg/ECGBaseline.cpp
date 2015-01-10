@@ -4,7 +4,9 @@
 
 std::vector<double> ECGBaseline::compute (std::vector<double>* signal){
 
-	std::vector <double> output;
+	std::vector <double> output; // t¹ definicjê przenios³abym do nag³ówka ECGBaseline.h, wtedy wszystkie metody 
+	//z klasy ECGBaseline  mog³yby z tego pola (output) korzystaæ i nie trzebaby by³o w ka¿dej metodzie z osobna jej tworzyæ
+	// - mam na myœli metody butterworthFilter, chebyshevFilter itp.
 
 	switch (baselineMethod){
 
@@ -15,7 +17,7 @@ std::vector<double> ECGBaseline::compute (std::vector<double>* signal){
 			output = chebyshevFilter (signal, samplingFrequency, filterType);
 			break;
 		case  LMS:
-			leastMeanSquares (signal, samplingFrequency, filterType);
+			output = leastMeanSquares (signal, samplingFrequency, filterType);
 			break;
 		case  MOVINGAVERAGE:
 			output = movingAverage (signal);
@@ -24,7 +26,7 @@ std::vector<double> ECGBaseline::compute (std::vector<double>* signal){
 			cubicSpline (signal);
 			break;
 		case  SAVITZKYGOLAY:
-			savitzkyGolay (signal);
+			output = savitzkyGolay (signal);
 			break;
 		default:
 			output = movingAverage (signal);
@@ -73,6 +75,7 @@ std::vector<double> ECGBaseline::cubicSpline (std::vector<double>* signal){
 
 
 std::vector<double> ECGBaseline::savitzkyGolay (std::vector<double>* signal){
-
-	return *signal;
+	SavitzkyGolay savitzkyGolay;
+	std::vector<double> output = savitzkyGolay.calculateSavitzkyGolay(signal);
+	return output;
 }

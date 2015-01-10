@@ -4,9 +4,15 @@
 
 class MovingAverage{
 	public:
+		static unsigned int span;
+
 		std::vector <double> calculateMovingAverage (std::vector<double>* signal);
+
 	private:
-		static const int span = 5;
+		std::vector<double> inputSignal;
+		std::vector <double> outputSignal;
+
 		double average;
 		double averageWholeSignal;
+		double averageSignal (std::vector<double>* signal);
 };
