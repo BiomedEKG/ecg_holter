@@ -1,20 +1,34 @@
 #ifndef DATAVCG_H
 #define DATAVCG_H
+#include <vector>
 
-double AllX [5] = {0.0617880000000000,0.0579930000000000,0.0602990000000000,0.0622410000000000,0.0642610000000000};
-double * wskX= AllX;
+using namespace std;
 
-double AllY [5] = {0.0617880000000000,0.0579930000000000,0.0602990000000000,0.0622410000000000,0.0642610000000000};
-double * wskY= AllY;
+int AllSignalLength = 100;
 
-double AllZ [5] = {0.0617880000000000,0.0579930000000000,0.0602990000000000,0.0622410000000000,0.0642610000000000};
-double * wskZ= AllZ;
+vector <double> AllX (10);
+//int * wskX= AllX;
+vector < double >::iterator wskX = AllX.begin();
+// wywo³anie: * wskX
+
+//int AllSignalLength = sizeof(AllX);
+
+vector<double> AllY (10);
+vector < double >::iterator wskY = AllY.begin();
+
+vector<double> AllZ (10);
+vector < double >::iterator wskZ = AllZ.begin();
 
 double IsoelectricPoint [3] = {-0.00972300000000000, 0.00303600000000000,0.0177390000000000};
 
-int T_EdgesIndexes[13][2] = {{1,580},{801,1300},{1551,2060},{2251,2780},{2951,3520},{3701,4260},{4451,5000},{5171,5750},{5901,6480},{6651,7200},{7401,7930},{8101,8670},{8850,9390}};
+vector<double> QRS_ONSET;
+vector<double> QRS_END;
+vector<double> T_ONSET;
+vector<double> T_END;
 
-int QRS_EdgesIndexes[13][2] = {{581,800},{1301,1550},{2061,2250},{2781,2950},{3521,3700},{4261,4450},{5001,5170},{5751,5900},{6481,6650},{7201,7400},{7931,8100},{8671,8850},{9391,9550}};
+//double T_EdgesIndexes[13][2] = {{1,580},{801,1300},{1551,2060},{2251,2780},{2951,3520},{3701,4260},{4451,5000},{5171,5750},{5901,6480},{6651,7200},{7401,7930},{8101,8670},{8850,9390}};
+
+//double QRS_EdgesIndexes[13][2] = {{581,800},{1301,1550},{2061,2250},{2781,2950},{3521,3700},{4261,4450},{5001,5170},{5751,5900},{6481,6650},{7201,7400},{7931,8100},{8671,8850},{9391,9550}};
     //float pi=3.1415;
 	//for (i=0; i<=arrayset; i++){
 	//	a[i]= pi*(pow(static_cast<float>(g[i]),2));
@@ -44,22 +58,22 @@ double norm(double *vector){
 	return result;
 }
 
-double mean(double *vector){
-	int length = sizeof(vector);
+double mean(vector < double >::iterator data){
+	int length = sizeof(data);
 	double result = 0;
 	for (int i=0; i<=length; i++){
-        result = result+vector[i];
+        result = result+data[i];
 	}
 	result = result/length;
 	return result;
 }
 
-double stddev(double *vector){
-	double srednia = mean(vector);
-	int length = sizeof(vector);
+double stddev(vector < double >::iterator data){
+	double srednia = mean(data);
+	int length = sizeof(data);
 	double a, odchylenie = 0;
 	for (int i=0; i<=length; i++){
-		a = (vector[i]-srednia)*(vector[i]-srednia);
+		a = (data[i]-srednia)*(data[i]-srednia);
 		odchylenie = odchylenie + a;
 	}
 	odchylenie = odchylenie/length-1;
