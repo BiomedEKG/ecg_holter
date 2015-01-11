@@ -4,6 +4,7 @@ std::vector <double> SavitzkyGolay::calculateSavitzkyGolay (std::vector <double>
 
 
 
+	return *signal;
 
 }
 
