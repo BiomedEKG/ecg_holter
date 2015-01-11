@@ -30,14 +30,38 @@ QString PdfGenerator::getTime(void){
 	QString dateTimeString = dateTime.toString("dd-MM-yyyy hh:mm:ss");
 	return dateTimeString;
 }
-//Private method - changes position of currentPos point
+//Protected method - changes position of currentPos point
 bool PdfGenerator:: movePosition(int x, int y){
 	int newCoordinateX	= currentPos.rx() + x;
 	int newCoordinateY = currentPos.ry() + y;
-	if ((newCoordinateY >= pageHeight) || (newCoordinateX>= pageWidth))
+
+	if (newCoordinateX > pageWidth)
+		newCoordinateX = pageWidth - leftRightMargin;
+
+	if (newCoordinateX < leftRightMargin)
+		newCoordinateX = leftRightMargin;
+
+	if (newCoordinateY < topBottomMargin) 
+		newCoordinateY = topBottomMargin;
+
+	if ((newCoordinateY + topBottomMargin) >= pageHeight) 
 		return false;
 	else 
 		currentPos = QPoint(newCoordinateX,newCoordinateY);
+	return true;
+}
+//Protected method - Checks whether object gonna fit in paper sheet
+bool PdfGenerator::isTooBig(int objectHeight){
+	return ((objectHeight + currentPos.ry() + topBottomMargin) > pageHeight);
+
+}
+//*********************Protected method - creates new page************/
+bool PdfGenerator::createNewPage(){
+	if (!pdfPrinter.newPage())
+		return false;
+	currentPos.setX(leftRightMargin);
+	currentPos.setY(topBottomMargin);
+	writePageNumber(++pageCounter);
 	return true;
 }
 //Private method - writes page number in the rigth corner od the page
@@ -54,17 +78,9 @@ bool PdfGenerator:: writePageNumber(int nr){
 	docCreator.drawText(bbox,str);
 	return true;
 }
-//*********************Private method - creates new page************/
-bool PdfGenerator::createNewPage(){
-	if (!pdfPrinter.newPage())
-		return false;
-	currentPos.setX(leftRightMargin);
-	currentPos.setY(topBottomMargin);
-	writePageNumber(++pageCounter);
-	return true;
-}
+
 /******************* Adds header on the top of the page*************/
-bool PdfGenerator::addHeader(void){
+bool PdfGenerator::addHeader(QString title){
 	//Init if docCreator wasn't activated before
 	if (!docCreator.isActive())
 		if (!docCreator.begin(&pdfPrinter))
@@ -73,7 +89,7 @@ bool PdfGenerator::addHeader(void){
 	docCreator.setPen(QPen(Qt::black, 2.0, Qt::SolidLine));
 	docCreator.setBrush(Qt::NoBrush);
 	// Write title
-	QString title = "ECG Analysis Results";
+	//QString title = "ECG Analysis Results";
 	QFont f("Tahoma",24);
 	docCreator.setFont(f);
 	QFontMetrics fMetrics = docCreator.fontMetrics();
@@ -106,7 +122,7 @@ bool PdfGenerator::addPlot(QwtPlot* ptrPlot,bool strechToPageWidth){
 	//Get size of the plot
 	QSize sizePlot = ptrPlot->size();
 	//Check whether plot would fit in the current page
-	if ((sizePlot.height() + currentPos.ry()) > (pageHeight-leftRightMargin))
+	if (isTooBig(sizePlot.height()))
 		if (!createNewPage())
 			return false;
 	//Compute coordinates of bottom right point
@@ -128,8 +144,45 @@ bool PdfGenerator::addPlot(QwtPlot* ptrPlot,bool strechToPageWidth){
 	//if success, return true
 	return true;
 }
+/***************Insert plot to the document - overloaded************/
+bool PdfGenerator::addPlot(QwtPlot* ptrPlot,int plotWidth, directionOfCursorMove dir){
+	//If QPainter is not active
+	if (!docCreator.isActive())
+		if (!docCreator.begin(&pdfPrinter))
+			return false;
+	//Get size of the plot
+	QSize sizePlot = ptrPlot->size();
+	//Check whether plot would fit in the current page
+	if (isTooBig(sizePlot.height()))
+		if (!createNewPage())
+			return false;
+	//Compute coordinates of bottom right point
+	double scale = (double)plotWidth/(double)sizePlot.width();
+
+	QPoint bottomRight;
+	bottomRight.setY(currentPos.ry() + (int)((double)sizePlot.height()*scale));
+	bottomRight.setX(currentPos.rx() + plotWidth);
+
+	//Create rectangle for new plot
+	QRectF bbox = QRectF(currentPos, bottomRight); 
+	ptrPlot->replot();//bez tego nie zadzia³a, bd pusty wykres
+	//Insert plot
+	plotInserter.render(ptrPlot, &docCreator, bbox);
+	switch (dir){
+		case toSide:
+			movePosition((pageWidth-gap)/2-leftRightMargin, 0);
+			break;
+		case toBottom:
+			if (!movePosition(leftRightMargin-currentPos.rx(), (int)((double)sizePlot.height()*scale) + gap))
+				if(!createNewPage())
+					return false;
+			break;
+	}
+	//if success, return true
+	return true;
+}
 /*********************Inserts two plots*****************************/
-bool PdfGenerator::addPlot(QwtPlot* ptrPlotLeft, QwtPlot* ptrPlotRight){
+bool PdfGenerator::addPlots(QwtPlot* ptrPlotLeft, QwtPlot* ptrPlotRight){
 	//If QPainter is not active
 	if (!docCreator.isActive())
 		if (!docCreator.begin(&pdfPrinter))
@@ -145,8 +198,8 @@ bool PdfGenerator::addPlot(QwtPlot* ptrPlotLeft, QwtPlot* ptrPlotRight){
 		plotHeight = sizeLeft.height();
 	else 
 		plotHeight = sizeRight.height();
-	//Check whether plot would fit in the current page, if not create another one
-	if ((plotHeight + currentPos.ry()) > (pageHeight-leftRightMargin))
+	//Check whether plot would fit in the current page, if not create another page
+	if (isTooBig(plotHeight))
 		if (!createNewPage())
 			return false;
 
@@ -176,11 +229,74 @@ bool PdfGenerator::addSubtitle(QString title){
 	if (!docCreator.isActive())
 		if (!docCreator.begin(&pdfPrinter))
 			return false;
-	QFont f("Tahoma",18);
-	docCreator.setFont(f);
+	docCreator.setFont(QFont("Tahoma", 18));
 	QFontMetrics fMetrics = docCreator.fontMetrics();
 	QSize titleSize = fMetrics.size( Qt::TextSingleLine, title);
+	if (isTooBig(titleSize.height()))//check whether title would fit
+		if (!createNewPage())
+			return false;
 	docCreator.drawText(QRect(currentPos, titleSize),title);
-	movePosition(0,titleSize.height()+gap);
+	if (!movePosition(0,titleSize.height()+gap))// move position, if false, crete new page
+		if (!createNewPage())
+			return false;
 	return true;
 }
+/*******************Adds table to the document**************************/
+bool PdfGenerator::addTable(QStringList data, int colsNr, int width, directionOfCursorMove dir){
+	
+	int dataSize = data.size(); 
+	int rowsNr = (int) ((float)dataSize/float(colsNr) + 0.5);//compute how many rows
+
+	//Check whether plot would fit in the current page, if not create another one
+	if (isTooBig(cellHeight*rowsNr + gap)) 
+		if(!createNewPage())
+			return false;
+	QRect r (currentPos, QSize(width/colsNr, cellHeight));//rectable for table's cell
+	QRect required = QRect();
+	int x_pos = currentPos.x();//where to start drawing table
+	int y_pos = currentPos.y();
+	
+	if (!docCreator.isActive())
+		if(!docCreator.begin(&pdfPrinter))
+			return false;
+	//Set font, first row of table in bold
+	QFont f("Tahoma",12);
+	f.setBold(true);
+	docCreator.setFont(f);
+	//Write data to table
+	for (int i=0; i<dataSize; i++){
+
+		docCreator.drawRect(r);//draw rectangle
+		if (i == colsNr){//if we go through thirst row, switch of bold
+			f.setBold(false);
+			docCreator.setFont(f);
+		}
+		if ((i % colsNr) == 0)// if first column set text to left
+			docCreator.drawText(r,Qt::AlignLeft | Qt::TextWordWrap, data.at(i), &required);
+		else
+			docCreator.drawText(r,Qt::AlignCenter | Qt::TextWordWrap, data.at(i), &required);
+
+		if ((i % colsNr) == colsNr -1){
+			//Skip to next row
+			x_pos = currentPos.rx();
+			y_pos += cellHeight;
+			r.moveTopLeft(QPoint(x_pos, y_pos));
+		}
+		else{
+			//Skip to next column, move to the right
+			x_pos+= width/colsNr;
+			r.moveTopLeft(QPoint(x_pos,y_pos));
+		}
+	}
+	switch (dir){
+	case toSide:
+		movePosition((pageWidth-2*leftRightMargin-gap)/2, 0); break;
+	case toBottom:
+		if (!movePosition(- currentPos.rx() + leftRightMargin,cellHeight*rowsNr+gap))
+			if (!createNewPage())
+				return false;
+		break;
+	}
+	return true;
+}
+
