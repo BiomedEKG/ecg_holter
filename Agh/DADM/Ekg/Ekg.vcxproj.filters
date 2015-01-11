@@ -90,5 +90,11 @@
     <ClInclude Include="Table.h">
       <Filter>Modules\VisualizationModule</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Ekg.rc" />
   </ItemGroup>
 </Project>

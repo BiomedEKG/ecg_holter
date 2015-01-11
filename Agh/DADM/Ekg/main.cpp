@@ -20,6 +20,10 @@
 #include <QVector>
 #include <QtWidgets/QPushButton>
 #include <qwt_samples.h>
+#include <QMap>
+
+#include <QtGui>
+#include "lines.h"
 #define FFTW_DLL
 
 int main(int argc, char *argv[])
@@ -37,7 +41,17 @@ int main(int argc, char *argv[])
 	r_peaks_value << 0.89 << 0.935;
 	QVector<QwtIntervalSample> hist(7);
 	hist << QwtIntervalSample(5,0,1) << QwtIntervalSample(3,1,2) << QwtIntervalSample(1,2,3)<< QwtIntervalSample(4,3,4)<< QwtIntervalSample(6,4,5)<< QwtIntervalSample(5,5,6)<< QwtIntervalSample(3,6,7); 
-/****************************************************************************************************/
+	QMap<QString, double> map;
+	 map["one"] = 1;
+	 map["three"] = 3;
+	 map["seven"] = 7;
+
+	  QVector<QString> units(3);
+	  units[0] = "mm" ;
+	  units[1] = "min" ;
+	  units[2] = "s^2" ;
+
+	/****************************************************************************************************/
 
 /*****************Wywo³ujê obiekt klasy g³ównej************************************************/
 		
@@ -63,10 +77,7 @@ int main(int argc, char *argv[])
 		hp.HistogramPlotInit(hist, mp2.plotarea);
 		hp.setHistogramPlotArea(mp2,0.0,7.0,1.0,0.0,6.0,1.0,"RRx","value","sample Histogram");
 
-		Table t(5,2,mp2.plotarea->canvas());
-
+		Table t(map, units, mp2.plotarea->canvas());
 
 		return a.exec();
 }
-
-
