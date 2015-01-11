@@ -22,6 +22,7 @@ private:
 	vector<double> se;
 	vector<double> rmssd;
 	vector<int> licznikAF;
+	vector<int> numbersOfAF;
 	static const int lengthSegment;
 	
 public:
@@ -64,6 +65,9 @@ public:
 
 	/*check if it is artial fibrillation in signal*/
 	void checkAF();
+
+	/*Run everything */
+	void ArtialFibrilattion();
 
 	/*Grupa funkcji odpowiedzialna za wyœwietlanie danej funckji statystycznej*/
 	/*shows the dividded siganl vector using cout*/

@@ -46,6 +46,7 @@ void Artial::separateSegments()
 	}
 }
 
+
 double Artial:: minValue(vector <double> rawSeparateSignal)
 
 {
@@ -286,6 +287,7 @@ void Artial::checkAF()
 		if (rmssd[i] >= 0.1 && tpr[i] >= 0.0001 && tpr[i] <= 0.9999 && se[i] >= 0.7) //check if calculated value of each parameter with threshold, if af is detected, write 1 to vector licznikAF, if af is not detected, write 0 to vector licznikAF
 		{
 			licznikAF.push_back(1);
+			numbersOfAF.push_back(1);
 		}
 		else
 		{
@@ -295,6 +297,32 @@ void Artial::checkAF()
 		
 	}
 
+}
+
+void Artial::ArtialFibrilattion()
+{
+	/*Tutaj znajduj¹ siê wywo³ania metod, które s¹ odpowiedzialne za obliczenia statystyczne na podstawie, których zostanie podjêta decyzja o wykryciu migotania przedsionków*/
+	Artial artialTestObject;
+	artialTestObject.readData();//dzia³a
+	artialTestObject.separateSegments();//dzia³a
+	artialTestObject.prepareSegmentsWithoutOutlieres();//dzia³a
+	artialTestObject.meanSegment();//dzia³a
+	artialTestObject.rmssdSegment();//dzia³a
+	artialTestObject.tprSegment();//dzia³a
+	artialTestObject.seSegment();
+	artialTestObject.checkAF();
+	
+	
+	/*Tutaj znajduj¹ siê wywo³ania metod, które wyœwietlaj¹ wyniki wykonanych obliczeñ*/
+	//artialTestObject.showsignal128();//dzia³a
+	//artialTestObject.showsignal112();//dzia³a
+	artialTestObject.showAverage();//dzia³a
+	artialTestObject.showRmssd();//dzia³a
+	artialTestObject.showTpr();//dzia³a
+	artialTestObject.showSe();
+	//artialTestObject.showAF();
+
+system("PAUSE");
 }
 
 void Artial::showAF()

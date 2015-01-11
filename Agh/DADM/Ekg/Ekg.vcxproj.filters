@@ -59,9 +59,6 @@
     <ClCompile Include="Artial.cpp">
       <Filter>Modules\AtrialFibr</Filter>
     </ClCompile>
-    <ClCompile Include="Main_dla_atrial.cpp">
-      <Filter>Modules\AtrialFibr</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
