@@ -1,20 +1,20 @@
 
+
 #include "mainwindow.h"
 #include <QApplication>
+
+#include "ekg.h"
+#include "PdfGenerator.h"
+#include "RaportGenerator.h"
+
 #include <iostream>
-#define FFTW_DLL
-#include <fftw3.h>
-#include <gsl\gsl_sf_bessel.h>
-#include <qdebug.h>
-#include <qapplication.h>
-#include <qwt_plot.h> 
+#include <map>
+#include <qwt_plot.h>
 #include <qwt_plot_curve.h>
 #include <qwt_plot_grid.h>
 #include <qwt_symbol.h>
 #include <qwt_legend.h>
-#include <wfdb.h>
-
-
+typedef std::map <std::string, double>  myMap;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -44,8 +44,27 @@ int main(int argc, char *argv[])
 //	return a.exec();*/
 //
 
- 
-    QwtPlot plot;
+
+	
+	myMap res;
+	res["RR"] = 0.0; 
+	res["SDNN"] = 0.0; 
+	res["SDANN"] = 0.0;
+	res["SDANNindex"] = 0.0;
+	res["SDANN"] = 0.0;
+	res["RMSSD"] = 0.0;
+	res["pNN50"] = 0.0;
+	res["SDSD"] = 0.0;
+
+	QStringList data; 
+	data << "Variable" << "Value" << "Unit";
+	 for (auto& x: res) {
+		 data << QString::fromStdString(x.first) << QString::number(x.second) << "ms";
+  }
+	 QApplication a( argc, argv );
+	 //Próba zapisu do pliku
+	  QwtPlot plot;
+	  
     plot.setTitle( "Plot Demo" );
     plot.setCanvasBackground( Qt::white );
     plot.setAxisScale( QwtPlot::yLeft, 0.0, 10.0 );
@@ -74,5 +93,11 @@ int main(int argc, char *argv[])
 	w.addGraph(&plot);
 	w.show();
 
-    return a.exec();
+	plot.resize( 500, 350 );
+    plot.show(); 
+
+	RaportGenerator r("C:\\Users\\Magdalena\\Desktop\\r.pdf");
+	r.drawHRV2(data, &plot, &plot);
+	r.drawHRV1(&plot, data, data);
+	return a.exec();
 }
