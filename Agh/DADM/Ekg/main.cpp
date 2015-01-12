@@ -1,5 +1,6 @@
-#include "ekg.h"
-#include <QtWidgets/QApplication>
+
+#include "mainwindow.h"
+#include <QApplication>
 #include <iostream>
 #define FFTW_DLL
 #include <fftw3.h>
@@ -16,30 +17,33 @@
 
 int main(int argc, char *argv[])
 {
-	/*const int L = 10; 
-	fftw_complex *in; 
-	fftw_complex *out;
-	gsl_sf_bessel_k0_scaled(0.684684);
-	fftw_plan p;
+    QApplication a(argc, argv);
+    MainWindow w;
 
-	in = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*L);
-	out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*L);
-	p = fftw_plan_dft_1d(L, in, out,FFTW_FORWARD,FFTW_MEASURE); 
+	//	/*const int L = 10; 
+//	fftw_complex *in; 
+//	fftw_complex *out;
+//	gsl_sf_bessel_k0_scaled(0.684684);
+//	fftw_plan p;
+//
+//	in = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*L);
+//	out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*L);
+//	p = fftw_plan_dft_1d(L, in, out,FFTW_FORWARD,FFTW_MEASURE); 
+//
+//	fftw_execute(p);
+//	fftw_destroy_plan(p);
+//	fftw_free(in);
+//	fftw_free(out);
+//	 
+//	QApplication a(argc, argv);
+//	Ekg w;
+//	w.show();
+//	qDebug() << "sdfsdfsd";
+//	std::cout << "ALKO PROJEKT CPP CHLOSTA!";			
+//	
+//	return a.exec();*/
+//
 
-	fftw_execute(p);
-	fftw_destroy_plan(p);
-	fftw_free(in);
-	fftw_free(out);
-	 
-	QApplication a(argc, argv);
-	Ekg w;
-	w.show();
-	qDebug() << "sdfsdfsd";
-	std::cout << "ALKO PROJEKT CPP CHLOSTA!";			
-	
-	return a.exec();*/
-
-	    QApplication a( argc, argv );
  
     QwtPlot plot;
     plot.setTitle( "Plot Demo" );
@@ -67,9 +71,13 @@ int main(int argc, char *argv[])
  
     curve->attach( &plot );
   
+<<<<<<< HEAD
     plot.resize( 600, 400 );
     plot.show(); 
+=======
+	w.addGraph(&plot);
+	w.show();
+
+>>>>>>> remotes/origin/develop
     return a.exec();
 }
-
-
