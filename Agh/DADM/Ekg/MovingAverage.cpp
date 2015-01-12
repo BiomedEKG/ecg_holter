@@ -23,11 +23,11 @@ std::vector <double> MovingAverage::calculateMovingAverage (std::vector<double>*
 		inputSignal.insert(inputSignal.begin(), averageWholeSignal);
 	}
 
-	for (unsigned long int j = (span-1)/2; j < (inputSignal.size() - (span-1)) ; j++ ){
+	for (unsigned long int j = (span-1)/2; j < (inputSignal.size() - ((span-1)/2)) ; j++ ){
 		double sum = inputSignal[j]; 
 		double average;
 
-		for(int i = 1 ; i <= (span-1)/2; i++){
+		for(unsigned int i = 1 ; i <= (span-1)/2; i++){
 			sum += inputSignal[j-i];
 			sum += inputSignal[j+i];
 		}
