@@ -39,59 +39,164 @@
     <Filter Include="Modules\NowyFolderNaKazdyModul">
       <UniqueIdentifier>{be580e47-5a67-469d-bb91-c9b8a3710729}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\NowyFolderNaKazdyModul\I/O">
-      <UniqueIdentifier>{3316bf7f-8511-4fe8-b2f9-d860f24aaafd}</UniqueIdentifier>
+    <Filter Include="Modules\VisualizationModule">
+      <UniqueIdentifier>{f66e6bd9-3c47-40c5-bc20-9053aa447fef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\GUI">
+      <UniqueIdentifier>{a71780aa-fa53-457b-b580-e7882ac02e90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Common">
+      <UniqueIdentifier>{e2e2d8d4-0bd2-49db-a31a-a93e96777b82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\I/O">
+      <UniqueIdentifier>{53e62d74-8ba7-4f63-91c0-5d59db56fec2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ekg.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ekg.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ekg.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="gui\channelsmenu.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_channelsmenu.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_channelsmenu.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\channelsprivate.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\graphswidget.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_graphswidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_graphswidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\mainwidget.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_mainwidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_mainwidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\mainwindow.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_mainwindow.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\selectmodulemenu.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_selectmodulemenu.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_selectmodulemenu.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\selectmodulesprivate.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Modules\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="MajorPlot.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="CurvePlot.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="HistogramPlot.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="ScatterPlot.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
+      <Filter>Modules\I/O</Filter>
     </ClCompile>
     <ClCompile Include="PdfGenerator.cpp">
-      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
+      <Filter>Modules\I/O</Filter>
     </ClCompile>
     <ClCompile Include="RaportGenerator.cpp">
-      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
-    </ClCompile>
-    <ClCompile Include="testRaport.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Modules\I/O</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="ekg.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ekg.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="ekg.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="gui\channelsmenu.h">
+      <Filter>Modules\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\graphswidget.h">
+      <Filter>Modules\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\mainwidget.h">
+      <Filter>Modules\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\mainwindow.h">
+      <Filter>Modules\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\selectmodulemenu.h">
+      <Filter>Modules\GUI</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GeneratedFiles\ui_ekg.h">
-      <Filter>Generated Files</Filter>
+    <ClInclude Include="CurvePlot.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="MajorPlot.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="ScatterPlot.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="HistogramPlot.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Table.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\channelsprivate.h">
+      <Filter>Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\selectmodulesprivate.h">
+      <Filter>Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Modules\Common</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
+      <Filter>Modules\I/O</Filter>
     </ClInclude>
     <ClInclude Include="PdfGenerator.h">
-      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
+      <Filter>Modules\I/O</Filter>
     </ClInclude>
     <ClInclude Include="RaportGenerator.h">
-      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
+      <Filter>Modules\I/O</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Ekg.rc" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 #pragma once
 #include "pdfgenerator.h"
+
 class RaportGenerator :
 	public PdfGenerator
 {

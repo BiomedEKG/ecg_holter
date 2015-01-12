@@ -7,11 +7,15 @@
 #include <QTextEdit>
 #include <QFileDialog>
 #include <QProgressBar>
+#include <QTabWidget>
 #include "selectmodulemenu.h"
 #include "channelsmenu.h"
 #include "mainwidget.h"
 #include "graphswidget.h"
 #include <QDebug>
+#include "ObjectManager.h"
+#include "RaportGenerator.h"
+typedef std::map <std::string, double>  myMap;
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -49,6 +53,8 @@ MainWindow::MainWindow(QWidget *parent)
     addToolBar(toolbar);
 
     setCentralWidget(mainWidget);
+
+	addGraph(NULL);
 }
 
 MainWindow::~MainWindow()
@@ -68,10 +74,71 @@ void MainWindow::compute()
 
 void MainWindow::generateReport()
 {
-    QFileDialog::getSaveFileName(this, tr("Please select report file."), ".", QString(".pdf"));
+    QString filename = QFileDialog::getSaveFileName(this, tr("Please select report file."), ".", QString("*.pdf"));
+	if (!filename.isEmpty() && !filename.endsWith(".pdf"))
+	{
+		filename += ".pdf";
+	}
+
+	myMap res;
+	res["RR"] = 0.0; 
+	res["SDNN"] = 0.0; 
+	res["SDANN"] = 0.0;
+	res["SDANNindex"] = 0.0;
+	res["SDANN"] = 0.0;
+	res["RMSSD"] = 0.0;
+	res["pNN50"] = 0.0;
+	res["SDSD"] = 0.0;
+
+	QStringList data; 
+	data << "Variable" << "Value" << "Unit";
+	 for (auto& x: res) {
+		 data << QString::fromStdString(x.first) << QString::number(x.second) << "ms";
+  }
+	 //Pr�ba zapisu do pliku
+	  QwtPlot plot;
+	  
+    plot.setTitle( "Plot Demo" );
+    plot.setCanvasBackground( Qt::white );
+    plot.setAxisScale( QwtPlot::yLeft, 0.0, 10.0 );
+    plot.insertLegend( new QwtLegend() );
+ 
+    QwtPlotGrid *grid = new QwtPlotGrid();
+    grid->attach( &plot );
+ 
+    QwtPlotCurve *curve = new QwtPlotCurve();
+    curve->setTitle( "Some Points" );
+    curve->setPen( Qt::blue, 4 ),
+    curve->setRenderHint( QwtPlotItem::RenderAntialiased, true );
+ 
+    QwtSymbol *symbol = new QwtSymbol( QwtSymbol::Ellipse,
+        QBrush( Qt::yellow ), QPen( Qt::red, 2 ), QSize( 8, 8 ) );
+    curve->setSymbol( symbol );
+ 
+    QPolygonF points;
+    points << QPointF( 0.0, 4.4 ) << QPointF( 1.0, 3.0 )
+        << QPointF( 2.0, 4.5 ) << QPointF( 3.0, 6.8 )
+        << QPointF( 4.0, 7.9 ) << QPointF( 5.0, 7.1 );
+    curve->setSamples( points );
+ 
+    curve->attach( &plot );
+  
+	plot.resize( 500, 350 );
+    plot.show(); 
+
+	RaportGenerator r(filename);
+	r.drawHRV2(data, ObjectManager::getInstance()->wykres(), ObjectManager::getInstance()->wykres());
+	r.drawHRV1(ObjectManager::getInstance()->histogram(), data, data);
 }
 
 void MainWindow::addGraph(QWidget *graph)
 {
-	 mainWidget->getGraphsWidget()->addGraph(graph);
+	QTabWidget *tabWidget = new QTabWidget(0);
+	tabWidget->addTab(ObjectManager::getInstance()->wykres(), tr("Wykres"));
+	tabWidget->addTab(ObjectManager::getInstance()->histogram(), tr("Histogram"));
+
+	mainWidget->getGraphsWidget()->addGraph(tabWidget);
 }
+
+
+	

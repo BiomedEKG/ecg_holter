@@ -1,5 +1,5 @@
-#ifndef _PDF_GENERATOR
-#define	_PDF_GENERATOR
+#pragma once
+
 #include <QtPrintSupport\qprinter.h>
 #include <QtCore\qrect.h>
 #include <QtCore\qpoint.h>
@@ -44,4 +44,3 @@ protected:
 	
 };
 
-#endif //_PDF_GENERATOR
