@@ -12,6 +12,7 @@ class SelectModulesPrivate
 public:
     SelectModulesPrivate(QObject *parent);
 
+	QAction *plotEKG;
     QAction *rPeeksDetection;
     QAction *qrsDetection;
 
@@ -30,6 +31,7 @@ public:
     QAction *vcg;
     QAction *sleepApnea;
     QAction *atrialFibrilation;
+	QAction *ectopicBeat;
 
     QList<QAction *> allModules;
     QList<QAction *> mainModules;

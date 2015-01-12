@@ -11,7 +11,6 @@
 #include "channelsmenu.h"
 #include "mainwidget.h"
 #include "graphswidget.h"
-
 #include <QDebug>
 
 

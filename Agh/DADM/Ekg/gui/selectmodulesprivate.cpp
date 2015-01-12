@@ -4,6 +4,7 @@
 
 SelectModulesPrivate::SelectModulesPrivate(QObject *parent)
 {
+	plotEKG = new QAction("Plot EKG", parent);
     rPeeksDetection = new QAction("R peeks detection", parent);
     qrsDetection = new QAction("QRS detection", parent);
 
@@ -22,8 +23,10 @@ SelectModulesPrivate::SelectModulesPrivate(QObject *parent)
     vcg = new QAction("VCG", parent);
     sleepApnea = new QAction("Sleep apnea", parent);
     atrialFibrilation = new QAction("Atrial fibrilation", parent);
+	ectopicBeat = new QAction("Ectopic beat", parent);
 
     //allModules
+	allModules.append(plotEKG);
     allModules.append(rPeeksDetection);
     allModules.append(qrsDetection);
     allModules.append(qrsAnalysis);
@@ -39,8 +42,10 @@ SelectModulesPrivate::SelectModulesPrivate(QObject *parent)
     allModules.append(vcg);
     allModules.append(sleepApnea);
     allModules.append(atrialFibrilation);
+	allModules.append(ectopicBeat);
 
     //mainModules
+	mainModules.append(plotEKG);
     mainModules.append(rPeeksDetection);
     mainModules.append(qrsDetection);
 
@@ -51,4 +56,5 @@ SelectModulesPrivate::SelectModulesPrivate(QObject *parent)
     otherModules.append(vcg);
     otherModules.append(sleepApnea);
     otherModules.append(atrialFibrilation);
+	otherModules.append(ectopicBeat);
 }
