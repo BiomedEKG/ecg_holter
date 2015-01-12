@@ -8,15 +8,14 @@
 #include <qwt_plot.h>
 class PdfGenerator
 {
-protected:
+private:
+	//Static members
 	static const int leftRightMargin = 25;//lewy & prawy margines
 	static const int topBottomMargin = 30;//górny & dolny margines
 	static const int gap = 25; //odstêp pomiêdzy kolejnymi elementami
 	static const int pageWidth = 793; //Rozmiar strony A4 w punktach
 	static const int pageHeight = 1123;
 	static const int cellHeight = 20; //wysokoœc komórki tabelki
-
-private:
 	QPrinter pdfPrinter;
 	QPainter docCreator;
 	QwtPlotRenderer plotInserter;
@@ -32,7 +31,7 @@ protected:
 	bool createNewPage();
 	bool movePosition(int x, int y);
 	bool isTooBig(int objectHeight);
-
+public:
 	explicit PdfGenerator(QString path2file);
 	~PdfGenerator(void);
 	bool addHeader(QString title);
