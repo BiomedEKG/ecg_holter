@@ -61,7 +61,6 @@ int main(int argc, char *argv[])
 	 for (auto& x: res) {
 		 data << QString::fromStdString(x.first) << QString::number(x.second) << "ms";
   }
-	 QApplication a( argc, argv );
 	 //Próba zapisu do pliku
 	  QwtPlot plot;
 	  
