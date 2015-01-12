@@ -4,8 +4,6 @@
 
 class CubicSpline{
 	public:
-		std::vector <double> calculateCubicSpline (std::vector<double>* );
-	private:
-		static const int stepSize = 0.5;
-
+		std::vector <double> calculateCubicSpline (std::vector<double>*, int samplingFrequency );
+	
 };

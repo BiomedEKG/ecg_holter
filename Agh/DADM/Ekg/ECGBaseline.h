@@ -24,6 +24,6 @@ private:
 	std::vector<double> chebyshevFilter (std::vector<double>* signal, int samplingFrequency, FILTERTYPE filterType);
 	std::vector<double> movingAverage (std::vector<double>* signal);
 	std::vector<double> leastMeanSquares (std::vector<double>* signal, int samplingFrequency, FILTERTYPE filterType);
-	std::vector<double> cubicSpline (std::vector<double>* signal);
+	std::vector<double> cubicSpline (std::vector<double>* signal, int samplingFrequency);
 	std::vector<double> savitzkyGolay (std::vector<double>* signal);
 };
