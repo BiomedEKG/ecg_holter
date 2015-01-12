@@ -69,7 +69,6 @@ int main(int argc, char *argv[])
   
     plot.resize( 600, 400 );
     plot.show(); 
-  
     return a.exec();
 }
 
