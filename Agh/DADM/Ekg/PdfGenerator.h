@@ -8,7 +8,7 @@
 #include <qwt_plot.h>
 class PdfGenerator
 {
-private:
+public:
 	//Static members
 	static const int leftRightMargin = 25;//lewy & prawy margines
 	static const int topBottomMargin = 30;//górny & dolny margines
