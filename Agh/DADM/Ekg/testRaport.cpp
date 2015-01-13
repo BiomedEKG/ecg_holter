@@ -1,8 +1,12 @@
+
+
+#include "mainwindow.h"
+#include <QApplication>
+
 #include "ekg.h"
 #include "PdfGenerator.h"
 #include "RaportGenerator.h"
-#include <qapplication.h>
-#include <QtWidgets/QApplication>
+
 #include <iostream>
 #include <map>
 #include <qwt_plot.h>
@@ -14,6 +18,35 @@
 typedef std::map <std::string, double>  myMap;
 int main(int argc, char *argv[])
 {
+    QApplication a(argc, argv);
+    MainWindow w;
+
+	//	/*const int L = 10; 
+//	fftw_complex *in; 
+//	fftw_complex *out;
+//	gsl_sf_bessel_k0_scaled(0.684684);
+//	fftw_plan p;
+//
+//	in = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*L);
+//	out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex)*L);
+//	p = fftw_plan_dft_1d(L, in, out,FFTW_FORWARD,FFTW_MEASURE); 
+//
+//	fftw_execute(p);
+//	fftw_destroy_plan(p);
+//	fftw_free(in);
+//	fftw_free(out);
+//	 
+//	QApplication a(argc, argv);
+//	Ekg w;
+//	w.show();
+//	qDebug() << "sdfsdfsd";
+//	std::cout << "ALKO PROJEKT CPP CHLOSTA!";			
+//	
+//	return a.exec();*/
+//
+
+
+	
 	myMap res;
 	res["RR"] = 0.0; 
 	res["SDNN"] = 0.0; 
@@ -29,9 +62,9 @@ int main(int argc, char *argv[])
 	 for (auto& x: res) {
 		 data << QString::fromStdString(x.first) << QString::number(x.second) << "ms";
   }
-	 QApplication a( argc, argv );
 	 //Próba zapisu do pliku
 	  QwtPlot plot;
+	  
     plot.setTitle( "Plot Demo" );
     plot.setCanvasBackground( Qt::white );
     plot.setAxisScale( QwtPlot::yLeft, 0.0, 10.0 );
@@ -56,6 +89,10 @@ int main(int argc, char *argv[])
     curve->setSamples( points );
  
     curve->attach( &plot );
+  
+	w.addGraph(&plot);
+	w.show();
+
 	plot.resize( 500, 350 );
     plot.show(); 
 	
