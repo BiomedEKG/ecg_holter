@@ -42,8 +42,8 @@
     <Filter Include="Modules\gui">
       <UniqueIdentifier>{c7c77964-42ab-4e1b-b341-6f130b9815b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\SIG_EDR">
-      <UniqueIdentifier>{1c242f52-0525-4304-b3cd-7fd7d0eec400}</UniqueIdentifier>
+    <Filter Include="Modules\NowyFolderNaKazdyModul\SIG_EDR">
+      <UniqueIdentifier>{3eb112ca-7aa6-46ce-8019-d3738958e8b5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -113,8 +113,8 @@
     <ClCompile Include="gui\channelsprivate.cpp">
       <Filter>Modules\gui</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
-      <Filter>Modules\SIG_EDR</Filter>
+    <ClCompile Include="SIG_EDR.cpp">
+      <Filter>Modules\NowyFolderNaKazdyModul\SIG_EDR</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

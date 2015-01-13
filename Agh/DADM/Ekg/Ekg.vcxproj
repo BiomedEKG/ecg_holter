@@ -127,7 +127,7 @@
     <ClCompile Include="gui\selectmodulemenu.cpp" />
     <ClCompile Include="gui\selectmodulesprivate.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="SIG_EDR.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
