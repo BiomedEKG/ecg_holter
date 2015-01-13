@@ -36,11 +36,8 @@
     <Filter Include="Modules">
       <UniqueIdentifier>{8208523c-aceb-4eb0-8869-cc66f243dc0e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\NowyFolderNaKazdyModul">
+    <Filter Include="Modules\I/O">
       <UniqueIdentifier>{be580e47-5a67-469d-bb91-c9b8a3710729}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\NowyFolderNaKazdyModul\I/O">
-      <UniqueIdentifier>{3316bf7f-8511-4fe8-b2f9-d860f24aaafd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -56,17 +53,17 @@
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
-    </ClCompile>
-    <ClCompile Include="PdfGenerator.cpp">
-      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
-    </ClCompile>
-    <ClCompile Include="RaportGenerator.cpp">
-      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
-    </ClCompile>
     <ClCompile Include="testRaport.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Modules\I/O</Filter>
+    </ClCompile>
+    <ClCompile Include="PdfGenerator.cpp">
+      <Filter>Modules\I/O</Filter>
+    </ClCompile>
+    <ClCompile Include="RaportGenerator.cpp">
+      <Filter>Modules\I/O</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,13 +82,13 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
+      <Filter>Modules\I/O</Filter>
     </ClInclude>
     <ClInclude Include="PdfGenerator.h">
-      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
+      <Filter>Modules\I/O</Filter>
     </ClInclude>
     <ClInclude Include="RaportGenerator.h">
-      <Filter>Modules\NowyFolderNaKazdyModul\I/O</Filter>
+      <Filter>Modules\I/O</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
