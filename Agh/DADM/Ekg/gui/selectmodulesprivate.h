@@ -12,9 +12,11 @@ class SelectModulesPrivate
 public:
     SelectModulesPrivate(QObject *parent);
 
-	QAction *plotEKG;
+	QAction *plotECG;
+	QAction *ecgFiltration;
     QAction *rPeeksDetection;
     QAction *qrsDetection;
+	QAction *edrExtraction;
 
     QAction *qrsAnalysis; //Submenu
     QAction *qrsClassification;

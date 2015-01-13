@@ -7,6 +7,8 @@
 #include "HistogramPlot.h"
 #include "Table.h"
 
+#include "Input.h"
+
 #include "qwt_plot.h"
 
 
@@ -19,6 +21,8 @@ public:
 	QwtPlot * wykres();
 	QwtPlot * histogram();
 
+	Input &inputHandler();
+ 
 private:
 	ObjectManager();
 	void populate();
@@ -28,6 +32,8 @@ private:
 
 	MajorPlot m_wykres;
 	MajorPlot m_histogram;
+
+	Input m_inputHandler;
 };
 
 #endif //OBJECT_MANAGER_H
