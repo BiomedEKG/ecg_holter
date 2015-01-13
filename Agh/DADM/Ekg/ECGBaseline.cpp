@@ -23,7 +23,7 @@ std::vector<double> ECGBaseline::compute (std::vector<double>* signal){
 			output = movingAverage (signal);
 			break;
 		case  CUBICSPLINE:
-			cubicSpline (signal);
+			output = cubicSpline (signal, samplingFrequency);
 			break;
 		case  SAVITZKYGOLAY:
 			output = savitzkyGolay (signal);
@@ -68,9 +68,10 @@ std::vector<double> ECGBaseline::movingAverage (std::vector<double>* signal){
 	
 }
 
-std::vector<double> ECGBaseline::cubicSpline (std::vector<double>* signal){
-	
-	return *signal;
+std::vector<double> ECGBaseline::cubicSpline (std::vector<double>* signal, int samplingFrequency){
+	CubicSpline cubicSpline;
+	std::vector <double> output = cubicSpline.calculateCubicSpline(signal, samplingFrequency);
+	return output;
 }
 
 
