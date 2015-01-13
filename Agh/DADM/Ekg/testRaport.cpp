@@ -10,6 +10,7 @@
 #include <qwt_plot_grid.h>
 #include <qwt_symbol.h>
 #include <qwt_legend.h>
+#include "Input.h"
 typedef std::map <std::string, double>  myMap;
 int main(int argc, char *argv[])
 {
@@ -57,8 +58,8 @@ int main(int argc, char *argv[])
     curve->attach( &plot );
 	plot.resize( 500, 350 );
     plot.show(); 
-
-	RaportGenerator r("C:\\Users\\Magdalena\\Desktop\\r.pdf");
+	
+	RaportGenerator r("C:\\Users\\asus\\Desktop\\Test.pdf");///PODMIENIC SCIEZKE !!
 	r.drawHRV2(data, &plot, &plot);
 	r.drawHRV1(&plot, data, data);
 	return a.exec();

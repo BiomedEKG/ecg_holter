@@ -40,7 +40,6 @@ public:
 	bool addPlot(QwtPlot* ptrPlot, int plotWidth, directionOfCursorMove dir);
 	bool addSubtitle(QString title);
 	bool addTable(QStringList data, int colsNr, int width, directionOfCursorMove dir);
-	
 };
 
-#endif //_PDF_GENERATOR
+#endif //_PDF_GENERATOR	

@@ -1,64 +1,63 @@
 #include "Input.h"
 
-
-
-int Input::iOpen(char *cSignalPath)
+int Input::Open(char *SignalPath)
 {
 	//Check path if not null !
-	cPath = cSignalPath;
-	imChannelID.clear();
-	iSelectedChannelID = -1;
-	iFs = sampfreq(cSignalPath);
+	PrepairPath(SignalPath);
+	
+	ChannelID.clear();
+	SelectedChannelID = -1;
+	Fs = sampfreq(Path);
 
-	iSigTotNumber = isigopen(cPath, NULL, 0);// Sprawdz liczbe sygnalow
+	SigTotNumber = isigopen(Path, NULL, 0);// Sprawdz liczbe sygnalow
 	
-      if (iSigTotNumber < 1) return(2008);//Nie obsluzony blad
-	  if (iCounter == 0){
+      if (SigTotNumber < 1) return(2008);//Nie obsluzony blad
+	  if (Counter == 0){
 	
-		  SignalInfo = new WFDB_Siginfo[iSigTotNumber];
-		  Sample = new WFDB_Sample[iSigTotNumber];
+		  SignalInfo = new WFDB_Siginfo[SigTotNumber];
+		  Sample = new WFDB_Sample[SigTotNumber];
 	  } 
 	  else {
 		  delete SignalInfo;
 		  delete Sample;
-		  SignalInfo = new WFDB_Siginfo[iSigTotNumber];
-		  Sample = new WFDB_Sample[iSigTotNumber];
+		  SignalInfo = new WFDB_Siginfo[SigTotNumber];
+		  Sample = new WFDB_Sample[SigTotNumber];
 		
 	  }
 
-	  iCounter++;
+	  Counter++;
 	
-	if (isigopen(cPath, SignalInfo, iSigTotNumber) != iSigTotNumber)  exit(2009);
+	if (isigopen(Path, SignalInfo, SigTotNumber) != SigTotNumber)  exit(2009);
 
-	  for(int i = 0; i < iSigTotNumber; i++){
+	  for(int i = 0; i < SigTotNumber; i++){
 
-	  imChannelID[SignalInfo[i].desc] = i+1 ;
+	  ChannelID[SignalInfo[i].desc] = i+1 ;
 
 	  }
 
 	  return(0);
 }
-int Input::iSelectChannel( char * cChannelName)
+int Input::SelectChannel( char * ChannelName)
 {
-	iSelectedChannelID = imChannelID[cChannelName];
-	if (iSelectedChannelID > 0 ){
+	SelectedChannelID = ChannelID[ChannelName];
+	if (SelectedChannelID > 0 ){
 
-	iSigLength = SignalInfo[iSelectedChannelID-1].nsamp;
-	this->cChannelName = cChannelName;
-	return(iSelectedChannelID);
+	SigLength = SignalInfo[SelectedChannelID-1].nsamp;
+	this->ChannelName = ChannelName;
+	return(SelectedChannelID);
 	}
 	else{
-	iSelectedChannelID = -1;
-	return(iSelectedChannelID);
+	SelectedChannelID = -1;
+	return(SelectedChannelID);
 	}
 }
 vector <double> Input:: vdGetChannelData(void)
 {
 	dvData.clear();
 	isigsettime(0L); // Ustaw sie na poczatku pliku 
-	ivData.reserve(iSigLength); dvData.reserve(iSigLength); // Przydziel miejsce dla vectorow
+	ivData.reserve(SigLength); dvData.reserve(SigLength); // Przydziel miejsce dla vectorow
 	while(getvec(Sample) > 0) {
-		  dvData.push_back(aduphys(iSelectedChannelID-1,Sample[iSelectedChannelID-1])); //Dane w mV
+		  dvData.push_back(aduphys(SelectedChannelID-1,Sample[SelectedChannelID-1])); //Dane w mV
 	  }
 
 	return dvData;
@@ -68,39 +67,60 @@ vector <int> Input:: viGetChannelData(void)
 {
 	ivData.clear();
 	isigsettime(0L); // Ustaw sie na poczatku pliku 
-	ivData.reserve(iSigLength); dvData.reserve(iSigLength); // Przydziel miejsce dla vectorow
+	ivData.reserve(SigLength); dvData.reserve(SigLength); // Przydziel miejsce dla vectorow
 	while(getvec(Sample) > 0) {
-		  ivData.push_back(Sample[iSelectedChannelID-1]); // Dane int
+		  ivData.push_back(Sample[SelectedChannelID-1]); // Dane int
 	  }
 
 	return ivData;
 
 }
-int Input::iGetFs(void)
+int Input::GetFs(void)
 {
-	return iFs;
+	return Fs;
 }
-int Input::iGetNumberOfChannels(void)
+int Input::GetNumberOfChannels(void)
 {
-	return iSigTotNumber;
+	return SigTotNumber;
 }
-char * Input::cGetChannelName(void)
+char * Input::GetChannelName(void)
 {
-	return cChannelName;
+	return ChannelName;
 }
-char ** Input::acGetChannelsNames(void)
+char ** Input::GetChannelsNames(void)
 {
-	cChannelNames = new char*[iSigTotNumber];
+	ChannelNames = new char*[SigTotNumber];
 	
-	for(int i = 0; i < iSigTotNumber; i++) {
+	for(int i = 0; i < SigTotNumber; i++) {
 	
-		cChannelNames[i] = SignalInfo[i].desc; ;
+		ChannelNames[i] = SignalInfo[i].desc; ;
 	}
-	return cChannelNames;
+	return ChannelNames;
 }
-int Input::iGetSignalLength(void)
+int Input::GetSignalLength(void)
 {
-	return iSigLength;
+	return SigLength;
+}
+void Input::PrepairPath(char *RawPath){
+	QString LocalString = RawPath;
+
+	if (LocalString.contains("\\\\")){
+		LocalString.replace(QString("\\\\"),QString("\\"));
+	}
+	if (LocalString.contains("/")){
+		LocalString.replace(QString("/"),QString("\\"));
+	}
+	LocalString.remove(QString(".hea"),Qt::CaseInsensitive);
+	LocalString.remove(QString(".dat"),Qt::CaseInsensitive);
+
+	string DupString = LocalString.toStdString();
+	Path = new char[DupString.length()+1];
+	strcpy(Path,DupString.c_str());
+
+
+}
+char * Input::GetPath(void){
+	return Path;
 }
 void Input::Close(void)
 {
