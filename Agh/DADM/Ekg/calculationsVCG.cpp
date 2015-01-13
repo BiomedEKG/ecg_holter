@@ -2,6 +2,7 @@
 #include <math.h>
 #include <dataVCG.h>
 
+
 using namespace std;
 
 int main (){
