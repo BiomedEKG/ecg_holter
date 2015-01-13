@@ -51,7 +51,7 @@ std::vector<std::vector<double>> ButterworthFilter::setParameters (int samplingF
 										   butterworthCoefficients[0][1] = -5.899696;
 										   butterworthCoefficients[0][2] = 14.749240;
 										   butterworthCoefficients[0][3] = -19.665653;
-										   butterworthCoefficients[0][4] =14.749240;
+										   butterworthCoefficients[0][4] = 14.749240;
 										   butterworthCoefficients[0][5] = -5.899696;
 										   butterworthCoefficients[0][6] = 0.983283;
 

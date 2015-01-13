@@ -8,42 +8,34 @@ std::vector<double> Filter::filterSignal (std::vector<double> b, std::vector<dou
 std::vector<double> input = *signal;  // hmm
 
 std::vector<double> output;
+output.resize(numberOfSamples);
 
+int i,j;
+output[0] = b[0]*input[0];
 
-double x1 = input[0];
+for (i=1; i<filterOrder+1; i++) {
+	output[i]=0.0;
 
-output[0] = x1*b[0];
-
-for (int i=1; i<filterOrder+1; i++) {
-	output[i] = 0.0;
-
-	for (int j=0; j<i+1; j++) {
-		double y1 = output [i];
-		double x1 = input[i-j];
-		output[i] = y1+b[j]*x1;
+	for (j=0; j<i+1; j++) {
+		output[i]=output[i]+b[j]*input[i-j];
 		}
 
 	for (int j=0; j<i; j++) {
-		double y11 = output [i];
-		double y1 = output[i-j-1];
-		output[i] = y11-a[j+1]*y1;
+		output[i]=output[i]-a[j+1]*output[i-j-1];
 		}
     }
 
 
-for (int i=filterOrder+1; i<numberOfSamples; i++) {
-	output [i] = 0.0;
 
-	for (int j=0; j<filterOrder+1; j++) {
-		double y1 = output[i];
-		double x1 = input[i-j];
-		output[i] = y1+b[j]*x1;
+for (int i=filterOrder+1; i<numberOfSamples; i++) {
+	output[i]=0.0;
+
+	for (j=0; j<filterOrder+1; j++) {
+		output[i]=output[i]+b[j]*input[i-j];
 		}
 
-	for (int j=0; j<filterOrder; j++) {
-		double y11 = output[i];
-		double y1 = output[i-j-1];
-		output[i] = y11-a[j+1]*y1;
+	for (j=0; j<filterOrder; j++) {
+		output[i]=output[i]-a[j+1]*output[i-j-1];
 		}
 	}
 
@@ -58,8 +50,8 @@ std::vector<double> output;
 output = filterSignal(b, a, signal);
 
 
-std::vector<double> reverse(numberOfSamples);
-
+std::vector<double> reverse;
+reverse.resize(numberOfSamples);
 
 for (int i=0; i<numberOfSamples; i++) {
 	double y1 = output[numberOfSamples-i-1];

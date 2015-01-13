@@ -5,7 +5,8 @@
 std::vector <double> LeastMeanSquares::calculateLeastMeanSquares (std::vector<double>* signal, int samplingFrequency, FILTERTYPE filterType){
 
 ButterworthFilter butterworthFilter;
-int numberOfSamples = butterworthFilter.numberOfSamples = signal->size();
+int numberOfSamples = signal->size();
+butterworthFilter.numberOfSamples = numberOfSamples;
 std::vector<std::vector<double>> butterworthCoefficients = butterworthFilter.setParameters(samplingFrequency, filterType);
 std::vector <double> referenceSignal = butterworthFilter.zeroPhaseFiltering(butterworthCoefficients[0], butterworthCoefficients[1], signal);
 
@@ -20,13 +21,16 @@ std::vector <double> referenceSignal = butterworthFilter.zeroPhaseFiltering(butt
 */
 
 std::vector<double> inputSignal = *signal;    
-std::vector<double> outputSignal(numberOfSamples);
-std::vector<double> errorValue(numberOfSamples);
-std::vector<double> adaptiveCoefficients(numberOfSamples);
+std::vector<double> outputSignal;
+std::vector<double> errorValue;
+std::vector<double> adaptiveCoefficients;
+outputSignal.resize(numberOfSamples);
+errorValue.resize(numberOfSamples);
+adaptiveCoefficients.resize(numberOfSamples);
 
 const double stepSize = 0.5;
 
-adaptiveCoefficients.assign (numberOfSamples,0.0);
+adaptiveCoefficients.assign (numberOfSamples,0.0);   
 
 
 for (int i=0; i<numberOfSamples; i++) {

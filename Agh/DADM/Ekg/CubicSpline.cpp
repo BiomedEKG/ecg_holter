@@ -152,6 +152,10 @@ int numberOfDetectedRPeaks = 0;
 	std::vector<int> RPeaksIndexes;  //hmmm
 	std::vector<double> interpolatedBaseline;
 
+
+	//do interpolacji podawaæ R[index-50]!
+
+
     gsl_interp_accel *acc  = gsl_interp_accel_alloc ();
     gsl_spline *spline  = gsl_spline_alloc (gsl_interp_cspline, numberOfDetectedRPeaks);
 
