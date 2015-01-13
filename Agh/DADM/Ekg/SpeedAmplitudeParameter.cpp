@@ -1,6 +1,3 @@
-// SpeedAmplitudeParameter.cpp : Defines the max speed to amplitude ratio for further calculations.
-//
-
 #include <iostream>
 #include <cstdlib>
 #include <vector>
@@ -9,12 +6,10 @@
 #include <map>
 #include "SpeedAmplitudeParameter.h"
 
-using namespace std;
-
-SpeedAmplitudeParameter::SpeedAmplitudeParameter(){
+SpeedAmplitudeParameter::SpeedAmplitudeParameter(vector<double> qrsOnsetData, vector<double> qrsEndData, vector<double> signalData) : 
+										AbstractExtractor(qrsOnsetData, qrsEndData, signalData){
 
 }
-
 
 // Testing on a different data
 vector<double> SpeedAmplitudeParameter::SpeedAmplitudeExtractor(){
@@ -22,9 +17,10 @@ vector<double> SpeedAmplitudeParameter::SpeedAmplitudeExtractor(){
 	vector<double> speedAmplitude;
 	vector<double> signalData;
 
-	for(unsigned int i = 0; i < this->numberOfQrs; i++){
+	MyMap tempMap = SignalExtractor();
 
-		signalData = SignalExtractor(i);
+	for(unsigned int i = 0; i < this->qrsOnset.size(); i++){
+
 		double maxSpeed = 0;
 		double maxSignal = 0;
 		double miniSignal = 0;

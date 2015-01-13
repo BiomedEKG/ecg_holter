@@ -1,5 +1,3 @@
-// FastGrowthParameter.cpp : Defines the percentage of samples which speed exceed 40% of a max speed
-
 #include <iostream>
 #include <cstdlib>
 #include <vector>
@@ -8,25 +6,25 @@
 #include <map>
 #include "FastGrowthParameter.h"
 
-using namespace std;
-
-FastGrowthParameter::FastGrowthParameter(){
+FastGrowthParameter::FastGrowthParameter(vector<double> qrsOnsetData, vector<double> qrsEndData, vector<double> signalData) : 
+										AbstractExtractor(qrsOnsetData, qrsEndData, signalData){
 
 }
-
-// Testing on a different data
 
 vector<double> FastGrowthParameter::FastGrowthExtractor(){
 
 	vector<double> signalData;
 	vector<double> fastGrowth;
 
-	for(unsigned int i = 0; i < this->numberOfQrs; i++){
+	MyMap tempMap = SignalExtractor();
+	
+	for(unsigned int i = 0; i < this->qrsOnset.size(); i++){
 
-		signalData = SignalExtractor(i);
 		double maxSpeed = 0;
+		double speed = 0;
 		double samplesCount = 0;
-
+		signalData = tempMap.FindInMap(i);
+	
 		for(unsigned int j = 0; j < signalData.size(); j++){
 
 			speed = signalData.at(j) + signalData.at(j-2) - 2*signalData.at(j-1);

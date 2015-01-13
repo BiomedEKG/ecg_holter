@@ -1,12 +1,21 @@
+#include <iostream>
+#include <cstdlib>
+#include <vector>
+#include <cmath>
+#include <string>
+#include <map>
+#include "MyMap.h"
+
 using namespace std;
 
 class AbstractExtractor{
+	
 	public:
-        vector<double> qrsOnset;
-        vector<double> qrsEnd;
-		vector<double> signal; 
-        double numberOfQrs;
-
-        AbstractExtractor(vector<double> qrsOnsetFromWaves, vector<double> qrsEndFromWaves, vector<double> signalFromEcgBaseline);
-		vector<double> SignalExtractor(unsigned int qrsNumber);
+		vector<double> qrsOnset;
+		vector<double> qrsEnd;
+		vector<double> signal;
+		vector<double> numberOfSamples;
+		
+		AbstractExtractor(vector<double> qrsOnsetFromWaves, vector<double> qrsEndFromWaves, vector<double> signalFromEcgBaseline);
+		MyMap SignalExtractor();
 };
