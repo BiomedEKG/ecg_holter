@@ -42,6 +42,9 @@
     <Filter Include="Modules\gui">
       <UniqueIdentifier>{c7c77964-42ab-4e1b-b341-6f130b9815b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\stsegment">
+      <UniqueIdentifier>{bff5276c-4716-4587-8eb6-9cbc7aac1a66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -110,6 +113,9 @@
     <ClCompile Include="gui\channelsprivate.cpp">
       <Filter>Modules\gui</Filter>
     </ClCompile>
+    <ClCompile Include="stsegment.cpp">
+      <Filter>Modules\stsegment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -146,6 +152,9 @@
   <ItemGroup>
     <ClInclude Include="gui\channelsprivate.h">
       <Filter>Modules\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="stsegment.h">
+      <Filter>Modules\stsegment</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

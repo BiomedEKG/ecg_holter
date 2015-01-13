@@ -127,6 +127,7 @@
     <ClCompile Include="gui\selectmodulemenu.cpp" />
     <ClCompile Include="gui\selectmodulesprivate.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="stsegment.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -252,6 +253,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gui\channelsprivate.h" />
+    <ClInclude Include="stsegment.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
