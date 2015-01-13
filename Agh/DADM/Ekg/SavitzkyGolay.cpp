@@ -10,6 +10,7 @@ std::vector <double> SavitzkyGolay::calculateSavitzkyGolay (std::vector <double>
 
 	//std::vector<double> coefficientsVector(coefficientsArray, coefficientsArray + sizeof(coefficientsArray) / sizeof(coefficientsArray[0]) );
 	
+	inputSignal = *signal;
 
 	double sumSignal = 0.0;
 
