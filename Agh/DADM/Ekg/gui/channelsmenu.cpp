@@ -6,12 +6,9 @@ ChannelsMenu::ChannelsMenu(QWidget *parent) :
     QMenu(parent),
     d(new ChannelsPrivate(parent))
 {
-    addActions(d->allChannels);
-    setSingleChoice(d->allChannels, new QActionGroup(this)); 
+	setDisabled(true);
+	updateMenu();
 }
-
-
-
 
 void ChannelsMenu::setSingleChoice(QList<QAction *> &list, QActionGroup *actionGroup)
 {
@@ -22,3 +19,25 @@ void ChannelsMenu::setSingleChoice(QList<QAction *> &list, QActionGroup *actionG
     }
 }
 
+void ChannelsMenu::clearChannels()
+{	
+	setDisabled(true);
+	d->allChannels.clear();
+	clear();
+}
+
+void ChannelsMenu::addChannel(const QString &name)
+{
+	d->allChannels.append(new QAction(name, this));
+}
+
+void ChannelsMenu::updateMenu()
+{
+	addActions(d->allChannels);
+	setSingleChoice(d->allChannels, new QActionGroup(this));
+
+	if (d->allChannels.size() > 0)
+	{
+		setEnabled(true);
+	}
+}

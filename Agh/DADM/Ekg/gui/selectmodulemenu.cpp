@@ -18,7 +18,6 @@ SelectModuleMenu::SelectModuleMenu(QWidget *parent) :
     addActions(d->otherModules);
 
     QList<QAction *> qrsAnalysisModules;
-    qrsAnalysisModules.append(d->qrsClassification);
     qrsAnalysisModules.append(d->stAnalysis);
     qrsAnalysisModules.append(d->tAlternans);
     qrsAnalysisModules.append(d->qtLengthTAnalysis);
