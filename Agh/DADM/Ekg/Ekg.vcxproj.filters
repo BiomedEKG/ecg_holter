@@ -113,7 +113,7 @@
     <ClCompile Include="gui\channelsprivate.cpp">
       <Filter>Modules\gui</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Ewelina\Desktop\Pieciak_ostatnie\ConsoleApplication1\ConsoleApplication1\SIG_EDR.cpp">
+    <ClCompile Include="Source.cpp">
       <Filter>Modules\SIG_EDR</Filter>
     </ClCompile>
   </ItemGroup>
