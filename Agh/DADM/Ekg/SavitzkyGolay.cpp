@@ -3,7 +3,7 @@
 //coefficients taken from MATLAB, for 4-order polynominal savitzkygolay filter
 const double SavitzkyGolay::coefficientsArray[] = {01417, 0.0, -0.0043, 0.0, 0.0};
 const unsigned int SavitzkyGolay::span = 25;
-const unsigned int spanHalf = 12;
+const unsigned int SavitzkyGolay::spanHalf = 12;
 const unsigned int SavitzkyGolay::polynominalOrder = 4;
 
 std::vector <double> SavitzkyGolay::calculateSavitzkyGolay (std::vector <double> *signal){
