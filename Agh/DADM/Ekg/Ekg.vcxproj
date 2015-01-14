@@ -114,9 +114,11 @@
     </ClCompile>
     <ClCompile Include="gui\channelsmenu.cpp" />
     <ClCompile Include="gui\channelsprivate.cpp" />
+    <ClCompile Include="gui\ECGFiltrationWidget.cpp" />
     <ClCompile Include="gui\graphswidget.cpp" />
     <ClCompile Include="gui\mainwidget.cpp" />
     <ClCompile Include="gui\mainwindow.cpp" />
+    <ClCompile Include="gui\RPeaksDetectionWidget.cpp" />
     <ClCompile Include="gui\selectmodulemenu.cpp" />
     <ClCompile Include="gui\selectmodulesprivate.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -183,6 +185,8 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtPrintSupport"</Command>
     </CustomBuild>
+    <ClInclude Include="gui\ECGFiltrationWidget.h" />
+    <ClInclude Include="gui\RPeaksDetectionWidget.h" />
     <ClInclude Include="gui\selectmodulesprivate.h" />
     <ClInclude Include="HistogramPlot.h" />
     <ClInclude Include="Input.h" />
