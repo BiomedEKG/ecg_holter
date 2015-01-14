@@ -13,13 +13,26 @@
 #include <qwt_symbol.h>
 #include <qwt_legend.h>
 #include <wfdb.h>
+#include <Hrv2.h>
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-
+	
+	double tab[]={22.0,4.0,6.0,8.0,9.0,10.0,22.0,4.0,6.0,8.0,9.0,10.0};
+			vector<double> peaks;
+			for (int i=0; i<6; i++){
+				peaks.push_back(tab[i]);
+			}
+			unsigned int fr = 1000;
+	Hrv2 ob(peaks, fr);
+	double samen = ob.calculateSamen();
+	cout<<samen<<endl;
+	double tinn = ob.triangleRR();
+	cout<<tinn;
+	
 	//	/*const int L = 10; 
 //	fftw_complex *in; 
 //	fftw_complex *out;
@@ -71,13 +84,15 @@ int main(int argc, char *argv[])
  
     curve->attach( &plot );
   
-<<<<<<< HEAD
+//<<HEAD
     plot.resize( 600, 400 );
     plot.show(); 
-=======
+
 	w.addGraph(&plot);
 	w.show();
 
->>>>>>> remotes/origin/develop
+//>>>>>>> remotes/origin/develop
     return a.exec();
+	system("pause");
+	
 }
