@@ -5,11 +5,16 @@
 #include <string>
 #include <map>
 #include "AbstractExtractor.h"
+#ifndef SPEEDAMPLITUDEPARAMETER_H
+#define SPEEDAMPLITUDEPARAMETER_H
 
 using namespace std;
 
 class SpeedAmplitudeParameter : public AbstractExtractor{
 	
-	SpeedAmplitudeParameter(vector<double> qrsOnsetData, vector<double> qrsEndData, vector<double> signalData);
-	vector<double> SpeedAmplitudeExtractor();
+	public:
+		SpeedAmplitudeParameter(vector<double> qrsOnsetData, vector<double> qrsEndData, vector<double> signalData);
+		friend vector<double> SpeedAmplitudeExtractor(SpeedAmplitudeParameter &speedAmplitudeType);
 };
+
+#endif // SPEEDAMPLITUDEPARAMETER_H

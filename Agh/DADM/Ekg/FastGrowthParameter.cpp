@@ -11,14 +11,15 @@ FastGrowthParameter::FastGrowthParameter(vector<double> qrsOnsetData, vector<dou
 
 }
 
-vector<double> FastGrowthParameter::FastGrowthExtractor(){
+vector<double> FastGrowthExtractor(FastGrowthParameter &fgType){
 
 	vector<double> signalData;
 	vector<double> fastGrowth;
-
-	MyMap tempMap = SignalExtractor();
 	
-	for(unsigned int i = 0; i < this->qrsOnset.size(); i++){
+	fgType.SignalExtractor();
+	MyMap tempMap = fgType.extractedSamples;
+	
+	for(unsigned int i = 0; i < fgType.qrsOnset.size(); i++){
 
 		double maxSpeed = 0;
 		double speed = 0;
@@ -43,7 +44,7 @@ vector<double> FastGrowthParameter::FastGrowthExtractor(){
 
 		}
 
-		fastGrowth.at(i) = samplesCount/signalData.size();
+		fastGrowth.at(i) = samplesCount/signalData.size()*10;
 	}
 
 	return fastGrowth;

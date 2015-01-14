@@ -15,13 +15,13 @@ vector<double> MyMap::FindInMap(int index){
 	it = map<int, vector<double> >::find(index);
 	vector<double> dblVec = it->second;
 				
-	for(int i = 0; i < dblVec.size(); i++){
+	for(unsigned int i = 0; i < dblVec.size(); i++){
 				
-		cout << dblVec[i] << " ";
+	//	cout << dblVec[i] << " ";
 		temp.push_back(dblVec[i]);
 	}
 			
-	cout << endl;
+//	cout << endl;
 		
 	return temp;
 }

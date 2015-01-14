@@ -4,6 +4,8 @@
 #include <cmath>
 #include <string>
 #include <map>
+#ifndef MYMAP_H
+#define MYMAP_H
 
 using namespace std;
 
@@ -17,3 +19,5 @@ class MyMap: public map<int, vector<double> >{
 		vector<double> FindInMap(int index);
 		void InsertToMap(int index, vector<double> dblVector);
 };
+
+#endif // MYMAP_H

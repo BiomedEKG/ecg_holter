@@ -5,6 +5,8 @@
 #include <string>
 #include <map>
 #include "MyMap.h"
+#ifndef ABSTRACTEXTRACTOR_H
+#define ABSTRACTEXTRACTOR_H
 
 using namespace std;
 
@@ -15,7 +17,10 @@ class AbstractExtractor{
 		vector<double> qrsEnd;
 		vector<double> signal;
 		vector<double> numberOfSamples;
+		MyMap extractedSamples;
 		
 		AbstractExtractor(vector<double> qrsOnsetFromWaves, vector<double> qrsEndFromWaves, vector<double> signalFromEcgBaseline);
-		MyMap SignalExtractor();
+		void SignalExtractor();
 };
+
+#endif // ABSTRACTEXTRACTOR_H

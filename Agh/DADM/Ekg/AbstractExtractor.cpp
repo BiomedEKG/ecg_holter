@@ -18,7 +18,7 @@ AbstractExtractor::AbstractExtractor(vector<double> qrsOnsetFromWaves, vector<do
     }
 }
 
-MyMap AbstractExtractor::SignalExtractor(){
+void AbstractExtractor::SignalExtractor(){
 	
 	double signalBegin = 0;
 	double signalEnd = 0;
@@ -26,10 +26,10 @@ MyMap AbstractExtractor::SignalExtractor(){
 	vector<double> temp;
 	
 	// ile wektorów
-	for(unsigned int i = 0; i < qrsEnd.size(); i++){
+	for(unsigned int i = 0; i < this->qrsEnd.size(); i++){
 		
-		signalBegin = this->signal.at(qrsOnset.at(i));
-		signalEnd = this->signal.at(qrsEnd.at(i));
+		signalBegin = this->signal.at(this->qrsOnset.at(i));
+		signalEnd = this->signal.at(this->qrsEnd.at(i));
 		temp.clear();
 		
 		// jak d³ugie wektory
@@ -41,7 +41,7 @@ MyMap AbstractExtractor::SignalExtractor(){
 		qrsMap.InsertToMap(i, temp);
 	}
 	
-	return qrsMap;
+	this->extractedSamples = qrsMap;
 }
 
 
