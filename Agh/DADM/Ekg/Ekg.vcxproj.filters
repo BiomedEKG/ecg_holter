@@ -43,7 +43,7 @@
       <UniqueIdentifier>{c7c77964-42ab-4e1b-b341-6f130b9815b1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\NowyFolderNaKazdyModul\SIG_EDR">
-      <UniqueIdentifier>{3eb112ca-7aa6-46ce-8019-d3738958e8b5}</UniqueIdentifier>
+      <UniqueIdentifier>{c1ec0b24-700a-4fc2-9e0b-c8104eddc65d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -113,7 +113,10 @@
     <ClCompile Include="gui\channelsprivate.cpp">
       <Filter>Modules\gui</Filter>
     </ClCompile>
-    <ClCompile Include="SIG_EDR.cpp">
+    <ClCompile Include="SIG_EGR.cpp">
+      <Filter>Modules\NowyFolderNaKazdyModul\SIG_EDR</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
       <Filter>Modules\NowyFolderNaKazdyModul\SIG_EDR</Filter>
     </ClCompile>
   </ItemGroup>
@@ -152,6 +155,15 @@
   <ItemGroup>
     <ClInclude Include="gui\channelsprivate.h">
       <Filter>Modules\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="SIG_EDR.h">
+      <Filter>Modules\NowyFolderNaKazdyModul\SIG_EDR</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Modules\NowyFolderNaKazdyModul\SIG_EDR</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Modules\NowyFolderNaKazdyModul\SIG_EDR</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
