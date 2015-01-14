@@ -5,10 +5,12 @@
 
 std::vector<double> Filter::filterSignal (std::vector<double> b, std::vector<double> a, std::vector<double>* signal){
 
-std::vector<double> input = *signal;  // hmm
+std::vector<double> input = *signal;  
 
 std::vector<double> output;
 output.resize(numberOfSamples);
+
+filterOrder=2;
 
 int i,j;
 output[0] = b[0]*input[0];
@@ -39,7 +41,7 @@ for (int i=filterOrder+1; i<numberOfSamples; i++) {
 		}
 	}
 
-return output;
+return output;  
 
 }
 

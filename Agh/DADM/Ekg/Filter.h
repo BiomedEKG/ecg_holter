@@ -9,6 +9,6 @@ class Filter{
 		std::vector <double> zeroPhaseFiltering (std::vector<double>, std::vector<double>, std::vector<double>* );
 		int numberOfSamples;
 	private:
-	static const int filterOrder = 6;	
+	int filterOrder;	///no chyba jednak nie
 
 };

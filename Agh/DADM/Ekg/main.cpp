@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
 
-
+	
 
 	//	/*const int L = 10; 
 //	fftw_complex *in; 

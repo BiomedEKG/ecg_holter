@@ -40,12 +40,9 @@ std::vector<double> ECGBaseline::butterworthFilter (std::vector<double>* signal,
 	filterType = HIGHPASS;   
 	std::vector<std::vector<double>> butterworthCoefficients = butterworthFilter.setParameters(samplingFrequency, filterType);
 	std::vector <double> output = butterworthFilter.zeroPhaseFiltering(butterworthCoefficients[0], butterworthCoefficients[1], signal);
-	filterType =LOWPASS;   
-	butterworthCoefficients = butterworthFilter.setParameters(samplingFrequency, filterType);
-	output = butterworthFilter.zeroPhaseFiltering(butterworthCoefficients[0], butterworthCoefficients[1], &output);  
-	filterType =BANDSTOP;
-	butterworthCoefficients = butterworthFilter.setParameters(samplingFrequency, filterType);
-	output = butterworthFilter.zeroPhaseFiltering(butterworthCoefficients[0], butterworthCoefficients[1], &output);
+	//filterType =LOWPASS;   
+//	butterworthCoefficients = butterworthFilter.setParameters(samplingFrequency, filterType);
+	//output = butterworthFilter.zeroPhaseFiltering(butterworthCoefficients[0], butterworthCoefficients[1], &output);  
 	return output;
 }
 
@@ -56,18 +53,15 @@ std::vector<double> ECGBaseline::chebyshevFilter (std::vector<double>* signal, i
 	filterType = HIGHPASS; 
 	std::vector<std::vector<double>> chebyshevCoefficients = chebyshevFilter.setParameters(samplingFrequency, filterType);
 	std::vector <double> output = chebyshevFilter.zeroPhaseFiltering(chebyshevCoefficients[0], chebyshevCoefficients[1], signal);
-	filterType = LOWPASS;
-	chebyshevCoefficients = chebyshevFilter.setParameters(samplingFrequency, filterType);
-	output = chebyshevFilter.zeroPhaseFiltering(chebyshevCoefficients[0], chebyshevCoefficients[1], &output);
-	filterType = BANDSTOP;
-	chebyshevCoefficients = chebyshevFilter.setParameters(samplingFrequency, filterType);
-	output = chebyshevFilter.zeroPhaseFiltering(chebyshevCoefficients[0], chebyshevCoefficients[1], &output);
+//	filterType = LOWPASS;
+//	chebyshevCoefficients = chebyshevFilter.setParameters(samplingFrequency, filterType);
+//	output = chebyshevFilter.zeroPhaseFiltering(chebyshevCoefficients[0], chebyshevCoefficients[1], &output);
 	return output;
 }
 
 std::vector<double> ECGBaseline::leastMeanSquares (std::vector<double>* signal, int samplingFrequency){
 	LeastMeanSquares leastMeanSquares;
-	filterType = LOWPASS;
+	filterType = HIGHPASS;
 	std::vector <double> output = leastMeanSquares.calculateLeastMeanSquares(signal, samplingFrequency, filterType);
 	return output;
 }
