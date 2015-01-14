@@ -55,7 +55,7 @@ vector <double> Input:: vdGetChannelData(void)
 {
 	dvData.clear();
 	isigsettime(0L); // Ustaw sie na poczatku pliku 
-	ivData.reserve(SigLength); dvData.reserve(SigLength); // Przydziel miejsce dla vectorow
+	dvData.reserve(SigLength); // Przydziel miejsce dla vectorow
 	while(getvec(Sample) > 0) {
 		  dvData.push_back(aduphys(SelectedChannelID-1,Sample[SelectedChannelID-1])); //Dane w mV
 	  }
@@ -67,7 +67,7 @@ vector <int> Input:: viGetChannelData(void)
 {
 	ivData.clear();
 	isigsettime(0L); // Ustaw sie na poczatku pliku 
-	ivData.reserve(SigLength); dvData.reserve(SigLength); // Przydziel miejsce dla vectorow
+	ivData.reserve(SigLength);  // Przydziel miejsce dla vectorow
 	while(getvec(Sample) > 0) {
 		  ivData.push_back(Sample[SelectedChannelID-1]); // Dane int
 	  }
@@ -110,6 +110,9 @@ void Input::PrepairPath(char *RawPath){
 	if (LocalString.contains("/")){
 		LocalString.replace(QString("/"),QString("\\"));
 	}
+	if (LocalString.contains("//")){
+		LocalString.replace(QString("//"),QString("\\"));
+	}
 	LocalString.remove(QString(".hea"),Qt::CaseInsensitive);
 	LocalString.remove(QString(".dat"),Qt::CaseInsensitive);
 
@@ -129,5 +132,7 @@ void Input::Close(void)
 Input::~Input(void)
 {
 }
+
+
 
 
