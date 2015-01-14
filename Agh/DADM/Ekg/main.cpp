@@ -12,6 +12,13 @@
 #include <qwt_symbol.h>
 #include <qwt_legend.h>
 #include <wfdb.h>
+#include <VAbstractModule.h>
+#include <AbstractModule.h>
+#include <ResultKeeper.h>
+#include <AbstractResult.h>
+#include <TestModule.h>
+#include <ModuleTimer.h>
+
 
 
 int main(int argc, char *argv[])
@@ -39,38 +46,48 @@ int main(int argc, char *argv[])
 	
 	return a.exec();*/
 
-	    QApplication a( argc, argv );
+	   // QApplication a( argc, argv );
  
-    QwtPlot plot;
-    plot.setTitle( "Plot Demo" );
-    plot.setCanvasBackground( Qt::white );
-    plot.setAxisScale( QwtPlot::yLeft, 0.0, 10.0 );
-    plot.insertLegend( new QwtLegend() );
+    //QwtPlot plot;
+    //plot.setTitle( "Plot Demo" );
+    //plot.setCanvasBackground( Qt::white );
+    //plot.setAxisScale( QwtPlot::yLeft, 0.0, 10.0 );
+    //plot.insertLegend( new QwtLegend() );
  
-    QwtPlotGrid *grid = new QwtPlotGrid();
-    grid->attach( &plot );
+    //QwtPlotGrid *grid = new QwtPlotGrid();
+    //grid->attach( &plot );
  
-    QwtPlotCurve *curve = new QwtPlotCurve();
-    curve->setTitle( "Some Points" );
-    curve->setPen( Qt::blue, 4 ),
-    curve->setRenderHint( QwtPlotItem::RenderAntialiased, true );
+    //QwtPlotCurve *curve = new QwtPlotCurve();
+    //curve->setTitle( "Some Points" );
+    //curve->setPen( Qt::blue, 4 ),
+    //curve->setRenderHint( QwtPlotItem::RenderAntialiased, true );
  
-    QwtSymbol *symbol = new QwtSymbol( QwtSymbol::Ellipse,
-        QBrush( Qt::yellow ), QPen( Qt::red, 2 ), QSize( 8, 8 ) );
-    curve->setSymbol( symbol );
+    //QwtSymbol *symbol = new QwtSymbol( QwtSymbol::Ellipse,
+    //    QBrush( Qt::yellow ), QPen( Qt::red, 2 ), QSize( 8, 8 ) );
+    //curve->setSymbol( symbol );
  
-    QPolygonF points;
-    points << QPointF( 0.0, 4.4 ) << QPointF( 1.0, 3.0 )
-        << QPointF( 2.0, 4.5 ) << QPointF( 3.0, 6.8 )
-        << QPointF( 4.0, 7.9 ) << QPointF( 5.0, 7.1 );
-    curve->setSamples( points );
+    //QPolygonF points;
+    //points << QPointF( 0.0, 4.4 ) << QPointF( 1.0, 3.0 )
+    //    << QPointF( 2.0, 4.5 ) << QPointF( 3.0, 6.8 )
+    //    << QPointF( 4.0, 7.9 ) << QPointF( 5.0, 7.1 );
+    //curve->setSamples( points );
  
-    curve->attach( &plot );
+    //curve->attach( &plot );
   
-    plot.resize( 600, 400 );
-    plot.show(); 
+    //plot.resize( 600, 400 );
+    //plot.show(); 
   
-    return a.exec();
+
+
+    //return a.exec();
+    ResultKeeper *rsk = new ResultKeeper();
+    ModuleTimer timer = ModuleTimer();
+    TestModule *tm = new TestModule();
+
+    timer.measureModuleTimeOfExecution(*tm, *rsk, 10);
+    std::cout << "Hello world!" << std::endl;
+	system("PAUSE");
+	return 0;
 }
 
 
