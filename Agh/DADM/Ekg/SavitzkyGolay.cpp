@@ -1,7 +1,7 @@
 #include "SavitzkyGolay.h"
 
 //coefficients taken from MATLAB, for 4-order polynominal savitzkygolay filter
-const double SavitzkyGolay::coefficientsArray[] = {01417, 0.0, -0.0043, 0.0, 0.0};
+const double SavitzkyGolay::coefficientsArray[] = {0.1417, 0.0, -0.0043, 0.0, 0.0};
 const unsigned int SavitzkyGolay::span = 25;
 const unsigned int SavitzkyGolay::spanHalf = 12;
 const unsigned int SavitzkyGolay::polynominalOrder = 4;
@@ -53,7 +53,7 @@ void SavitzkyGolay::createSpan(){
 	
 	spanCount.push_back(0.0);
 
-	for (int unsigned i = 0; i<spanHalf; i ++){
+	for (int unsigned i = 1; i<=spanHalf; i ++){
 		
 		spanCount.insert(spanCount.begin(), (-i));
 		spanCount.push_back(i);
@@ -74,7 +74,7 @@ void SavitzkyGolay::calculateFilterCoefficients(){
 	coefficientsFilter.push_back(zeroCoefficient);
 
 	//calculate others coefficients
-	for (int b = 0; b <= spanHalf; b++){	
+	for (int b = 0; b < spanHalf; b++){	
 
 		double coefficientL = 0.0;
 		double coefficientR = 0.0;
