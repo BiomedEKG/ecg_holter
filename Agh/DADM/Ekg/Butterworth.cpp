@@ -9,7 +9,7 @@ std::vector<std::vector<double>> ButterworthFilter::setParameters (int samplingF
 		order1 = 3;  
 	    }
 	else {
-		order1 = 7;  
+		order1 = 5;  
 	}
 
 
@@ -64,59 +64,52 @@ std::vector<std::vector<double>> ButterworthFilter::setParameters (int samplingF
 		switch (samplingFrequency){
 								   case 250:
 									       //b
-										   butterworthCoefficients[0][0] = 0.289407;
-										   butterworthCoefficients[0][1] = 1.736442;
-										   butterworthCoefficients[0][2] = 4.341104;
-										   butterworthCoefficients[0][3] = 5.788138;
-										   butterworthCoefficients[0][4] = 4.341104;
-										   butterworthCoefficients[0][5] = 1.736442;
-										   butterworthCoefficients[0][6] = 0.289407;
+										   butterworthCoefficients[0][0] = 0.4328;
+										   butterworthCoefficients[0][1] = 1.7313;
+										   butterworthCoefficients[0][2] = 2.5970;
+										   butterworthCoefficients[0][3] = 1.7313;
+										   butterworthCoefficients[0][4] = 0.4328;
+
 										   //a
 										   butterworthCoefficients[1][0] = 1;
-										   butterworthCoefficients[1][1] = 3.579435;
-										   butterworthCoefficients[1][2] = 5.658667;
-										   butterworthCoefficients[1][3] = 4.965415;
-										   butterworthCoefficients[1][4] = 2.529495;
-										   butterworthCoefficients[1][5] = 0.705274;
-										   butterworthCoefficients[1][6] = 0.083756;
+										   butterworthCoefficients[1][1] = 2.3695;
+										   butterworthCoefficients[1][2] = 2.3139;
+										   butterworthCoefficients[1][3] = 1.0546;
+										   butterworthCoefficients[1][4] = 0.1873;
+
 
 									   break;
 
 								   case 360:
-									       butterworthCoefficients[0][0] = 0.048650;
-										   butterworthCoefficients[0][1] = 0.291903;
-										   butterworthCoefficients[0][2] = 0.729757;
-										   butterworthCoefficients[0][3] = 0.973009;
-										   butterworthCoefficients[0][4] = 0.729757;
-										   butterworthCoefficients[0][5] = 0.291903;
-										   butterworthCoefficients[0][6] = 0.048650;
+									       butterworthCoefficients[0][0] = 0.1309;
+										   butterworthCoefficients[0][1] = 0.5238;
+										   butterworthCoefficients[0][2] = 0.7857;
+										   butterworthCoefficients[0][3] = 0.5238;
+										   butterworthCoefficients[0][4] = 0.1309;
+
 
 										   butterworthCoefficients[1][0] = 1;
-										   butterworthCoefficients[1][1] = 0.659471;
-										   butterworthCoefficients[1][2] = 0.940102;
-										   butterworthCoefficients[1][3] = 0.330754;
-										   butterworthCoefficients[1][4] = 0.157455;
-										   butterworthCoefficients[1][5] = 0.023191;
-										   butterworthCoefficients[1][6] = 0.002655;
+										   butterworthCoefficients[1][1] = 0.4340;
+										   butterworthCoefficients[1][2] = 0.5456;
+										   butterworthCoefficients[1][3] = 0.0942;
+										   butterworthCoefficients[1][4] = 0.0213;
+
 
 								       break;
 
 								   default:
-										   butterworthCoefficients[0][0] = 0.048650;
-										   butterworthCoefficients[0][1] = 0.291903;
-										   butterworthCoefficients[0][2] = 0.729757;
-										   butterworthCoefficients[0][3] = 0.973009;
-										   butterworthCoefficients[0][4] = 0.729757;
-									 	   butterworthCoefficients[0][5] = 0.291903;
-									 	   butterworthCoefficients[0][6] = 0.048650;
+									       butterworthCoefficients[0][0] = 0.1309;
+										   butterworthCoefficients[0][1] = 0.5238;
+										   butterworthCoefficients[0][2] = 0.7857;
+										   butterworthCoefficients[0][3] = 0.5238;
+										   butterworthCoefficients[0][4] = 0.1309;
+
 
 										   butterworthCoefficients[1][0] = 1;
-										   butterworthCoefficients[1][1] = 0.659471;
-										   butterworthCoefficients[1][2] = 0.940102;
-										   butterworthCoefficients[1][3] = 0.330754;
-										   butterworthCoefficients[1][4] = 0.157455;
-										   butterworthCoefficients[1][5] = 0.023191;
-									       butterworthCoefficients[1][6] = 0.002655;
+										   butterworthCoefficients[1][1] = 0.4340;
+										   butterworthCoefficients[1][2] = 0.5456;
+										   butterworthCoefficients[1][3] = 0.0942;
+										   butterworthCoefficients[1][4] = 0.0213;
 
 									   break;
 		                          }
