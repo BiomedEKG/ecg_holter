@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
 	
+	//HRv2 params
 	double tab[]={22.0,4.0,6.0,8.0,9.0,10.0,22.0,4.0,6.0,8.0,9.0,10.0};
 			vector<double> peaks;
 			for (int i=0; i<6; i++){
@@ -28,10 +29,11 @@ int main(int argc, char *argv[])
 			}
 			unsigned int fr = 1000;
 	Hrv2 ob(peaks, fr);
-	double samen = ob.calculateSamen();
-	cout<<samen<<endl;
-	double tinn = ob.triangleRR();
-	cout<<tinn;
+	map<string,double> parm;
+	parm=ob.computeParams();
+	cout<<parm["tri"];
+
+	////////////////////////
 	
 	//	/*const int L = 10; 
 //	fftw_complex *in; 
