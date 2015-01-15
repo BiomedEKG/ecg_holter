@@ -13,8 +13,10 @@ using namespace std;
 class MalinowskaParameter : public AbstractExtractor{
 	
 	public:
+		vector<double> malinowskaValues;
 		MalinowskaParameter(vector<double> qrsOnsetData, vector<double> qrsEndData, vector<double> signalData);
-		friend vector<double> MalinowskaExtractor(MalinowskaParameter &malinowskaType);
+		void MalinowskaExtractor();
 };
 
 #endif // MALINOWSKAPARAMETER_H
+

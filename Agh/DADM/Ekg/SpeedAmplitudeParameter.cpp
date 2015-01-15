@@ -8,29 +8,27 @@
 
 SpeedAmplitudeParameter::SpeedAmplitudeParameter(vector<double> qrsOnsetData, vector<double> qrsEndData, vector<double> signalData) : 
 										AbstractExtractor(qrsOnsetData, qrsEndData, signalData){
-
+											
 }
 
 // Testing on a different data
-vector<double> SpeedAmplitudeExtractor(SpeedAmplitudeParameter &speedAmplitudeType){
+void SpeedAmplitudeParameter::SpeedAmplitudeExtractor(){
 	
-	vector<double> speedAmplitude;
 	vector<double> signalData;
-	
-	speedAmplitudeType.SignalExtractor();
-	MyMap tempMap = speedAmplitudeType.extractedSamples;
 
-	for(unsigned int i = 0; i < speedAmplitudeType.qrsOnset.size(); i++){
+	for(unsigned int i = 0; i < this->signalMap.size(); i++){
 
 		double maxSpeed = 0;
 		double maxSignal = 0;
 		double miniSignal = 0;
 		double speed = 0;
 		double maxAmplitude = 0;
-
+		signalData.clear();
+		signalData = this->signalMap[i];
+		
 		for(unsigned int j = 0; j < signalData.size(); j++){
 
-			if(j > 2){
+			if(j >= 2){
 				speed = signalData.at(j) + signalData.at(j-2) - 2*signalData.at(j-1);
 				if(speed > maxSpeed){
 					maxSpeed = speed;
@@ -45,8 +43,7 @@ vector<double> SpeedAmplitudeExtractor(SpeedAmplitudeParameter &speedAmplitudeTy
 		}
 		
 		maxAmplitude = fabs(maxSignal - miniSignal);
-		speedAmplitude.at(i) = 10*(maxSpeed/maxAmplitude)*100;
+		this->speedAmplitudeValues.push_back(10*(maxSpeed/maxAmplitude)*10);
 	}
-
-	return speedAmplitude;
 }
+

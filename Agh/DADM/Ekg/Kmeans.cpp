@@ -6,32 +6,32 @@
 #include <map>
 #include "Kmeans.h"
 
+using namespace std;
 // na razie bez statystyki
-Kmeans::Kmeans(vector<double> Malinowska, vector<double> FastGrowth, vector<double> SpeedAmplitude){
+Kmeans::Kmeans(vector<double> malinowska, vector<double> fastGrowth, vector<double> speedAmplitude){
+	
+	this->calculatedParametersMap.clear();
+	this->artifactsCentroid.clear();
+	this->normalQrsCentroid.clear();
+	this->vQrsCentroid.clear();
 	
 	for(unsigned int i = 0; i < 3; i++){
 		
-		this->artifactsCentroid.at(i) = rand() % 30 + 1;
-		this->normalQrsCentroid.at(i) = rand() % 30 + 1;
-		this->vQrsCentroid.at(i) = rand() % 30 + 1;
+		this->artifactsCentroid.push_back(3);
+		this->normalQrsCentroid.push_back(3);
+		this->vQrsCentroid.push_back(4);
 	}
 	
-	MyMap temp;
-	vector<double> qrsParameters;
 	// ilosc wektorów
-	for(unsigned int i = 0; i < Malinowska.size(); i++){
+	for(unsigned int i = 0; i < malinowska.size(); i++){
 		
-		qrsParameters.clear();
-		qrsParameters.push_back(Malinowska.at(i));
-		qrsParameters.push_back(FastGrowth.at(i));
-		qrsParameters.push_back(SpeedAmplitude.at(i));
-		temp.InsertToMap(i, qrsParameters);
+		this->calculatedParametersMap[i].push_back(malinowska.at(i));
+		this->calculatedParametersMap[i].push_back(fastGrowth.at(i));
+		this->calculatedParametersMap[i].push_back(speedAmplitude.at(i));
 	}
-	
-	this->mapedParameterValues = temp;
 }
 
-double DistanceCalculator(vector<double> centroid, vector<double> point){
+double Kmeans::DistanceCalculator(vector<double> centroid, vector<double> point){
 	
 	double x = centroid.at(0) - point.at(0);
 	double y = centroid.at(1) - point.at(1);
@@ -48,12 +48,11 @@ void Kmeans::ClassificationStep(){
 	double distanceV;
 	double distanceArtifact;
 	
-	for(unsigned int i = 0; i < this->mapedParameterValues.size(); i++){
+	for(unsigned int i = 0; i < this->calculatedParametersMap.size(); i++){
 		
-		temp = this->mapedParameterValues.FindInMap(i);
-		distanceNormal = DistanceCalculator(this->normalQrsCentroid, temp);
-		distanceV = DistanceCalculator(this->vQrsCentroid, temp);
-		distanceArtifact = DistanceCalculator(this->artifactsCentroid, temp);
+		distanceNormal = DistanceCalculator(this->normalQrsCentroid, calculatedParametersMap[i]);
+		distanceV = DistanceCalculator(this->vQrsCentroid, calculatedParametersMap[i]);
+		distanceArtifact = DistanceCalculator(this->artifactsCentroid, calculatedParametersMap[i]);
 		
 		if(min(distanceNormal, min(distanceV, distanceArtifact)) == distanceNormal){
 			
@@ -61,7 +60,7 @@ void Kmeans::ClassificationStep(){
 		} 
 		else if(min(distanceNormal, min(distanceV, distanceArtifact)) == distanceV){
 			
-			this->VQrs.push_back(i);
+			this->vQrs.push_back(i);
 		}
 		else{
 			
@@ -70,53 +69,58 @@ void Kmeans::ClassificationStep(){
 	}
 }
 
-vector<double> CentroidDistanceCalculator(vector<double> centroidLocation, MyMap values){
+vector<double> Kmeans::centroidLocationCalculator(vector<double> classCalculatedParameters){
 	
-	vector<double> newCentroidLocation;
-	newCentroidLocation.clear();
-	vector<double> qrsValues;
+	double distanceMalinowska;
+	double distanceFastGrowth;
+	double distanceSpeedAmplitude;
+	double meanDistanceMalinowska = 0;
+	double meanDistanceFastGrowth = 0;
+	double meanDistanceSpeedAmplitude = 0;
 	vector<double> temp;
-	double x = 0;
-	double y = 0;
-	double z = 0;
+	vector<double> newLocation;
+	newLocation.clear();
 	
-	for(unsigned int i = 0; i < centroidLocation.size(); i++){
-
-		temp.clear();
-		qrsValues = values.FindInMap(centroidLocation.at(i));
-			
-		x = x + qrsValues.at(0);
-		y = y + qrsValues.at(1);
-		z = z + qrsValues.at(2);
+	for(unsigned int i = 0; i < classCalculatedParameters.size(); i++){
+		
+		temp = calculatedParametersMap.at(classCalculatedParameters.at(i));
+		distanceMalinowska = fabs(classCalculatedParameters.at(0) - temp.at(0));
+		distanceFastGrowth = fabs(classCalculatedParameters.at(1) - temp.at(1));
+		distanceSpeedAmplitude = fabs(classCalculatedParameters.at(2) - temp.at(2));
+		meanDistanceMalinowska = meanDistanceMalinowska + distanceMalinowska;
+		meanDistanceFastGrowth = meanDistanceFastGrowth + distanceFastGrowth;
+		meanDistanceSpeedAmplitude = meanDistanceSpeedAmplitude + distanceSpeedAmplitude;
 	}
 	
-	double meanX = x/centroidLocation.size();
-	double meanY = y/centroidLocation.size();
-	double meanZ = z/centroidLocation.size();
+	meanDistanceMalinowska = meanDistanceMalinowska/classCalculatedParameters.size();
+	meanDistanceFastGrowth = meanDistanceFastGrowth/classCalculatedParameters.size();
+	meanDistanceSpeedAmplitude = meanDistanceSpeedAmplitude/classCalculatedParameters.size();
 	
-	newCentroidLocation.push_back(meanX);
-	newCentroidLocation.push_back(meanY);
-	newCentroidLocation.push_back(meanZ);
+	newLocation.push_back(meanDistanceMalinowska);
+	newLocation.push_back(meanDistanceFastGrowth);
+	newLocation.push_back(meanDistanceSpeedAmplitude);
 	
-	return newCentroidLocation;
-}
-
-void PerformClassification(Kmeans &k){
-	
-	Kmeans temp = k;
-	
-	do{
-		k.ClassificationStep();
-		temp.normalQrsCentroid = CentroidDistanceCalculator(k.normalQrsCentroid, k.mapedParameterValues);
-		temp.vQrsCentroid = CentroidDistanceCalculator(k.vQrsCentroid, k.mapedParameterValues);
-		temp.artifactsCentroid = CentroidDistanceCalculator(k.artifactsCentroid, k.mapedParameterValues);	
-		k.normalQrsCentroid = temp.normalQrsCentroid;
-		k.vQrsCentroid = temp.vQrsCentroid;
-		k.artifactsCentroid = temp.artifactsCentroid;
-	}while((temp.normalQrsCentroid != k.normalQrsCentroid) && (temp.vQrsCentroid != k.vQrsCentroid) && (temp.artifactsCentroid != k.artifactsCentroid));
+	return newLocation;
 }
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**/
 

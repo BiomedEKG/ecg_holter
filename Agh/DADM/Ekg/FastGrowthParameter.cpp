@@ -6,27 +6,26 @@
 #include <map>
 #include "FastGrowthParameter.h"
 
+using namespace std;
+
 FastGrowthParameter::FastGrowthParameter(vector<double> qrsOnsetData, vector<double> qrsEndData, vector<double> signalData) : 
 										AbstractExtractor(qrsOnsetData, qrsEndData, signalData){
 
 }
 
-vector<double> FastGrowthExtractor(FastGrowthParameter &fgType){
+void FastGrowthParameter::FastGrowthExtractor(){
 
 	vector<double> signalData;
-	vector<double> fastGrowth;
 	
-	fgType.SignalExtractor();
-	MyMap tempMap = fgType.extractedSamples;
-	
-	for(unsigned int i = 0; i < fgType.qrsOnset.size(); i++){
+	for(unsigned int i = 0; i < this->signalMap.size(); i++){
 
+		signalData.clear();
 		double maxSpeed = 0;
 		double speed = 0;
 		double samplesCount = 0;
-		signalData = tempMap.FindInMap(i);
+		signalData = this->signalMap[i];
 	
-		for(unsigned int j = 0; j < signalData.size(); j++){
+		for(unsigned int j = 2; j < signalData.size(); j++){
 
 			speed = signalData.at(j) + signalData.at(j-2) - 2*signalData.at(j-1);
 			if(speed > maxSpeed){
@@ -36,16 +35,14 @@ vector<double> FastGrowthExtractor(FastGrowthParameter &fgType){
 
 		maxSpeed = maxSpeed*0.4;
 
-		for(unsigned int j = 0; j < signalData.size(); j++){
+		for(unsigned int k = 0; k < signalData.size(); k++){
 
-			if(signalData.at(j) > maxSpeed){
+			if(signalData.at(k) > maxSpeed){
 				samplesCount++;
 			}
-
 		}
 
-		fastGrowth.at(i) = samplesCount/signalData.size()*10;
+		this->fastGrowthValues.push_back((samplesCount/signalData.size())*10);
 	}
-
-	return fastGrowth;
 }
+

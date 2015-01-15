@@ -8,23 +8,20 @@
 
 MalinowskaParameter::MalinowskaParameter(vector<double> qrsOnsetData, vector<double> qrsEndData, vector<double> signalData) : 
 										AbstractExtractor(qrsOnsetData, qrsEndData, signalData){
-
+											
 }
 
 // Testing on a different data
-vector<double> MalinowskaExtractor(MalinowskaParameter &malinowskaType){
+void MalinowskaParameter::MalinowskaExtractor(){
 
 	vector<double> signalData;
-	vector<double> malinowska;
 
-	malinowskaType.SignalExtractor();
-	MyMap tempMap = malinowskaType.extractedSamples;
-
-	for(unsigned int i = 0; i < malinowskaType.qrsOnset.size(); i++){
+	for(unsigned int i = 0; i < this->signalMap.size(); i++){
 
 		double area = 0;
 		double sum = 0;
-		signalData = tempMap.FindInMap(i);
+		signalData.clear();
+		signalData = this->signalMap[i];
 		
 		for(unsigned int j = 0; j < signalData.size(); j++){
 
@@ -35,9 +32,8 @@ vector<double> MalinowskaExtractor(MalinowskaParameter &malinowskaType){
 			sum = sum + fabs(signalData.at(j));
 		}
 
-		malinowska.at(i) = 10*sum/area*10;
+		this->malinowskaValues.push_back(10*sum/area);
 	}
-	
-	return malinowska;
 }
+
 

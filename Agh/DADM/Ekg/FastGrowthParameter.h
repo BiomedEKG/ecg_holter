@@ -13,8 +13,10 @@ using namespace std;
 class FastGrowthParameter : public AbstractExtractor{
 	
 	public:
+		vector<double> fastGrowthValues;
 		FastGrowthParameter(vector<double> qrsOnsetData, vector<double> qrsEndData, vector<double> signalData);
-		friend vector<double> FastGrowthExtractor(FastGrowthParameter &fgType);
+		void FastGrowthExtractor();
 };
 
 #endif // FASTGROWTHPARAMETER_H
+

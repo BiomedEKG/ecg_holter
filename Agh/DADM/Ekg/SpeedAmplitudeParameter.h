@@ -13,8 +13,9 @@ using namespace std;
 class SpeedAmplitudeParameter : public AbstractExtractor{
 	
 	public:
+		vector<double> speedAmplitudeValues;
 		SpeedAmplitudeParameter(vector<double> qrsOnsetData, vector<double> qrsEndData, vector<double> signalData);
-		friend vector<double> SpeedAmplitudeExtractor(SpeedAmplitudeParameter &speedAmplitudeType);
+		void SpeedAmplitudeExtractor();
 };
 
 #endif // SPEEDAMPLITUDEPARAMETER_H
