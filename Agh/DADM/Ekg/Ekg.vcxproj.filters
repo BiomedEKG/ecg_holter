@@ -36,14 +36,11 @@
     <Filter Include="Modules">
       <UniqueIdentifier>{8208523c-aceb-4eb0-8869-cc66f243dc0e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\NowyFolderNaKazdyModul">
-      <UniqueIdentifier>{be580e47-5a67-469d-bb91-c9b8a3710729}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Modules\gui">
       <UniqueIdentifier>{c7c77964-42ab-4e1b-b341-6f130b9815b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\NowyFolderNaKazdyModul\SIG_EDR">
-      <UniqueIdentifier>{c1ec0b24-700a-4fc2-9e0b-c8104eddc65d}</UniqueIdentifier>
+    <Filter Include="Modules\SIG_EDR">
+      <UniqueIdentifier>{be580e47-5a67-469d-bb91-c9b8a3710729}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -113,11 +110,8 @@
     <ClCompile Include="gui\channelsprivate.cpp">
       <Filter>Modules\gui</Filter>
     </ClCompile>
-    <ClCompile Include="SIG_EGR.cpp">
-      <Filter>Modules\NowyFolderNaKazdyModul\SIG_EDR</Filter>
-    </ClCompile>
-    <ClCompile Include="test.cpp">
-      <Filter>Modules\NowyFolderNaKazdyModul\SIG_EDR</Filter>
+    <ClCompile Include="SIG_EDR.cpp">
+      <Filter>Modules\SIG_EDR</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -157,13 +151,7 @@
       <Filter>Modules\gui</Filter>
     </ClInclude>
     <ClInclude Include="SIG_EDR.h">
-      <Filter>Modules\NowyFolderNaKazdyModul\SIG_EDR</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Modules\NowyFolderNaKazdyModul\SIG_EDR</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Modules\NowyFolderNaKazdyModul\SIG_EDR</Filter>
+      <Filter>Modules\SIG_EDR</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "SIG_EDR.h"
 #include <vector> 
 #include <iostream>
