@@ -22,16 +22,25 @@ int main(int argc, char *argv[])
     MainWindow w;
 	
 	//HRv2 params
-	double tab[]={22.0,4.0,6.0,8.0,9.0,10.0,22.0,4.0,6.0,8.0,9.0,10.0};
+
+	
+
+	double tab[]={1,2,4,7,12,17,25,29,35,42,47,55,60,69,73,79,84,90,96,103,107,112,117,122,127,132,137,142,147,152,157,162,169,175,181};
 			vector<double> peaks;
-			for (int i=0; i<6; i++){
+			for (int i=0; i<35; i++){
 				peaks.push_back(tab[i]);
 			}
-			unsigned int fr = 1000;
-	Hrv2 ob(peaks, fr);
+	unsigned int fr = 1000;
+	Hrv2 ob2(peaks, fr);
 	map<string,double> parm;
-	parm=ob.computeParams();
-	cout<<parm["tri"];
+	parm=ob2.computeParams();
+	cout<<"Parametry hrv2:"<<endl;
+	cout<<"apen: "<<parm["apen"]<<endl;
+	cout<<"samen: "<<parm["samen"]<<endl;
+	cout<<"sd1 "<<parm["sd1"]<<endl;
+	cout<<"sd2 "<<parm["sd2"]<<endl;
+	cout<<"tri "<<parm["tri"]<<endl;
+	cout<<"tinn "<<parm["tinn"]<<endl;
 
 	////////////////////////
 	
