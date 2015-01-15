@@ -128,6 +128,7 @@
     <ClCompile Include="gui\selectmodulemenu.cpp" />
     <ClCompile Include="gui\selectmodulesprivate.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="methodsVCG.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -253,8 +254,9 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dataVCG.h" />
+    <ClInclude Include="methodsVCG.h" />
     <ClInclude Include="gui\channelsprivate.h" />
+    <ClInclude Include="outClass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

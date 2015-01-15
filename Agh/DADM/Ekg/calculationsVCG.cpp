@@ -1,12 +1,16 @@
-#include <vector>
 #include <math.h>
-#include <dataVCG.h>
-
+#include <methodsVCG.h>
+#include <outClass.h>
 
 using namespace std;
 
-int main (){
+
+output VCG_T_LOOP (){
+
+output Result;
+vector<double> i,ii,v1,v2,v3,v4,v5,v6;
 	
+//DowerTransform ( i, ii, v1, v2, v3, v4, v5, v6);
 int HeartbeatsCtr;
 int HeartbeatsAmount= sizeof(QRS_ONSET);    
 double ElAz_Sum = 0; // We will need to sum all DEA to calculate the DEA mean
@@ -139,7 +143,6 @@ for (HeartbeatsCtr = 0;  HeartbeatsCtr < HeartbeatsAmount; HeartbeatsCtr++){
 
 vector <double> mMA; 
 vector < double >::iterator wsk_mMA = mMA.begin();
-double Results_mMA, Results_mMA_std;
 
 double TLoopVector_XY[2];
 double TLoopVector_XZ[2];
@@ -174,8 +177,8 @@ for (HeartbeatsCtr = 0;  HeartbeatsCtr < HeartbeatsAmount; HeartbeatsCtr++){
     mMA[HeartbeatsCtr] = max * 180 / 3.14159265;  //rad to deg
 }
 
-Results_mMA = mean(wsk_mMA);
-Results_mMA_std = stddev(wsk_mMA);
+Result.mMA = mean(wsk_mMA);
+Result.mMA_std = stddev(wsk_mMA);
 
 
 //-------------------------LICZENIE PARAMETRÓW------------------------------
@@ -187,8 +190,6 @@ vector <double> mRMMV;
 vector < double >::iterator wsk_mRMMV = mRMMV.begin();
 double Vmax;
 double Vn;  
-double Results_mRMMV;
-double Results_mRMMV_std;
 
 for (HeartbeatsCtr = 0;  HeartbeatsCtr < HeartbeatsAmount; HeartbeatsCtr++){
 	Vmax = All_T_AxisModules[HeartbeatsCtr];  
@@ -196,18 +197,15 @@ for (HeartbeatsCtr = 0;  HeartbeatsCtr < HeartbeatsAmount; HeartbeatsCtr++){
     mRMMV[HeartbeatsCtr] = Vmax/Vn;
 }
 
-Results_mRMMV = mean(wsk_mRMMV);
-Results_mRMMV_std = stddev(wsk_mRMMV);
+Result.mRMMV = mean(wsk_mRMMV);
+Result.mRMMV_std = stddev(wsk_mRMMV);
 
 
 //-------------------------LICZENIE PARAMETRÓW------------------------------
 //---------- DEA - T axis elevation and azimuth angle difference -----------
 
-double Results_mDEA;
-double Results_mDEA_std;
+Result.mDEA = mean(wsk_DEA_EachLoopMeans);
+Result.mDEA_std = stddev(wsk_DEA_EachLoopMeans);
 
-Results_mDEA = mean(wsk_DEA_EachLoopMeans);
-Results_mDEA_std = stddev(wsk_DEA_EachLoopMeans);
 
-	
-return 0;}
+return Result;}
