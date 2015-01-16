@@ -103,8 +103,8 @@ int main(int argc, char *argv[])
 
 		//Table t(map, units, mp2.plotarea->canvas());
 
-		//Plot3D p(X,Z,Y); // wykres VCG - trzeba podaæ najpierw wektor Y a potem Z;
-		//p.show();
+		Plot3D p(X,Z,Y); // wykres VCG - trzeba podaæ najpierw wektor Y a potem Z;
+		p.show();
 
 		return a.exec();
 }
