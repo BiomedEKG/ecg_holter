@@ -26,9 +26,8 @@ public:
 	QwtPlotPicker* picker;
 	QwtPlotPanner* panner;
 	
-
 	MajorPlot();  //konstruktor domyœlny
-	void PlotAreaInit(double xMin, double xMax, double xStep, double yMin, double yMax, double yStep, QString xTitle, QString yTitle, QString plotTitle );
+	void PlotAreaInit(double xMin, double xMax, double xStep, double yMin, double yMax, double yStep, QString xTitle, QString yTitle, QString plotTitle , bool autoscale);
 	void PlotPickerInit();
 	void PlotZoomerInit();
 };
@@ -39,7 +38,7 @@ public:
 		zoomer = new QwtPlotZoomer(plotarea->canvas());
 		panner = new QwtPlotPanner(plotarea->canvas());
 	}
-	void MajorPlot:: PlotAreaInit(double xMin, double xMax, double xStep,double yMin, double yMax, double yStep, QString xTitle, QString yTitle, QString plotTitle ){
+	void MajorPlot:: PlotAreaInit(double xMin, double xMax, double xStep,double yMin, double yMax, double yStep, QString xTitle, QString yTitle, QString plotTitle, bool autoscale = 0 ){
 		plotarea->setCanvasBackground( Qt::white );
 		plotarea->setTitle(plotTitle);
 		plotarea->setAutoReplot(true);
@@ -47,6 +46,8 @@ public:
 		plotarea->setAxisScale(QwtPlot::yLeft, yMin, yMax, yStep);
 		plotarea->setAxisTitle( QwtPlot::xBottom, xTitle);
 		plotarea->setAxisTitle( QwtPlot::yLeft, yTitle);
+		plotarea->setAxisAutoScale(QwtPlot::yLeft, autoscale);
+		plotarea->setAxisAutoScale(QwtPlot::xBottom, autoscale);
 		plotarea->resize(600,400);
 		plotarea->show();
 	}

@@ -4,6 +4,7 @@
 #include "ScatterPlot.h"
 #include "HistogramPlot.h"
 #include "Table.h"
+#include "plot3D.h"
 
 #include <QtWidgets/QApplication>
 #include <iostream>
@@ -21,9 +22,8 @@
 #include <QtWidgets/QPushButton>
 #include <qwt_samples.h>
 #include <QMap>
-
 #include <QtGui>
-#include "lines.h"
+
 #define FFTW_DLL
 
 int main(int argc, char *argv[])
@@ -39,45 +39,73 @@ int main(int argc, char *argv[])
 	r_peaks << 615 << 912;
 	QVector<double> r_peaks_value(2);
 	r_peaks_value << 0.89 << 0.935;
-	QVector<QwtIntervalSample> hist(7);
-	hist << QwtIntervalSample(5,0,1) << QwtIntervalSample(3,1,2) << QwtIntervalSample(1,2,3)<< QwtIntervalSample(4,3,4)<< QwtIntervalSample(6,4,5)<< QwtIntervalSample(5,5,6)<< QwtIntervalSample(3,6,7); 
+
+	//mapa do histogramu
+	QMap<QString, QVector<double>> histmap;
+	histmap["value"] << 5 << 3 << 1 << 4 << 6 << 5 << 3 << 1 << 6 ;
+	histmap["start_time"] << 0 << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8;
+	histmap["end_time"] << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9;
+	//QVector<QwtIntervalSample> hist(7);
+	//hist << QwtIntervalSample(5,0,1) << QwtIntervalSample(3,1,2) << QwtIntervalSample(1,2,3)<< QwtIntervalSample(4,3,4)<< QwtIntervalSample(6,4,5)<< QwtIntervalSample(5,5,6)<< QwtIntervalSample(3,6,7); 
+	
+	//mapa do tabeli
 	QMap<QString, double> map;
 	 map["one"] = 1;
 	 map["three"] = 3;
 	 map["seven"] = 7;
 
-	  QVector<QString> units(3);
+	 //wektor jednostek do tabeli
+	 QVector<QString> units(3);
 	  units[0] = "mm" ;
 	  units[1] = "min" ;
 	  units[2] = "s^2" ;
 
-	/****************************************************************************************************/
+	/**************************************Wektory do VCG**************************************************************/
+	QVector<double> X(126);
+	QVector<double> Y(126);
+	QVector<double> Z(126);
+    double z = 0.0f;
+    double angle = 0.0f;
+	int i = 0;
+
+    for ( angle = 0.0; angle <= twoPi * 2.0; angle += 0.1, z += 0.5 )
+    {
+        X[i]= 20.0 * sin( angle );
+        Y[i] = 30.0 * cos( angle );
+		Z[i] = z;
+		i++;
+    }
 
 /*****************Wywo³ujê obiekt klasy g³ównej************************************************/
 		
-		MajorPlot mp;
+		//MajorPlot mp;
 	
 
 /*****************Wywo³ujê obiekty klas pochodnych dla ró¿nych typów wykresów*************************/	
 /*****************Uwaga: na obiekcie klasy g³ównej mogê narysowaæ dowoln¹*************************/	
 /**********************************iloœæ wykresów klas pochodnych*************************/	
 		
-		CurvePlot cp; //obiekt1
-		cp.CurvePlotInit(2, Qt::blue, vectorX,vectorY,mp.plotarea,"original ECG");
-		cp.setCurvePlotArea(mp, 500.0,1000.0, 100.0, -1.0,1.0,0.5, "time [s]", "amplitude [mV]", "sampleECG");
-		
-		ScatterPlot sp; //obiekt2
-		sp.ScatterPlotInit(8, Qt:: red, r_peaks,r_peaks_value,mp.plotarea,"R-Peaks",QwtPlotCurve::CurveStyle::Dots, QwtSymbol::Style::Star2);
-		//Table t0(5,2,mp.plotarea->canvas());	
+		//CurvePlot cp; //obiekt1
+		//cp.CurvePlotInit(2, Qt::blue, vectorX,vectorY,mp.plotarea,"original ECG");
+		//cp.setCurvePlotArea(mp, 500.0,1000.0, 100.0, -1.0,1.0,0.5, "time [s]", "amplitude [mV]", "sampleECG");
+		//
+		//ScatterPlot sp; //obiekt2
+		//sp.ScatterPlotInit(8, Qt:: red, r_peaks,r_peaks_value,mp.plotarea,"R-Peaks",QwtPlotCurve::CurveStyle::Dots, QwtSymbol::Style::Star2);
+
 
 /***********************Histogram*****************************************************************************/
 		
 		MajorPlot mp2;
+		//mp2.PlotAreaInit(0,400,0,0,600,0,"","","VCG");
 		HistogramPlot hp;
-		hp.HistogramPlotInit(hist, mp2.plotarea);
-		hp.setHistogramPlotArea(mp2,0.0,7.0,1.0,0.0,6.0,1.0,"RRx","value","sample Histogram");
+		hp.HistogramPlotInit(histmap, mp2.plotarea);
+		hp.setHistogramPlotArea(mp2,histmap["start_time"].first(),histmap["end_time"].last(),1,0,1,1,"RRx","value","sample Histogram");
 
-		Table t(map, units, mp2.plotarea->canvas());
+		//Table t(map, units, mp2.plotarea->canvas());
+
+		//Plot3D p(X,Z,Y); // wykres VCG - trzeba podaæ najpierw wektor Y a potem Z;
+		//p.show();
 
 		return a.exec();
 }
+ 

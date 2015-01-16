@@ -59,6 +59,15 @@
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="plot3D.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_plot3D.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_plot3D.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -69,6 +78,9 @@
     </CustomBuild>
     <CustomBuild Include="ekg.qrc">
       <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="plot3D.h">
+      <Filter>Modules\VisualizationModule</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

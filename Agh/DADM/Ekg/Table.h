@@ -20,7 +20,7 @@ public:
         tableView->setObjectName(QStringLiteral("tableView"));
 		tableView->setColumnWidth(2,10);
 		tableView->setRowHeight(map.size(),5);
-		tableView->setGeometry(240,200,150,100);
+		//tableView->setGeometry(240,200,150,100);
 		
 		QStringList horheaders;
 		horheaders << "Value" << "Unit";
