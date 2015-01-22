@@ -51,6 +51,9 @@
     <Filter Include="Modules\I/O">
       <UniqueIdentifier>{53e62d74-8ba7-4f63-91c0-5d59db56fec2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Engine">
+      <UniqueIdentifier>{b9b88387-f9a3-4cf8-a570-4bd3e67f374b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -143,6 +146,33 @@
     <ClCompile Include="gui\RPeaksDetectionWidget.cpp">
       <Filter>Modules\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="AbstractModule.cpp">
+      <Filter>Modules\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractResult.cpp">
+      <Filter>Modules\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleThread.cpp">
+      <Filter>Modules\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTimer.cpp">
+      <Filter>Modules\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Result.cpp">
+      <Filter>Modules\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultKeeper.cpp">
+      <Filter>Modules\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="TestModule.cpp">
+      <Filter>Modules\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="VAbstractModule.cpp">
+      <Filter>Modules\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ReturnType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -206,6 +236,33 @@
     </ClInclude>
     <ClInclude Include="gui\RPeaksDetectionWidget.h">
       <Filter>Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractModule.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractResult.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleThread.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTimer.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Result.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultKeeper.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="TestModule.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="VAbstractModule.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ReturnType.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
