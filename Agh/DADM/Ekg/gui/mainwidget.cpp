@@ -3,6 +3,8 @@
 #include <QVBoxLayout>
 #include <QTableWidget>
 #include <QProgressBar>
+#include <QTabWidget>
+#include <QScrollArea>
 #include "graphswidget.h"
 
 
@@ -16,12 +18,16 @@ MainWidget::MainWidget(QWidget *parent) :
     leftPartLayout->addWidget(graphsWidget);
     leftPartLayout->addWidget(progressBar);
 
-    tableWidget = new QTableWidget(this);
+	tableWidget = new QTableWidget(this);
+	tabWidget = new QTabWidget(this);
+
+	QVBoxLayout *rightPartLayout = new QVBoxLayout();
+	rightPartLayout->addWidget(tableWidget);
+	rightPartLayout->addWidget(tabWidget);
 
     QHBoxLayout *mainLayout = new QHBoxLayout(this);
-
     mainLayout->addLayout(leftPartLayout);
-    mainLayout->addWidget(tableWidget);
+	mainLayout->addLayout(rightPartLayout);
 
     setLayout(mainLayout);
 }
@@ -34,6 +40,11 @@ GraphsWidget *MainWidget::getGraphsWidget()
 QTableWidget *MainWidget::getTableWidget()
 {
     return tableWidget;
+}
+
+QTabWidget   *MainWidget::getTabWidget()
+{
+	return tabWidget;
 }
 
 QProgressBar *MainWidget::getProgressBar()

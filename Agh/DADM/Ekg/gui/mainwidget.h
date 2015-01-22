@@ -5,6 +5,7 @@
 
 class QProgressBar;
 class QTableWidget;
+class QTabWidget;
 class GraphsWidget;
 
 class MainWidget : public QWidget
@@ -16,10 +17,12 @@ public:
     GraphsWidget *getGraphsWidget();
     QTableWidget *getTableWidget();
     QProgressBar *getProgressBar();
+	QTabWidget   *getTabWidget();
 
 private:
     GraphsWidget *graphsWidget;
     QTableWidget *tableWidget;
+	QTabWidget   *tabWidget;
     QProgressBar *progressBar;
 };
 

@@ -10,10 +10,14 @@ class SelectModuleMenu : public QMenu
     Q_OBJECT
 public:
     explicit SelectModuleMenu(QWidget *parent = 0);
+	SelectModulesPrivate *getSelectModulesPrivate();
 
 private slots:
-    void enableModules(bool enabled);
-    void setActionsChecked(QAction *triggeredAction);
+    void setModulesEnabled(bool enabled, const QList<QAction *> &actions);
+	void setRPeeksDetectionEnabled(bool enabled);
+	void setRPeeksDetectionGroupEnabled(bool enabled);
+	void setQRSDetectionGroupEnabled(bool enabled);
+	void setRestGroupEnabled(bool enabled);
 
 private:
     void setMultipleChoice(QList<QAction *> &list);

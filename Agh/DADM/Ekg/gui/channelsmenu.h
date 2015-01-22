@@ -11,6 +11,10 @@ class ChannelsMenu : public QMenu
 public:
     explicit ChannelsMenu(QWidget *parent = 0);
 
+	void clearChannels();
+	void addChannel(const QString &name);
+	void updateMenu();
+
 private:
     void setSingleChoice(QList<QAction *> &list, QActionGroup *actionGroup = 0);
 
