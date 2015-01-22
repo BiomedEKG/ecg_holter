@@ -19,6 +19,15 @@ int main(int argc, char *argv[])
 	w.addGraph(ObjectManager::getInstance()->wykres(), QString("Graph"));
 	w.addGraph(ObjectManager::getInstance()->histogram(), QString("Histogram"));
 	w.show();
+		ResultKeeper *rkp;
+	rkp = &ResultKeeper::getInstance();
+    ModuleTimer timer = ModuleTimer();
+    TestModule *tm = new TestModule();
+
+    timer.measureModuleTimeOfExecution(*tm, *rkp, 10);
+    std::cout << "Hello world!" << std::endl;
+	
+
 
 	return a.exec();
 }

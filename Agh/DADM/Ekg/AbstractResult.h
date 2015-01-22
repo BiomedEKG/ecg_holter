@@ -5,10 +5,14 @@
 class AbstractResult
 {
     public:
+		virtual AbstractResult* getResult(){return new AbstractResult();};
         AbstractResult();
         virtual ~AbstractResult();
-    protected:
-    private:
+		int paramType;    
+protected:
+
+private:
+		
 };
 
 #endif // ABSTRACTRESULT_H
