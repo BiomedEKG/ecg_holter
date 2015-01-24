@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMap>
 
 class MainWidget;
 class ChannelsMenu;
@@ -20,12 +21,15 @@ private slots:
     void compute();
     void generateReport();
 	void channelChanged(QAction *action);
+	void selectedModule(QAction *action);
 
 private:
     QAction *open;
     QAction *quit;
 	ChannelsMenu *channelsMenu;
     MainWidget *mainWidget;
+
+	QMap<QString, int> configTabsMap;
 };
 
 #endif // MAINWINDOW_H

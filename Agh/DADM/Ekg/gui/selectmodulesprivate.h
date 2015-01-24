@@ -5,7 +5,7 @@
 
 class QAction;
 class QObject;
-
+class QActionGroup;
 
 class SelectModulesPrivate
 {
@@ -36,8 +36,9 @@ public:
 	QAction *ectopicBeat;
 
     QList<QAction *> allModules;
-    QList<QAction *> mainModules;
-    QList<QAction *> otherModules;
+	QList<QAction *> *rPeeksDetectionGroup;
+	QList<QAction *> *qrsDetectionGroup;
+	QList<QAction *> *restGroup;
 };
 
 #endif // SELECTMODULESPRIVATE_H

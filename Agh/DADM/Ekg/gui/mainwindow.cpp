@@ -5,15 +5,19 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QTextEdit>
+#include <QTabWidget>
 #include <QFileDialog>
 #include <QProgressBar>
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QStatusBar>
 #include "selectmodulemenu.h"
+#include "selectmodulesprivate.h"
 #include "channelsmenu.h"
 #include "mainwidget.h"
 #include "graphswidget.h"
+#include "ECGFiltrationWidget.h"
+#include "RPeaksDetectionWidget.h"
 #include <QDebug>
 
 #include "ObjectManager.h"
@@ -38,8 +42,29 @@ MainWindow::MainWindow(QWidget *parent)
 	mainWidget = new MainWidget(this);
 
 	QPushButton *selectModuleButton = new QPushButton(tr("Select module"), this);
-	selectModuleButton->setMenu(new SelectModuleMenu(selectModuleButton));
+	SelectModuleMenu *selectModuleMenu = new SelectModuleMenu(selectModuleButton);
+	connect(selectModuleMenu, SIGNAL(triggered(QAction *)), this, SLOT(selectedModule(QAction *))); 
+	selectModuleButton->setMenu(selectModuleMenu);
 
+	SelectModulesPrivate *p = selectModuleMenu->getSelectModulesPrivate();
+	
+	//Create config tabs
+	QString label;
+	int tabIndex;
+
+	label = p->ecgFiltration->text();
+	tabIndex = mainWidget->getTabWidget()->addTab(new ECGFiltrationWidget(mainWidget->getTabWidget()), label);
+	mainWidget->getTabWidget()->tabBar()->setTabEnabled(tabIndex, false);
+	mainWidget->getTabWidget()->widget(tabIndex)->setEnabled(false);
+	configTabsMap.insert(label, tabIndex);
+
+	label = p->rPeeksDetection->text();
+	tabIndex = mainWidget->getTabWidget()->addTab(new RPeaksDetectionWidget(mainWidget->getTabWidget()), label);
+	mainWidget->getTabWidget()->tabBar()->setTabEnabled(tabIndex, false);
+	mainWidget->getTabWidget()->widget(tabIndex)->setEnabled(false);
+	configTabsMap.insert(label, tabIndex);
+
+	//Add Channels button
 	QPushButton *channelsButton = new QPushButton(tr("Channels"), this);
 	channelsMenu = new ChannelsMenu(channelsButton);
 	connect(channelsMenu, SIGNAL(triggered(QAction *)), this, SLOT(channelChanged(QAction *))); 
@@ -51,7 +76,7 @@ MainWindow::MainWindow(QWidget *parent)
 	QPushButton *generateReportButton = new QPushButton(tr("Generate report"), this);
 	connect(generateReportButton, SIGNAL(clicked()), this, SLOT(generateReport()));
 
-	QToolBar *toolbar = new QToolBar(mainWidget);
+	QToolBar *toolbar = new QToolBar(this);
 	toolbar->addWidget(selectModuleButton);
 	toolbar->addWidget(channelsButton);
 	toolbar->addWidget(computeButton);
@@ -182,4 +207,26 @@ void MainWindow::addGraph(QWidget *graph, const QString &tabName)
 void MainWindow::channelChanged(QAction *action)
 {
 	statusBar()->showMessage("Changed channel: " + action->text(), 3000);
+}
+
+void MainWindow::selectedModule(QAction *action)
+{
+	statusBar()->showMessage("Selected module: " + action->text(), 2000);
+
+	int currentTabIdx = configTabsMap.value(action->text(), -1);
+
+	if (currentTabIdx == -1)
+	{
+		return;
+	}
+
+	mainWidget->getTabWidget()->tabBar()->setTabEnabled(currentTabIdx, action->isChecked());
+	mainWidget->getTabWidget()->widget(currentTabIdx)->setEnabled(action->isChecked());
+
+	if (!action->isChecked())
+	{
+		return;
+	}
+
+	mainWidget->getTabWidget()->setCurrentIndex(currentTabIdx);
 }
