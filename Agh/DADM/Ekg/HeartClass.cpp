@@ -12,21 +12,34 @@
 
 using namespace std;
 
-HeartClass::HeartClass(vector<double> qrsOnsetFromWaves, vector<double> qrsEndFromWaves, 
-															vector<double> signalFromEcgBaseline){
+HeartClass::HeartClass(vector<double>* qrsOnsetFromWaves, vector<double>* qrsEndFromWaves, 
+															vector<double>* signalFromEcgBaseline){
 	
-	FastGrowthParameter fastGrowth(qrsOnsetFromWaves, qrsEndFromWaves, signalFromEcgBaseline);
+    vector<double>* wsignal;
+    vector<double>* wqrsOnset;
+    vector<double>* wqrsEnd;
+	wsignal = signalFromEcgBaseline;
+	wqrsOnset = qrsOnsetFromWaves;
+	wqrsEnd = qrsEndFromWaves;
+	
+	FastGrowthParameter fastGrowth(wqrsOnset, wqrsEnd, wsignal);
     fastGrowth.FastGrowthExtractor();
-    
-	SpeedAmplitudeParameter speedAmplitude(qrsOnsetFromWaves, qrsEndFromWaves, signalFromEcgBaseline);
+
+	SpeedAmplitudeParameter speedAmplitude(wqrsOnset, wqrsEnd, wsignal);
     speedAmplitude.SpeedAmplitudeExtractor();
-    
-	MalinowskaParameter malinowska(qrsOnsetFromWaves, qrsEndFromWaves, signalFromEcgBaseline);
+   
+	MalinowskaParameter malinowska(wqrsOnset, wqrsEnd, wsignal);
     malinowska.MalinowskaExtractor();
     
-    Kmeans kmeans(malinowska.malinowskaValues, fastGrowth.fastGrowthValues, speedAmplitude.speedAmplitudeValues);
-    
-    Kmeans temp(malinowska.malinowskaValues, fastGrowth.fastGrowthValues, speedAmplitude.speedAmplitudeValues);
+    vector<double>* wMalinowska;
+    vector<double>* wSpeedAmplitude;
+    vector<double>* wFastGrowth;
+    wMalinowska = &malinowska.malinowskaValues;
+    wSpeedAmplitude = &speedAmplitude.speedAmplitudeValues;
+    wFastGrowth = &fastGrowth.fastGrowthValues;
+
+	Kmeans kmeans(wMalinowska, wFastGrowth, wSpeedAmplitude);
+	Kmeans temp(wMalinowska, wFastGrowth, wSpeedAmplitude);
     
 	do{
 		
@@ -40,19 +53,8 @@ HeartClass::HeartClass(vector<double> qrsOnsetFromWaves, vector<double> qrsEndFr
 		kmeans.vQrsCentroid = kmeans.centroidLocationCalculator(kmeans.vQrs);
 		
 	}while((temp.normalQrsCentroid != kmeans.normalQrsCentroid) && (temp.vQrsCentroid != kmeans.vQrsCentroid) && (temp.artifactsCentroid != kmeans.artifactsCentroid));
-	
-	for(unsigned int i = 0; i < kmeans.normalQrs.size(); i++){
 
-		this->qrsClassificationMap["NormalQRS"].push_back(kmeans.normalQrs.at(i));
-	}
-		
-	for(unsigned int i = 0; i < kmeans.vQrs.size(); i++){
-
-		this->qrsClassificationMap["VQRS"].push_back(kmeans.vQrs.at(i));
-	}	
-		
-	for(unsigned int i = 0; i < kmeans.artifacts.size(); i++){
-
-		this->qrsClassificationMap["Artifacts"].push_back(kmeans.artifacts.at(i));
-	}	
+	qrsClassificationMap.insert(pair<string, vector<double> > ("NormalQRS", kmeans.normalQrs));
+	qrsClassificationMap.insert(pair<string, vector<double> > ("VQRS", kmeans.vQrs));
+	qrsClassificationMap.insert(pair<string, vector<double> > ("Artifacts", kmeans.artifacts));
 }

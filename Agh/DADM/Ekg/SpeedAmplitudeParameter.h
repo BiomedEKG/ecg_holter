@@ -14,7 +14,8 @@ class SpeedAmplitudeParameter : public AbstractExtractor{
 	
 	public:
 		vector<double> speedAmplitudeValues;
-		SpeedAmplitudeParameter(vector<double> qrsOnsetData, vector<double> qrsEndData, vector<double> signalData);
+		
+		SpeedAmplitudeParameter(vector<double>* qrsOnsetData, vector<double>* qrsEndData, vector<double>* signalData);
 		void SpeedAmplitudeExtractor();
 };
 

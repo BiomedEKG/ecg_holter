@@ -1,12 +1,16 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include <fstream>
 #include <cmath>
 #include <string>
 #include <map>
 #include "SpeedAmplitudeParameter.h"
 
-SpeedAmplitudeParameter::SpeedAmplitudeParameter(vector<double> qrsOnsetData, vector<double> qrsEndData, vector<double> signalData) : 
+
+using namespace std;
+
+SpeedAmplitudeParameter::SpeedAmplitudeParameter(vector<double>* qrsOnsetData, vector<double>* qrsEndData, vector<double>* signalData) : 
 										AbstractExtractor(qrsOnsetData, qrsEndData, signalData){
 											
 }
@@ -28,8 +32,8 @@ void SpeedAmplitudeParameter::SpeedAmplitudeExtractor(){
 		
 		for(unsigned int j = 0; j < signalData.size(); j++){
 
-			if(j >= 2){
-				speed = signalData.at(j) + signalData.at(j-2) - 2*signalData.at(j-1);
+			if(j > 1){
+				speed = abs(signalData.at(j) + signalData.at(j-2) - 2*signalData.at(j-1));
 				if(speed > maxSpeed){
 					maxSpeed = speed;
 				}
@@ -42,8 +46,17 @@ void SpeedAmplitudeParameter::SpeedAmplitudeExtractor(){
 			}
 		}
 		
-		maxAmplitude = fabs(maxSignal - miniSignal);
+		maxAmplitude = abs(maxSignal - miniSignal);
 		this->speedAmplitudeValues.push_back(10*(maxSpeed/maxAmplitude)*10);
 	}
-}
 
+
+	// zapis do pliku	
+	/*ofstream speedAmplitudeTestTxt;
+    speedAmplitudeTestTxt.open("D:\\Dadm\\MójProjekt2\\speedAmplitudeTest.txt");
+	for(unsigned int i = 0; i < this->speedAmplitudeValues.size(); i++){
+	    	
+	    speedAmplitudeTestTxt << this->speedAmplitudeValues.at(i) << endl;
+	}
+    speedAmplitudeTestTxt.close();*/
+}

@@ -15,13 +15,9 @@ class HeartClass{
 	
 	public:
 	map<string, vector<double> > qrsClassificationMap;	
-	HeartClass(vector<double> qrsOnsetFromWaves, vector<double> qrsEndFromWaves, vector<double> signalFromEcgBaseline);
+	
+	HeartClass(vector<double>* qrsOnsetFromWaves, vector<double>* qrsEndFromWaves, vector<double>* signalFromEcgBaseline);
 };
-
-
-
-
-
 
 
 #endif // HEARTCLASS_H

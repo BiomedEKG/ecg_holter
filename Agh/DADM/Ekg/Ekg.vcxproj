@@ -76,6 +76,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractExtractor.cpp" />
+    <ClCompile Include="FastGrowthParameter.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_channelsmenu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -121,8 +123,11 @@
     <ClCompile Include="gui\RPeaksDetectionWidget.cpp" />
     <ClCompile Include="gui\selectmodulemenu.cpp" />
     <ClCompile Include="gui\selectmodulesprivate.cpp" />
+    <ClCompile Include="HeartClass.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Kmeans.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MalinowskaParameter.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="MajorPlot.cpp" />
     <ClCompile Include="CurvePlot.cpp" />
@@ -131,8 +136,10 @@
     <ClCompile Include="RaportGenerator.cpp" />
     <ClCompile Include="ScatterPlot.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="SpeedAmplitudeParameter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractExtractor.h" />
     <ClInclude Include="CurvePlot.h" />
     <CustomBuild Include="gui\channelsmenu.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -144,6 +151,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtPrintSupport"</Command>
     </CustomBuild>
+    <ClInclude Include="FastGrowthParameter.h" />
     <ClInclude Include="gui\channelsprivate.h" />
     <CustomBuild Include="gui\graphswidget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -188,14 +196,18 @@
     <ClInclude Include="gui\ECGFiltrationWidget.h" />
     <ClInclude Include="gui\RPeaksDetectionWidget.h" />
     <ClInclude Include="gui\selectmodulesprivate.h" />
+    <ClInclude Include="HeartClass.h" />
     <ClInclude Include="HistogramPlot.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Kmeans.h" />
     <ClInclude Include="MajorPlot.h" />
+    <ClInclude Include="MalinowskaParameter.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PdfGenerator.h" />
     <ClInclude Include="RaportGenerator.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ScatterPlot.h" />
+    <ClInclude Include="SpeedAmplitudeParameter.h" />
     <ClInclude Include="Table.h" />
   </ItemGroup>
   <ItemGroup>

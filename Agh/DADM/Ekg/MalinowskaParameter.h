@@ -14,9 +14,9 @@ class MalinowskaParameter : public AbstractExtractor{
 	
 	public:
 		vector<double> malinowskaValues;
-		MalinowskaParameter(vector<double> qrsOnsetData, vector<double> qrsEndData, vector<double> signalData);
+		
+		MalinowskaParameter(vector<double>* qrsOnsetData, vector<double>* qrsEndData, vector<double>* signalData);
 		void MalinowskaExtractor();
 };
 
 #endif // MALINOWSKAPARAMETER_H
-

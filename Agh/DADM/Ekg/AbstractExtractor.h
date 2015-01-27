@@ -14,7 +14,7 @@ class AbstractExtractor{
 	public:
 		map<int, vector<double> > signalMap;
 		
-		AbstractExtractor(vector<double> qrsOnsetFromWaves, vector<double> qrsEndFromWaves, vector<double> signalFromEcgBaseline);
+		AbstractExtractor(vector<double>* qrsOnsetFromWaves, vector<double>* qrsEndFromWaves, vector<double>* signalFromEcgBaseline);
 };
 
 #endif // ABSTRACTEXTRACTOR_H

@@ -14,9 +14,9 @@ class FastGrowthParameter : public AbstractExtractor{
 	
 	public:
 		vector<double> fastGrowthValues;
-		FastGrowthParameter(vector<double> qrsOnsetData, vector<double> qrsEndData, vector<double> signalData);
+		
+		FastGrowthParameter(vector<double>* qrsOnsetData, vector<double>* qrsEndData, vector<double>* signalData);
 		void FastGrowthExtractor();
 };
 
 #endif // FASTGROWTHPARAMETER_H
-

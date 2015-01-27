@@ -143,6 +143,24 @@
     <ClCompile Include="gui\RPeaksDetectionWidget.cpp">
       <Filter>Modules\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="AbstractExtractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Kmeans.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FastGrowthParameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MalinowskaParameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpeedAmplitudeParameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -206,6 +224,24 @@
     </ClInclude>
     <ClInclude Include="gui\RPeaksDetectionWidget.h">
       <Filter>Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MalinowskaParameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpeedAmplitudeParameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FastGrowthParameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractExtractor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Kmeans.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartClass.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
