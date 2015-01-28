@@ -143,6 +143,21 @@
     <ClCompile Include="gui\RPeaksDetectionWidget.cpp">
       <Filter>Modules\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="gui\PlotManager.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ECGFiltrationWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ECGFiltrationWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_RPeaksDetectionWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RPeaksDetectionWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -161,6 +176,12 @@
       <Filter>Modules\GUI</Filter>
     </CustomBuild>
     <CustomBuild Include="gui\selectmodulemenu.h">
+      <Filter>Modules\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\ECGFiltrationWidget.h">
+      <Filter>Modules\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\RPeaksDetectionWidget.h">
       <Filter>Modules\GUI</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -201,10 +222,7 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gui\ECGFiltrationWidget.h">
-      <Filter>Modules\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\RPeaksDetectionWidget.h">
+    <ClInclude Include="gui\PlotManager.h">
       <Filter>Modules\GUI</Filter>
     </ClInclude>
   </ItemGroup>

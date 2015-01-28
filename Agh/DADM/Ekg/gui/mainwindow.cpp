@@ -16,8 +16,8 @@
 #include "channelsmenu.h"
 #include "mainwidget.h"
 #include "graphswidget.h"
-#include "ECGFiltrationWidget.h"
-#include "RPeaksDetectionWidget.h"
+//#include "ECGFiltrationWidget.h"
+//#include "RPeaksDetectionWidget.h"
 #include <QDebug>
 
 #include "ObjectManager.h"
@@ -50,16 +50,24 @@ MainWindow::MainWindow(QWidget *parent)
 	
 	//Create config tabs
 	QString label;
-	int tabIndex;
+	int tabIndex = -1;
 
 	label = p->ecgFiltration->text();
-	tabIndex = mainWidget->getTabWidget()->addTab(new ECGFiltrationWidget(mainWidget->getTabWidget()), label);
+	ECGFiltrationWidget *ecgFiltrationWidget = new ECGFiltrationWidget(mainWidget->getTabWidget());
+	connect(ecgFiltrationWidget, SIGNAL(filterChanged(ECGFiltrationWidget::ECGFiltrationFilter, QString)),
+		this, SLOT(ecgFiltrationFilterChanged(ECGFiltrationWidget::ECGFiltrationFilter, QString)));
+
+	tabIndex = mainWidget->getTabWidget()->addTab(ecgFiltrationWidget, label);
 	mainWidget->getTabWidget()->tabBar()->setTabEnabled(tabIndex, false);
 	mainWidget->getTabWidget()->widget(tabIndex)->setEnabled(false);
 	configTabsMap.insert(label, tabIndex);
 
 	label = p->rPeeksDetection->text();
-	tabIndex = mainWidget->getTabWidget()->addTab(new RPeaksDetectionWidget(mainWidget->getTabWidget()), label);
+	RPeaksDetectionWidget *rPeaksDetectionWidget = new RPeaksDetectionWidget(mainWidget->getTabWidget());
+	connect(rPeaksDetectionWidget, SIGNAL(algorithmChanged(RPeaksDetectionWidget::RPeaksDetectionAlgorithm, QString)),
+		this, SLOT(rPeaksDetectionAlgorithmChanged(RPeaksDetectionWidget::RPeaksDetectionAlgorithm, QString)));
+
+	tabIndex = mainWidget->getTabWidget()->addTab(rPeaksDetectionWidget, label);
 	mainWidget->getTabWidget()->tabBar()->setTabEnabled(tabIndex, false);
 	mainWidget->getTabWidget()->widget(tabIndex)->setEnabled(false);
 	configTabsMap.insert(label, tabIndex);
@@ -165,7 +173,6 @@ void MainWindow::openFile()
 void MainWindow::compute()
 {
 	qDebug() << "Obliczam.";
-	mainWidget->getProgressBar()->setValue(mainWidget->getProgressBar()->value() + 10);
 }
 
 void MainWindow::generateReport()
@@ -229,4 +236,14 @@ void MainWindow::selectedModule(QAction *action)
 	}
 
 	mainWidget->getTabWidget()->setCurrentIndex(currentTabIdx);
+}
+
+void MainWindow::ecgFiltrationFilterChanged(ECGFiltrationWidget::ECGFiltrationFilter filter, const QString &name)
+{
+	statusBar()->showMessage("Changed filter: " + name, 2000);
+}
+
+void MainWindow::rPeaksDetectionAlgorithmChanged(RPeaksDetectionWidget::RPeaksDetectionAlgorithm algorithm, const QString &name)
+{
+	statusBar()->showMessage("Changed algorithm: " + name, 2000);
 }

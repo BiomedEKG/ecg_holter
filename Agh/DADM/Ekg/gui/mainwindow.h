@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QMap>
 
+#include "ECGFiltrationWidget.h"
+#include "RPeaksDetectionWidget.h"
+
 class MainWidget;
 class ChannelsMenu;
 
@@ -22,6 +25,8 @@ private slots:
     void generateReport();
 	void channelChanged(QAction *action);
 	void selectedModule(QAction *action);
+	void ecgFiltrationFilterChanged(ECGFiltrationWidget::ECGFiltrationFilter filter, const QString &name);
+	void rPeaksDetectionAlgorithmChanged(RPeaksDetectionWidget::RPeaksDetectionAlgorithm algorithm, const QString &name);
 
 private:
     QAction *open;

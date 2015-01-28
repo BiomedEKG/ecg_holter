@@ -7,6 +7,7 @@ class QProgressBar;
 class QTableWidget;
 class QTabWidget;
 class GraphsWidget;
+class PlotManager;
 
 class MainWidget : public QWidget
 {
@@ -21,6 +22,7 @@ public:
 
 private:
     GraphsWidget *graphsWidget;
+	PlotManager *plotManager;
     QTableWidget *tableWidget;
 	QTabWidget   *tabWidget;
     QProgressBar *progressBar;
