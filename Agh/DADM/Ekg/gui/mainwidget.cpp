@@ -2,7 +2,6 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QTableWidget>
-#include <QProgressBar>
 #include <QTabWidget>
 #include <QGroupBox>
 #include <QScrollArea>
@@ -51,7 +50,7 @@ QTabWidget   *MainWidget::getTabWidget()
 	return tabWidget;
 }
 
-QProgressBar *MainWidget::getProgressBar()
+PlotManager *MainWidget::getPlotManager()
 {
-    return progressBar;
+	return plotManager;
 }

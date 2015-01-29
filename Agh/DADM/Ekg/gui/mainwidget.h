@@ -3,7 +3,6 @@
 
 #include <QWidget>
 
-class QProgressBar;
 class QTableWidget;
 class QTabWidget;
 class GraphsWidget;
@@ -17,15 +16,14 @@ public:
 
     GraphsWidget *getGraphsWidget();
     QTableWidget *getTableWidget();
-    QProgressBar *getProgressBar();
+	PlotManager  *getPlotManager();
 	QTabWidget   *getTabWidget();
 
 private:
     GraphsWidget *graphsWidget;
-	PlotManager *plotManager;
+	PlotManager  *plotManager;
     QTableWidget *tableWidget;
 	QTabWidget   *tabWidget;
-    QProgressBar *progressBar;
 };
 
 #endif // MAINWIDGET_H

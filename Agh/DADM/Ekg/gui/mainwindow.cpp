@@ -16,8 +16,6 @@
 #include "channelsmenu.h"
 #include "mainwidget.h"
 #include "graphswidget.h"
-//#include "ECGFiltrationWidget.h"
-//#include "RPeaksDetectionWidget.h"
 #include <QDebug>
 
 #include "ObjectManager.h"
@@ -41,38 +39,39 @@ MainWindow::MainWindow(QWidget *parent)
 
 	mainWidget = new MainWidget(this);
 
-	QPushButton *selectModuleButton = new QPushButton(tr("Select module"), this);
-	SelectModuleMenu *selectModuleMenu = new SelectModuleMenu(selectModuleButton);
-	connect(selectModuleMenu, SIGNAL(triggered(QAction *)), this, SLOT(selectedModule(QAction *))); 
-	selectModuleButton->setMenu(selectModuleMenu);
-
+	SelectModuleMenu *selectModuleMenu = new SelectModuleMenu(this);
 	SelectModulesPrivate *p = selectModuleMenu->getSelectModulesPrivate();
+
+	//Create toolbar
+	addToolBar(createToolbar(selectModuleMenu));
 	
 	//Create config tabs
-	QString label;
-	int tabIndex = -1;
-
-	label = p->ecgFiltration->text();
 	ECGFiltrationWidget *ecgFiltrationWidget = new ECGFiltrationWidget(mainWidget->getTabWidget());
+	addConfigurationTab(mainWidget, ecgFiltrationWidget, p->ecgFiltration->text());
 	connect(ecgFiltrationWidget, SIGNAL(filterChanged(ECGFiltrationWidget::ECGFiltrationFilter, QString)),
 		this, SLOT(ecgFiltrationFilterChanged(ECGFiltrationWidget::ECGFiltrationFilter, QString)));
 
-	tabIndex = mainWidget->getTabWidget()->addTab(ecgFiltrationWidget, label);
-	mainWidget->getTabWidget()->tabBar()->setTabEnabled(tabIndex, false);
-	mainWidget->getTabWidget()->widget(tabIndex)->setEnabled(false);
-	configTabsMap.insert(label, tabIndex);
-
-	label = p->rPeeksDetection->text();
 	RPeaksDetectionWidget *rPeaksDetectionWidget = new RPeaksDetectionWidget(mainWidget->getTabWidget());
+	addConfigurationTab(mainWidget, rPeaksDetectionWidget, p->rPeeksDetection->text());
 	connect(rPeaksDetectionWidget, SIGNAL(algorithmChanged(RPeaksDetectionWidget::RPeaksDetectionAlgorithm, QString)),
 		this, SLOT(rPeaksDetectionAlgorithmChanged(RPeaksDetectionWidget::RPeaksDetectionAlgorithm, QString)));
 
-	tabIndex = mainWidget->getTabWidget()->addTab(rPeaksDetectionWidget, label);
-	mainWidget->getTabWidget()->tabBar()->setTabEnabled(tabIndex, false);
-	mainWidget->getTabWidget()->widget(tabIndex)->setEnabled(false);
-	configTabsMap.insert(label, tabIndex);
+	SleepApneaWidget *sleepApneaWidget = new SleepApneaWidget(mainWidget->getTabWidget());
+	addConfigurationTab(mainWidget, sleepApneaWidget, p->sleepApnea->text());
+	connect(sleepApneaWidget, SIGNAL(methodChanged(SleepApneaWidget::SleepApneaMetrics, QString)),
+		this, SLOT(sleepApneaMethodChanged(SleepApneaWidget::SleepApneaMetrics, QString)));
 
+	setCentralWidget(mainWidget);
+	setStatusBar(new QStatusBar(this));
+}
+
+QToolBar *MainWindow::createToolbar(SelectModuleMenu *selectModuleMenu)
+{
 	//Add Channels button
+	QPushButton *selectModuleButton = new QPushButton(tr("Select module"), this);
+	connect(selectModuleMenu, SIGNAL(triggered(QAction *)), this, SLOT(selectedModule(QAction *))); 
+	selectModuleButton->setMenu(selectModuleMenu);
+
 	QPushButton *channelsButton = new QPushButton(tr("Channels"), this);
 	channelsMenu = new ChannelsMenu(channelsButton);
 	connect(channelsMenu, SIGNAL(triggered(QAction *)), this, SLOT(channelChanged(QAction *))); 
@@ -90,10 +89,15 @@ MainWindow::MainWindow(QWidget *parent)
 	toolbar->addWidget(computeButton);
 	toolbar->addWidget(generateReportButton);
 
-	addToolBar(toolbar);
+	return toolbar;
+}
 
-	setCentralWidget(mainWidget);
-	setStatusBar(new QStatusBar(this));
+void MainWindow::addConfigurationTab(MainWidget *mainWidget, QWidget *tabWidget, const QString &label)
+{
+	int tabIndex = mainWidget->getTabWidget()->addTab(tabWidget, label);
+	mainWidget->getTabWidget()->tabBar()->setTabEnabled(tabIndex, false);
+	mainWidget->getTabWidget()->widget(tabIndex)->setEnabled(false);
+	configTabsMap.insert(label, tabIndex);
 }
 
 MainWindow::~MainWindow()
@@ -240,10 +244,18 @@ void MainWindow::selectedModule(QAction *action)
 
 void MainWindow::ecgFiltrationFilterChanged(ECGFiltrationWidget::ECGFiltrationFilter filter, const QString &name)
 {
+	Q_UNUSED(filter);
 	statusBar()->showMessage("Changed filter: " + name, 2000);
 }
 
 void MainWindow::rPeaksDetectionAlgorithmChanged(RPeaksDetectionWidget::RPeaksDetectionAlgorithm algorithm, const QString &name)
 {
+	Q_UNUSED(algorithm);
 	statusBar()->showMessage("Changed algorithm: " + name, 2000);
+}
+
+void MainWindow::sleepApneaMethodChanged(SleepApneaWidget::SleepApneaMetrics method, const QString &name)
+{
+	Q_UNUSED(method)
+	statusBar()->showMessage("Changed method: " + name, 2000);
 }
