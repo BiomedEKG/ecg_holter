@@ -1,14 +1,16 @@
 #include "stsegment.h"
-
+//#include "stdafx.h"
+#include <math.h>
 
 // czêstotliwoœæ w Hercach
 vector<unsigned int> STSegment:: computeJ20  ( )
 {
 	int ms20= (double)(Frequency*0.001*20);
-
+	//int ms20= 2;
+	
 	vector <unsigned int> J20;
 	
-	for(int i=0; i<QRSend.size();i++)
+	for(int i=0; i<SizeVector;i++)
 	{
 		J20.push_back(QRSend[i]+ms20);
 	}
@@ -20,7 +22,7 @@ vector<double> STSegment:: computeSlope (vector<unsigned int> TE)
 {
 	vector <double> Slope;
 	
-	for(int i=0; i<TE.size();i++)
+	for(int i=0; i<SizeVector;i++)
 	{
 		Slope.push_back((Signal[TE[i]]-Signal[J20[i]])/(TE[i]-J20[i]));		
 	}
@@ -55,7 +57,6 @@ vector<unsigned int> STSegment :: computeMaxDistanceIndex (vector <double> Slope
 		
 		MaxDistance.push_back(*result);
 		IndeksMax=distance(Distance.begin(), result);
-		
 		MaxDistanceIndex.push_back(J20[i]+IndeksMax);
 			
 	}
@@ -70,7 +71,7 @@ vector<string> STSegment :: defineOffsetLevel ( )
 	unsigned int time;
 	vector <string> OffsetLevel;
 	//double hr=110;
-	for(int i=0; i<Ton.size();i++)
+	for(int i=0; i<SizeVector;i++)
 	{
 		if(HeartRate[i]<100) time=(double)(Frequency*0.001*80);
 		else if (HeartRate[i]>=100||HeartRate[i]<110) time=(double)(Frequency*0.001*72);
@@ -92,7 +93,7 @@ vector<string> STSegment :: defineOffsetLevel ( )
 vector<double> STSegment :: correctSlopeorMaxDistanceForShapeST (vector <double> StraightTpeak,vector <double> StraighTon)
 {
 	vector <double> ForShapeST;
-	for(int i=0;i<OffsetLevel.size();i++)
+	for(int i=0;i<SizeVector;i++)
 	{
 		if(OffsetLevel[i]=="higher") ForShapeST.push_back(StraightTpeak[i]);
 		else ForShapeST.push_back(StraighTon[i]);
@@ -118,7 +119,7 @@ vector<string> STSegment :: defineShapeST ()
 {
 	
 	vector<string> ShapeST;
-	for(int i=0; i<OffsetLevel.size();i++)
+	for(int i=0; i<SizeVector;i++)
 	{
 		if(MaxDistanceShapeSKST[i]<=threshold) ShapeST.push_back("straight");
 		else ShapeST.push_back("curve");
@@ -133,7 +134,7 @@ vector<string> STSegment :: defineTypeShapeST ()
 	vector <string> TypeShapeST;
 	unsigned int difference,above,below;
 	double straight;
-	for(int i =0; i<ShapeST.size();i++)
+	for(int i =0; i<SizeVector;i++)
 	{
 		if(ShapeST[i]=="curve")
 		{
@@ -178,6 +179,54 @@ vector <double> STSegment :: computeHeartRate ()
 	return HeartRate;
 }
 
+void STSegment :: Run()
+{
+	HeartRate=computeHeartRate();
+	J20=computeJ20();
+	SlopeTpeak=computeSlope(Tpeak);
+	Ton=computeMaxDistanceIndex (SlopeTpeak, Tpeak, MaxDistanceTpeak);
+	OffsetLevel=defineOffsetLevel ();
+	SlopeTon=computeSlope(Ton);
+	TMax=computeMaxDistanceIndex (SlopeTon, Ton, MaxDistanceTon);
+	TE=correctTEForShapeST();
+	SlopeSKST=correctSlopeorMaxDistanceForShapeST(SlopeTpeak, SlopeTon);
+	MaxDistanceShapeSKST=correctSlopeorMaxDistanceForShapeST(MaxDistanceTpeak, MaxDistanceTon);
+	ShapeST=defineShapeST ();
+	TypeShapeST=defineTypeShapeST();
+}
+
+void STSegment :: CorrectSize()
+{
+	vector<int> Size;
+	Size.push_back(QRSonset.size());
+	Size.push_back(QRSend.size());
+	Size.push_back(Tpeak.size());
+	Size.push_back(Rpeak.size());
+	SizeVector=min_element(begin(Size), end(Size));
+}
+
+STSegmentResult STSegment:: compute(map <string, vector<unsigned int> >*resultFromWaves, vector<double>*signal,
+									vector<unsigned int>*Rpeaks)
+{
+	this->Signal= *signal;	
+	this->Frequency=Frequency;
+	
+	this->QRSonset= resultFromWaves["QRSonset"]; 
+	this->QRSend=*resultFromWaves["QRSend"];  
+	this->Tpeak=*resultFromWaves["Tpeak"]; 
+	this->Rpeak=*Rpeaks;
+	k1offset=-0.1;
+	k2offset=0.1;
+	threshold=0.15;
+	k1slope=-0.15;
+	k2slope=0.15;
+	CorrectSize();
+	Run();
+	STSegmentResult p(OffsetLevel,ShapeST,TypeShapeST);
+	return p;
+}
+
+
 STSegment::STSegment (vector<double> Signal, int Frequency, vector<unsigned int> QRSonset, vector<unsigned int> QRSend, 
 					  vector<unsigned int> Tpeak,vector <unsigned int> Rpeak)
 	
@@ -194,19 +243,12 @@ STSegment::STSegment (vector<double> Signal, int Frequency, vector<unsigned int>
 	threshold=0.15;
 	k1slope=-0.15;
 	k2slope=0.15;
-	
-	HeartRate=computeHeartRate();
-	J20=computeJ20();
-	SlopeTpeak=computeSlope(Tpeak);
-	Ton=computeMaxDistanceIndex (SlopeTpeak, Tpeak, MaxDistanceTpeak);
-	OffsetLevel=defineOffsetLevel ();
-	SlopeTon=computeSlope(Ton);
-	TMax=computeMaxDistanceIndex (SlopeTon, Ton, MaxDistanceTon);
-	TE=correctTEForShapeST();
-	SlopeSKST=correctSlopeorMaxDistanceForShapeST(SlopeTpeak, SlopeTon);
-	MaxDistanceShapeSKST=correctSlopeorMaxDistanceForShapeST(MaxDistanceTpeak, MaxDistanceTon);
-	ShapeST=defineShapeST ();
-	TypeShapeST=defineTypeShapeST();
+			
+}
 
-		
+STSegmentResult::STSegmentResult(vector<string> OffsetLevel, vector<string>ShapeST, vector <string> TypeShapeST)
+{
+	this->OffsetLevel=OffsetLevel;
+	this->ShapeST=ShapeST;
+	this->TypeShapeST=TypeShapeST;
 }
