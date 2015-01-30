@@ -149,6 +149,11 @@ int j=0;
 
    
 
+	if (detectionSize.size()<2){
+		return input;
+	}
+
+
 	std::vector<double> splineIndex;
 	// spline index = R peak index - 50
 	int calculateIndex;

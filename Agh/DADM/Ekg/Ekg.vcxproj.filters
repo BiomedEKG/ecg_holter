@@ -137,6 +137,9 @@
     <ClCompile Include="SavitzkyGolay.cpp">
       <Filter>Modules\ECGBaseline</Filter>
     </ClCompile>
+    <ClCompile Include="BaselineResult.cpp">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -202,6 +205,9 @@
       <Filter>Modules\ECGBaseline</Filter>
     </ClInclude>
     <ClInclude Include="FilterType.h">
+      <Filter>Modules\ECGBaseline</Filter>
+    </ClInclude>
+    <ClInclude Include="BaselineResult.h">
       <Filter>Modules\ECGBaseline</Filter>
     </ClInclude>
   </ItemGroup>

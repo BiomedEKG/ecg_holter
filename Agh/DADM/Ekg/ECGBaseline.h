@@ -1,5 +1,8 @@
 #pragma once
 
+#include "AbstractModule.h"     
+#include "Result.h"   
+
 #include "Methods.h"
 #include "FilterType.h"
 #include "MovingAverage.h"
@@ -11,10 +14,10 @@
 
 
 
-class ECGBaseline {
+class ECGBaseline: public AbstractModule<Result> {
 
 public:
-	std::vector<double> compute (std::vector<double>* signal, BASELINEMETHOD baselineMethod, int samplingFrequency);
+	BaselineResult* compute (ResultKeeper *rkp, BASELINEMETHOD baselineMethod);
 	std::vector <double> output;
 	
 private:
@@ -26,5 +29,5 @@ private:
 	std::vector<double> movingAverage (std::vector<double>* signal);
 	std::vector<double> leastMeanSquares (std::vector<double>* signal, int samplingFrequency);
 	std::vector<double> cubicSpline (std::vector<double>* signal, int samplingFrequency);
-	std::vector<double> savitzkyGolay (std::vector<double>* signal);
+	std::vector<double> savitzkyGolay (std::vector<double>* signal, int samplingFrequency);
 };
