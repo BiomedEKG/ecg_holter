@@ -18,31 +18,35 @@ struct Output {
 	vector<double> power;
 	vector<double> frequency;
 };
+	struct Lomb_param {
+		vector<double> power;
+		vector<double> frequency;
+	};
+
 
 class HRV1 {
 
 public:
 	map<string, double> timeParameter;
 	map<string, double> freqParameter;
-	struct Lomb_param {
-		vector<double> power;
-		vector<double> frequency;
-	};
+
 			
 	Output time_freq_compute(vector < double > &temp_vec, int fp){
 	Output out_data;
-	vector<double> i_rr= inter_RR(temp_vec, fp);
-	out_data.timeParameters["RR_mean"]= RR_mean(i_rr);
-	out_data.timeParameters["SDNN"]= SDNN(i_rr);
-	out_data.timeParameters["RMSSD"]= RMSSD(i_rr);
+	//vector<double> i_rr= inter_RR(temp_vec, fp);
+	vector<double> i_rr= temp_vec;
+	out_data.timeParameters["RR_mean"]= RR_mean(i_rr)*1000;
+	out_data.timeParameters["SDNN"]= SDNN(i_rr)*1000;
+	out_data.timeParameters["RMSSD"]= RMSSD(i_rr)*1000;
 	out_data.timeParameters["NN50"]= NN50(i_rr);
 	out_data.timeParameters["pNN50"]= pNN50(i_rr);
-	out_data.timeParameters["SDANN"]= SDANN(i_rr);
-	out_data.timeParameters["SDANN_index"]= SDANN_index(i_rr);
-	out_data.timeParameters["SDSD"]= SDSD(i_rr);
+	out_data.timeParameters["SDANN"]= SDANN(i_rr)*1000;
+	out_data.timeParameters["SDANN_index"]= SDANN_index(i_rr)*1000;
+	out_data.timeParameters["SDSD"]= SDSD(i_rr)*1000;
 
 	vector<double> i_rrt = inter_RRt(temp_vec, fp);
-	Lomb_param struct1 = Lomb_Scargle(i_rrt); //struktura Lomb_param, która zawiera pary moc czêstotliwoœæ
+	//Lomb_param struct1 = Lomb_Scargle(i_rrt); //struktura Lomb_param, która zawiera pary moc czêstotliwoœæ
+	Lomb_param struct1 = lomb(i_rrt);
 	out_data.power = struct1.power;
 	out_data.frequency = struct1.frequency;
 
@@ -91,15 +95,17 @@ public:
 		return timeParameter;
 	}
 
-	map<string, double> computeFreq(vector < double > tab){ //mapa parametrów czêstotliwoœciowych
-		Lomb_param struct1 = Lomb_Scargle(tab); //Lomb_param
-		freqParameter["TP"] = TP_Power(struct1.power, struct1.frequency);
+	Lomb_param computeFreq(vector < double > tab){ //mapa parametrów czêstotliwoœciowych
+		vector<double> i_rrt = inter_RRt(tab, 1);
+		//Lomb_param struct1 = Lomb_Scargle(i_rrt); //Lomb_param
+		Lomb_param struct1 = lomb(i_rrt);
+		/*freqParameter["TP"] = TP_Power(struct1.power, struct1.frequency);
 		freqParameter["HF"] = HF_Power(struct1.power, struct1.frequency);
 		freqParameter["LF"] = LF_Power(struct1.power, struct1.frequency);
 		freqParameter["VLF"] = VLF_Power(struct1.power, struct1.frequency);
 		freqParameter["ULF"] = ULF_Power(struct1.power, struct1.frequency);
-		freqParameter["LFHF"] = LFHF_Power(struct1.power, struct1.frequency);
-		return freqParameter;
+		freqParameter["LFHF"] = LFHF_Power(struct1.power, struct1.frequency);*/
+		return struct1;
 	}
 
 	vector<double> type_change(vector <unsigned int> &temp_vec){
@@ -232,6 +238,7 @@ public:
 		index.clear();
 		index.push_back(0); //poczatek pierwszego przedzialu to pierwsza probka
 		for (int j = 0; j <	N; j++){ //iteracja tylko po pe³nych przedzia³ach
+			sum = 0;
 			while ( (sum<300) && (i<temp_vec.size())){
             sum = sum + temp_vec[i];
             i = i + 1;
@@ -299,7 +306,67 @@ public:
 
 
 //******************************     OBLICZANIE PARAMETRÓW CZÊSTOTLIWOŒCIOWYCH     ******************************
+	Lomb_param lomb(std::vector<double> intervals)
+{
+	vector<double> freqs;
+	vector<double> int_time;
+	vector<double> tau;
+	vector<double> PSD;
 
+	double average = RR_mean(intervals);
+	double stddev = SDNN(intervals);
+	//std::cout<<"Intervals:"<< intervals.size()<<std::endl;
+	double variance=stddev*stddev;
+	int_time.push_back(0);
+	for(int i=0;i<intervals.size()-1;++i)
+	int_time.push_back(int_time[i]+intervals[i]/1000);
+	int length=intervals.size();
+	double timespan=int_time[length-1];
+	freqs.push_back(2*PI_const/timespan);
+	for(int i=1;i<length*2;++i)
+	freqs.push_back((i+1)*2*PI_const/timespan);
+	//std::cout<<"Freqs:"<< freqs.size()<<std::endl;
+	for(int i=0;i<length*2;++i)
+	{
+	double sin_sum=0;
+	double cos_sum=0;
+	for(int n=0;n<length;++n)
+	sin_sum+=sin(2*freqs[i]*int_time[n]);
+	for(int n=0;n<length;++n)
+	cos_sum+=cos(2*freqs[i]*int_time[n]);
+	tau.push_back(atan2(sin_sum, cos_sum)/(2*freqs[i]));
+	}
+	for(int i=0;i<length*2;++i)
+	{
+	double stddevcos=0;
+	double cossqr=0;
+	double stddevsin=0;
+	double sinsqr=0;
+	for(int n=0;n<length;++n)
+	stddevcos+=(intervals[n]-average)*cos(freqs[i]*(int_time[n]-tau[i]));
+	stddevcos*=stddevcos;
+	for(int n=0;n<length;++n)
+	stddevsin+=(intervals[n]-average)*sin(freqs[i]*(int_time[n]-tau[i]));
+	stddevsin*=stddevsin;
+	for(int n=0;n<length;++n)
+	cossqr+=cos(freqs[i]*(int_time[n]-tau[i]))*cos(freqs[i]*(int_time[n]-tau[i]));
+	for(int n=0;n<length;++n)
+	sinsqr+=sin(freqs[i]*(int_time[n]-tau[i]))*sin(freqs[i]*(int_time[n]-tau[i]));
+	PSD.push_back((stddevcos/cossqr+stddevsin/sinsqr)/(2*variance));
+	}
+	for(int i=0;i<freqs.size();++i){
+	freqs[i]/=(2*PI_const);
+	freqs[i]/=(10000);
+	}
+	//std::cout<<"PSDs:"<< PSD.size()<<std::endl;
+
+			Lomb_param out;
+		out.power = PSD;
+		out.frequency = freqs;
+
+		return out;
+
+}
 
 	Lomb_param Lomb_Scargle(vector<double> &temp_vec){
 	//Wyznaczenie parametrów czêstotliwoœciowych meotd¹ Lomba-Scargle'a

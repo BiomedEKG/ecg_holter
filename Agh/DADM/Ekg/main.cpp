@@ -89,30 +89,55 @@ int main(int argc, char *argv[])
 	
 	Output darson;
 
-	//vector <double> data12 =dark.read_from_file("C:/Users/darsonss/Desktop/vector.txt");
+	vector <double> data12 =dark.read_from_file("C:/Users/darsonss/Desktop/vectors/darson_vector3.txt");
+	Output d = dark.time_freq_compute(data12,1);
+	//vector<int> vecx= dark.index_300(data12);
+	//map<string, double> c = dark.compute(data12);
+	/*
+	//darson = dark.time_freq_compute(data12, 1);
+	*/
+	/*int i = 0;
+	for(i; i<vecx.size();i++){
+	cout << "Index " << i <<":"<< vecx[i] << "\n";
+	}*/
+	cout << "RR_mean: " << d.timeParameters["RR_mean"] << "\n";
+	cout << "RR_sdnn: " << d.timeParameters["SDNN"] << "\n";
+	cout << "RR_rmssd: " << d.timeParameters["RMSSD"] << "\n";
+	cout << "RR_nn50: " << d.timeParameters["NN50"] << "\n";
+	cout << "RR_pnn50: " << d.timeParameters["pNN50"] << "\n";
+	cout << "RR_sdann: " << d.timeParameters["SDANN"] << "\n";
+	cout << "RR_sdanni: " << d.timeParameters["SDANN_index"] << "\n";
+	cout << "RR_sdsd: " << d.timeParameters["SDSD"] << "\n";
 
-	map<string, double> c = dark.compute(tab);
+	cout << "---\n";
+	cout << "TP: " << d.freqParameters["TP"] << "\n";
+	cout << "HF: " << d.freqParameters["HF"] << "\n";
+	cout << "LF: " << d.freqParameters["LF"] << "\n";
+	cout << "VLF: " << d.freqParameters["VLF"] << "\n";
+	cout << "ULF: " << d.freqParameters["ULF"] << "\n";
+	cout << "LFHF: " << d.freqParameters["LFHF"] << "\n";
 
-	darson = dark.time_freq_compute(tab, 1);
+//	Lomb_param d = dark.computeFreq(data12);
+	cout << "xd2 " << "\n";
+	ofstream myfile ("C:/Users/darsonss/Desktop/x.txt");
+  if (myfile.is_open())
+  {
+	  for(int i=0;i<d.frequency.size();i++){
+    myfile <<d.frequency[i]<< "\n";
 
-	cout << "RR_mean: " << c["RR_mean"] << "\n";
-	cout << "RR_sdnn: " << c["SDNN"] << "\n";
-	cout << "RR_rmssd: " << c["RMSSD"] << "\n";
-	cout << "RR_nn50: " << c["NN50"] << "\n";
-	cout << "RR_pnn50: " << c["pNN50"] << "\n";
-	cout << "RR_sdann: " << c["SDANN"] << "\n";
-	cout << "RR_sdanni: " << c["SDANN_index"] << "\n";
-	cout << "RR_sdsd: " << c["SDSD"] << "\n";
+	  }
+    myfile.close();
+  }
 
-	map<string, double> d = dark.computeFreq(tab);
+  ofstream myfil ("C:/Users/darsonss/Desktop/y.txt");
+  if (myfil.is_open())
+  {
+	  for(int i=0;i<d.power.size();i++){
+    myfil <<d.power[i]<< "\n";
 
-	cout << "TP: " << d["TP"] << "\n";
-	cout << "HF: " << c["HF"] << "\n";
-	cout << "LF: " << d["LF"] << "\n";
-	cout << "VLF: " << d["VLF"] << "\n";
-	cout << "ULF: " << d["ULF"] << "\n";
-	cout << "LFHF: " << d["LFHF"] << "\n";
-
+	  }
+    myfil.close();
+  }
     return a.exec();
 
 }
