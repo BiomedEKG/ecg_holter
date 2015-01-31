@@ -2,6 +2,7 @@
 #include "RPeaksAbstract.h"
 #include "PanTompkins.h"
 #include "Hilbert.h"
+#include "RPeaks.h"
 #include "stdafx.h"
 
 
@@ -23,8 +24,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	
 	// reading data from .dat file - for tests only! 
-	/*string filepath = "C:/Users/Kajczan/Desktop/AGH/DADM/data_input.txt";
-	string filepath_output_R1 = "C:/Users/Kajczan/Desktop/AGH/DADM/data_output_R1.txt";
+	string filepath = "C:/Users/Kajczan/Desktop/AGH/DADM/data_input.txt";
+	/*string filepath_output_R1 = "C:/Users/Kajczan/Desktop/AGH/DADM/data_output_R1.txt";
 	string filepath_output_R2 = "C:/Users/Kajczan/Desktop/AGH/DADM/data_output_R2.txt";
 	string filepath_output_final = "C:/Users/Kajczan/Desktop/AGH/DADM/data_output_final.txt";
 	string filepath_output_integral = "C:/Users/Kajczan/Desktop/AGH/DADM/data_output_integral.txt";
@@ -39,13 +40,16 @@ int _tmain(int argc, _TCHAR* argv[])
     // choosing sampling frequency, window width - for tests only! 
 	int sampling_frequency = 360;
 	int window_width = 40; // [ms] // of sampling_frequency = 200 { window_width = 30}
-	//Start
+
+	RPeaks R = RPeaks(data_input,sampling_frequency);
+	R.compute();
+
+	/*//Start
 	//Reading ECG_BASELINE data: vector<double> data_input
-	PanTompkins PanTompObject = PanTompkins(data_input, sampling_frequency);
-	//data_output = PanTompObject.compute();
-	//RPeaksAbstract::save_data_as_txt(data_output,filepath_output);
-	PanTompObject.derivative_data = PanTompObject.differentation(data_input);
-	Hilbert testObj = Hilbert(data_input, sampling_frequency);
+					//PanTompkins PanTompObject = PanTompkins(data_input, sampling_frequency);
+
+					//PanTompObject.derivative_data = PanTompObject.differentation(data_input);
+					//Hilbert testObj = Hilbert(data_input, sampling_frequency);
 
 	//squere
 	PanTompObject.squered_data = PanTompObject.squere(PanTompObject.derivative_data);
@@ -64,14 +68,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	//PanTompObject.R_indexes_second = PanTompObject.select_R_indexes(PanTompObject.R_indexes_first, PanTompObject.integral_data);
 
 	//calculate filter shift 
-	//PanTompObject.data_output = PanTompObject.calc_filter_shift(PanTompObject.R_indexes_second);
+	//PanTompObject.data_output = PanTompObject.calc_filter_shift(PanTompObject.R_indexes_second);*/
 	/*
-	RPeaksAbstract::save_double_data_as_txt(PanTompObject.integral_data,filepath_output_diff);
-	RPeaksAbstract::save_double_data_as_txt(PanTompObject.integral_data,filepath_output_integral);
-	RPeaksAbstract::save_double_data_as_txt(PanTompObject.tresholded_data,filepath_output_treshold);
-	RPeaksAbstract::save_data_as_txt(PanTompObject.R_indexes_first,filepath_output_R1);
-	RPeaksAbstract::save_data_as_txt(PanTompObject.R_indexes_second, filepath_output_R2);
-	RPeaksAbstract::save_data_as_txt(PanTompObject.data_output,filepath_output_final);
-	RPeaksAbstract::save_data_as_txt(PanTompObject.R_Peaks,filepath_output_RRRRR);*/
+	RPeaksAbstract::save_double_data_as_txt(R.integral_data,filepath_output_diff);
+	RPeaksAbstract::save_double_data_as_txt(R.integral_data,filepath_output_integral);
+	RPeaksAbstract::save_double_data_as_txt(R.tresholded_data,filepath_output_treshold);
+	RPeaksAbstract::save_data_as_txt(R.R_indexes_first,filepath_output_R1);
+	RPeaksAbstract::save_data_as_txt(R.R_indexes_second, filepath_output_R2);
+	RPeaksAbstract::save_data_as_txt(R.data_output,filepath_output_final);
+	RPeaksAbstract::save_data_as_txt(R.R_Peaks,filepath_output_RRRRR);*/
 	return 0;
 }
