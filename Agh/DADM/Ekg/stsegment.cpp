@@ -1,4 +1,5 @@
 #include "stsegment.h"
+#include "stsegmentresult.h"
 //#include "stdafx.h"
 #include <math.h>
 
@@ -10,7 +11,7 @@ vector<unsigned int> STSegment:: computeJ20  ( )
 	
 	vector <unsigned int> J20;
 	
-	for(int i=0; i<SizeVector;i++)
+	for(int i=0; i<50;i++)
 	{
 		J20.push_back(QRSend[i]+ms20);
 	}
@@ -22,7 +23,7 @@ vector<double> STSegment:: computeSlope (vector<unsigned int> TE)
 {
 	vector <double> Slope;
 	
-	for(int i=0; i<SizeVector;i++)
+	for(int i=0; i<50;i++)
 	{
 		Slope.push_back((Signal[TE[i]]-Signal[J20[i]])/(TE[i]-J20[i]));		
 	}
@@ -202,18 +203,18 @@ void STSegment :: CorrectSize()
 	Size.push_back(QRSend.size());
 	Size.push_back(Tpeak.size());
 	Size.push_back(Rpeak.size());
-	SizeVector=min_element(begin(Size), end(Size));
+	SizeVector=*min_element(begin(Size), end(Size));
 }
 
-STSegmentResult STSegment:: compute(map <string, vector<unsigned int> >*resultFromWaves, vector<double>*signal,
-									vector<unsigned int>*Rpeaks)
+STSegmentResult STSegment:: compute(map <string, vector<unsigned int> > *resultFromWaves, vector<double>*signal,
+									vector<unsigned int>*Rpeaks,int Frequency)
 {
 	this->Signal= *signal;	
 	this->Frequency=Frequency;
 	
-	this->QRSonset= resultFromWaves["QRSonset"]; 
-	this->QRSend=*resultFromWaves["QRSend"];  
-	this->Tpeak=*resultFromWaves["Tpeak"]; 
+	this->QRSonset= (*resultFromWaves)["qrs_onset"]; // zmieniæ nazwe klucza jeœli inna !!!
+	this->QRSend=(*resultFromWaves)["qrs_end"];  
+	this->Tpeak=(*resultFromWaves)["t_peaks"]; 
 	this->Rpeak=*Rpeaks;
 	k1offset=-0.1;
 	k2offset=0.1;
@@ -227,28 +228,5 @@ STSegmentResult STSegment:: compute(map <string, vector<unsigned int> >*resultFr
 }
 
 
-STSegment::STSegment (vector<double> Signal, int Frequency, vector<unsigned int> QRSonset, vector<unsigned int> QRSend, 
-					  vector<unsigned int> Tpeak,vector <unsigned int> Rpeak)
-	
-   
-{
-	this->Signal=Signal;
-	this->Frequency=Frequency;
-	this->QRSonset= QRSonset; 
-	this->QRSend=QRSend;  
-	this->Tpeak=Tpeak; 
-	this->Rpeak=Rpeak;
-	k1offset=-0.1;
-	k2offset=0.1;
-	threshold=0.15;
-	k1slope=-0.15;
-	k2slope=0.15;
-			
-}
 
-STSegmentResult::STSegmentResult(vector<string> OffsetLevel, vector<string>ShapeST, vector <string> TypeShapeST)
-{
-	this->OffsetLevel=OffsetLevel;
-	this->ShapeST=ShapeST;
-	this->TypeShapeST=TypeShapeST;
-}
+

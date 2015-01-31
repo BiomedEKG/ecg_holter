@@ -116,6 +116,9 @@
     <ClCompile Include="stsegment.cpp">
       <Filter>Modules\stsegment</Filter>
     </ClCompile>
+    <ClCompile Include="stsegmentresult.cpp">
+      <Filter>Modules\stsegment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -154,6 +157,9 @@
       <Filter>Modules\gui</Filter>
     </ClInclude>
     <ClInclude Include="stsegment.h">
+      <Filter>Modules\stsegment</Filter>
+    </ClInclude>
+    <ClInclude Include="stsegmentresult.h">
       <Filter>Modules\stsegment</Filter>
     </ClInclude>
   </ItemGroup>
