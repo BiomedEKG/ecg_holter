@@ -127,6 +127,11 @@
     <ClCompile Include="gui\selectmodulemenu.cpp" />
     <ClCompile Include="gui\selectmodulesprivate.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PVC.cpp" />
+    <ClCompile Include="HRTResult.cpp" />
+    <ClCompile Include="HRT.cpp" />
+    <ClCompile Include="TO.cpp" />
+    <ClCompile Include="TS.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -252,6 +257,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gui\channelsprivate.h" />
+    <ClInclude Include="HRTResult.h" />
+    <ClInclude Include="HRT.h" />
+    <ClInclude Include="PVC.h" />
+    <ClInclude Include="TO.h" />
+    <ClInclude Include="TS.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -110,6 +110,21 @@
     <ClCompile Include="gui\channelsprivate.cpp">
       <Filter>Modules\gui</Filter>
     </ClCompile>
+    <ClCompile Include="PVC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HRTResult.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HRT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -146,6 +161,21 @@
   <ItemGroup>
     <ClInclude Include="gui\channelsprivate.h">
       <Filter>Modules\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="PVC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HRT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HRTResult.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
