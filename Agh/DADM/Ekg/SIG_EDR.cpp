@@ -1,4 +1,6 @@
+#include "stdafx.h"
 #include "SIG_EDR.h"
+#include "SIG_EDResult.h"
 #include <vector> 
 #include <iostream>
 #include <math.h>
@@ -6,6 +8,36 @@
 using namespace std;
 
 
+SIG_EDResult* SIG_EDR::compute(ResultKeeper* rkp) const 
+{
+	// Receive needed data and return EDR signal
+	
+	//Receiving
+
+	vector<double> signal_in = rkp->getBaseline();
+	vector<double> R_peaks_in = rkp->getRpeaks();
+	int size_signal = rkp->getBaseline(); //Size
+	int size_Rpeaks = rkp->getRpeaks();
+
+// powy¿ej maj¹ byæ obiekty zwracane przez inne modu³y i rozpakowane !!!!!!!!!!!!!!!!!!!!!!!!
+
+	SIG_EDR *EDR = new SIG_EDR();
+	vector<double> wynik_EDR2;
+	vector<double> wynik_X_AXIS2;
+	SIG_EDResult* r = new SIG_EDResult();
+
+	//Computing Rampl and recording data
+	wynik_EDR2 = EDR->Rampl(signal_in,size_signal,360, R_peaks_in,size_Rpeaks);
+	wynik_X_AXIS2 = EDR->Rx(R_peaks_in,size_Rpeaks);
+
+	//Return EDR signal
+	r->wynik_EDR = wynik_EDR2; 
+	r->wynik_X_AXIS = wynik_X_AXIS2;
+	return r->getResult();
+}
+
+
+// Compute mediana
 float SIG_EDR :: mediana(float x[], int size) {
   
     sort(&x[0], &x[size]);       
@@ -14,6 +46,7 @@ float SIG_EDR :: mediana(float x[], int size) {
 	
 }
 
+//Implementation of median filter with moving window 
 float* SIG_EDR ::  medfilt(float sig[], int window_size,int N){
 	
 	// Pick up window elements
@@ -29,7 +62,7 @@ float* SIG_EDR ::  medfilt(float sig[], int window_size,int N){
 	return sig;
 }
 
-
+//Creating vector with variable range
 float* SIG_EDR ::  linspace(int min, int max, int n)
 {
 	float *vec ;
@@ -46,6 +79,7 @@ float* SIG_EDR ::  linspace(int min, int max, int n)
 }
 
 
+//Vectors muliplication
 void SIG_EDR :: multiple(float t[], int n){
 
 	for (int i=0; i<n; i++){
@@ -53,7 +87,7 @@ void SIG_EDR :: multiple(float t[], int n){
 	}
 }
 
-
+//Vectors addition
 float SIG_EDR ::  sum(float t[], int n){
 
 float suma = 0.0;
@@ -63,23 +97,26 @@ return suma;
 }
 
 
+//Returns the Gaussian kernel regression
 float* SIG_EDR :: ksr(float x[], int x_size, float y[], int y_size){
 	
-	//Zapisnie orygina³u x
+	//Save the original signal x
 	float* x_oryginal = new float[ x_size];
 	for(int i=0; i< x_size; i++) x_oryginal[i] = x[i];
 
-	//Zapisnie orygina³u y
+	//Save the original signal y
 	float* y_oryginal = new float[ y_size];
 	for(int i=0; i< y_size; i++) y_oryginal[i] = y[i];
 	
-	// Deklaracja zmiennych
+	//Variable declaration
 	int N = 100;
 	int nx = x_size;
 	int ny = y_size;
 	float hx, hy, h;
 
-	//obicznie hx
+	//Optimal bandwidth suggested by Bowman and Azzalini (1997) p.31
+
+	//Computing hx
 	float m=mediana(x,nx);
 	float* m1 = new float[nx];	
 		
@@ -89,7 +126,7 @@ float* SIG_EDR :: ksr(float x[], int x_size, float y[], int y_size){
 	float factorx = pow(0.6745*(4.0/3.0/nx), 0.2);
 	hx=mediana(m1,nx)/factorx;
 	
-	//oblicznie hy
+	//Computing hy
 	float m3=mediana(y,ny);
 	float* m4 = new float[ny];
 	
@@ -99,10 +136,10 @@ float* SIG_EDR :: ksr(float x[], int x_size, float y[], int y_size){
 	
 	hy=mediana(m4,ny)/factory;
 	
-	//obicznie h
+	//Computing h
 	h=sqrt(hy*hx);
 
-	// linspace - tablica cx
+	//Creating cx table by linespace 
 	float min = x_oryginal[0];
 	float max = x_oryginal[0];
 
@@ -118,7 +155,7 @@ float* SIG_EDR :: ksr(float x[], int x_size, float y[], int y_size){
 
 	float* cx = linspace(min, max, N);
 
-	//Wynik regresji
+	//Regression resultes
 	float* df = new float[100]; 
 	for(int i=0; i<100; i++) df[i]=0.0;
 
@@ -130,14 +167,15 @@ float* SIG_EDR :: ksr(float x[], int x_size, float y[], int y_size){
 		}
 		
 	multiple(tab, N);
-	//Kernel
+	
+	//Gaussian kernel function
 		for(int i=0; i<N; i++){
 		tab[i] = tab[i]/2.0;
 		tab[i] = exp(tab[i])/sqrt(2.0*3.14);
 		}		
 
 
-	//multiple2
+	//Vectors multiplication
 	float* multiple2 = new float[N];
 	for (int i=0; i<N; i++) multiple2[i]=tab[i]*y_oryginal[i];
 	
@@ -145,9 +183,9 @@ float* SIG_EDR :: ksr(float x[], int x_size, float y[], int y_size){
 	float num2 = sum(tab,N);
 	
 	df[i] = num1/num2;
-	//for(int i=0; i< 100; i++) cout << df[i] <<endl;
 	}
 
+	//Removing data
 	delete [] x_oryginal;
 	delete [] y_oryginal;
 	delete [] m1;
@@ -157,21 +195,20 @@ float* SIG_EDR :: ksr(float x[], int x_size, float y[], int y_size){
 
 vector<double> SIG_EDR :: Rampl(vector<double> signal_in, int size_signal, int fs, vector<double> R_peaks_in, int size_Rpeaks)
 {
-	 //Przekanwertowanie do tablic
+	 //Convertion to tables
 
-     //int signal_size = signal_in.size();
   	  float* signal = new float[size_signal];
       for(int i=0; i<size_signal; i++) signal[i] = signal_in[i];
 
-      //int Rpeaks_size = R_peaks_in.size();
   	  float* R_peaks = new float[size_Rpeaks];
       for(int i=0; i<size_Rpeaks; i++) R_peaks[i] = R_peaks_in[i];
 
-	//Utworzenie kopii sygna³u
+	//Creating signal copy
+
 	float* signal_oryginal = new float[size_signal];
 	for(int i=0; i<size_signal; i++) signal_oryginal[i] = signal[i];
 	
-	//Filtracja medianowa w przesównym oknie
+	//Median filters
 	int window1_size = floor(fs/5);
 	
 	float* baseline = medfilt(signal, window1_size, size_signal);
@@ -179,7 +216,7 @@ vector<double> SIG_EDR :: Rampl(vector<double> signal_in, int size_signal, int f
 	int window2_size = floor(fs/1.7);
 	baseline = medfilt(baseline, window2_size, size_signal);
 	
-	//Odjêcie baseline od sygna³u
+	//From all R peaks in signal substact baseline to obtain R amplitude
 	float* signal_R = new float[size_Rpeaks];
 	float* baseline_R = new float[size_Rpeaks];
 	float* R_amplitude = new float[size_Rpeaks];
@@ -194,12 +231,12 @@ vector<double> SIG_EDR :: Rampl(vector<double> signal_in, int size_signal, int f
 		R_amplitude[i]=signal_R[i]-baseline_R[i];
 	}
 	
-	//Regresja z j¹drem Gaussa
+	//Create EDR sgnal using kernel smoothing regression
 	int Rampl_size = size_Rpeaks;
 	float *edr = ksr(R_peaks,size_Rpeaks,R_amplitude,Rampl_size);
 		//for(int i=0; i< 100; i++) cout << edr[i] <<endl;
 
-		// Zapisywanie do wektora
+		//Table to vector convertion
 		vector<double> result;
 		for(int i = 0; i < 100; i++ ) result.push_back(edr[i]);
 
@@ -213,19 +250,22 @@ vector<double> SIG_EDR :: Rampl(vector<double> signal_in, int size_signal, int f
 		return result;
 }
 
+// Output vector
 vector<double> SIG_EDR :: Rx(vector<double> R_peaks_in, int size_Rpeaks)
 {
-	  //int Rpeaks_size = R_peaks_in.size();
+	  
   	  float* R_peaks = new float[size_Rpeaks];
       for(int i=0; i<size_Rpeaks; i++) R_peaks[i] = R_peaks_in[i];
 
 
 	  float* rx = linspace(R_peaks[0], R_peaks[size_Rpeaks], 100);
 
-		// Zapisywanie do wektora
+		//Table to vector convertion
 		vector<double> RX;
 		for(int i = 0; i < 100; i++ ) RX.push_back(rx[i]);
 
 		delete [] R_peaks;
+
+		//Return - time base
 		return RX;
 }

@@ -1,12 +1,20 @@
-#include <vector> 
+#include <vector>
+using std::vector;
 #include <iostream>
+#include <AbstractResult.h>
+
 using namespace std;
 
 #pragma once
-class SIG_EDR {
+class SIG_EDR: public AbstractModule<SIG_EDResult>
+{
 public:
-	vector<double> EDR;
-	vector<double> X_AXIS;
+	vector<SIG_EDR> *EDR;
+	vector<double> wynik_EDR2;
+	vector<double> wynik_X_AXIS2;
+
+	virtual SIG_EDResult* compute(ResultKeeper* rkp) const override;
+
 
 	float mediana(float x[], int size);
 	float* medfilt(float sig[], int window_size,int N);
@@ -19,3 +27,4 @@ public:
 	vector<double> sygnal;
 
 };
+
