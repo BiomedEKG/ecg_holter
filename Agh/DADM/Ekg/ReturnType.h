@@ -4,7 +4,8 @@
 		BASELINE,
 		HEART_CLASS,
 		HRV2,
-		RPEAKS
+		RPEAKS,
+		ATRIAL
 	}; 
 
 
