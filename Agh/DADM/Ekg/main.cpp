@@ -13,12 +13,14 @@
 #include <qwt_symbol.h>
 #include <qwt_legend.h>
 #include <wfdb.h>
+#include <Ectopic.h>
+#include <Testy.h>
 
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
+//    QApplication a(argc, argv);
+//    MainWindow w;
 
 	//	/*const int L = 10; 
 //	fftw_complex *in; 
@@ -44,7 +46,7 @@ int main(int argc, char *argv[])
 //	return a.exec();*/
 //
 
- 
+ /*
     QwtPlot plot;
     plot.setTitle( "Plot Demo" );
     plot.setCanvasBackground( Qt::white );
@@ -73,6 +75,13 @@ int main(int argc, char *argv[])
   
 	w.addGraph(&plot);
 	w.show();
+	*/
 
-    return a.exec();
+	testEctopicBeat test1;
+	test1.wyswietlWykryte();
+
+	system("pause");
+	return 0;
+
+//    return a.exec();
 }

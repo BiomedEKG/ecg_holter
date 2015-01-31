@@ -110,6 +110,12 @@
     <ClCompile Include="gui\channelsprivate.cpp">
       <Filter>Modules\gui</Filter>
     </ClCompile>
+    <ClCompile Include="Testy.cpp">
+      <Filter>Modules\NowyFolderNaKazdyModul</Filter>
+    </ClCompile>
+    <ClCompile Include="Ectopic.cpp">
+      <Filter>Modules\NowyFolderNaKazdyModul</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -146,6 +152,12 @@
   <ItemGroup>
     <ClInclude Include="gui\channelsprivate.h">
       <Filter>Modules\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Testy.h">
+      <Filter>Modules\NowyFolderNaKazdyModul</Filter>
+    </ClInclude>
+    <ClInclude Include="Ectopic.h">
+      <Filter>Modules\NowyFolderNaKazdyModul</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
