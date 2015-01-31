@@ -129,6 +129,7 @@
     <ClCompile Include="RaportGenerator.cpp" />
     <ClCompile Include="ScatterPlot.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="testInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CurvePlot.h" />

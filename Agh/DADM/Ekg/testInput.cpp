@@ -8,15 +8,15 @@ int main(int argc, char *argv[])
 
 	//Input Class Test ---------------------------------------------------------------------
 	
-	char * path1 = "C:\\Users\\";
-	char * path2 = "C:\\Users\\"; 
+	char * path1 = "C:\\Users\\Magdalena\\Desktop\\115.dat";
+	char * path2 = "C:\\Users\\Magdalena\\Desktop\\116.dat"; 
 	
 	Input Handler; // Nowy obiekt obslugi WFDB
 	char ** ChannelNames; 	
 	vector <int> viData;
 	vector <double> vdData;
 
-	Handler.iOpen(path1); // Otworz plik
+	Handler.Open(path1); // Otworz plik
 	ChannelNames = Handler.GetChannelsNames();
 
 	for(int i = 0; i < Handler.GetNumberOfChannels() ;i++) 

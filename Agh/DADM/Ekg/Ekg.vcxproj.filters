@@ -137,6 +137,9 @@
     <ClCompile Include="RaportGenerator.cpp">
       <Filter>Modules\I/O</Filter>
     </ClCompile>
+    <ClCompile Include="testInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">

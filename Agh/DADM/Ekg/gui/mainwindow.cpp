@@ -2,6 +2,7 @@
 #include <QToolButton>
 #include <QPushButton>
 #include <QToolBar>
+#include <qmessagebox.h>
 #include <QMenu>
 #include <QMenuBar>
 #include <QTextEdit>
@@ -15,9 +16,9 @@
 #include <QDebug>
 #include "ObjectManager.h"
 #include "RaportGenerator.h"
-typedef std::map <std::string, double>  myMap;
-
-
+#include <map>
+typedef std::map <std::string, double> myMap;
+typedef std::map <std::string, std::string> myMapStr;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -91,44 +92,37 @@ void MainWindow::generateReport()
 	res["SDSD"] = 0.0;
 
 	QStringList data; 
-	data << "Variable" << "Value" << "Unit";
+	data << "Variable" << "Value" << "Units";
 	 for (auto& x: res) {
 		 data << QString::fromStdString(x.first) << QString::number(x.second) << "ms";
   }
-	 //Pr�ba zapisu do pliku
-	  QwtPlot plot;
-	  
-    plot.setTitle( "Plot Demo" );
-    plot.setCanvasBackground( Qt::white );
-    plot.setAxisScale( QwtPlot::yLeft, 0.0, 10.0 );
-    plot.insertLegend( new QwtLegend() );
- 
-    QwtPlotGrid *grid = new QwtPlotGrid();
-    grid->attach( &plot );
- 
-    QwtPlotCurve *curve = new QwtPlotCurve();
-    curve->setTitle( "Some Points" );
-    curve->setPen( Qt::blue, 4 ),
-    curve->setRenderHint( QwtPlotItem::RenderAntialiased, true );
- 
-    QwtSymbol *symbol = new QwtSymbol( QwtSymbol::Ellipse,
-        QBrush( Qt::yellow ), QPen( Qt::red, 2 ), QSize( 8, 8 ) );
-    curve->setSymbol( symbol );
- 
-    QPolygonF points;
-    points << QPointF( 0.0, 4.4 ) << QPointF( 1.0, 3.0 )
-        << QPointF( 2.0, 4.5 ) << QPointF( 3.0, 6.8 )
-        << QPointF( 4.0, 7.9 ) << QPointF( 5.0, 7.1 );
-    curve->setSamples( points );
- 
-    curve->attach( &plot );
-  
-	plot.resize( 500, 350 );
-    plot.show(); 
+	 myMapStr tab; 
+	 tab["Tone"] = "...";
+	 tab["Shape"] = "...";
+	 tab["Offset"] = "...";
+	 QStringList dataTab;
+	 dataTab << "Variable" << "Value";
+	 for (auto& x: tab ){
+		 dataTab << QString::fromStdString(x.first) << QString::fromStdString(x.second);
+	}
+	QString titleBox;
+	QString messageText;
+	try {
+		RaportGenerator r(filename);
+		r.drawHRV1(ObjectManager::getInstance()->histogram(), data, data);
+		r.drawHRV2(data, ObjectManager::getInstance()->wykres(), ObjectManager::getInstance()->wykres());
+		r.drawEDR(ObjectManager::getInstance()->wykres());
+		r.drawStSegment(dataTab,ObjectManager::getInstance()->wykres());
+		messageText = "Raport generation finished.";
 
-	RaportGenerator r(filename);
-	r.drawHRV2(data, ObjectManager::getInstance()->wykres(), ObjectManager::getInstance()->wykres());
-	r.drawHRV1(ObjectManager::getInstance()->histogram(), data, data);
+	}catch (std::exception &e){
+		messageText = e.what();
+	}
+	
+	QMessageBox msgBox;
+	msgBox.setText(messageText);
+	msgBox.setStandardButtons(QMessageBox::Ok);
+	int ret = msgBox.exec();
 }
 
 void MainWindow::addGraph(QWidget *graph)

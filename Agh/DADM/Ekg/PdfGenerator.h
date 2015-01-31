@@ -16,6 +16,7 @@ protected:
 	static const int pageWidth = 793; //Rozmiar strony A4 w punktach
 	static const int pageHeight = 1123;
 	static const int cellHeight = 20; //wysokoœc komórki tabelki
+private:
 	QPrinter pdfPrinter;
 	QPainter docCreator;
 	QwtPlotRenderer plotInserter;
@@ -35,9 +36,9 @@ public:
 	explicit PdfGenerator(QString path2file);
 	~PdfGenerator(void);
 	bool addHeader(QString title);
-	bool addPlot(QwtPlot* ptrPlot, bool strechToPageWidth = false);
+	bool addPlot(QwtPlot* ptrPlot, bool strechToPageWidth = false, bool discardLegend = false);
 	bool addPlots(QwtPlot* ptrPlotLeft, QwtPlot* ptrPlotRight);
-	bool addPlot(QwtPlot* ptrPlot, int plotWidth, directionOfCursorMove dir);
+	bool addPlot(QwtPlot* ptrPlot, int plotWidth, directionOfCursorMove dir,  bool discardLegend = false);
 	bool addSubtitle(QString title);
 	bool addTable(QStringList data, int colsNr, int width, directionOfCursorMove dir);
 };

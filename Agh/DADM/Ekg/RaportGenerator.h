@@ -12,14 +12,21 @@ private:
 	RaportGenerator(const RaportGenerator& r);
 public:
 
-	RaportGenerator(QString path2file);
+	explicit RaportGenerator(QString path2file);
 	~RaportGenerator(void);
-
+	//Funkcje to rysowania poszczegolnych sekcji 
 	void drawHRV1(QwtPlot* ptrPlot, QStringList hrvTime, QStringList hrvFreqz);
 	void drawHRV2(QStringList nonlinear, QwtPlot* pointCare, QwtPlot* hist);
 	void drawEDR(QwtPlot* ptrPlot);
-	void drawDFA(QStringList tab, QwtPlot* dfa);
+	void drawStSegment(QStringList tab, QwtPlot* dfa);
 	void drawQtDisp(QStringList dt);
-	void drawHrt(QwtPlot* hrtPlot);
+	void drawHrt(QStringList tabData, QwtPlot* hrtPlot);
+	void drawSleepApnea(QwtPlot* plot);
+	void drawTWaveAlt(QStringList tab);
+	void drawVCG(QwtPlot* plot);
+	void drawWaves(QwtPlot* plot);
+	void drawAtrialFibr(QStringList tab, QwtPlot* plot);
+	void drawHeartClass();
+	void drawEtiopic();
 };
 
