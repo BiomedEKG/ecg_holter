@@ -55,6 +55,7 @@ int main(int argc, char *argv[])
 			
 	unsigned int fr = 1;
 	Hrv2 ob(peaks, fr);
+	Hrv2 ob2(peaks, fr);
 
 	map<string,double> parm;
 	parm=ob.computeParams();
@@ -65,7 +66,6 @@ int main(int argc, char *argv[])
 	cout<<"sd2 "<<parm["sd2"]<<endl;
 	cout<<"tri "<<parm["tri"]<<endl;
 	cout<<"tinn "<<parm["tinn"]<<endl;
-	
 	double start, koniec;
 	cout<<"poczatek: ";
 	cin>>start;
