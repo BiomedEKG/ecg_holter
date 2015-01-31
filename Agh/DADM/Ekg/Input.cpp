@@ -28,7 +28,7 @@ int Input::Open(char *SignalPath)
 	  Counter++;
 	
 	if (isigopen(Path, SignalInfo, SigTotNumber) != SigTotNumber)  exit(2009);
-
+	Patient = getinfo(NULL);
 	  for(int i = 0; i < SigTotNumber; i++){
 
 	  ChannelID[SignalInfo[i].desc] = i+1 ;
@@ -82,6 +82,9 @@ int Input::GetFs(void)
 int Input::GetNumberOfChannels(void)
 {
 	return SigTotNumber;
+}
+char * Input::GetPatientInfo(void){
+	return Patient;
 }
 char * Input::GetChannelName(void)
 {

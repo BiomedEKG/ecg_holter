@@ -14,6 +14,7 @@ private:
     WFDB_Siginfo *SignalInfo;
 	char *Path; 
 	char **ChannelNames;
+	char *Patient;
 	int Counter;
 	int Fs; //Czestotliwosc probkowania
 	int SigTotNumber; // Liczba kanalow w sygnale
@@ -40,6 +41,7 @@ public:
 	int GetFs(void); 
 	int GetSignalLength(void);
 	int GetNumberOfChannels(void);
+	char * GetPatientInfo(void);
 	char * GetChannelName(void);
 	char ** GetChannelsNames(void); 
 	vector <double> vdGetChannelData(void);

@@ -1,3 +1,5 @@
+
+
 #include <QApplication>
 #include "mainwindow.h"
 #include "ObjectManager.h"
@@ -8,8 +10,8 @@ int main(int argc, char *argv[])
 
 	//Input Class Test ---------------------------------------------------------------------
 	
-	char * path1 = "C:\\Users\\Magdalena\\Desktop\\115.dat";
-	char * path2 = "C:\\Users\\Magdalena\\Desktop\\116.dat"; 
+	char * path1 = "C:\\Users\\asus\\Downloads\\115.dat";
+	char * path2 = "C:\\Users\\asus\\Downloads\\116.dat"; 
 	
 	Input Handler; // Nowy obiekt obslugi WFDB
 	char ** ChannelNames; 	
@@ -28,7 +30,7 @@ int main(int argc, char *argv[])
 		for(int j = 0; j < 10;j++) {printf("ADU: %d\t mV:%f \n",viData[j], vdData[j]);}
 	}
 	printf("Freq: %d Hz \n",Handler.GetFs());
-
+	printf("Patient: %s  \n",Handler.GetPatientInfo());
 	Handler.Close();
 	Handler.Open(path2);
 	ChannelNames = Handler.GetChannelsNames();
@@ -41,6 +43,7 @@ int main(int argc, char *argv[])
 		for(int j = 0; j < 10;j++){printf("ADU: %d\t mV:%f \n",viData[j], vdData[j]);}
 	}
 	printf("Freq: %d Hz \n",Handler.GetFs());
+	printf("Patient: %s  \n",Handler.GetPatientInfo());
 	Handler.Close();
 
 	//Input Class Test END ---------------------------------------------------------------------
@@ -57,4 +60,5 @@ int main(int argc, char *argv[])
 
 	return a.exec();
 }
+	
 	
