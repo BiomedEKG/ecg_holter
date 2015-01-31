@@ -33,8 +33,8 @@ public:
 			
 	Output time_freq_compute(vector < double > &temp_vec, int fp){
 	Output out_data;
-	//vector<double> i_rr= inter_RR(temp_vec, fp);
-	vector<double> i_rr= temp_vec;
+	vector<double> i_rr= inter_RR(temp_vec, fp);
+	//vector<double> i_rr= temp_vec;
 	out_data.timeParameters["RR_mean"]= RR_mean(i_rr)*1000;
 	out_data.timeParameters["SDNN"]= SDNN(i_rr)*1000;
 	out_data.timeParameters["RMSSD"]= RMSSD(i_rr)*1000;

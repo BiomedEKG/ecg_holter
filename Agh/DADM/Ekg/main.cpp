@@ -78,8 +78,13 @@ int main(int argc, char *argv[])
   
 	w.addGraph(&plot);
 	w.show();
+	
+	
 	HRV1 dark;
-	vector < double > tab;
+
+	vector <double> data12 =dark.read_from_file("C:/Users/darsonss/Desktop/vectors/darson_vector3.txt");
+	Output d = dark.time_freq_compute(data12,1);
+		/*vector < double > tab;
 	    double x = 0;
     for( int i = 0; i < 10; i++ )
     {
@@ -87,10 +92,7 @@ int main(int argc, char *argv[])
         x = x + 2;
     }
 	
-	Output darson;
-
-	vector <double> data12 =dark.read_from_file("C:/Users/darsonss/Desktop/vectors/darson_vector3.txt");
-	Output d = dark.time_freq_compute(data12,1);
+	Output darson;*/
 	//vector<int> vecx= dark.index_300(data12);
 	//map<string, double> c = dark.compute(data12);
 	/*
@@ -118,7 +120,7 @@ int main(int argc, char *argv[])
 	cout << "LFHF: " << d.freqParameters["LFHF"] << "\n";
 
 //	Lomb_param d = dark.computeFreq(data12);
-	cout << "xd2 " << "\n";
+/*	cout << "xd2 " << "\n";
 	ofstream myfile ("C:/Users/darsonss/Desktop/x.txt");
   if (myfile.is_open())
   {
@@ -137,7 +139,7 @@ int main(int argc, char *argv[])
 
 	  }
     myfil.close();
-  }
+  }*/
     return a.exec();
 
 }
