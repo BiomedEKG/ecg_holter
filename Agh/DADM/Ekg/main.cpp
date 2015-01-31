@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
 	cin>>start;
 	cout<<"koniec: ";
 	cin>>koniec;
-	cout<<endl<<"dane po: "<<endl;
+	cout<<endl<<"Zaktualizowane dane: "<<endl;
 
 	map<string,double> parms;
 	
