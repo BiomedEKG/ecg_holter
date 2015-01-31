@@ -51,6 +51,9 @@
     <Filter Include="Modules\I/O">
       <UniqueIdentifier>{53e62d74-8ba7-4f63-91c0-5d59db56fec2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\WAVES">
+      <UniqueIdentifier>{ad626646-0786-4a34-8174-8bd6b0b529d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -143,6 +146,30 @@
     <ClCompile Include="gui\RPeaksDetectionWidget.cpp">
       <Filter>Modules\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="AbstractModule.cpp">
+      <Filter>Modules\WAVES</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractResult.cpp">
+      <Filter>Modules\WAVES</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultKeeper.cpp">
+      <Filter>Modules\WAVES</Filter>
+    </ClCompile>
+    <ClCompile Include="ReturnType.cpp">
+      <Filter>Modules\WAVES</Filter>
+    </ClCompile>
+    <ClCompile Include="VAbstractModule.cpp">
+      <Filter>Modules\WAVES</Filter>
+    </ClCompile>
+    <ClCompile Include="Waves.cpp">
+      <Filter>Modules\WAVES</Filter>
+    </ClCompile>
+    <ClCompile Include="WavesResult.cpp">
+      <Filter>Modules\WAVES</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceMain.cpp">
+      <Filter>Modules\WAVES</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -206,6 +233,27 @@
     </ClInclude>
     <ClInclude Include="gui\RPeaksDetectionWidget.h">
       <Filter>Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractModule.h">
+      <Filter>Modules\WAVES</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractResult.h">
+      <Filter>Modules\WAVES</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultKeeper.h">
+      <Filter>Modules\WAVES</Filter>
+    </ClInclude>
+    <ClInclude Include="ReturnType.h">
+      <Filter>Modules\WAVES</Filter>
+    </ClInclude>
+    <ClInclude Include="VAbstractModule.h">
+      <Filter>Modules\WAVES</Filter>
+    </ClInclude>
+    <ClInclude Include="Waves.h">
+      <Filter>Modules\WAVES</Filter>
+    </ClInclude>
+    <ClInclude Include="WavesResult.h">
+      <Filter>Modules\WAVES</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

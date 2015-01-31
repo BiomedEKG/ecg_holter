@@ -3,11 +3,12 @@
 #include<string>
 using namespace std;
 
-class Waves{
-private:
+#include "AbstractModule.h"
+#include "WavesResult.h"
 
-	map <string, vector<int>> WavesData;
-public:
-	map <string, vector<int>> Compute(vector<double>* resultFromECKBaseline, vector<double>* resultFromRPeaks);
 
+class Waves : public AbstractModule<WavesResult>
+{
+   public:
+	virtual WavesResult* compute(ResultKeeper* rkp) const override;
 };

@@ -76,6 +76,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractModule.cpp" />
+    <ClCompile Include="AbstractResult.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_channelsmenu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -129,11 +131,22 @@
     <ClCompile Include="HistogramPlot.cpp" />
     <ClCompile Include="PdfGenerator.cpp" />
     <ClCompile Include="RaportGenerator.cpp" />
+    <ClCompile Include="ResultKeeper.cpp" />
+    <ClCompile Include="ReturnType.cpp" />
     <ClCompile Include="ScatterPlot.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="SourceMain.cpp" />
+    <ClCompile Include="VAbstractModule.cpp" />
+    <ClCompile Include="Waves.cpp" />
+    <ClCompile Include="WavesResult.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractModule.h" />
+    <ClInclude Include="AbstractResult.h" />
     <ClInclude Include="CurvePlot.h" />
+    <ClInclude Include="VAbstractModule.h" />
+    <ClInclude Include="Waves.h" />
+    <ClInclude Include="WavesResult.h" />
     <CustomBuild Include="gui\channelsmenu.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing channelsmenu.h...</Message>
@@ -195,6 +208,8 @@
     <ClInclude Include="PdfGenerator.h" />
     <ClInclude Include="RaportGenerator.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="ResultKeeper.h" />
+    <ClInclude Include="ReturnType.h" />
     <ClInclude Include="ScatterPlot.h" />
     <ClInclude Include="Table.h" />
   </ItemGroup>
