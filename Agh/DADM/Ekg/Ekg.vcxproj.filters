@@ -119,6 +119,9 @@
     <ClCompile Include="methodsVCG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ResultVCG.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -160,6 +163,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="methodsVCG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultVCG.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

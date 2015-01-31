@@ -1,16 +1,31 @@
 #include <math.h>
 #include <methodsVCG.h>
 #include <outClass.h>
+#include <ResultVCG.h>
 
 using namespace std;
 
 
-output VCG_T_LOOP (){
+ResultVCG* VCG_T_Loop::compute (ResultKeeper *rkp) 
+{
 
-output Result;
-vector<double> i,ii,v1,v2,v3,v4,v5,v6;
-	
-//DowerTransform ( i, ii, v1, v2, v3, v4, v5, v6);
+//Tutaj chcemy sobie wziac 8 przefiltrowanych przez ECGBaseline odprowadzen
+vector<double> i = rkp->i; 
+vector<double> ii = rkp->ii;
+vector<double> v1 = rkp->v1;
+vector<double> v2 = rkp->v2;
+vector<double> v3 = rkp->v3;
+vector<double> v4 = rkp->v4;
+vector<double> v5 = rkp->v5;
+vector<double> v6 = rkp->v6;
+
+//A tutaj chcemy wziac wiadomo co, bo jest napisane, od Waves
+vector<double> QRS_ONSET = rkp->QRS_ONSET; //INDEKSY!!!!!!!!!!!!!!!!!!!!! a nie wartoœci
+vector<double> QRS_END = rkp->QRS_END; //INDEKSY!!!!!!!!!!!!!!!!!!!!!
+vector<double> T_ONSET = rkp->T_ONSET; //INDEKSY!!!!!!!!!!!!!!!!!!!!!
+vector<double> T_END = rkp->T_END; //INDEKSY!!!!!!!!!!!!!!!!!!!!!
+
+DowerTransform ( i, ii, v1, v2, v3, v4, v5, v6);
 int HeartbeatsCtr;
 int HeartbeatsAmount= sizeof(QRS_ONSET);    
 double ElAz_Sum = 0; // We will need to sum all DEA to calculate the DEA mean
@@ -207,5 +222,9 @@ Result.mRMMV_std = stddev(wsk_mRMMV);
 Result.mDEA = mean(wsk_DEA_EachLoopMeans);
 Result.mDEA_std = stddev(wsk_DEA_EachLoopMeans);
 
-
-return Result;}
+//ZWRACANIE TABLICY 3D DO ResultKeeper'a     map <char, vector<double>> VCG;
+rkp->mMA = Result.mMA;
+rkp->mRMMB = Result.mRMMV;
+rkp->mDEA = Result.DEA;
+return new ResultVCG();
+}
