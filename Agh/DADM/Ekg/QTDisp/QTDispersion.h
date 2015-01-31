@@ -21,8 +21,7 @@ using namespace std;
 		public:
 			virtual QTDisp* compute(ResultKeeper* rkp) const override;
 			qt_disp();
-			Result* run(unsigned int channel) const;
-			//const Result* run(unsigned int channel, Result& dispatcher) const;
+			QTDisp* run(unsigned int channel, map<std::string, vector<unsigned int>*> &wavesResult,vector<double> *signal, int samplingFrequency) const;
 			~qt_disp();
 			
 

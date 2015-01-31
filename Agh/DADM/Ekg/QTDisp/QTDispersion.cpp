@@ -2,20 +2,10 @@
 
 
 
-		Output :: Output(unsigned int iqrDispersion) : iqrDispersion(iqrDispersion)
+		QTDisp :: QTDisp(unsigned int _iqrDispersion) : iqrDispersion(_iqrDispersion)
 		{
 		}
 
-
-		Result* qt_disp::compute(ResultKeeper* rkp) const  {
-
-			Result* o = run(...);
-			Result* r = new Result();
-			r = (Result) o;
-			// TU przypisuje do obiektu r dane które chce zwróciæ
-			return r->getResult();
-		}
-		*/
 
 		qt_disp :: qt_disp() //: AbstractModule(Parameters())
 		{
@@ -268,35 +258,53 @@
 			unsigned int IQR = med3-med1;
 			return IQR;
 		}
-		/* QTDisp qt_disp:: compute(map <string, vector<unsigned int> > *resultFromWaves, vector<double>*signal,int Frequency)
-			this->Signal= *signal;	
-			this->samplingFrequency=Frequency;
+		
+		QTDisp* compute(ResultKeeper* rkp) {
+			Waves* resultWaves = rkp->getResultFromWaves();
+			//map<std::string, vector<unsigned int>*> resultWaves = rkp->getResultFromWaves();
+			this->QRSonset_=(*resultWaves)["QRS_ONSET"];
+			this->tPeak=(*resultWaves)["T_END"]; 
+
+
+			ECGBaseline* resultECGBaseline = rkp->getResultFrom_ECGBaseline();
+			//this->Signal= rkp->getResultFrom_ECGBaseline();
+			 this->samplingFrequency = resultECGBaseline->samplingFrequency();
+
+		}
+		/*
+		QTDisp qt_disp:: compute(map <string, vector<unsigned int> > *resultFromWaves, vector<double>*signal,int Frequency) {
+				this->Signal= signal;	
+				this->samplingFrequency=Frequency;
 	
-			this->QRSonset_= (*resultFromWaves)["qrs_onset"];  
-			this->Tpeak=(*resultFromWaves)["t_peaks"]; 
-			*/
-		Result* qt_disp :: run(unsigned int channel) const
+				this->QRSonset_= (*resultFromWaves)["QRS_ONSET"];  
+				this->tPeak=(*resultFromWaves)["T_END"]; 
+		}
+		*/
+
+		QTDisp* qt_disp :: run(unsigned int channel, map<std::string, vector<unsigned int>*> &wavesResult,vector<double> *signal, int samplingFrequency) const
 		{
-            qt_disp QTDISP = qt_disp();
 
-			const unsigned int samplingFrequency = //.getResult<ECGBaseline::Result>(ECG_BASELINE, channel))->Frequency;
+			qt_disp* QTDISP = new qt_disp();
+			const unsigned int samplingFrequency = this->samplingFrequency;
 
-			const vector<double>* input1 = getResult1();
-			const vector<double>* input2 = getResult2();
-			const vector<double>* input3 = getResult3();
-			const vector<double>* input4 = getResult4();
-			const vector<double>* input5 = getResult5();
-			const vector<double>* input6 = getResult6();
-			const vector<double>* input7 = getResult7();
-			const vector<double>* input8 = getResult8();
-			const vector<double>* input9 = getResult9();
-			const vector<double>* input10 = getResult10();
-			const vector<double>* input11 = getResult11();
-			const vector<double>* input12 = getResult12();
-
-			//const map<Waves::ecgPoints, vector<unsigned int>*> &inputwavesMap = (dispatcher.getOutput<Waves::Output>(WAVES, channel))->data;
-			const vector<unsigned int> &qrsOnset_ = getOutputQrsOn();
-			const vector<unsigned int> &tEndGlobal_ = getOutputTEnd();
+			
+			const vector<double>* input1 = this->Signal;
+			/*const vector<double>* input2 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 2))->signal;
+			const vector<double>* input3 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 3))->signal;
+			const vector<double>* input4 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 4))->signal;
+			const vector<double>* input5 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 5))->signal;
+			const vector<double>* input6 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 6))->signal;
+			const vector<double>* input7 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 7))->signal;
+			const vector<double>* input8 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 8))->signal;
+			const vector<double>* input9 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 9))->signal;
+			const vector<double>* input10 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 10))->signal;
+			const vector<double>* input11 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 11))->signal;
+			const vector<double>* input12 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 12))->signal;
+		*/
+			//const map<std::string, vector<unsigned int>*> &inputwavesMap = wavesResult;
+			const vector<unsigned int> &qrsOnset_ =this->QRSonset_; // (*inputwavesMap)["QRS_ONSET"];
+			const vector<unsigned int> &tEndGlobal_ =this->tPeak; // (*inputwavesMap)["T_END"];
+			
 
 			unsigned int sizeQrsOnsetVector = qrsOnset_.size();
 			unsigned int sizeTEndGlobalVector = tEndGlobal_.size();
@@ -462,7 +470,7 @@
 			QTDISP.sort(QTDISP.qtDistancePointerMeanForAllChannels);
 			QTDISP.iqrDispersion = QTDISP.IQR(QTDISP.qtDistancePointerMeanForAllChannels);
 
-			return new Result(QTDISP.iqrDispersion);
+			return new QTDisp(QTDISP.iqrDispersion);
 		}
 
 

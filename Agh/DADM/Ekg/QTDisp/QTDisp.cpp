@@ -1,12 +1,4 @@
-﻿#include "QTDisp.h"
-
-
-STSegmentResult::STSegmentResult(vector<string> OffsetLevel, vector<string>ShapeST, vector <string> TypeShapeST)
-{
-	this->OffsetLevel=OffsetLevel;
-	this->ShapeST=ShapeST;
-	this->TypeShapeST=TypeShapeST;
-}
+﻿
 
 		Result* qt_disp::compute(ResultKeeper* rkp) const  {
 
