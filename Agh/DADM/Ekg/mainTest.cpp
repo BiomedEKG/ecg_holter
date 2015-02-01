@@ -43,7 +43,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	RPeaks R = RPeaks(data_input,sampling_frequency);
 	R.compute();
-
+	result = R.R_Peaks;
 	/*//Start
 	//Reading ECG_BASELINE data: vector<double> data_input
 					//PanTompkins PanTompObject = PanTompkins(data_input, sampling_frequency);
