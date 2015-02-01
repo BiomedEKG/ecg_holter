@@ -77,11 +77,6 @@ int main(int argc, char *argv[])
 	w.show();
 	*/
 
-	testEctopicBeat test1;
-	test1.wyswietlWykryte();
-
-	system("pause");
-	return 0;
 
 //    return a.exec();
 }

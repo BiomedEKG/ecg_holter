@@ -42,6 +42,9 @@
     <Filter Include="Modules\gui">
       <UniqueIdentifier>{c7c77964-42ab-4e1b-b341-6f130b9815b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\NowyFolderNaKazdyModul\EctopicBeat">
+      <UniqueIdentifier>{6320775c-50cf-4051-9f47-5a87bda85eda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -110,11 +113,11 @@
     <ClCompile Include="gui\channelsprivate.cpp">
       <Filter>Modules\gui</Filter>
     </ClCompile>
-    <ClCompile Include="Testy.cpp">
-      <Filter>Modules\NowyFolderNaKazdyModul</Filter>
+    <ClCompile Include="EctopicBeatModule.cpp">
+      <Filter>Modules\NowyFolderNaKazdyModul\EctopicBeat</Filter>
     </ClCompile>
-    <ClCompile Include="Ectopic.cpp">
-      <Filter>Modules\NowyFolderNaKazdyModul</Filter>
+    <ClCompile Include="EctopicBeatResult.cpp">
+      <Filter>Modules\NowyFolderNaKazdyModul\EctopicBeat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -153,11 +156,11 @@
     <ClInclude Include="gui\channelsprivate.h">
       <Filter>Modules\gui</Filter>
     </ClInclude>
-    <ClInclude Include="Testy.h">
-      <Filter>Modules\NowyFolderNaKazdyModul</Filter>
+    <ClInclude Include="EctopicBeatModule.h">
+      <Filter>Modules\NowyFolderNaKazdyModul\EctopicBeat</Filter>
     </ClInclude>
-    <ClInclude Include="Ectopic.h">
-      <Filter>Modules\NowyFolderNaKazdyModul</Filter>
+    <ClInclude Include="EctopicBeatResult.h">
+      <Filter>Modules\NowyFolderNaKazdyModul\EctopicBeat</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
