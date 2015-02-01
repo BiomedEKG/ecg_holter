@@ -1,4 +1,6 @@
 #include "RPeaks.h"
+//#include "RPeaksResult.h"
+#include "ResultKeeper.h"
 
     /*************************************************************************
 	*
@@ -165,10 +167,8 @@ vector<unsigned int> RPeaks::find_R(vector<double> data) {
 		}
 		end_samples.push_back(maxR);
 		}
-        this->R_Peaks = end_samples;
 	return end_samples;
 }
-
 
 /*
 vector<unsigned int> RPeaks::find_R2(vector<double> data){
@@ -246,14 +246,14 @@ vector<unsigned int> RPeaks::delete_if_zero(vector<unsigned int> data){
 	*   method purpose - finding filter shift
 	*
 	*************************************************************************/
-int RPeaks::find_filter_shift(vector<double> data_input, vector<unsigned int> R_peak, unsigned int sampling_frequency){
+int RPeaks::find_filter_shift(vector<double> data_input, vector<unsigned int> R_peaks, unsigned int sampling_frequency){
 		
 		unsigned int filter_shift = 0;
 		double max = 0;
 		for(size_t i = 0; i<sampling_frequency; i++ ){
 			if(data_input.at(i)>max){
 				max = data_input.at(i);
-				filter_shift = (R_peak.at(0)+1)-(i+1);	
+				filter_shift = (R_Peaks.at(0)+1)-(i+1);	
 			}
 		}
 		this->filter_shift = filter_shift;
@@ -297,7 +297,39 @@ vector<double> RPeaks::squere(vector<double> data){
 		return data;
 }
 
-vector<unsigned int> RPeaks::compute(void){
+RPeaksResult* RPeaks::compute(BaselineResult *rkp, ResultKeeper *rkp2){
+
+	int sampling_frequency = 360;
+	int window_width = 40; // [ms] // of sampling_frequency = 200 { window_width = 30}
+	//samplingFrequency = rkp2->samplingFrequency;
+	std::vector <double> signal = (rkp->getFilteredSignal());
+	//enum RPeaksMethod = (rkp2->RPEAKSMETHOD);
+	std::vector<unsigned int> output;
+
+
+	//switch (RPeaksMethod){
+
+		//case  PANTOMPKINS:
+		
+			output = compute2(signal,sampling_frequency);
+			
+		//	break;
+		//case  HILBERT:
+			
+		///	break;
+		//default:
+		//	output = compute2 (signal,sampling_frequency);
+		//	break;
+	
+	RPeaksResult b = RPeaksResult(); 
+	b.setRPeaks(output);
+
+	return b.getResult();
+
+}
+
+vector<unsigned int> RPeaks::compute2(std::vector<double> data_input, int sampling_frequency){
+	this->data_input = data_input;
 	this->derivative_data = this->differentation(this->data_input);
 	this->squered_data = this->squere(this->derivative_data);
 	this->integral_data = this->integration(this->squered_data, this->sampling_frequency, this->window_width);
@@ -306,32 +338,7 @@ vector<unsigned int> RPeaks::compute(void){
 	this->R_Peaks = this->calc_filter_shift(this->R_Peaks);
 	return this->R_Peaks;
 }
-/*
-vector<unsigned int> PanTompkins::compute(void){
 
-	this->derivative_data = this->differentation(this->data_input);
-
-	//squere
-	this->squered_data = this->squere(this->derivative_data);
-
-	//integration
-	this->integral_data = this->integration(this->squered_data, sampling_frequency, window_width);
-
-	//find local max in signal, calls find_cut_level which calls find_max and root_mean_squere functions
-	this->local_max_vec = this->find_local_max(this->integral_data);
-
-	//first guess of R peaks indexes
-	this->R_indexes_first = this->find_R_indexes(this->local_max_vec);
-
-	//second guess of R peaks indexes - based on the "minimum distance between guessed R indexes"
-	this->R_indexes_second = this->select_R_indexes(this->R_indexes_first, this->integral_data);
-
-	//calculate filter shift 
-	this->data_output = this->calc_filter_shift(this->R_indexes_second);
-
-	return this->data_output;
-	}
-	*/
     /*************************************************************************
 	*
 	*   TEST static method purpose - reading input_data from .txt file 
@@ -339,6 +346,7 @@ vector<unsigned int> PanTompkins::compute(void){
 	*   algoirthms, right after filtration part - saved in .txt file. 
 	*
 	*************************************************************************/
+/*
 vector<double> RPeaks::read_from_file(string filepath){
     
 	string line;
@@ -372,6 +380,7 @@ vector<double> RPeaks::read_from_file(string filepath){
 	*
 	*************************************************************************/
 //template<typename T, typename A>
+/*
 void RPeaks::save_data_as_txt(vector<unsigned int> vec, string filepath){
 
 	ofstream outputfile;
@@ -391,7 +400,7 @@ void RPeaks::save_double_data_as_txt(vector<double> vec, string filepath){
         outputfile << vec.at(i) << endl;
 	}
 
-}
+}*/
 
 RPeaks::~RPeaks(void)
 {
