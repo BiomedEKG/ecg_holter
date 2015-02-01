@@ -1,4 +1,6 @@
 #pragma once
+#include "AbstractModule.h"     
+#include "Result.h"   
 #include <vector>
 #include <iostream>
 #include <cstdlib>
@@ -10,6 +12,8 @@
 #include <string>
 #include <fstream>
 #include <fftw3.h>
+#include "BaselineResult.h"
+#include "RPeaksResult.h" 
 
 
 using namespace std;
@@ -20,7 +24,7 @@ using namespace std;
 	*
 	*************************************************************************/
 
-class RPeaks
+class RPeaks: public AbstractModule<RPeaksResult>
 {
 public:
 	vector<double> data_input;
@@ -49,7 +53,7 @@ public:
 	*   TEST METHODS - START
 	*
 	*************************************************************************/
-
+	/*
 	static vector<double> read_from_file(string filepath);
 	//template<typename T, typename A>
 	//static void save_data_as_txt(vector<T,A> &vec, string filepath);
@@ -60,7 +64,7 @@ public:
 	*   TEST METHODS - END
 	*
 	*************************************************************************/
-
+	
 
 	RPeaks(void);
 	RPeaks(vector<double> data_input, int sampling_frequency);
@@ -80,10 +84,12 @@ public:
 	
 	vector<double> integration(vector<double> data, unsigned int sampling_frequency, int window_width);
 	vector<double> squere(vector<double> data);
-	vector<unsigned int> compute(void);
+	RPeaksResult* compute (BaselineResult *rkp, ResultKeeper *rkp2);
+	vector<unsigned int> compute2(std::vector<double> data_input, int sampling_frequency);
 
 	~RPeaks(void);
 
 
 };
+
 
