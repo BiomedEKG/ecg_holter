@@ -1,26 +1,19 @@
-#ifndef WAVES_RESULT_H
-#define WAVES_RESULT_H
+#include "AbstractModule.h"
+#pragma once
+#include "ReturnType.h"
 #include <map>
-#include<vector>
-#include<string>
-using namespace std;
-#include "AbstractResult.h"
 
+class WavesResult: public AbstractResult {
+public:
 
-class WavesResult : public AbstractResult
-{
-	WavesResult* ws;
-    public:
-		virtual WavesResult* getResult();
-		virtual map <string, vector<int>> getWavesMap();
-		virtual void setWavesMap(map <string, vector<int>> *wavesMap);
-        WavesResult();
-        ~WavesResult();
-		
-    protected:
-    private:
-		map <string, vector<int>> wavesMap;
+	WavesResult(){};
+	~WavesResult(){};
+	WavesResult * getResult() override;
+	map <string, vector<int>> GetWavesResultData(void);
+	void SetWavesResultData(map <string, vector<int>> ComputedData);
+
+private:
+	map <string, vector<int>> WavesResultData;
+
 
 };
-
-#endif // WAVES_RESULT_H

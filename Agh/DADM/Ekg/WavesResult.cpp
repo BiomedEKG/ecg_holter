@@ -1,26 +1,16 @@
 #include "WavesResult.h"
-#include "ReturnType.h"
+ 
 
-WavesResult::WavesResult(void)
-{
+WavesResult * WavesResult::getResult(void){
+	this->paramType = BASELINE;
+return this;
 }
 
-
-WavesResult::~WavesResult(void)
-{
-	delete ws;
+map <string, vector<int>> WavesResult::GetWavesResultData(void){
+	
+	return WavesResultData;
 }
 
-
-WavesResult* WavesResult::getResult() {
-	 WavesResult* res = new WavesResult();
-	 return res;
-}
-
-map <string, vector<int>> WavesResult::getWavesMap(){
-	return wavesMap;
-}
-
-void WavesResult::setWavesMap(map <string, vector<int>> *map) {
-	wavesMap = *map;
-}
+void WavesResult::SetWavesResultData(map <string, vector<int>> ComputedData){
+		WavesResultData = ComputedData;
+	}
