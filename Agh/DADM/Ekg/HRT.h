@@ -6,8 +6,7 @@
 class HRT : public AbstractModule<Result> {
 
 	public:
-		HRTResult* compute (ResultKeeper *rkp);
-		std::vector <double> output;
-	private:
+		HRTResult* compute (ResultKeeper *rkp) const override;
+		
 
 };

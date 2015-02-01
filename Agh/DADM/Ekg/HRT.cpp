@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 
-HRTResult* HRT:: compute (ResultKeeper *rkp){
+HRTResult* HRT:: compute (ResultKeeper *rkp) const{
 
 	 double samplingFrequency = rkp->samplingFrequency;
 	 std::vector <double> R_peaks = rkp->RPEAKS;   //jeszcze nie wiem jak to bêdzie wygl¹daæ
@@ -33,18 +33,13 @@ HRTResult* HRT:: compute (ResultKeeper *rkp){
 	 HRTResult *output = new HRTResult;
 	 
 	 if(turbOnset.TO_correct == true && turbSlope.TScorrect == true)
-		output->group = HRT0;
+		output->setGroup(HRT0);
 	else {if(turbOnset.TO_correct == false && turbSlope.TScorrect == false)
-		output->group = HRT2;
+		output->setGroup(HRT2);
 	
 	else
-		output->group = HRT1;
+		output->setGroup(HRT1);
 	}
 	
-	output->TS_value = turbSlope.a;
-	output->TO_value = turbOnset.TOvalue;
-	output->MeanTachogram = a.www.meanTachogram;
-	output->TS_match = turbSlope.points;
-
-	return output;
+	return output->getResult();
 }
