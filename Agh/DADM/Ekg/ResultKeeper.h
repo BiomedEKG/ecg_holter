@@ -2,6 +2,10 @@
 #define RESULTKEEPER_H
 #include <vector>
 #include "AbstractResult.h"
+#include "AtrFibr.h"
+#include "ECGBaseline.h"
+#include "Waves.h"
+#include "SIG_EDR.h"
 using namespace std;
 class ResultKeeper
 {
@@ -10,6 +14,25 @@ class ResultKeeper
 		static ResultKeeper& getInstance();
        // ResultKeeper();
         int someParam;
+		AtrFibr *atrialFibrillation;
+	//	Hrv2 *hrv2;
+	//	RPeaks *rPeaks;
+	//	HRV1 *hrv1;
+	//	HeartClass *heartClass;
+		ECGBaseline *ecgBaseline;
+	//	EctopicBeat *ectopicBeat;
+	//	STSegmentResult *stSegmentResult;
+		TWaves *tWaves;
+	//	HRT *hrt;
+	//	SleepApnea *sleepApnea;
+	//	QTDisp *qtDisp;
+	//	Input *input;
+	//	RaportGenerator *raportGenerator;
+		SIG_EDR *sigEDR;
+		Waves *waves;
+
+
+
 
 
 
@@ -21,6 +44,25 @@ class ResultKeeper
 
 		vector<double>* getRawSignalMV();
 		void setRawSignalMV(vector<double>* signal);
+
+		AtrialFibrillation* getAtrialFibrillation();
+	//	Hrv2* getHrv2();
+	//	RPeaks* getRPeaks();
+	//	HRV1* getHRV1();
+	//	HeartClass* getHeartClass();
+		ECGBaseline* getECGBaseline();
+	//	EctopicBeat* getEctopicBeat();
+	//	STSegmentResult* getSTSegmentResult();
+	//	TWaves* getTWaves();
+	//	HRT* getHRT();
+	//	SleepApnea* getSleepApnea();
+	//	QTDisp* getQTDisp();
+	//	Input* getInput();
+	//	RaportGenerator* getRaportGenerator();
+		SIG_EDR* getSIG_EDR();
+		Waves* getWaves();
+
+
 
         
     private:
@@ -37,5 +79,6 @@ class ResultKeeper
 		vector<double>* rawSignalMV;
 
 };
+
 
 #endif // RESULTKEEPER_H

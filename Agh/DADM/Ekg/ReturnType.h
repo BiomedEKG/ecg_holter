@@ -1,13 +1,7 @@
 #pragma once
 
 	enum returnTypes{
-<<<<<<< HEAD
-		BASELINE,
-		HEART_CLASS,
-		HRV2,
-		RPEAKS,
-		ATRIAL
-=======
+
 			BASELINE,
 			HEART_CLASS,
 			HRV1e,
@@ -24,7 +18,7 @@
 			QT_DISP,
 			INPUT,
 			RAPORT
->>>>>>> a44facf7ae70b1364aea622083a1753616adadbe
+
 	}; 
 
 

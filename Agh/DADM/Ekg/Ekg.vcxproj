@@ -78,6 +78,12 @@
   <ItemGroup>
     <ClCompile Include="AbstractModule.cpp" />
     <ClCompile Include="AbstractResult.cpp" />
+    <ClCompile Include="BaselineResult.cpp" />
+    <ClCompile Include="Butterworth.cpp" />
+    <ClCompile Include="Chebyshev.cpp" />
+    <ClCompile Include="CubicSpline.cpp" />
+    <ClCompile Include="ECGBaseline.cpp" />
+    <ClCompile Include="Filter.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_channelsmenu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -124,9 +130,11 @@
     <ClCompile Include="gui\selectmodulemenu.cpp" />
     <ClCompile Include="gui\selectmodulesprivate.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="LeastMeanSquares.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModuleThread.cpp" />
     <ClCompile Include="ModuleTimer.cpp" />
+    <ClCompile Include="MovingAverage.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="MajorPlot.cpp" />
     <ClCompile Include="CurvePlot.cpp" />
@@ -136,6 +144,7 @@
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="ResultKeeper.cpp" />
     <ClCompile Include="ReturnType.cpp" />
+    <ClCompile Include="SavitzkyGolay.cpp" />
     <ClCompile Include="ScatterPlot.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TestModule.cpp" />
@@ -144,8 +153,19 @@
   <ItemGroup>
     <ClInclude Include="AbstractModule.h" />
     <ClInclude Include="AbstractResult.h" />
+    <ClInclude Include="BaselineResult.h" />
+    <ClInclude Include="Butterworth.h" />
+    <ClInclude Include="Chebyshev.h" />
+    <ClInclude Include="CubicSpline.h" />
     <ClInclude Include="CurvePlot.h" />
+    <ClInclude Include="ECGBaseline.h" />
+    <ClInclude Include="Filter.h" />
+    <ClInclude Include="FilterType.h" />
+    <ClInclude Include="LeastMeanSquares.h" />
+    <ClInclude Include="Methods.h" />
+    <ClInclude Include="MovingAverage.h" />
     <ClInclude Include="ReturnType.h" />
+    <ClInclude Include="SavitzkyGolay.h" />
     <ClInclude Include="TestModule.h" />
     <ClInclude Include="VAbstractModule.h" />
     <CustomBuild Include="gui\channelsmenu.h">
