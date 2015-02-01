@@ -123,7 +123,7 @@ vector<double> RPeaks::find_local_max(vector<double> data){
 *************************************************************************/
 
 vector<double> RPeaks::treshold_data(vector<double> data, double treshold) {
-
+		this->treshold = 0.001;
 		vector<double> after_treshold;
 		//this->treshold = treshold;
 		for(size_t i=0; i<data.size(); i++) {
