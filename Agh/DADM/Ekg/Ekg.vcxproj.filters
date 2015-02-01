@@ -116,6 +116,9 @@
     <ClCompile Include="hrv1.cpp">
       <Filter>Modules\HRV1</Filter>
     </ClCompile>
+    <ClCompile Include="HRV1Result.cpp">
+      <Filter>Modules\HRV1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -154,6 +157,9 @@
       <Filter>Modules\gui</Filter>
     </ClInclude>
     <ClInclude Include="hrv1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HRV1Result.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

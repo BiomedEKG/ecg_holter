@@ -205,6 +205,7 @@
     <ClCompile Include="gui\selectmodulemenu.cpp" />
     <ClCompile Include="gui\selectmodulesprivate.cpp" />
     <ClCompile Include="hrv1.cpp" />
+    <ClCompile Include="HRV1Result.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -423,6 +424,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gui\channelsprivate.h" />
+    <ClInclude Include="HRV1Result.h" />
     <ClInclude Include="hrv1.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

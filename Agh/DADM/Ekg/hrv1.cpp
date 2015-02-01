@@ -1,7 +1,5 @@
-//#define _USE_MATH_DEFINES
-
-#include "hrv1.h" //plik nag³ówkowy
-#include <fstream> //FUNKCJA DO USUNIÊCIA -> wczytywanie danych z pliku ;P
+#include <hrv1.h> //plik nag³ówkowy
+#include <iostream> //biblioteka do operacji wejœcia/wyjœcia
 #include <numeric> //biblioteka z której u¿yta jest funkcja accumulate
 #include <cmath> //biblioteka zawieraj¹ca potrzebne funkcje matematyczne (pierwiastek,potêga,zaokr¹glanie w górê lub dó³)
 #include <map> //biblioteka zawiraj¹ca operacje, które mo¿na wykonywaæ na mapach
@@ -12,22 +10,25 @@ using namespace std;
 
 const double PI_const = 3.14;
 
+/* STRUKTURA DO SPRAWDZANIA POPRAWNOŒCI LICZENIA
 struct Output {
 	map<string, double> timeParameters;
 	map<string, double> freqParameters;
 	vector<double> power;
 	vector<double> frequency;
-};
-	struct Lomb_param {
+};*/
+struct Lomb_param {
 		vector<double> power;
 		vector<double> frequency;
-	};
+};
 
 
-class HRV1 {
+class HRV1: public AbstractModule<HRV1Result> {
 
 public:
-	map<string, double> timeParameter;
+/* RZECZY DO SPRAWDZANIA POPRAWNOŒCI DZIA£ANIA 
+ //STRUKTURY DO SPRAWDZANIA
+    map<string, double> timeParameter;
 	map<string, double> freqParameter;
 
 			
@@ -35,14 +36,14 @@ public:
 	Output out_data;
 	vector<double> i_rr= inter_RR(temp_vec, fp);
 	//vector<double> i_rr= temp_vec;
-	out_data.timeParameters["RR_mean"]= RR_mean(i_rr)*1000;
-	out_data.timeParameters["SDNN"]= SDNN(i_rr)*1000;
-	out_data.timeParameters["RMSSD"]= RMSSD(i_rr)*1000;
+	out_data.timeParameters["RR_mean"]= RR_mean(i_rr);
+	out_data.timeParameters["SDNN"]= SDNN(i_rr);
+	out_data.timeParameters["RMSSD"]= RMSSD(i_rr);
 	out_data.timeParameters["NN50"]= NN50(i_rr);
 	out_data.timeParameters["pNN50"]= pNN50(i_rr);
-	out_data.timeParameters["SDANN"]= SDANN(i_rr)*1000;
-	out_data.timeParameters["SDANN_index"]= SDANN_index(i_rr)*1000;
-	out_data.timeParameters["SDSD"]= SDSD(i_rr)*1000;
+	out_data.timeParameters["SDANN"]= SDANN(i_rr);
+	out_data.timeParameters["SDANN_index"]= SDANN_index(i_rr);
+	out_data.timeParameters["SDSD"]= SDSD(i_rr);
 
 	vector<double> i_rrt = inter_RRt(temp_vec, fp);
 	//Lomb_param struct1 = Lomb_Scargle(i_rrt); //struktura Lomb_param, która zawiera pary moc czêstotliwoœæ
@@ -60,6 +61,7 @@ public:
 	return out_data;
 	}
 
+/* //FUNKCJA DO WCZYTYWANIA z PLIKU TXT
 	vector<double> read_from_file(string filepath){ //funkcja do wczytywania danych z pliku
     
 		 string line;
@@ -83,18 +85,6 @@ public:
 		return data_input;
 	}
 
-	map<string, double> compute(vector <double> &temp_vec){ //mapa parametrów czasowych
-		timeParameter["RR_mean"]= RR_mean(temp_vec)*1000;
-		timeParameter["SDNN"]= SDNN(temp_vec)*1000;
-		timeParameter["RMSSD"]= RMSSD(temp_vec)*1000;
-		timeParameter["NN50"]= NN50(temp_vec);
-		timeParameter["pNN50"]= pNN50(temp_vec);
-		timeParameter["SDANN"]= SDANN(temp_vec)*1000;
-		timeParameter["SDANN_index"]= SDANN_index(temp_vec)*1000;
-		timeParameter["SDSD"]= SDSD(temp_vec)*1000;
-		return timeParameter;
-	}
-
 	Lomb_param computeFreq(vector < double > tab){ //mapa parametrów czêstotliwoœciowych
 		vector<double> i_rrt = inter_RRt(tab, 1);
 		//Lomb_param struct1 = Lomb_Scargle(i_rrt); //Lomb_param
@@ -104,9 +94,9 @@ public:
 		freqParameter["LF"] = LF_Power(struct1.power, struct1.frequency);
 		freqParameter["VLF"] = VLF_Power(struct1.power, struct1.frequency);
 		freqParameter["ULF"] = ULF_Power(struct1.power, struct1.frequency);
-		freqParameter["LFHF"] = LFHF_Power(struct1.power, struct1.frequency);*/
+		freqParameter["LFHF"] = LFHF_Power(struct1.power, struct1.frequency);
 		return struct1;
-	}
+	}*/
 
 	vector<double> type_change(vector <unsigned int> &temp_vec){
 	//Zmiana wektora wartoœci typu unsigned int na wektor wartoœciu double.
@@ -125,7 +115,7 @@ public:
 		vector<double> inter_rr(temp_vec.size()-1);
 
 		for (unsigned i = 1; i<temp_vec.size(); i++){
-            inter_rr[i-1] = (temp_vec[i] - temp_vec[i-1])/fp;
+            inter_rr[i-1] = (temp_vec[i] - temp_vec[i-1])*1000/fp;
 		}
 
 		return inter_rr;
@@ -209,8 +199,8 @@ public:
 
 		nn50 = 0;
 		for (unsigned i = 1; i<temp_vec.size(); i++){
-			if ((temp_vec[i]-temp_vec[i-1]) > 0.05)
-            nn50 = nn50 +1;
+			if ((temp_vec[i]-temp_vec[i-1]) > 50)
+            nn50 = nn50 + 1;
 		}
 
 		return nn50;
@@ -306,8 +296,7 @@ public:
 
 
 //******************************     OBLICZANIE PARAMETRÓW CZÊSTOTLIWOŒCIOWYCH     ******************************
-	Lomb_param lomb(std::vector<double> intervals)
-{
+	Lomb_param lomb(vector<double> intervals){
 	vector<double> freqs;
 	vector<double> int_time;
 	vector<double> tau;
@@ -315,7 +304,6 @@ public:
 
 	double average = RR_mean(intervals);
 	double stddev = SDNN(intervals);
-	//std::cout<<"Intervals:"<< intervals.size()<<std::endl;
 	double variance=stddev*stddev;
 	int_time.push_back(0);
 	for(int i=0;i<intervals.size()-1;++i)
@@ -325,9 +313,7 @@ public:
 	freqs.push_back(2*PI_const/timespan);
 	for(int i=1;i<length*2;++i)
 	freqs.push_back((i+1)*2*PI_const/timespan);
-	//std::cout<<"Freqs:"<< freqs.size()<<std::endl;
-	for(int i=0;i<length*2;++i)
-	{
+	for(int i=0;i<length*2;++i){
 	double sin_sum=0;
 	double cos_sum=0;
 	for(int n=0;n<length;++n)
@@ -358,16 +344,16 @@ public:
 	freqs[i]/=(2*PI_const);
 	freqs[i]/=(10000);
 	}
-	//std::cout<<"PSDs:"<< PSD.size()<<std::endl;
 
-			Lomb_param out;
+	Lomb_param out;
 		out.power = PSD;
 		out.frequency = freqs;
 
-		return out;
+	return out;
 
 }
 
+/* STARY LOMB !
 	Lomb_param Lomb_Scargle(vector<double> &temp_vec){
 	//Wyznaczenie parametrów czêstotliwoœciowych meotd¹ Lomba-Scargle'a
 		int over_samp; //parametr nadpróbkowania czêstotliwoœci
@@ -457,7 +443,7 @@ public:
 
 		return out;
 	}
-
+*/
 	double TP_Power(vector<double> &temp_vec, vector<double> &f){
 	//Wyznaczenie ca³kowitej mocy widma  (zakres poni¿ej 0,4Hz)
 		double TP;
@@ -541,4 +527,25 @@ public:
 
 		return (LF/HF);
 	}
+
+		//FUNKCJA COMPUTE !
+
+	 HRV1Result* HRV1 :: compute(ResultKeeper* rkp) const{
+		R_peaks_in = *rkp->rpeaks; // vector r pików
+        fp= *rkp->freq; // Czêstotliwoœæ próbkowania
+		vector<double> inter_rr(R_peaks_in.size()-1);
+		inter_rr = inter_RR(R_peaks_in,fp);
+		double rr_mean, sdnn, rmssd, nn50, pnn50, ind, sdann, sdann_index, sdsd;
+		double tp, hf, lf, vlf, ulf, lfhf;
+		rr_mean = RR_mean(inter_rr);
+		sdnn = SDNN(inter_rr);
+		rmssd = RMSSD(inter_rr);
+		nn50 = NN50(inter_rr);
+		pnn50 = pNN50(inter_rr);
+		ind = index_300(inter_rr);
+		sdann = SDANN(inter_rr);
+		sdann_index = SDANN_index(inter_rr);
+		sdsd = SDSD(inter_rr);
+		//TUTAJ TO JA JU¯ SIE POGUBI£EM CO I JAK...
+	 }
 };
