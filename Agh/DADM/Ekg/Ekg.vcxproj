@@ -127,6 +127,7 @@
     <ClCompile Include="gui\selectmodulemenu.cpp" />
     <ClCompile Include="gui\selectmodulesprivate.cpp" />
     <ClCompile Include="Hrv2.cpp" />
+    <ClCompile Include="Hrv2Result.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -254,6 +255,7 @@
   <ItemGroup>
     <ClInclude Include="gui\channelsprivate.h" />
     <ClInclude Include="Hrv2.h" />
+    <ClInclude Include="Hrv2Result.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
