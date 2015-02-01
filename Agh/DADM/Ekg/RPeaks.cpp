@@ -144,18 +144,31 @@ vector<unsigned int> RPeaks::find_R(vector<double> data) {
 	vector<unsigned int> R_Peaks;
 	vector<unsigned int> start_samples;
 	vector<unsigned int> end_samples;
+	//unsigned int j = 0;
+	
+	unsigned int maxR = 0;
 		for(size_t i = 0; i<data.size()-1; i++) {
 			if(data.at(i) == 0 && data.at(i+1) > 0.0)
 				//start_samples.push_back(i+1);
 					start_samples.push_back(i+1);
 		}
-
-		for(size_t i = 0; i<start_samples.size(); i++) {
-			//find max pomiedzy dwoma poczatkami
+		unsigned int k = start_samples.at(0);
+		for(size_t i = 0; i < start_samples.size()-1; i++) {
+	    unsigned int k = start_samples.at(i);
+		unsigned int l = start_samples.at(i+1);
+		while (k < l) {
+			if(data.at(k) > data.at(k+1))
+			 maxR = k;
+			else
+			 maxR = maxR;
+		k++;
 		}
-
-	return start_samples;
+		end_samples.push_back(maxR);
+		}
+        this->R_Peaks = end_samples;
+	return end_samples;
 }
+
 
 /*
 vector<unsigned int> RPeaks::find_R2(vector<double> data){
@@ -243,6 +256,7 @@ int RPeaks::find_filter_shift(vector<double> data_input, vector<unsigned int> R_
 				filter_shift = (R_peak.at(0)+1)-(i+1);	
 			}
 		}
+		this->filter_shift = filter_shift;
 		return filter_shift;
 	}
 
@@ -253,7 +267,7 @@ int RPeaks::find_filter_shift(vector<double> data_input, vector<unsigned int> R_
 	*************************************************************************/
 vector<unsigned int> RPeaks::calc_filter_shift(vector<unsigned int> data){
 		
-	    this->filter_shift = find_filter_shift(this->data_input, this->R_indexes_second, this->sampling_frequency);
+	    this->filter_shift = find_filter_shift(this->data_input, this->R_Peaks, this->sampling_frequency);
 		for(size_t i = 0 ; i<data.size(); i++){	
 			if(static_cast<int>(data.at(i)) > (this->filter_shift))
 				data.at(i) -= (this->filter_shift) ;
@@ -289,6 +303,7 @@ vector<unsigned int> RPeaks::compute(void){
 	this->integral_data = this->integration(this->squered_data, this->sampling_frequency, this->window_width);
 	this->tresholded_data = this->treshold_data(this->integral_data, this->treshold);
 	this->R_Peaks = this->find_R(this->tresholded_data);
+	this->R_Peaks = this->calc_filter_shift(this->R_Peaks);
 	return this->R_Peaks;
 }
 /*
