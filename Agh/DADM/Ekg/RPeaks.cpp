@@ -315,7 +315,7 @@ RPeaksResult* RPeaks::compute(BaselineResult *rkp, ResultKeeper *rkp2){
 			
 		//	break;
 		//case  HILBERT:
-			
+			output = compute2(signal,sampling_frequency);
 		///	break;
 		//default:
 		//	output = compute2 (signal,sampling_frequency);
