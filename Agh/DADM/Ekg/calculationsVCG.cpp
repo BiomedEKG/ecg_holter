@@ -1,6 +1,6 @@
 #include <math.h>
 #include <methodsVCG.h>
-#include <outClass.h>
+#include <calculationsVCG.h>
 #include <ResultVCG.h>
 
 using namespace std;
@@ -8,6 +8,18 @@ using namespace std;
 
 ResultVCG* VCG_T_Loop::compute (ResultKeeper *rkp) 
 {
+	// obiekt zwracany res
+	ResultVCG* res = new ResultVCG;
+	
+ map <string,double> param;
+ param["mMA"] = 0;
+ param["mRMMV"] = 0;
+
+ map <char,vector<double>> XYZ;
+ XYZ['X'];
+ XYZ['Y'];
+ XYZ['Z'];
+  
 
 //Tutaj chcemy sobie wziac 8 przefiltrowanych przez ECGBaseline odprowadzen
 vector<double> i = rkp->i; 
@@ -25,7 +37,11 @@ vector<double> QRS_END = rkp->QRS_END; //INDEKSY!!!!!!!!!!!!!!!!!!!!!
 vector<double> T_ONSET = rkp->T_ONSET; //INDEKSY!!!!!!!!!!!!!!!!!!!!!
 vector<double> T_END = rkp->T_END; //INDEKSY!!!!!!!!!!!!!!!!!!!!!
 
-DowerTransform ( i, ii, v1, v2, v3, v4, v5, v6);
+XYZ = DowerTransform ( i, ii, v1, v2, v3, v4, v5, v6);
+AllX = XYZ['X'];
+AllY = XYZ['Y'];
+AllZ = XYZ['Z'];
+
 int HeartbeatsCtr;
 int HeartbeatsAmount= sizeof(QRS_ONSET);    
 double ElAz_Sum = 0; // We will need to sum all DEA to calculate the DEA mean
@@ -47,6 +63,7 @@ vector < double >::iterator wsk_DEA_EachLoopMeans = DEA_EachLoopMeans.begin();
 
 //-----Znajdümy punkt izoelektryczny w ca≥ym VCG:---------------------------
 vector <double> Z; 
+
 double IsoelectricPoint[3]= {AllX[0],AllY[0],AllZ[0]};
 double minZ= sqrt(AllX[0]*AllX[0] + AllY[0]*AllY[0] + AllZ[0]*AllZ[0]);  // Z[0]
 
@@ -166,7 +183,7 @@ double TLoopVector_ZY[2];
 double QRSLoopVector_XY[2];
 double QRSLoopVector_XZ[2];
 double QRSLoopVector_ZY[2];
-
+double ResultmMA, ResultmMA_std;
 double A_F, A_H, A_LS, max;
 
 for (HeartbeatsCtr = 0;  HeartbeatsCtr < HeartbeatsAmount; HeartbeatsCtr++){
@@ -192,8 +209,8 @@ for (HeartbeatsCtr = 0;  HeartbeatsCtr < HeartbeatsAmount; HeartbeatsCtr++){
     mMA[HeartbeatsCtr] = max * 180 / 3.14159265;  //rad to deg
 }
 
-Result.mMA = mean(wsk_mMA);
-Result.mMA_std = stddev(wsk_mMA);
+ResultmMA = mean(wsk_mMA);
+ResultmMA_std = stddev(wsk_mMA);
 
 
 //-------------------------LICZENIE PARAMETR”W------------------------------
@@ -205,6 +222,7 @@ vector <double> mRMMV;
 vector < double >::iterator wsk_mRMMV = mRMMV.begin();
 double Vmax;
 double Vn;  
+double ResultmRMMV, ResultmRMMV_std;
 
 for (HeartbeatsCtr = 0;  HeartbeatsCtr < HeartbeatsAmount; HeartbeatsCtr++){
 	Vmax = All_T_AxisModules[HeartbeatsCtr];  
@@ -212,19 +230,31 @@ for (HeartbeatsCtr = 0;  HeartbeatsCtr < HeartbeatsAmount; HeartbeatsCtr++){
     mRMMV[HeartbeatsCtr] = Vmax/Vn;
 }
 
-Result.mRMMV = mean(wsk_mRMMV);
-Result.mRMMV_std = stddev(wsk_mRMMV);
+ResultmRMMV = mean(wsk_mRMMV);
+ResultmRMMV_std = stddev(wsk_mRMMV);
+
+
+// przypisanie wartoúci do mMA, mRMMV
+param["mMA"] = ResultmMA;
+param["mRMMV"] = ResultmRMMV;
+rkp->param = res;
+
+//wpisanie wektorÛw XYZ do ResultVCG
+XYZ['X'].resize(800);
+XYZ['Y'].resize(800);
+XYZ['Z'].resize(800);
+rkp->XYZ = res;
 
 
 //-------------------------LICZENIE PARAMETR”W------------------------------
 //---------- DEA - T axis elevation and azimuth angle difference -----------
 
-Result.mDEA = mean(wsk_DEA_EachLoopMeans);
-Result.mDEA_std = stddev(wsk_DEA_EachLoopMeans);
+//Result.mDEA = mean(wsk_DEA_EachLoopMeans);
+//Result.mDEA_std = stddev(wsk_DEA_EachLoopMeans);
 
 //ZWRACANIE TABLICY 3D DO ResultKeeper'a     map <char, vector<double>> VCG;
-rkp->mMA = Result.mMA;
-rkp->mRMMB = Result.mRMMV;
-rkp->mDEA = Result.DEA;
-return new ResultVCG();
+//rkp->mMA = Result.mMA;
+//rkp->mRMMB = Result.mRMMV;
+//rkp->mDEA = Result.DEA;
+return res;
 }

@@ -1,6 +1,5 @@
-#ifndef OUTCLASS_H
-#define OUTCLASS_H
-//TO JEST calculationsVCG.h !!!
+#ifndef CALCULATIONSVCG_H
+#define CALCULATIONSVCG_H
 
 #include <vector>
 #include <map>
@@ -8,18 +7,16 @@
 #include "AbstractModule.h"
 #include "Result.h"
 
-class VCG_T_Loop: public AbstractModule<Result>
+class VCG_T_Loop: public AbstractModule<ResultVCG>
 {
        
 public: 
 	ResultVCG* compute (ResultKeeper *rkp);
     map <char, vector<double>> VCG;
-    double mMA;
-	double mRMMV;
-	double mDEA;
-   
+	map <string,double> parameters;
+       
 private:
 
 };
 
-#endif // OUTCLASS_H
+#endif // CALCULATIONSVCG_H
