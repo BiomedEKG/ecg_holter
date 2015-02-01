@@ -109,7 +109,7 @@ using namespace std;
        
         }
 		if(Cm[0]==0 || Cm[1]==0){
-			return fabs(log((N-m)/(N-m-1))); //wyznaczanie entropii
+			return fabs(log((N-dim)/(N-dim-1))); //wyznaczanie entropii
 			}
 		else{
 			return fabs(log(Cm[0]/Cm[1])); //wyznaczanie entropii
@@ -158,7 +158,7 @@ using namespace std;
        
         }
 		if(Cm_s[0]==0 || Cm_s[1]==0){
-			return fabs(log((N-m)/(N-m-1))); //wyznaczanie entropii
+			return fabs(log((N-dim)/(N-dim-1))); //wyznaczanie entropii
 		}
 		else{
 			return fabs(log(Cm_s[0]/Cm_s[1])); //wyznaczanie entropii
