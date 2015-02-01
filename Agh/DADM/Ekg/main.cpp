@@ -54,11 +54,11 @@ int main(int argc, char *argv[])
 			}
 			
 	unsigned int fr = 1;
-	Hrv2 ob(peaks, fr);
-	Hrv2 ob2(peaks, fr);
+	Hrv2* ob= new Hrv2();
+
 
 	map<string,double> parm;
-	parm=ob.computeParams();
+	parm=ob->computeParams(peaks, fr);
 	cout<<"Parametry hrv2:"<<endl;
 	cout<<"apen: "<<parm["apen"]<<endl;
 	cout<<"samen: "<<parm["samen"]<<endl;
@@ -75,10 +75,13 @@ int main(int argc, char *argv[])
 
 	map<string,double> parms;
 	
-	parms=ob.updateHistParams(start, koniec);
+	parms=ob->updateHistParams(start, koniec, peaks, fr);
 	cout<<"Parametry hrv2:"<<endl;
 	cout<<"tri "<<parms["tri"]<<endl;
 	cout<<"tinn "<<parms["tinn"]<<endl;
+
+
+	delete ob;
 	
 	//nie nasze
 
