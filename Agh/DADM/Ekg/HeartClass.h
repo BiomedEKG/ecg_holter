@@ -6,12 +6,13 @@
 #include <map>
 #include "ResultKeeper.h"
 #include "HeartClassResult.h"
+#include "AbstractModule.h"
 #ifndef HEART_CLASS_H
 #define HEART_CLASS_H
 
 using namespace std;
 
-class HeartClass{
+class HeartClass : public AbstractModule<{
 	
 	public:
 		
