@@ -6,9 +6,9 @@
 class EctopicBeatResult : public AbstractResult
 {
     public:
-		virtual Result* getResult();
-        Result();
-        ~Result();
+		virtual ectopicBeatResult* getResult();
+        ectopicBeatResult();
+        ~ectopicBeatResult();
         vector<double> ectopicBeat;
         map<string, vector<double> > classifiedBeats;
 };

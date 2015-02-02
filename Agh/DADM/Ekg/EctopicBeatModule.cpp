@@ -60,7 +60,7 @@ map<string, vector<double> > EctopicBeatModule::classificationOfBeats (map<int, 
     return classifiedBeats;
 }
 
-Result* EctopicBeatModule::compute(ResultKeeper* rkp) const  {
+ectopicBeatResult* EctopicBeatModule::compute(ResultKeeper* rkp) const  {
 
     //potrzebujemy od modulu RPEAK wektor z czasami R pikow >> vector<double> RPeak
     vector<double> RPeak;
@@ -72,7 +72,8 @@ Result* EctopicBeatModule::compute(ResultKeeper* rkp) const  {
 	//reklasyfikacja jezeli znleziono jakies uderzenia ektopowe
     classifiedBeats = classificationOfBeats(HeartClass, ectopicBeat);
     
-	Result* r = new EctopicBeatResult();
+	ectopicBeatResult->ectopicBeat = ectopicBeat;
+	ectopicBeatResult->classifiedBeats = classifiedBeats;
 
-    return r->getResult();
+    return ectopicBeatResult->getResult();
 }
