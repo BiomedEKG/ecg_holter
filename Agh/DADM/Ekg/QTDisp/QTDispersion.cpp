@@ -7,7 +7,7 @@
 		}
 
 
-		qt_disp :: qt_disp() //: AbstractModule(Parameters())
+		qt_disp :: qt_disp() : AbstractModule(Parameters())
 		{
 			this->tPeakSearchRange = 0;
 			this->intervalBeforeTEndGlobal = 0;
@@ -289,7 +289,7 @@
 
 			
 			const vector<double>* input1 = this->Signal;
-			/*const vector<double>* input2 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 2))->signal;
+			const vector<double>* input2 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 2))->signal;
 			const vector<double>* input3 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 3))->signal;
 			const vector<double>* input4 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 4))->signal;
 			const vector<double>* input5 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 5))->signal;
@@ -300,7 +300,7 @@
 			const vector<double>* input10 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 10))->signal;
 			const vector<double>* input11 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 11))->signal;
 			const vector<double>* input12 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 12))->signal;
-		*/
+		
 			//const map<std::string, vector<unsigned int>*> &inputwavesMap = wavesResult;
 			const vector<unsigned int> &qrsOnset_ =this->QRSonset_; // (*inputwavesMap)["QRS_ONSET"];
 			const vector<unsigned int> &tEndGlobal_ =this->tPeak; // (*inputwavesMap)["T_END"];
