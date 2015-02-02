@@ -69,6 +69,9 @@
     <Filter Include="Modules\HRV2">
       <UniqueIdentifier>{75a0c724-9101-4c82-8868-4f5b17f6eab6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\RPeaks">
+      <UniqueIdentifier>{90a504a8-2ccd-40fa-afd2-787c20662060}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -188,35 +191,11 @@
     <ClCompile Include="ReturnType.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AtrFibr.cpp">
-      <Filter>Modules\AtrialFibrilation</Filter>
-    </ClCompile>
-    <ClCompile Include="AtrfibrResult.cpp">
-      <Filter>Modules\AtrialFibrilation</Filter>
-    </ClCompile>
     <ClCompile Include="BaselineResult.cpp">
       <Filter>Modules\Baseline</Filter>
     </ClCompile>
     <ClCompile Include="ECGBaseline.cpp">
       <Filter>Modules\Baseline</Filter>
-    </ClCompile>
-    <ClCompile Include="SIG_EDR.cpp">
-      <Filter>Modules\SigEDR</Filter>
-    </ClCompile>
-    <ClCompile Include="SigEDResult.cpp">
-      <Filter>Modules\SigEDR</Filter>
-    </ClCompile>
-    <ClCompile Include="Waves.cpp">
-      <Filter>Modules\Waves</Filter>
-    </ClCompile>
-    <ClCompile Include="WavesResult.cpp">
-      <Filter>Modules\Waves</Filter>
-    </ClCompile>
-    <ClCompile Include="Hrv2.cpp">
-      <Filter>Modules\HRV2</Filter>
-    </ClCompile>
-    <ClCompile Include="Hrv2Result.cpp">
-      <Filter>Modules\HRV2</Filter>
     </ClCompile>
     <ClCompile Include="Butterworth.cpp">
       <Filter>Modules\Baseline</Filter>
@@ -238,6 +217,12 @@
     </ClCompile>
     <ClCompile Include="Filter.cpp">
       <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="RPeaks.cpp">
+      <Filter>Modules\RPeaks</Filter>
+    </ClCompile>
+    <ClCompile Include="RPeaksResult.cpp">
+      <Filter>Modules\RPeaks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -330,35 +315,11 @@
     <ClInclude Include="ReturnType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AtrFibr.h">
-      <Filter>Modules\AtrialFibrilation</Filter>
-    </ClInclude>
-    <ClInclude Include="AtrfibrResult.h">
-      <Filter>Modules\AtrialFibrilation</Filter>
-    </ClInclude>
     <ClInclude Include="BaselineResult.h">
       <Filter>Modules\Baseline</Filter>
     </ClInclude>
     <ClInclude Include="ECGBaseline.h">
       <Filter>Modules\Baseline</Filter>
-    </ClInclude>
-    <ClInclude Include="SIG_EDR.h">
-      <Filter>Modules\SigEDR</Filter>
-    </ClInclude>
-    <ClInclude Include="SigEDResult.h">
-      <Filter>Modules\SigEDR</Filter>
-    </ClInclude>
-    <ClInclude Include="Waves.h">
-      <Filter>Modules\Waves</Filter>
-    </ClInclude>
-    <ClInclude Include="WavesResult.h">
-      <Filter>Modules\Waves</Filter>
-    </ClInclude>
-    <ClInclude Include="Hrv2.h">
-      <Filter>Modules\HRV2</Filter>
-    </ClInclude>
-    <ClInclude Include="Hrv2Result.h">
-      <Filter>Modules\HRV2</Filter>
     </ClInclude>
     <ClInclude Include="Butterworth.h">
       <Filter>Modules\Baseline</Filter>
@@ -383,6 +344,15 @@
     </ClInclude>
     <ClInclude Include="FilterType.h">
       <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="Methods.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RPeaks.h">
+      <Filter>Modules\RPeaks</Filter>
+    </ClInclude>
+    <ClInclude Include="RPeaksResult.h">
+      <Filter>Modules\RPeaks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
