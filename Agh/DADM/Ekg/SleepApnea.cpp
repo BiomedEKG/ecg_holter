@@ -729,9 +729,25 @@ SleepApneaResult* SleepApnea :: Rampl(int fs, vector<float> R_peaks_in, int size
 // Zapisywanie do wektora
 	vector<int> result;
 	for(int i = 0; i < liczbaMinut; i++ ) result.push_back(wynik[i]);
+	
+	map<string,vector<double>> ResMap;
+	vector<double> ResVal;
+	vector<double> ResXbeg;
+	vector<double> ResXend;
+	unsigned roz=result.size();
+	
+	for(unsigned i=0;i<roz;i++)
+	{
+		ResVal.push_back(result[i]);
+		ResXbeg.push_back(i);
+		ResXend.push_back(i+1);
+	}
+	ResMap["values"]=ResVal;
+	ResMap["start_time"]=ResXbeg;
+	ResMap["end_time"]=ResXend;
 
 	SleepApneaResult res = SleepApneaResult();
-	res.setVectorResult(result);
+	res.setMapResult(ResMap);
 	return res.getResult();
 }
 
@@ -745,6 +761,4 @@ SleepApneaResult* SleepApnea :: compute(ResultKeeper* rkp) const {
 
 	return Rampl( fs , R_peaks_in, size_Rpeaks,metoda);  // Czemu w edr puste? Brak argumentow
 }
-
-
 
