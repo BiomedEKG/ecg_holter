@@ -7,6 +7,7 @@
 #include <fstream>
 #include "HeartClass.h"
 #include "ResultKeeper.h"
+#include "HeartClassResult.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ int main(){
 	ResultKeeper rpk;
 	ResultKeeper *wskRpk;
 	wskRpk = &rpk;
-	HeartClass heartClass(wskRpk);
+	/*HeartClass heartClass(wskRpk);
 	
 	vector<double>* tempSignal;
 	
@@ -31,9 +32,10 @@ int main(){
 	
 	heartClass.SamplesBetween();
 	
-	heartClass.Conditioning();
-
+	heartClass.Conditioning();*/
 	
+	HeartClass heartClass(wskRpk);
+	HeartClassResult* k = heartClass.compute(wskRpk);	
 	
 	
 	return 0;	

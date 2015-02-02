@@ -6,7 +6,7 @@
 #include <map>
 #include <fstream>
 #include "HeartClass.h"
-#include "HeartClassResults.h"
+#include "HeartClassResult.h"
 
 using namespace std;
 
@@ -416,7 +416,7 @@ void HeartClass::Conditioning(){
 		cout << sixthCondition << endl;
 		cout << seventhCondition << endl << endl;*/
 			
-		HeartClassResults heartClassResults;	
+		HeartClassResult heartClassResults;	
 			
 		if((firstCondition == true) || (secondCondition == true) || (thirdCondition == true) || (fourthCondition == true) || (fifthCondition == true)){
 			
@@ -448,8 +448,46 @@ void HeartClass::Conditioning(){
 				heartClassResults.qrsClassificationMap["NormalQRS"].push_back(this->qrsEnd.at(z));
 			}
 		}
-	}
+		for(unsigned int i = 0; i < heartClassResults.qrsClass.size(); i++){
+		
+			cout << heartClassResults.qrsClass.at(i) << endl;
+		}
+	}	
 }
+
+HeartClassResult* HeartClass::compute(ResultKeeper* rkp){
+	
+	vector<double>* tempSignal;
+	
+	for(unsigned int i = 0; i < this->signalMap.size(); i++){
+		
+		tempSignal = &this->signalMap[i];
+		this->Amplitudes(tempSignal);	
+	}
+	
+	this->MeanAmplitude();
+	
+	this->FrameLocator();
+	
+	this->SamplesBetween();
+	
+	this->Conditioning();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

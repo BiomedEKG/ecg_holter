@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include "ResultKeeper.h"
+#include "HeartClassResult.h"
 #ifndef HEART_CLASS_H
 #define HEART_CLASS_H
 
@@ -44,9 +45,10 @@ class HeartClass{
 		double meanSamplesBetweenMax;
 		double meanSamplesBetweenMin;
 		
+		HeartClass();
 		HeartClass(ResultKeeper* rpk);
 		
-		//virtual HeartClassResult* compute(ResultKeeper* rkp) const override;
+		virtual HeartClassResult* compute(ResultKeeper* rkp); const override;
 		
 		double ComplexArea(vector<double>* tempArea);
 		void Amplitudes(vector<double>* temp);
