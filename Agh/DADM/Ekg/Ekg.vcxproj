@@ -148,6 +148,8 @@
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="ResultKeeper.cpp" />
     <ClCompile Include="ReturnType.cpp" />
+    <ClCompile Include="RPeaks.cpp" />
+    <ClCompile Include="RPeaksResult.cpp" />
     <ClCompile Include="SavitzkyGolay.cpp" />
     <ClCompile Include="ScatterPlot.cpp" />
     <ClCompile Include="SigEDResult.cpp" />
@@ -176,6 +178,8 @@
     <ClInclude Include="LeastMeanSquares.h" />
     <ClInclude Include="MovingAverage.h" />
     <ClInclude Include="ReturnType.h" />
+    <ClInclude Include="RPeaks.h" />
+    <ClInclude Include="RPeaksResult.h" />
     <ClInclude Include="SavitzkyGolay.h" />
     <ClInclude Include="SigEDResult.h" />
     <ClInclude Include="SIG_EDR.h" />
