@@ -137,6 +137,8 @@
     <ClCompile Include="ResultKeeper.cpp" />
     <ClCompile Include="ReturnType.cpp" />
     <ClCompile Include="ScatterPlot.cpp" />
+    <ClCompile Include="SleepApnea.cpp" />
+    <ClCompile Include="SleepApneaResult.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TestModule.cpp" />
     <ClCompile Include="VAbstractModule.cpp" />
@@ -146,6 +148,9 @@
     <ClInclude Include="AbstractResult.h" />
     <ClInclude Include="CurvePlot.h" />
     <ClInclude Include="ReturnType.h" />
+    <ClInclude Include="SleepApnea.h" />
+    <ClInclude Include="SleepApneaResult.h" />
+    <ClInclude Include="StructApnea.h" />
     <ClInclude Include="TestModule.h" />
     <ClInclude Include="VAbstractModule.h" />
     <CustomBuild Include="gui\channelsmenu.h">

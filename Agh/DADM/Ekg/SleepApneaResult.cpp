@@ -1,31 +1,44 @@
-#include "SleepApnea.h"
+#include "SleepApneaResult.h"
 #include <vector>
 
 
-SigEDResult::SleepApnea(void)
+SleepApneaResult::SleepApneaResult(void)
 {
 
 }
 
-SigEDResult::~SleepApnea(void)
+SleepApneaResult::~SleepApneaResult(void)
 {
 
 }
 
+SleepApneaResult* SleepApneaResult::getResult()
+{
+	SleepApneaResult* odp = new  SleepApneaResult();
+	odp->Xlab="min";
+	odp->Ylab="";
+	odp->vectorResult=vectorResult;
+	odp->paramType=SLEEP_APNEA;
 
-
-
-
-SleepApnea* SleepApnea :: getResult() {
-
-	this->paramType = Sleep_Apnea;
-	return this;
+	return odp;
 
 }
 
 
-void Sleep_Apnea::setVectorResult(vector<double> rez) {
+ 
+void SleepApneaResult::setVectorResult(vector<int> rez, string X, string Y)
+{
 	this->vectorResult = rez;
+	this->Xlab=X;
+	this->Ylab=Y;
 }
+/*
+compute() {
+
+SleepApneaResult* sleep = new SLeep....;
+sleep->vector = vectkor z funckji;
+return sleep->getResult();
+}
+*/
 
 

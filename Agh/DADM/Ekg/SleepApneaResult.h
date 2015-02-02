@@ -1,19 +1,22 @@
 
 #pragma once
 #include <vector>
+#include <AbstractResult.h>
 #include <AbstractModule.h>
+#include <ReturnType.h>
 
 
-class SleepApnea :
-
-public AbstractResult
+class SleepApneaResult :public AbstractResult
 {
-public:
-void setVectorResult(vector<double> rez);
-SleepApnea* getResult();
-	SleepApnea(void);
-	~SleepApnea(void);
+	public:
+
+	void setVectorResult(vector<int> rez, string X, string Y);
+	SleepApneaResult* getResult();
+	SleepApneaResult(void);
+	~SleepApneaResult(void);
 
 private:
-	vector<double> vectorResult;
+	vector<int> vectorResult;
+	string Xlab;
+	string Ylab;
 };

@@ -54,6 +54,9 @@
     <Filter Include="Modules\Engine">
       <UniqueIdentifier>{b9b88387-f9a3-4cf8-a570-4bd3e67f374b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\SleepApnea">
+      <UniqueIdentifier>{7c88d567-f17c-4e02-b2cb-b6a50fdbb6b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -173,6 +176,12 @@
     <ClCompile Include="ReturnType.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SleepApnea.cpp">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepApneaResult.cpp">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -261,8 +270,17 @@
     <ClInclude Include="VAbstractModule.h">
       <Filter>Modules\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="SleepApnea.h">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepApneaResult.h">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClInclude>
+    <ClInclude Include="StructApnea.h">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClInclude>
     <ClInclude Include="ReturnType.h">
-      <Filter>Header Files</Filter>
+      <Filter>Modules\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

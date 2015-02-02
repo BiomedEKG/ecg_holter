@@ -1,4 +1,4 @@
-#include "Sleep_Apnea.h"
+#include "SleepApnea.h"
 #include <iostream>
 #include <stdio.h>
 #include <tchar.h>
@@ -12,37 +12,6 @@
 using namespace std;
 
 
-//sturtura pczechowujaca dane o wczytanej probce PCA
-struct probkaPCA {
-    float PC1;
-    float PC2;
-    float PC3;
-    float PC4;
-    float PC5;
-    float PC6;
-    float PC7;
-    float PC8;
-    float PC9;
-    float PC10;
-    float PC11;
-    char typ;
-};
-
-
-struct probkaWczytana {
-    float srednia;
-    float odchylenie;
-    float NN50_1;
-    float NN50_2;
-    float pNN50_1;
-    float pNN50_2;
-    float SDSD;
-    float RMSSD;
-    float mediana;
-    float IQR;
-    float MAD;
-    char typ;
-};
 
 
 
@@ -77,7 +46,7 @@ void SleepApnea::wczytywanie (probkaPCA tablicaProbekUczacych[16841],float wspol
 	int i; 
 	int k;
 
-	ifstream in("danePCAProbek.txt");
+	ifstream in("SleepdanePCAProbek.txt");
 
 
 	for ( i=0; i < 16841; i++){
@@ -87,8 +56,7 @@ void SleepApnea::wczytywanie (probkaPCA tablicaProbekUczacych[16841],float wspol
 		tablicaProbekUczacych[i].PC10 >> tablicaProbekUczacych[i].PC11;
 	}
 
-
-	ifstream etyk("etykiety.txt");
+	ifstream etyk("Sleepetykiety.txt");
 
 	for ( i=0; i < 16841; i++){
 	
@@ -96,7 +64,7 @@ void SleepApnea::wczytywanie (probkaPCA tablicaProbekUczacych[16841],float wspol
 	}
 
 
-	ifstream PCA("PCAWspolczynniki.txt");	
+	ifstream PCA("SleepPCAWspolczynniki.txt");	
 
 
 	for ( i=0; i < 11; i++){
@@ -108,7 +76,7 @@ void SleepApnea::wczytywanie (probkaPCA tablicaProbekUczacych[16841],float wspol
 	
 	
 
-	ifstream plikSrednie("srednie.txt");	
+	ifstream plikSrednie("Sleepsrednie.txt");	
 	
 	for ( i=0; i < 11; i++){
 		
@@ -119,7 +87,7 @@ void SleepApnea::wczytywanie (probkaPCA tablicaProbekUczacych[16841],float wspol
 
 
 
-	ifstream plikOdchylenia("odchylenia.txt");	
+	ifstream plikOdchylenia("Sleepodchylenia.txt");	
 
 	for ( i=0; i < 11; i++){
 		
@@ -200,7 +168,7 @@ vector < probkaWczytana >  SleepApnea::inicjowanieProbek(int liczbaMinut){
 
 
 //pozostaiwa tylko interwaly dluzsze ni¿ 0,5 i krotsze niz 1,5 sek
-vector < float > SleepApnea::wyborAnalizowanych(int poczatek; int koniec; vector<float> RX){
+vector < float > SleepApnea::wyborAnalizowanych(int poczatek, int koniec, vector<float> RX){
 
 
 	vector < float >tablicaAnalizowanych;
@@ -222,7 +190,7 @@ vector < float > SleepApnea::wyborAnalizowanych(int poczatek; int koniec; vector
 float  SleepApnea::obliczSrednia(int liczbaUderzen, vector < float > tablicaAnalizowanych){
 
 	float sumaDoSredniej=0;
-	for(int k=0;k<liczbaAnalizowanych;k++)
+	for(int k=0;k<liczbaUderzen;k++)
 	
 	{
 		sumaDoSredniej=sumaDoSredniej+tablicaAnalizowanych[k];
@@ -238,10 +206,10 @@ float  SleepApnea::obliczSrednia(int liczbaUderzen, vector < float > tablicaAnal
 float  SleepApnea::obliczOdchylenie(int liczbaUderzen, vector < float > tablicaAnalizowanych,float aktualnaSrednia){
 
 	float sumaDoOdchylenia=0;
-	for(int k=0;k<liczbaAnalizowanych;k++)
+	for(int k=0;k<liczbaUderzen;k++)
 	
 	{
-		sumaDoOdchylenia=sumaDoOdchylenia++pow((aktualnaSrednia-tablicaAnalizowanych[k]),2);
+		sumaDoOdchylenia=sumaDoOdchylenia+pow((aktualnaSrednia-tablicaAnalizowanych[k]),2);
 	
 	}
 
@@ -272,7 +240,7 @@ float  SleepApnea::obliczNN50_1(int liczbaUderzen, vector < float > roznice){
 
 	float NN50_1=0;
 	
-	for(int k=0;k<liczbaAnalizowanych-1;k++){
+	for(int k=0;k<liczbaUderzen-1;k++){
 
 
 		if(roznice[k]>0.05){
@@ -311,14 +279,14 @@ float  SleepApnea::obliczSDSD(int liczbaUderzen, vector < float > roznice){
 
 	for(int k=0;k<liczbaUderzen-1;k++){
 
-		sumaDoSDSD=sumaDoSDSD+rozniceRR[k];
+		sumaDoSDSD=sumaDoSDSD+roznice[k];
 
 	}
 	sredniaDoSDSD=sumaDoSDSD/(liczbaUderzen-1);
 
 	for (int k=0;k<liczbaUderzen-1;k++){
 	
-		sumaDoSDSD2=sumaDoSDSD2+pow((sredniaDoSDSD-rozniceRR[k]),2);
+		sumaDoSDSD2=sumaDoSDSD2+pow((sredniaDoSDSD-roznice[k]),2);
 	
 	}
 	float SDSD=sqrt(sumaDoSDSD2/(liczbaUderzen-1));
@@ -348,6 +316,7 @@ float  SleepApnea::obliczRMSSD(int liczbaUderzen, vector < float > roznice){
 //sortowanie tablicy analizowanych uderzen - potrzebne do policzenia mediany i IQR
 vector < float > SleepApnea::sortuj(int liczbaUderzen, vector < float > tablicaAnalizowanych) {
 
+	vector<float> sortowanaAnalizowanych;
 
 	for(int k=0;k<liczbaUderzen;k++){
 	
@@ -359,9 +328,9 @@ vector < float > SleepApnea::sortuj(int liczbaUderzen, vector < float > tablicaA
 	float pomocnicza;
 	int j;
 
-	for(j=0; j<liczbaAnalizowanych;j++){
+	for(j=0; j<liczbaUderzen;j++){
 
-		 for (int k = 0; k < liczbaAnalizowanych-1-j; k++) {
+		 for (int k = 0; k < liczbaUderzen-1-j; k++) {
                 if (sortowanaAnalizowanych[k] > sortowanaAnalizowanych[k+1]) {
                     
 					pomocnicza=sortowanaAnalizowanych[k];
@@ -431,7 +400,7 @@ float  SleepApnea::obliczIQR(int liczbaUderzen, vector < float > sortowanaAnaliz
 	
 	else {
 	
-		if(liczbaAnalizowanych==3){
+		if(liczbaUderzen==3){
 			kwartyl1=sortowanaAnalizowanych[0];
 			kwartyl3=sortowanaAnalizowanych[2];
 		}
@@ -453,7 +422,7 @@ float  SleepApnea::obliczMAD(int liczbaUderzen, vector < float > tablicaAnalizow
 	float MAD;
 	float sumaDoMAD=0;
 
-	for(int k=0;k<liczbaAnalizowanych; k++){
+	for(int k=0;k<liczbaUderzen; k++){
 
 		
 
@@ -461,7 +430,7 @@ float  SleepApnea::obliczMAD(int liczbaUderzen, vector < float > tablicaAnalizow
 
 	}
 
-	MAD=sumaDoMAD/liczbaAnalizowanych;
+	MAD=sumaDoMAD/liczbaUderzen;
 	return MAD;
 
 }
@@ -494,11 +463,11 @@ probkaPCA SleepApnea::rzutowaniePCA( probkaWczytana znormalizowana, float wspolc
 
 	probkaPCA wczytanaProbkaPCA;
 	wczytanaProbkaPCA.PC1=znormalizowana.srednia*wspolczynnikiPCA[0][0]+znormalizowana.odchylenie*wspolczynnikiPCA[1][0]+znormalizowana.NN50_1*wspolczynnikiPCA[2][0]+znormalizowana.NN50_2*wspolczynnikiPCA[3][0]+znormalizowana.pNN50_1*wspolczynnikiPCA[4][0]+znormalizowana.pNN50_2*wspolczynnikiPCA[5][0]+znormalizowana.SDSD*wspolczynnikiPCA[6][0]+znormalizowana.RMSSD*wspolczynnikiPCA[7][0]+znormalizowana.mediana*wspolczynnikiPCA[8][0]+znormalizowana.IQR*wspolczynnikiPCA[9][0]+znormalizowana.MAD*wspolczynnikiPCA[10][0];
-	wczytanaProbkaPCA.PC2=znormalizowana.srednia*wspolczynnikiPCA[0][1]+znormalizowana.odchylenie*wspolczynnikiPCA[1][1]+znormalizowana.NN50_1*wspolczynnikiPCA[2][1]+znormalizowana.NN50_2*wspolczynnikiPCA[3][1]+znormalizowana.pNN50_1*wspolczynnikiPCA[4][1]znormalizowana.pNN50_2*wspolczynnikiPCA[5][1]+znormalizowana.SDSD*wspolczynnikiPCA[6][1]+znormalizowana.RMSSD*wspolczynnikiPCA[7][1]+znormalizowana.mediana*wspolczynnikiPCA[8][1]+znormalizowana.IQR*wspolczynnikiPCA[9][1]+znormalizowana.MAD*wspolczynnikiPCA[10][1];
+	wczytanaProbkaPCA.PC2=znormalizowana.srednia*wspolczynnikiPCA[0][1]+znormalizowana.odchylenie*wspolczynnikiPCA[1][1]+znormalizowana.NN50_1*wspolczynnikiPCA[2][1]+znormalizowana.NN50_2*wspolczynnikiPCA[3][1]+znormalizowana.pNN50_1*wspolczynnikiPCA[4][1]+znormalizowana.pNN50_2*wspolczynnikiPCA[5][1]+znormalizowana.SDSD*wspolczynnikiPCA[6][1]+znormalizowana.RMSSD*wspolczynnikiPCA[7][1]+znormalizowana.mediana*wspolczynnikiPCA[8][1]+znormalizowana.IQR*wspolczynnikiPCA[9][1]+znormalizowana.MAD*wspolczynnikiPCA[10][1];
 	wczytanaProbkaPCA.PC3=znormalizowana.srednia*wspolczynnikiPCA[0][2]+znormalizowana.odchylenie*wspolczynnikiPCA[1][2]+znormalizowana.NN50_1*wspolczynnikiPCA[2][2]+znormalizowana.NN50_2*wspolczynnikiPCA[3][2]+znormalizowana.pNN50_1*wspolczynnikiPCA[4][2]+znormalizowana.pNN50_2*wspolczynnikiPCA[5][2]+znormalizowana.SDSD*wspolczynnikiPCA[6][2]+znormalizowana.RMSSD*wspolczynnikiPCA[7][2]+znormalizowana.mediana*wspolczynnikiPCA[8][2]+znormalizowana.IQR*wspolczynnikiPCA[9][2]+znormalizowana.MAD*wspolczynnikiPCA[10][2];
 	wczytanaProbkaPCA.PC4=znormalizowana.srednia*wspolczynnikiPCA[0][3]+znormalizowana.odchylenie*wspolczynnikiPCA[1][3]+znormalizowana.NN50_1*wspolczynnikiPCA[2][3]+znormalizowana.NN50_2*wspolczynnikiPCA[3][3]+znormalizowana.pNN50_1*wspolczynnikiPCA[4][3]+znormalizowana.pNN50_2*wspolczynnikiPCA[5][3]+znormalizowana.SDSD*wspolczynnikiPCA[6][3]+znormalizowana.RMSSD*wspolczynnikiPCA[7][3]+znormalizowana.mediana*wspolczynnikiPCA[8][3]+znormalizowana.IQR*wspolczynnikiPCA[9][3]+znormalizowana.MAD*wspolczynnikiPCA[10][3];
 	wczytanaProbkaPCA.PC5=znormalizowana.srednia*wspolczynnikiPCA[0][4]+znormalizowana.odchylenie*wspolczynnikiPCA[1][4]+znormalizowana.NN50_1*wspolczynnikiPCA[2][4]+znormalizowana.NN50_2*wspolczynnikiPCA[3][4]+znormalizowana.pNN50_1*wspolczynnikiPCA[4][4]+znormalizowana.pNN50_2*wspolczynnikiPCA[5][4]+znormalizowana.SDSD*wspolczynnikiPCA[6][4]+znormalizowana.RMSSD*wspolczynnikiPCA[7][4]+znormalizowana.mediana*wspolczynnikiPCA[8][4]+znormalizowana.IQR*wspolczynnikiPCA[9][4]+znormalizowana.MAD*wspolczynnikiPCA[10][4];
-	wczytanaProbkaPCA.PC6=znormalizowana.srednia*wspolczynnikiPCA[0][5]+znormalizowana.odchylenie*wspolczynnikiPCA[1][5]+znormalizowana.NN50_1*wspolczynnikiPCA[2][5]+znormalizowana.NN50_2*wspolczynnikiPCA[3][5]+znormalizowana.pNN50_1*wspolczynnikiPCA[4][5]+znormalizowana.pNN50_2*wspolczynnikiPCA[5][5]+znormalizowana.SDSD*wspolczynnikiPCA[6][5]+znormalizowana.RMSSD*wspolczynnikiPCA[7][5]+znormalizowana.mediana*wspolczynnikiPCA[8][5]znormalizowana.IQR*wspolczynnikiPCA[9][5]+znormalizowana.MAD*wspolczynnikiPCA[10][5];
+	wczytanaProbkaPCA.PC6=znormalizowana.srednia*wspolczynnikiPCA[0][5]+znormalizowana.odchylenie*wspolczynnikiPCA[1][5]+znormalizowana.NN50_1*wspolczynnikiPCA[2][5]+znormalizowana.NN50_2*wspolczynnikiPCA[3][5]+znormalizowana.pNN50_1*wspolczynnikiPCA[4][5]+znormalizowana.pNN50_2*wspolczynnikiPCA[5][5]+znormalizowana.SDSD*wspolczynnikiPCA[6][5]+znormalizowana.RMSSD*wspolczynnikiPCA[7][5]+znormalizowana.mediana*wspolczynnikiPCA[8][5]+znormalizowana.IQR*wspolczynnikiPCA[9][5]+znormalizowana.MAD*wspolczynnikiPCA[10][5];
 	wczytanaProbkaPCA.PC7=znormalizowana.srednia*wspolczynnikiPCA[0][6]+znormalizowana.odchylenie*wspolczynnikiPCA[1][6]+znormalizowana.NN50_1*wspolczynnikiPCA[2][6]+znormalizowana.NN50_2*wspolczynnikiPCA[3][6]+znormalizowana.pNN50_1*wspolczynnikiPCA[4][6]+znormalizowana.pNN50_2*wspolczynnikiPCA[5][6]+znormalizowana.SDSD*wspolczynnikiPCA[6][6]+znormalizowana.RMSSD*wspolczynnikiPCA[7][6]+znormalizowana.mediana*wspolczynnikiPCA[8][6]+znormalizowana.IQR*wspolczynnikiPCA[9][6]+znormalizowana.MAD*wspolczynnikiPCA[10][6];
 	wczytanaProbkaPCA.PC8=znormalizowana.srednia*wspolczynnikiPCA[0][7]+znormalizowana.odchylenie*wspolczynnikiPCA[1][7]+znormalizowana.NN50_1*wspolczynnikiPCA[2][7]+znormalizowana.NN50_2*wspolczynnikiPCA[3][7]+znormalizowana.pNN50_1*wspolczynnikiPCA[4][7]+znormalizowana.pNN50_2*wspolczynnikiPCA[5][7]+znormalizowana.SDSD*wspolczynnikiPCA[6][7]+znormalizowana.RMSSD*wspolczynnikiPCA[7][7]+znormalizowana.mediana*wspolczynnikiPCA[8][7]+znormalizowana.IQR*wspolczynnikiPCA[9][7]+znormalizowana.MAD*wspolczynnikiPCA[10][7];
 	wczytanaProbkaPCA.PC9=znormalizowana.srednia*wspolczynnikiPCA[0][8]+znormalizowana.odchylenie*wspolczynnikiPCA[1][8]+znormalizowana.NN50_1*wspolczynnikiPCA[2][8]+znormalizowana.NN50_2*wspolczynnikiPCA[3][8]+znormalizowana.pNN50_1*wspolczynnikiPCA[4][8]+znormalizowana.pNN50_2*wspolczynnikiPCA[5][8]+znormalizowana.SDSD*wspolczynnikiPCA[6][8]+znormalizowana.RMSSD*wspolczynnikiPCA[7][8]+znormalizowana.mediana*wspolczynnikiPCA[8][8]+znormalizowana.IQR*wspolczynnikiPCA[9][8]+znormalizowana.MAD*wspolczynnikiPCA[10][8];
@@ -512,12 +481,14 @@ probkaPCA SleepApnea::rzutowaniePCA( probkaWczytana znormalizowana, float wspolc
 
 //zmeinna metoda pobierana pewnie od gui albo in/out - akutalnie int przerobcie na co uwazacie 1 - euklidesowa 2 - manhattan 3 -czebyszewa
 
-char SleepApnea::klasyfikuj(probkaPCA analizowanaProbka, probkaPCA tablicaProbekUczacych[16841], int metoda){
+char SleepApnea::klasyfikuj(probkaPCA analizowanaProbka, probkaPCA tablicaProbekUczacych[16841], int metoda)
+{
 
 		char rodzaj;
 		float tablicaOdleglosci[2][20]; //inicjalzowanie talbicy do szukania nejmniejszych odleglosci
 		
-		for(int z=0;z<20;z++){
+		for(int z=0;z<20;z++)
+		{
 			
 			tablicaOdleglosci[0][z]=1000000;
 			tablicaOdleglosci[1][z]=0;
@@ -525,9 +496,11 @@ char SleepApnea::klasyfikuj(probkaPCA analizowanaProbka, probkaPCA tablicaProbek
 		}
 
 		float odleglosc;
-		for (int k=0;k<16841; k++){
+		for (int k=0;k<16841; k++)
+		{
 		
-			switch(metoda){
+			switch(metoda)
+			{
 			
 				case 1:
 				
@@ -537,7 +510,7 @@ char SleepApnea::klasyfikuj(probkaPCA analizowanaProbka, probkaPCA tablicaProbek
 				
 				case 2:
 				
-					odleglosc=fabs(analizowanaProbka.PC1-tablicaProbekUczacych[k].PC1)+fabs(analizowanaProbka.PC2-tablicaProbekUczacych[k].PC2)+fabs(analizowanaProbka.PC3-tablicaProbekUczacych[k].PC3)+fabs(analizowanaProbka.PC4-tablicaProbekUczacych[k].PC4)+fabs(wczytaneProbkiPCA[i].PC5-tablicaProbekUczacych[k].PC5)+fabs(analizowanaProbka.PC6-tablicaProbekUczacych[k].PC6)+fabs(analizowanaProbka.PC7-tablicaProbekUczacych[k].PC7)+fabs(analizowanaProbka.PC8-tablicaProbekUczacych[k].PC8)+fabs(analizowanaProbka.PC9-tablicaProbekUczacych[k].PC9)+fabs(analizowanaProbka.PC10-tablicaProbekUczacych[k].PC10)+fabs(analizowanaProbka.PC11-tablicaProbekUczacych[k].PC11);
+					odleglosc=fabs(analizowanaProbka.PC1-tablicaProbekUczacych[k].PC1)+fabs(analizowanaProbka.PC2-tablicaProbekUczacych[k].PC2)+fabs(analizowanaProbka.PC3-tablicaProbekUczacych[k].PC3)+fabs(analizowanaProbka.PC4-tablicaProbekUczacych[k].PC4)+fabs(analizowanaProbka.PC5-tablicaProbekUczacych[k].PC5)+fabs(analizowanaProbka.PC6-tablicaProbekUczacych[k].PC6)+fabs(analizowanaProbka.PC7-tablicaProbekUczacych[k].PC7)+fabs(analizowanaProbka.PC8-tablicaProbekUczacych[k].PC8)+fabs(analizowanaProbka.PC9-tablicaProbekUczacych[k].PC9)+fabs(analizowanaProbka.PC10-tablicaProbekUczacych[k].PC10)+fabs(analizowanaProbka.PC11-tablicaProbekUczacych[k].PC11);
 					najmniejszeOdleglosci(tablicaOdleglosci, odleglosc, k);
 					break;
 				
@@ -622,23 +595,27 @@ char SleepApnea::klasyfikuj(probkaPCA analizowanaProbka, probkaPCA tablicaProbek
 }
 		
 		
-
+vector <int> SleepApnea::zamianaNaInt(vector<probkaPCA> analizowaneProbki, int liczbaProbek)
+{
 
 	vector <int> ostatni;
 
-	for (int k=0;int k<liczbaProbek;k++){
+	for (int k=0;k<liczbaProbek;k++){
 
-		if analizowaneProbki[i].typ='A'//wykrycie bezdechu
-			ostatni.push_back(1));
-		else if analizowaneProbki[i].typ='N'//brak bezdechu
-			ostatni.push_back(0));
+		if (analizowaneProbki[k].typ=='A')//wykrycie bezdechu
+			ostatni.push_back(1);
+		else if (analizowaneProbki[k].typ=='N')//brak bezdechu
+			ostatni.push_back(0);
 		else 
-			ostatni.push_back(-1));// pozosta³e przypadki czyli niesklasyfikowane
+			ostatni.push_back(-1);// pozosta³e przypadki czyli niesklasyfikowane
 
 	}
 	return ostatni;
 }
-SleepApneaResult* SleepApnea :: Rampl(int fs, vector<double> R_peaks_in, int size_Rpeaks)
+
+//  Jak pobierac dane z obiektu resultsKeeper
+
+SleepApneaResult* SleepApnea :: Rampl(int fs, vector<double> R_peaks_in, int size_Rpeaks, int metoda)
 {
 	probkaPCA tablicaUczacych[16841];
 	float wspolczynnikiDoPCA[11][11];
@@ -712,7 +689,7 @@ SleepApneaResult* SleepApnea :: Rampl(int fs, vector<double> R_peaks_in, int siz
 	
 		probkiZnormalizowane.push_back(probkaWczytana());
 				
-		if (tablicaWczytanych[i].typ=='U'){	
+		if (tablicaWczyt[i].typ=='U'){	
 			continue;
 		}
 
@@ -725,7 +702,7 @@ SleepApneaResult* SleepApnea :: Rampl(int fs, vector<double> R_peaks_in, int siz
 	
 		wczytaneProbkiPCA.push_back(probkaPCA());
 				
-		if (tablicaWczytanych[i].typ=='U'){	
+		if (tablicaWczyt[i].typ=='U'){	
 			continue;
 		}
 		
@@ -736,7 +713,7 @@ SleepApneaResult* SleepApnea :: Rampl(int fs, vector<double> R_peaks_in, int siz
 	for (i=0; i<liczbaMinut;i++){
 
 
-		if (tablicaWczytanych[i].typ=='U')
+		if (tablicaWczyt[i].typ=='U')
 		
 		{
 			wczytaneProbkiPCA[i].typ='U';
@@ -754,11 +731,20 @@ SleepApneaResult* SleepApnea :: Rampl(int fs, vector<double> R_peaks_in, int siz
 	for(int i = 0; i < liczbaMinut; i++ ) result.push_back(wynik[i]);
 
 	SleepApneaResult res = SleepApneaResult();
-	res.setVectorResult(result);
+	res.setVectorResult(result, XUnit(), YUnit());
 	return res.getResult();
 }
 
+
 SleepApneaResult* SleepApnea :: compute(ResultKeeper* rkp) const {
-	return Rampl();
+	
+	int fs=rkp->GETjakisInput()->fs // albo getfs() itd dla reszty
+	R_peaks_in
+	size_Rpeaks
+	metoda
+
+	return Rampl( fs , R_peaks_in, size_Rpeaks,metoda);  // Czemu w edr puste? Brak argumentow
 }
+
+
 

@@ -1,9 +1,10 @@
 #include <vector>
 #include <iostream>
-#include <SleepApnea.h>
 #include <AbstractModule.h>
 #include <ResultKeeper.h>
+#include <SleepApneaResult.h>
 #include <string>
+#include <StructApnea.h>
 using namespace std;
 
 #pragma once
@@ -14,9 +15,22 @@ class SleepApnea : public AbstractModule<SleepApneaResult>{
 
 public:
 
-	const string XUnit ="min";  // te dwa na zyczenie in out to chyba tu
-	const string YUint ="";		//
-
+	string XUnit;
+	string YUnit;
+		
+		/*
+		& XUnit() // te dwa na zyczenie in out to chyba tu
+		{
+			static string foo("min");
+			return foo;
+		}
+		
+	string& YUnit()
+		{
+			static string boo("");
+			return boo;
+		};		//
+		*/
 	void SleepApnea::najmniejszeOdleglosci( float tab[2][20], float odlegl, float numerProbki );
 	void SleepApnea::wczytywanie (probkaPCA tablicaProbekUczacych[16841],float wspolczynnikiPCA[11][11],float srednie[11],float odchylenia[11]);
 	vector<float> SleepApnea::RR(vector<double> R_peaks_in, int size_Rpeaks);
@@ -38,9 +52,9 @@ public:
 	vector <int> SleepApnea::zamianaNaInt(vector<probkaPCA>analizowaneProbki, int liczbaProbek);
 	vector < int > SleepApnea::punktyPodzialu(vector<float> RX, int liczbaMinut);
 	vector < probkaWczytana >  SleepApnea::inicjowanieProbek(int liczbaMinut);
-	vector < float > SleepApnea::wyborAnalizowanych(int poczatek; int koniec; vector<float> RX);
+	vector < float > SleepApnea::wyborAnalizowanych(int poczatek, int koniec, vector<float> RX);
 
-	SleepApneaResult* SleepApnea :: Rampl(int fs, vector<double> R_peaks_in, int size_Rpeaks);
+	SleepApneaResult* SleepApnea :: Rampl(int fs, vector<double> R_peaks_in, int size_Rpeaks, int metoda);
 	SleepApneaResult* SleepApnea :: compute(ResultKeeper* rkp) const ;
 	
 
