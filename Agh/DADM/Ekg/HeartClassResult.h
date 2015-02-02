@@ -4,19 +4,18 @@
 #include <cmath>
 #include <string>
 #include <map>
-#ifndef HEART_CLASS_RESULTS_H
-#define HEART_CLASS_RESULTS_H
+#ifndef HEART_CLASS_RESULT_H
+#define HEART_CLASS_RESULT_H
 
 using namespace std;
 
-class HeartClassResults{
+class HeartClassResult{
 	
 	public:
 		
 		map<string, vector<double> > qrsParameters;
 		map<string, vector<double> > qrsClassificationMap;
-		vector<double> qrsClass;
-		
+		vector<double> qrsClass;		
 };
 
-#endif // HEART_CLASS_RESULTS_H
+#endif // HEART_CLASS_RESULT_H
