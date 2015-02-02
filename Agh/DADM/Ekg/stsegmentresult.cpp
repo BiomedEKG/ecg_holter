@@ -1,8 +1,7 @@
 #include "stsegmentresult.h"
 
 
-STSegmentResult::STSegmentResult(vector<string> OffsetLevel, vector<string>ShapeST, vector <string> TypeShapeST,
-								 vector<unsigned int> QRSend,vector<unsigned int> Ton)
+STSegmentResult::STSegmentResult(map<string, vector<string>> ShapeLine, map<string, vector<unsigned int>> STonset_end)
 {
 	this->OffsetLevel=OffsetLevel;
 	this->ShapeST=ShapeST;
