@@ -143,6 +143,7 @@
     <ClCompile Include="gui\RPeaksDetectionWidget.cpp">
       <Filter>Modules\GUI</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="AbstractExtractor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -160,6 +161,31 @@
     </ClCompile>
     <ClCompile Include="HeartClass.cpp">
       <Filter>Source Files</Filter>
+=======
+    <ClCompile Include="gui\PlotManager.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ECGFiltrationWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ECGFiltrationWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_RPeaksDetectionWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RPeaksDetectionWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\SleepApneaWidget.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SleepApneaWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SleepApneaWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+>>>>>>> remotes/origin/develop
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +205,15 @@
       <Filter>Modules\GUI</Filter>
     </CustomBuild>
     <CustomBuild Include="gui\selectmodulemenu.h">
+      <Filter>Modules\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\ECGFiltrationWidget.h">
+      <Filter>Modules\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\RPeaksDetectionWidget.h">
+      <Filter>Modules\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\SleepApneaWidget.h">
       <Filter>Modules\GUI</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -219,10 +254,7 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gui\ECGFiltrationWidget.h">
-      <Filter>Modules\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\RPeaksDetectionWidget.h">
+    <ClInclude Include="gui\PlotManager.h">
       <Filter>Modules\GUI</Filter>
     </ClInclude>
     <ClInclude Include="MalinowskaParameter.h">

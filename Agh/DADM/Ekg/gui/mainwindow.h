@@ -4,8 +4,16 @@
 #include <QMainWindow>
 #include <QMap>
 
+#include "ECGFiltrationWidget.h"
+#include "RPeaksDetectionWidget.h"
+#include "SleepApneaWidget.h"
+
+class QToolBar;
+class QPushButton;
 class MainWidget;
 class ChannelsMenu;
+class SelectModuleMenu;
+
 
 class MainWindow : public QMainWindow
 {
@@ -22,6 +30,13 @@ private slots:
     void generateReport();
 	void channelChanged(QAction *action);
 	void selectedModule(QAction *action);
+	void ecgFiltrationFilterChanged(ECGFiltrationWidget::ECGFiltrationFilter filter, const QString &name);
+	void rPeaksDetectionAlgorithmChanged(RPeaksDetectionWidget::RPeaksDetectionAlgorithm algorithm, const QString &name);
+	void sleepApneaMethodChanged(SleepApneaWidget::SleepApneaMetrics method, const QString &name);
+
+private:
+	void addConfigurationTab(MainWidget *mainWidget, QWidget *tabWidget, const QString &label);
+	QToolBar *MainWindow::createToolbar(SelectModuleMenu *selectModuleMenu);
 
 private:
     QAction *open;
