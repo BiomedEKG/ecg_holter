@@ -10,7 +10,7 @@ class SleepApneaResult :public AbstractResult
 {
 	public:
 
-	void setVectorResult(vector<int> rez, string X, string Y);
+	void setVectorResult(vector<int> rez);
 	SleepApneaResult* getResult();
 	SleepApneaResult(void);
 	~SleepApneaResult(void);

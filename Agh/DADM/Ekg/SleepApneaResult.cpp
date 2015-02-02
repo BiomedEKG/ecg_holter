@@ -26,11 +26,9 @@ SleepApneaResult* SleepApneaResult::getResult()
 
 
  
-void SleepApneaResult::setVectorResult(vector<int> rez, string X, string Y)
+void SleepApneaResult::setVectorResult(vector<int> rez)
 {
 	this->vectorResult = rez;
-	this->Xlab=X;
-	this->Ylab=Y;
 }
 /*
 compute() {

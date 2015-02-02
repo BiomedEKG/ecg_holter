@@ -98,9 +98,9 @@ void SleepApnea::wczytywanie (probkaPCA tablicaProbekUczacych[16841],float wspol
 }
 
 //wczytwanie r peakow na bazie tego co zrobily dziwczyny w sig_edr i robienie interwalow
-vector<float> SleepApnea::RR(vector<double> R_peaks_in, int size_Rpeaks){
+vector<float> SleepApnea::RR(vector<float> R_peaks_in, int size_Rpeaks,int fs){
 
-	float czestotliwoscProbkowania=120;///wpisac trzeba ta co trzeba albo wsadzic jako arg funkcji
+	int czestotliwoscProbkowania=fs;///wpisac trzeba ta co trzeba albo wsadzic jako arg funkcji
 	float* R_peaks = new float[size_Rpeaks];
 	for(int i=0; i<size_Rpeaks; i++) R_peaks[i] = R_peaks_in[i];
 	// Zapisywanie do wektora interwa³ów
@@ -615,7 +615,7 @@ vector <int> SleepApnea::zamianaNaInt(vector<probkaPCA> analizowaneProbki, int l
 
 //  Jak pobierac dane z obiektu resultsKeeper
 
-SleepApneaResult* SleepApnea :: Rampl(int fs, vector<double> R_peaks_in, int size_Rpeaks, int metoda)
+SleepApneaResult* SleepApnea :: Rampl(int fs, vector<float> R_peaks_in, int size_Rpeaks, int metoda)
 {
 	probkaPCA tablicaUczacych[16841];
 	float wspolczynnikiDoPCA[11][11];
@@ -624,7 +624,7 @@ SleepApneaResult* SleepApnea :: Rampl(int fs, vector<double> R_peaks_in, int siz
 	int i;
 
 	wczytywanie (tablicaUczacych,wspolczynnikiDoPCA, srednieDoPCA, odchyleniaDoPCA);
-	vector <float> interwalyRR =RR(R_peaks_in,size_Rpeaks);
+	vector <float> interwalyRR =RR(R_peaks_in,size_Rpeaks,fs);
 	int liczbaMinut= iloscMinut(interwalyRR, size_Rpeaks);
 	vector < int > miejscaPodzialu=punktyPodzialu(interwalyRR, liczbaMinut);
 	vector < probkaWczytana > tablicaWczyt = inicjowanieProbek (liczbaMinut);
@@ -731,7 +731,7 @@ SleepApneaResult* SleepApnea :: Rampl(int fs, vector<double> R_peaks_in, int siz
 	for(int i = 0; i < liczbaMinut; i++ ) result.push_back(wynik[i]);
 
 	SleepApneaResult res = SleepApneaResult();
-	res.setVectorResult(result, XUnit(), YUnit());
+	res.setVectorResult(result);
 	return res.getResult();
 }
 

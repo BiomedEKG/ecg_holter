@@ -33,7 +33,7 @@ public:
 		*/
 	void SleepApnea::najmniejszeOdleglosci( float tab[2][20], float odlegl, float numerProbki );
 	void SleepApnea::wczytywanie (probkaPCA tablicaProbekUczacych[16841],float wspolczynnikiPCA[11][11],float srednie[11],float odchylenia[11]);
-	vector<float> SleepApnea::RR(vector<double> R_peaks_in, int size_Rpeaks);
+	vector<float> SleepApnea::RR(vector<float> R_peaks_in, int size_Rpeaks, int fs);
 	int SleepApnea::iloscMinut(vector<float> RX, int size_Rpeaks);
 	float  SleepApnea::obliczSrednia(int liczbaUderzen, vector < float > tablicaAnalizowanych);
 	float  SleepApnea::obliczOdchylenie(int liczbaUderzen, vector < float > tablicaAnalizowanych,float aktualnaSrednia);
@@ -54,7 +54,7 @@ public:
 	vector < probkaWczytana >  SleepApnea::inicjowanieProbek(int liczbaMinut);
 	vector < float > SleepApnea::wyborAnalizowanych(int poczatek, int koniec, vector<float> RX);
 
-	SleepApneaResult* SleepApnea :: Rampl(int fs, vector<double> R_peaks_in, int size_Rpeaks, int metoda);
+	SleepApneaResult* SleepApnea :: Rampl(int fs, vector<float> R_peaks_in, int size_Rpeaks, int metoda);
 	SleepApneaResult* SleepApnea :: compute(ResultKeeper* rkp) const ;
 	
 
