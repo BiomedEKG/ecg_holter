@@ -10,8 +10,6 @@
 
 using namespace std;
 
-
-
 HeartClass::HeartClass(ResultKeeper* rpk){
 
     double signalBegin = 0;
