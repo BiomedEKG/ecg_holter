@@ -1,4 +1,3 @@
-/*
 #include <QApplication>
 #include "mainwindow.h"
 #include "ObjectManager.h"
@@ -14,4 +13,3 @@ int main(int argc, char *argv[])
 
 	return a.exec();
 }
-*/

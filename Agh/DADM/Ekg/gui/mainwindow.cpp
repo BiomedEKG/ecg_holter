@@ -90,29 +90,17 @@ void MainWindow::generateReport()
 	res["RMSSD"] = 0.0;
 	res["pNN50"] = 0.0;
 	res["SDSD"] = 0.0;
-
-	QStringList data; 
-	data << "Variable" << "Value" << "Units";
-	 for (auto& x: res) {
-		 data << QString::fromStdString(x.first) << QString::number(x.second) << "ms";
-  }
-	 myMapStr tab; 
-	 tab["Tone"] = "...";
-	 tab["Shape"] = "...";
-	 tab["Offset"] = "...";
-	 QStringList dataTab;
-	 dataTab << "Variable" << "Value";
-	 for (auto& x: tab ){
-		 dataTab << QString::fromStdString(x.first) << QString::fromStdString(x.second);
-	}
+	std::string units[] = {"ms", "ms", "ms", "", "ms", "ms", "", "ms" }; 
+	QStringList data;
 	QString titleBox;
 	QString messageText;
 	try {
 		RaportGenerator r(filename);
+		data = r.prepareDataForTable(res, units); 
 		r.drawHRV1(ObjectManager::getInstance()->histogram(), data, data);
 		r.drawHRV2(data, ObjectManager::getInstance()->wykres(), ObjectManager::getInstance()->wykres());
 		r.drawEDR(ObjectManager::getInstance()->wykres());
-		r.drawStSegment(dataTab,ObjectManager::getInstance()->wykres());
+		r.drawAtrialFibr(true, ObjectManager::getInstance()->wykres());
 		messageText = "Raport generation finished.";
 
 	}catch (std::exception &e){

@@ -8,16 +8,29 @@ RaportGenerator::RaportGenerator(QString path2file):
 
 
 RaportGenerator::~RaportGenerator(){}
-
+//Funkcje do konwersji - z jednostkami 
+QStringList RaportGenerator::prepareDataForTable(const std::map<std::string, double>& paramValue, const std::string units[]){
+	QStringList data; 
+	int ind = 0;
+	//Wczytaj nag³owek 
+	data << "Variable" << "Value" << "Units";
+	for (auto& x: paramValue){
+		data << QString::fromStdString(x.first) << QString::number(x.second) << QString::fromStdString(units[ind++]);
+	}
+	return data;
+}
+//Bez jednostek 
+QStringList RaportGenerator::prepareDataForTable(const std::map<std::string, double>& paramValue){
+	QStringList data; 
+	//Wczytaj nag³owek 
+	data << "Variable" << "Value";
+	for (auto& x: paramValue){
+		data << QString::fromStdString(x.first) << QString::number(x.second);
+	}
+	return data;
+}
 //Rysuje sekcje dla HRV1 - wykres, a pod nimi 2 tabele (tabele obok siebie)
 void RaportGenerator::drawHRV1(QwtPlot* ptrPlot, QStringList hrvTimeData, QStringList hrvFreqzData){
-	//Calculate size of the section
-	/*int tableHeight;
-	if (hrvTimeData.size() > hrvFreqzData.size())
-		tableHeight = (int)((float) hrvTimeData.size()/(float) noCols + 0.5);
-	else
-		tableHeight = (int)((float) hrvFreqzData.size()/(float) noCols + 0.5);
-	tableHeight*=cellHeight;*/
 	//Check whether at leat first object would fit in the page, so we can add subtitle 
 	if (isTooBig(ptrPlot->size().height() + subTitleHeight))
 		createNewPage();
@@ -41,27 +54,25 @@ void RaportGenerator::drawHRV2(QStringList nonlinear, QwtPlot* pointCare, QwtPlo
 //Sekcja EDR - tylko jeden wykres
 void RaportGenerator::drawEDR(QwtPlot* ptrPlot){
 	//Check whether plot and text would fit in this page, if not skip to next page
-	if (isTooBig(ptrPlot -> size().height() + subTitleHeight + gap))
+	if (isTooBig(ptrPlot -> size().height() + subTitleHeight))
 		createNewPage();
 	addSubtitle("ECG-Derived Respiration Signal (EDR)");
 	addPlot(ptrPlot, true);
 }
-//Sekcja ST_SEGMENT - tabelka i wykres obok siebie
-//Tableka bez jednostek
-void RaportGenerator::drawStSegment(QStringList tabData, QwtPlot* stPlot){
+//Sekcja ST_SEGMENT -wykres
+void RaportGenerator::drawStSegment(QwtPlot* stPlot){
 	//Check whether plot and text would fit in this page, if not skip to next page
-	if (isTooBig(stPlot -> size().height() + subTitleHeight + gap))
+	if (isTooBig(stPlot -> size().height() + subTitleHeight))
 		createNewPage();
 	addSubtitle("ST Segment analysis results");
-	addTable(tabData, 2, tableWidth, PdfGenerator::toSide);
-	addPlot(stPlot,plotWidth, PdfGenerator::toBottom);
+	addPlot(stPlot,true);
 }
 //Sekcja QT_DISP - jedna tabelka
 void RaportGenerator::drawQtDisp(QStringList dt){
 	int r = int((float) dt.size() / (float) noCols + 0.5);
 	r *= cellHeight;
 	//Check whether table and text would fit in this page, if not skip to next page
-	if (isTooBig(r + subTitleHeight + gap))
+	if (isTooBig(r + subTitleHeight))
 		createNewPage();
 	addSubtitle("QT Dispersion");
 	addTable(dt, noCols, tableWidth, PdfGenerator::toBottom);
@@ -89,7 +100,7 @@ void RaportGenerator::drawTWaveAlt(QStringList tab){
 	int r = int((float) tab.size() / (float) noCols + 0.5);
 	r *= cellHeight;
 	//Check whether table and text would fit in this page, if not skip to next page
-	if (isTooBig(r + subTitleHeight + gap))
+	if (isTooBig(r + subTitleHeight))
 		createNewPage();
 	addSubtitle("T Wave Alternans");
 	addTable(tab, noCols, tableWidth, PdfGenerator::toBottom);
@@ -112,19 +123,38 @@ void RaportGenerator::drawWaves(QwtPlot* plot){
 	addSubtitle("ECG Waves Detection");
 	addPlot(plot, true);
 }
-//Sekcja ATRIAL_FIBR - wykres + tableka
-void RaportGenerator::drawAtrialFibr(QStringList tab, QwtPlot* plot){
+//Sekcja ATRIAL_FIBR - wykres, a pod spodem tableka
+void RaportGenerator::drawAtrialFibr(bool isDetected, QwtPlot* plot){
 	//Check whether plot and text would fit in this page, if not skip to next page
-	if (isTooBig(plot -> size().height() + subTitleHeight + gap))
+	if (isTooBig(plot -> size().height() + subTitleHeight))
 		createNewPage();
 	addSubtitle("Atrial fibrillation");
-	addTable(tab, noCols, tableWidth, PdfGenerator::toSide);
-	addPlot(plot,plotWidth, PdfGenerator::toBottom);
+	QStringList tab;
+	tab << "AF detected?"; 
+	if (isDetected)
+		tab << "YES";
+	else 
+		tab << "NO";
+
+	addPlot(plot, true);
+	addTable(tab, 2, tableWidth, PdfGenerator::toBottom);
 }
-//Sekcja Heart_Class ?
-void RaportGenerator::drawHeartClass(){
+//Sekcja Heart_Class - jedna tabelka 
+void RaportGenerator::drawHeartClass(QStringList tab){
+	int r = int((float) tab.size() / (float) noCols + 0.5);
+	r *= cellHeight;
+	//Check whether table and text would fit in this page, if not skip to next page
+	if (isTooBig(r + subTitleHeight))
+		createNewPage();
+	addSubtitle("QRS Classification");
+	addTable(tab, noCols, tableWidth, PdfGenerator::toBottom);
 }
-//Sekcja Ectopic_Beat ?
-void RaportGenerator::drawEtiopic(){
+//Sekcja Ectopic_Beat - jeden wykres
+void RaportGenerator::drawEtiopic(QwtPlot* plot){
+	//Check whether plot and text would fit in this page, if not skip to next page
+	if (isTooBig(plot -> size().height() + subTitleHeight))
+		createNewPage();
+	addSubtitle("Ectopic Beat Detection");
+	addPlot(plot, true);
 }
 
