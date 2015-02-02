@@ -3,10 +3,16 @@
 #include "ReturnType.h"
 #include <iostream>
 
-//ResultKeeper::ResultKeeper()
-//{
-//    someParam = 0;
-//}
+ResultKeeper::ResultKeeper()
+{
+  this->atrialFibrillation=0;
+  this->ecgBaseline=0;
+  this->hrv2=0;
+  this->rawSignalADU=0;
+  this->rawSignalMV=0;
+  this->sigEDR=0;
+  this->waves=0;
+}
 
 ResultKeeper::~ResultKeeper()
 {
@@ -18,21 +24,38 @@ ResultKeeper::~ResultKeeper()
 	 return instance;
 } 
 
- void ResultKeeper :: setParam(AbstractResult* abResult) {
-	
-	 switch(abResult->paramType) {
-	 case BASELINE:
-		 std:: cout << "przypisano do baseline" << std::endl;
-		 break;
+ 
 
-	 case HEART_CLASS:
-		 break;
+ AtrFibr* ResultKeeper::getAtrialFibrillation() {
+	return atrialFibrillation;
+ }
 
-	 case HRV2:
-		 break;
+ BaselineResult* ResultKeeper::getECGBaseline(){
+	return ecgBaseline;
+ }
 
-	 case RPEAKS:
-		 break;
-	 }
+ Hrv2Result* ResultKeeper::getHrv2() {
+	return hrv2;
+ }
 
+ SigEDResult* ResultKeeper::getSIG_EDR() {
+	return sigEDR;
+ }
+
+
+
+ void ResultKeeper::setECGBaseline(BaselineResult* baseline) {
+	this->ecgBaseline = baseline;
+ }
+
+ void ResultKeeper::setAtrialFibrillation(AtrfibrResult* atr) {
+	this->atrialFibrillation = atr;
+ }
+
+ void ResultKeeper::setHrv2(Hrv2Result* hrv2) {
+	this->hrv2 = hrv2;
+ }
+
+ void ResultKeeper::setSIG_EDR(SigEDResult* sig) {
+	this->sigEDR = sig;
  }

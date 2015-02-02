@@ -1,8 +1,7 @@
 #pragma once
-
 #include "AbstractModule.h"     
 #include "Result.h"   
-
+#include<BaselineResult.h>
 #include "Methods.h"
 #include "FilterType.h"
 #include "MovingAverage.h"
