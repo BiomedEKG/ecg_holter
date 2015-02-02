@@ -258,17 +258,35 @@
 			unsigned int IQR = med3-med1;
 			return IQR;
 		}
+
+		//Wyciąganie danych - pytanie czy dobre nazwy zmiennych odprowadzen? (tzn, i, ii, aVr itd....)
 		
 		QTDisp* compute(ResultKeeper* rkp) {
-			Waves* resultWaves = rkp->getResultFromWaves();
+			//Waves* resultWaves = rkp->getResultFromWaves();
 			//map<std::string, vector<unsigned int>*> resultWaves = rkp->getResultFromWaves();
-			this->QRSonset_=(*resultWaves)["QRS_ONSET"];
-			this->tPeak=(*resultWaves)["T_END"]; 
+			//this->QRSonset_=(*resultWaves)["QRS_ONSET"];
+			//this->tPeak=(*resultWaves)["T_END"]; 
+			vector<double> QRSonset = rkp->QRS_ONSET; 
+			vector<double> tPeak = rkp->T_END; 
 
 
-			ECGBaseline* resultECGBaseline = rkp->getResultFrom_ECGBaseline();
+			//ECGBaseline* resultECGBaseline = rkp->getResultFrom_ECGBaseline();
 			//this->Signal= rkp->getResultFrom_ECGBaseline();
-			 this->samplingFrequency = resultECGBaseline->samplingFrequency();
+
+			const unsigned int samplingFrequency = rkp->samplingFrequency;
+
+			vector<double> Signal1 = rkp->i; 
+			vector<double> Signal2 = rkp->ii;
+			vector<double> Signal3 = rkp->iii;
+			vector<double> Signal4 = rkp->aVf;
+			vector<double> Signal5 = rkp->aVr;
+			vector<double> Signal6 = rkp->aVl;
+			vector<double> Signal7 = rkp->v1;
+			vector<double> Signal8 = rkp->v2;
+			vector<double> Signal5 = rkp->v3;
+			vector<double> Signal6 = rkp->v4;
+			vector<double> Signal7 = rkp->v5;
+			vector<double> Signal8 = rkp->v6;
 
 		}
 		/*
@@ -288,18 +306,18 @@
 			const unsigned int samplingFrequency = this->samplingFrequency;
 
 			
-			const vector<double>* input1 = this->Signal;
-			const vector<double>* input2 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 2))->signal;
-			const vector<double>* input3 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 3))->signal;
-			const vector<double>* input4 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 4))->signal;
-			const vector<double>* input5 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 5))->signal;
-			const vector<double>* input6 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 6))->signal;
-			const vector<double>* input7 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 7))->signal;
-			const vector<double>* input8 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 8))->signal;
-			const vector<double>* input9 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 9))->signal;
-			const vector<double>* input10 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 10))->signal;
-			const vector<double>* input11 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 11))->signal;
-			const vector<double>* input12 = (abstractResult.getResult<ECGBaseline>(ECG_BASELINE, 12))->signal;
+			const vector<double>* input1 = this->Signal1;
+			const vector<double>* input2 = this->Signal2;
+			const vector<double>* input3 = this->Signal3;
+			const vector<double>* input4 = this->Signal4;
+			const vector<double>* input5 = this->Signal5;
+			const vector<double>* input6 = this->Signal6;
+			const vector<double>* input7 = this->Signal7;
+			const vector<double>* input8 = this->Signal8;
+			const vector<double>* input9 = this->Signal9;
+			const vector<double>* input10 = this->Signal10;
+			const vector<double>* input11 = this->Signal11;
+			const vector<double>* input12 = this->Signal12;
 		
 			//const map<std::string, vector<unsigned int>*> &inputwavesMap = wavesResult;
 			const vector<unsigned int> &qrsOnset_ =this->QRSonset_; // (*inputwavesMap)["QRS_ONSET"];
