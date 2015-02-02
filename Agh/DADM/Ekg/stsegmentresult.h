@@ -21,7 +21,10 @@ class STSegmentResult
 	vector <string> OffsetLevel;
 	vector <string> ShapeST;
 	vector <string> TypeShapeST; 
-	STSegmentResult(vector<string> OffsetLevel, vector<string>ShapeST, vector <string> TypeShapeST);
+	vector<unsigned int> QRSend;// pocz¹tek odcinka
+	vector<unsigned int> Ton;// koniec odcnika ST
+	STSegmentResult(vector<string> OffsetLevel, vector<string>ShapeST, vector <string> TypeShapeST,
+		vector<unsigned int> QRSend,vector<unsigned int> Ton);
 
 };
 

@@ -223,7 +223,7 @@ STSegmentResult STSegment:: compute(map <string, vector<unsigned int> > *resultF
 	k2slope=0.15;
 	CorrectSize();
 	Run();
-	STSegmentResult p(OffsetLevel,ShapeST,TypeShapeST);
+	STSegmentResult p(OffsetLevel,ShapeST,TypeShapeST,QRSend,Ton);
 	return p;
 }
 
