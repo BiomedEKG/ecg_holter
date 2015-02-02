@@ -59,3 +59,7 @@ ResultKeeper::~ResultKeeper()
  void ResultKeeper::setSIG_EDR(SigEDResult* sig) {
 	this->sigEDR = sig;
  }
+
+ void ResultKeeper::setWaves(WavesResult* waves) {
+	this->waves = waves;
+ }

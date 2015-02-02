@@ -58,7 +58,7 @@ class ResultKeeper
 	//	Input* getInput();
 	//	RaportGenerator* getRaportGenerator();
 		void setSIG_EDR(SigEDResult* sigEdr);
-		void getWaves(WavesResult* waveRes);
+		void setWaves(WavesResult* waveRes);
 
 
 
