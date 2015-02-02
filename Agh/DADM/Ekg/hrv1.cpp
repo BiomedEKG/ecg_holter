@@ -10,13 +10,6 @@ using namespace std;
 
 const double PI_const = 3.14;
 
-/* STRUKTURA DO SPRAWDZANIA POPRAWNOŒCI LICZENIA
-struct Output {
-	map<string, double> timeParameters;
-	map<string, double> freqParameters;
-	vector<double> power;
-	vector<double> frequency;
-};*/
 struct Lomb_param {
 		vector<double> power;
 		vector<double> frequency;
@@ -26,77 +19,6 @@ struct Lomb_param {
 class HRV1: public AbstractModule<HRV1Result> {
 
 public:
-/* RZECZY DO SPRAWDZANIA POPRAWNOŒCI DZIA£ANIA 
- //STRUKTURY DO SPRAWDZANIA
-    map<string, double> timeParameter;
-	map<string, double> freqParameter;
-
-			
-	Output time_freq_compute(vector < double > &temp_vec, int fp){
-	Output out_data;
-	vector<double> i_rr= inter_RR(temp_vec, fp);
-	//vector<double> i_rr= temp_vec;
-	out_data.timeParameters["RR_mean"]= RR_mean(i_rr);
-	out_data.timeParameters["SDNN"]= SDNN(i_rr);
-	out_data.timeParameters["RMSSD"]= RMSSD(i_rr);
-	out_data.timeParameters["NN50"]= NN50(i_rr);
-	out_data.timeParameters["pNN50"]= pNN50(i_rr);
-	out_data.timeParameters["SDANN"]= SDANN(i_rr);
-	out_data.timeParameters["SDANN_index"]= SDANN_index(i_rr);
-	out_data.timeParameters["SDSD"]= SDSD(i_rr);
-
-	vector<double> i_rrt = inter_RRt(temp_vec, fp);
-	//Lomb_param struct1 = Lomb_Scargle(i_rrt); //struktura Lomb_param, która zawiera pary moc czêstotliwoœæ
-	Lomb_param struct1 = lomb(i_rrt);
-	out_data.power = struct1.power;
-	out_data.frequency = struct1.frequency;
-
-	out_data.freqParameters["TP"] = TP_Power(struct1.power, struct1.frequency);
-	out_data.freqParameters["HF"] = HF_Power(struct1.power, struct1.frequency);
-	out_data.freqParameters["LF"] = LF_Power(struct1.power, struct1.frequency);
-	out_data.freqParameters["VLF"] = VLF_Power(struct1.power, struct1.frequency);
-	out_data.freqParameters["ULF"] = ULF_Power(struct1.power, struct1.frequency);
-	out_data.freqParameters["LFHF"] = LFHF_Power(struct1.power, struct1.frequency);
-
-	return out_data;
-	}
-
-/* //FUNKCJA DO WCZYTYWANIA z PLIKU TXT
-	vector<double> read_from_file(string filepath){ //funkcja do wczytywania danych z pliku
-    
-		 string line;
-		 size_t st;
-		 double line_double;
-		 vector<double> data_input;
-		 ifstream data_in;
-		 data_in.open(filepath);
-		 if (data_in.is_open())
-		 {
-		   while (getline(data_in,line))
-		   { 
-			line_double = stod(line, &st);
-			data_input.push_back(line_double);   
-			}
-		  data_in.close();
-		 }
-		 else 
-		  cout << "Unable to open file" << endl; 
- 
-		return data_input;
-	}
-
-	Lomb_param computeFreq(vector < double > tab){ //mapa parametrów czêstotliwoœciowych
-		vector<double> i_rrt = inter_RRt(tab, 1);
-		//Lomb_param struct1 = Lomb_Scargle(i_rrt); //Lomb_param
-		Lomb_param struct1 = lomb(i_rrt);
-		/*freqParameter["TP"] = TP_Power(struct1.power, struct1.frequency);
-		freqParameter["HF"] = HF_Power(struct1.power, struct1.frequency);
-		freqParameter["LF"] = LF_Power(struct1.power, struct1.frequency);
-		freqParameter["VLF"] = VLF_Power(struct1.power, struct1.frequency);
-		freqParameter["ULF"] = ULF_Power(struct1.power, struct1.frequency);
-		freqParameter["LFHF"] = LFHF_Power(struct1.power, struct1.frequency);
-		return struct1;
-	}*/
 
 	vector<double> type_change(vector <unsigned int> &temp_vec){
 	//Zmiana wektora wartoœci typu unsigned int na wektor wartoœciu double.
@@ -135,19 +57,6 @@ public:
 
 		return inter_rrt;
 	}
-
-	double round(double value){
-	//funkcja zaokr¹glaj¹ca
-		double round;
-
-		if (value<0)
-            round = ceil(value-0.5);
-		else
-             round = floor(value+0.5);
-
-		return round;
-	}
-
 
 //******************************     OBLICZANIE PARAMETRÓW CZASOWYCH     ******************************
 
@@ -307,42 +216,41 @@ public:
 	double variance=stddev*stddev;
 	int_time.push_back(0);
 	for(int i=0;i<intervals.size()-1;++i)
-	int_time.push_back(int_time[i]+intervals[i]/1000);
+		int_time.push_back(int_time[i]+intervals[i]/1000);
 	int length=intervals.size();
 	double timespan=int_time[length-1];
 	freqs.push_back(2*PI_const/timespan);
 	for(int i=1;i<length*2;++i)
-	freqs.push_back((i+1)*2*PI_const/timespan);
+		freqs.push_back((i+1)*2*PI_const/timespan);
 	for(int i=0;i<length*2;++i){
-	double sin_sum=0;
-	double cos_sum=0;
-	for(int n=0;n<length;++n)
-	sin_sum+=sin(2*freqs[i]*int_time[n]);
-	for(int n=0;n<length;++n)
-	cos_sum+=cos(2*freqs[i]*int_time[n]);
-	tau.push_back(atan2(sin_sum, cos_sum)/(2*freqs[i]));
+		double sin_sum=0;
+		double cos_sum=0;
+		for(int n=0;n<length;++n)
+			sin_sum+=sin(2*freqs[i]*int_time[n]);
+		for(int n=0;n<length;++n)
+			cos_sum+=cos(2*freqs[i]*int_time[n]);
+		tau.push_back(atan2(sin_sum, cos_sum)/(2*freqs[i]));
 	}
-	for(int i=0;i<length*2;++i)
-	{
-	double stddevcos=0;
-	double cossqr=0;
-	double stddevsin=0;
-	double sinsqr=0;
-	for(int n=0;n<length;++n)
-	stddevcos+=(intervals[n]-average)*cos(freqs[i]*(int_time[n]-tau[i]));
-	stddevcos*=stddevcos;
-	for(int n=0;n<length;++n)
-	stddevsin+=(intervals[n]-average)*sin(freqs[i]*(int_time[n]-tau[i]));
-	stddevsin*=stddevsin;
-	for(int n=0;n<length;++n)
-	cossqr+=cos(freqs[i]*(int_time[n]-tau[i]))*cos(freqs[i]*(int_time[n]-tau[i]));
-	for(int n=0;n<length;++n)
-	sinsqr+=sin(freqs[i]*(int_time[n]-tau[i]))*sin(freqs[i]*(int_time[n]-tau[i]));
-	PSD.push_back((stddevcos/cossqr+stddevsin/sinsqr)/(2*variance));
+	for(int i=0;i<length*2;++i){
+		double stddevcos=0;
+		double cossqr=0;
+		double stddevsin=0;
+		double sinsqr=0;
+		for(int n=0;n<length;++n)
+			stddevcos+=(intervals[n]-average)*cos(freqs[i]*(int_time[n]-tau[i]));
+		stddevcos*=stddevcos;
+		for(int n=0;n<length;++n)
+			stddevsin+=(intervals[n]-average)*sin(freqs[i]*(int_time[n]-tau[i]));
+		stddevsin*=stddevsin;
+		for(int n=0;n<length;++n)
+			cossqr+=cos(freqs[i]*(int_time[n]-tau[i]))*cos(freqs[i]*(int_time[n]-tau[i]));
+		for(int n=0;n<length;++n)
+			sinsqr+=sin(freqs[i]*(int_time[n]-tau[i]))*sin(freqs[i]*(int_time[n]-tau[i]));
+		PSD.push_back((stddevcos/cossqr+stddevsin/sinsqr)/(2*variance));
 	}
 	for(int i=0;i<freqs.size();++i){
-	freqs[i]/=(2*PI_const);
-	freqs[i]/=(10000);
+		freqs[i]/=(2*PI_const);
+		freqs[i]/=(10000);
 	}
 
 	Lomb_param out;
@@ -352,98 +260,6 @@ public:
 	return out;
 
 }
-
-/* STARY LOMB !
-	Lomb_param Lomb_Scargle(vector<double> &temp_vec){
-	//Wyznaczenie parametrów czêstotliwoœciowych meotd¹ Lomba-Scargle'a
-		int over_samp; //parametr nadpróbkowania czêstotliwoœci
-		int hifac;
-		int time_n; //rozmiar wektora temp_vec
-		double period; //d³ugoœæ-1-time[0]
-		double mean;
-		double var;
-		double f0;
-		double num_freq; //by³ int, bo hifac 4, wiêc nie potrzebny double
-		double fd; //normalizacja wektora czêstotliwoœci do 0,5
-		vector<double> time(temp_vec.size()); //tworzenie wektora czasu
-		vector<double> frequency(num_freq); //wektor czêstotliwoœci
-		vector<double> omega(num_freq); //wektor omega
-		vector<double> tau(num_freq); //wektor tau
-		vector<double> Power_w(num_freq); //power(w)
-		vector<double> Power(num_freq/2);
-		vector<double> frequency2(num_freq/2);
-
-		over_samp = 1;
-		hifac = 4;
-		time.clear();
-		time.push_back(temp_vec[0]);
-		for (unsigned i = 1; i<temp_vec.size(); i++){
-			time.push_back(time[i-1] + temp_vec[i]);
-		} 
-		time_n = temp_vec.size();
-		period = time[temp_vec.size()-1] - time[0];
-		mean = RR_mean(temp_vec); //obliczenie œredniej
-		var = SDNN(temp_vec); //obliczenie odchylenia standardowego - konieczne dla policzenia wariancji
-		var = var * var; //obliczenie wariancji
-		f0 = 1 / (period * over_samp); //f0
-		//double step = f0;	
-		num_freq = (over_samp * hifac * time_n) / 2;
-		frequency.clear();
-		frequency.push_back(f0); //empty() true if empty
-		omega.clear();
-		omega.push_back(frequency[0] * PI_const * 2); //w = 2*PI_const*f;  PI_const = PI_const
-		for (int i = 1; i<num_freq; i++){
-			frequency.push_back(frequency[i-1] + f0 ); //wektor czêstotliwoœci o wymiarze num_freq //normalizowane !!!!f0
-			omega.push_back(frequency[i] * PI_const * 2); //wektor omega o wymiarze num_freq
-		}
-		tau.clear();
-		for (int i = 0; i < num_freq; i++){  //po omegach w
-			double sinu = 0; //temp sin
-			double cosi = 0; //temp
-			double sum1 = 0; //temp
-			double sum2 = 0; //temp
-			for (int j = 0; j < time_n; j++){ //po czasach t
-				sinu = sin(2 * omega[i] * time[j]);
-				sum1 = sinu + sum1;
-				cosi = cos(2 * omega[i] * time[j]);
-				sum2 = cosi + sum2;
-			}
-			tau.push_back(atan2(sum1,sum2));
-			tau[i] = tau[i]/(2*omega[i]);
-		}
-		Power_w.clear();
-		for (int i = 0; i < num_freq; i++){
-			double temp; //temp
-			double cosi; //temp
-			double sinu; //temp
-			double sum_licznik1 = 0; //temp
-			double sum_licznik2 = 0; //temp
-			double sum_mianownik1 = 0; //temp
-			double sum_mianownik2 = 0; //temp		
-			for(int j = 0; j < time_n; j++){	
-				temp = omega[i] * time[j] - omega[i] * tau[i]; //temp w*ti - w*tau
-				cosi = cos(temp);
-				sum_mianownik2 = cosi * cosi + sum_mianownik2;
-				sinu = sin(temp);
-				sum_mianownik1 = sinu * sinu + sum_mianownik1;
-				sum_licznik1 = sinu * (temp_vec[j] - mean) + sum_licznik1;
-				sum_licznik2 = cosi * (temp_vec[j] - mean) + sum_licznik2;
-			}
-			Power_w.push_back(((sum_licznik1 * sum_licznik1)/sum_mianownik1 + (sum_licznik2 * sum_licznik2)/sum_mianownik2)/(2*var));
-		}
-		Power.assign(Power_w.begin(), Power_w.end()-(num_freq/2));
-		frequency2.assign(frequency.begin(), frequency.end()-(num_freq/2));
-		fd= 2*(num_freq/2) * f0; //Normalizacja wektora czêstotliwoœci do 0.5
-		for(int i = 0; i  <frequency2.size(); i++){ 
-			frequency2[i] = frequency2[i] / fd;
-		}
-		Lomb_param out;
-		out.power = Power;
-		out.frequency = frequency2;
-
-		return out;
-	}
-*/
 	double TP_Power(vector<double> &temp_vec, vector<double> &f){
 	//Wyznaczenie ca³kowitej mocy widma  (zakres poni¿ej 0,4Hz)
 		double TP;
@@ -530,22 +346,41 @@ public:
 
 		//FUNKCJA COMPUTE !
 
-	 HRV1Result* HRV1 :: compute(ResultKeeper* rkp) const{
+	 HRV1Result* HRV1 :: compute(ResultKeeper* rkp) {
+		
+		HRV1Result result = HRV1Result();
 		R_peaks_in = *rkp->rpeaks; // vector r pików
         fp= *rkp->freq; // Czêstotliwoœæ próbkowania
 		vector<double> inter_rr(R_peaks_in.size()-1);
 		inter_rr = inter_RR(R_peaks_in,fp);
-		double rr_mean, sdnn, rmssd, nn50, pnn50, ind, sdann, sdann_index, sdsd;
-		double tp, hf, lf, vlf, ulf, lfhf;
-		rr_mean = RR_mean(inter_rr);
-		sdnn = SDNN(inter_rr);
-		rmssd = RMSSD(inter_rr);
-		nn50 = NN50(inter_rr);
-		pnn50 = pNN50(inter_rr);
-		ind = index_300(inter_rr);
-		sdann = SDANN(inter_rr);
-		sdann_index = SDANN_index(inter_rr);
-		sdsd = SDSD(inter_rr);
-		//TUTAJ TO JA JU¯ SIE POGUBI£EM CO I JAK...
+		map<string, double> timeParam;
+		map<string, double> freqParam;
+		timeParam["RR_mean"] = RR_mean(inter_rr);
+		timeParam["SDNN"] = SDNN(inter_rr);
+		timeParam["RMSSD"]= RMSSD(inter_rr);
+		timeParam["NN50"]= NN50(inter_rr);
+		timeParam["pNN50"]= pNN50(inter_rr);
+		timeParam["SDANN"]= SDANN(inter_rr);
+		timeParam["SDANN_index"]= SDANN_index(inter_rr);
+		timeParam["SDSD"]= SDSD(inter_rr);
+		
+		vector<double> inter_rrt(R_peaks_in.size()-1);
+		vector<double> power;
+		vector<double> freq;
+		inter_rrt = inter_RRt(R_peaks_in, fp);
+		Lomb_param struct1 = lomb(inter_rrt);
+		freqParam["TP"] = TP_Power(struct1.power, struct1.frequency);
+		freqParam["HF"] = HF_Power(struct1.power, struct1.frequency);
+		freqParam["LF"] = LF_Power(struct1.power, struct1.frequency);
+		freqParam["VLF"] = VLF_Power(struct1.power, struct1.frequency);
+		freqParam["ULF"] = ULF_Power(struct1.power, struct1.frequency);
+		freqParam["LFHF"] = LFHF_Power(struct1.power, struct1.frequency);
+		power = struct1.power;
+		freq = struct1.frequency;
+
+		result.setHRV1Result(timeParam, freqParam, );
+
+		return result.getResult();
+
 	 }
 };
