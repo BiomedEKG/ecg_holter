@@ -37,7 +37,7 @@ public:
 		vector<double> inter_rr(temp_vec.size()-1);
 
 		for (unsigned i = 1; i<temp_vec.size(); i++){
-            inter_rr[i-1] = (temp_vec[i] - temp_vec[i-1])*1000/fp;
+            inter_rr[i-1] = (temp_vec[i] - temp_vec[i-1])/fp;
 		}
 
 		return inter_rr;
@@ -108,7 +108,7 @@ public:
 
 		nn50 = 0;
 		for (unsigned i = 1; i<temp_vec.size(); i++){
-			if ((temp_vec[i]-temp_vec[i-1]) > 50)
+			if ((temp_vec[i]-temp_vec[i-1]) > 0.05)
             nn50 = nn50 + 1;
 		}
 
@@ -355,14 +355,15 @@ public:
 		inter_rr = inter_RR(R_peaks_in,fp);
 		map<string, double> timeParam;
 		map<string, double> freqParam;
-		timeParam["RR_mean"] = RR_mean(inter_rr);
-		timeParam["SDNN"] = SDNN(inter_rr);
-		timeParam["RMSSD"]= RMSSD(inter_rr);
+		//mno¿ymy razy 100 bo zamiana z sekund na ms !
+		timeParam["RR_mean"] = RR_mean(inter_rr)*1000;
+		timeParam["SDNN"] = SDNN(inter_rr)*1000;
+		timeParam["RMSSD"]= RMSSD(inter_rr)*1000;
 		timeParam["NN50"]= NN50(inter_rr);
 		timeParam["pNN50"]= pNN50(inter_rr);
-		timeParam["SDANN"]= SDANN(inter_rr);
-		timeParam["SDANN_index"]= SDANN_index(inter_rr);
-		timeParam["SDSD"]= SDSD(inter_rr);
+		timeParam["SDANN"]= SDANN(inter_rr)*1000;
+		timeParam["SDANN_index"]= SDANN_index(inter_rr)*1000;
+		timeParam["SDSD"]= SDSD(inter_rr)*1000;
 		
 		vector<double> inter_rrt(R_peaks_in.size()-1);
 		vector<double> power;
