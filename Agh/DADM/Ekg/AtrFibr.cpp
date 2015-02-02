@@ -34,7 +34,7 @@ void AtrFibr::createrr(vector<unsigned int>& peaksNum, double freq){
 	double time = 1/(static_cast<double> (freq));
 
 	for(int i = 0; i < peaksNum.size(); i++){
-        signal.push_back((peaksNum[i+1]-peaksNum[i])*time*1000); //wynik w ms
+        signal.push_back((peaksNum[i]-peaksNum[i-1])*time); //wynik w s
 	}
 }
 
