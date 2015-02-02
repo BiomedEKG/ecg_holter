@@ -171,5 +171,8 @@
     <ClInclude Include="calculationsVCG.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VCGTLOOP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

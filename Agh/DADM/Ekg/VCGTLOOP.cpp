@@ -1,12 +1,12 @@
 #include <math.h>
 #include <methodsVCG.h>
-#include <calculationsVCG.h>
+#include <VCGTLOOP.h>
 #include <ResultVCG.h>
 
 using namespace std;
 
 
-ResultVCG* VCG_T_Loop::compute (ResultKeeper *rkp) 
+ResultVCG* VCGTLoop::compute (ResultKeeper *rkp) 
 {
 	//obiekt zwracany res
 	ResultVCG *res = new ResultVCG;
@@ -237,14 +237,14 @@ ResultmRMMV_std = stddev(wsk_mRMMV);
 // przypisanie wartoœci do mMA, mRMMV
 param["mMA"] = ResultmMA;
 param["mRMMV"] = ResultmRMMV;
-//rkp->param = res;
+
 res->parameters=param;
 
 //wpisanie wektorów XYZ do ResultVCG
 XYZ['X'].resize(800);
 XYZ['Y'].resize(800);
 XYZ['Z'].resize(800);
-//rkp->XYZ = res;
+
 res->VCG=XYZ;
 
 

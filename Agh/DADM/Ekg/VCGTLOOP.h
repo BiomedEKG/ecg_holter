@@ -1,13 +1,13 @@
-#ifndef CALCULATIONSVCG_H
-#define CALCULATIONSVCG_H
+#ifndef VCGTLOOP_H
+#define VCGTLOOP_H
 
 #include <vector>
 #include <map>
 
 #include "AbstractModule.h"
-#include "Result.h"
+#include "ResultVCG.h"
 
-class VCG_T_Loop: public AbstractModule<ResultVCG>
+class VCGTLoop: public AbstractModule<ResultVCG>
 {
        
 public: 
@@ -19,4 +19,4 @@ private:
 
 };
 
-#endif // CALCULATIONSVCG_H
+#endif // VCGTLOOP_H
