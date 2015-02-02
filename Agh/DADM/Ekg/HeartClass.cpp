@@ -472,6 +472,8 @@ HeartClassResult* HeartClass::compute(ResultKeeper* rkp){
 	this->SamplesBetween();
 	
 	this->Conditioning();
+
+	return new HeartClassResult();
 }
 
 
