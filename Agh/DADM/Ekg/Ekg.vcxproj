@@ -255,6 +255,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="calculationsVCG.h" />
     <ClInclude Include="methodsVCG.h" />
     <ClInclude Include="gui\channelsprivate.h" />
     <ClInclude Include="outClass.h" />

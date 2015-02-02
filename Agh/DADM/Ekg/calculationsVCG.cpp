@@ -8,8 +8,8 @@ using namespace std;
 
 ResultVCG* VCG_T_Loop::compute (ResultKeeper *rkp) 
 {
-	// obiekt zwracany res
-	ResultVCG* res = new ResultVCG;
+	//obiekt zwracany res
+	ResultVCG *res = new ResultVCG;
 	
  map <string,double> param;
  param["mMA"] = 0;
@@ -237,24 +237,16 @@ ResultmRMMV_std = stddev(wsk_mRMMV);
 // przypisanie wartoœci do mMA, mRMMV
 param["mMA"] = ResultmMA;
 param["mRMMV"] = ResultmRMMV;
-rkp->param = res;
+//rkp->param = res;
+res->parameters=param;
 
 //wpisanie wektorów XYZ do ResultVCG
 XYZ['X'].resize(800);
 XYZ['Y'].resize(800);
 XYZ['Z'].resize(800);
-rkp->XYZ = res;
+//rkp->XYZ = res;
+res->VCG=XYZ;
 
 
-//-------------------------LICZENIE PARAMETRÓW------------------------------
-//---------- DEA - T axis elevation and azimuth angle difference -----------
-
-//Result.mDEA = mean(wsk_DEA_EachLoopMeans);
-//Result.mDEA_std = stddev(wsk_DEA_EachLoopMeans);
-
-//ZWRACANIE TABLICY 3D DO ResultKeeper'a     map <char, vector<double>> VCG;
-//rkp->mMA = Result.mMA;
-//rkp->mRMMB = Result.mRMMV;
-//rkp->mDEA = Result.DEA;
 return res;
 }
