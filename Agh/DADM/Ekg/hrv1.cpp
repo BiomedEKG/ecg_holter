@@ -379,7 +379,10 @@ public:
 		power = struct1.power;
 		freq = struct1.frequency;
 
-		result.setHRV1Result(timeParam, freqParam, );
+		string tabtime[8] = {"ms", "ms", "ms", "-", "%", "ms", "ms", "ms"};
+		string tabfreq[6] = {"ms2", "ms2", "ms2", "ms2", "ms2", "-"};
+
+		result.setHRV1Result(timeParam, freqParam, power, freq, tabtime, tabfreq);
 
 		return result.getResult();
 

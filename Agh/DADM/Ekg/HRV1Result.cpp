@@ -12,7 +12,7 @@ HRV1Result* HRV1Result :: getResult() {
 	//potrzeba pobraæ wektor pików R i czêstotliwoœæ próbkowania
 	return this;
 }
-void HRV1Result::setHRV1Result(map<string, double> timeParameters, map<string, double> freqParameters, vector<double> power, vector<double> frequency) {
+void HRV1Result::setHRV1Result(map<string, double> timeParameters, map<string, double> freqParameters, vector<double> power, vector<double> frequency, string tabtime[8], string tabfreq[6]) {
 	this -> prvtimeParameters = timeParameters;
 	this -> prvfreqParameters = freqParameters;
 	this -> prvpower = power;
