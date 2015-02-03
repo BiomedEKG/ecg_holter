@@ -1,51 +1,40 @@
 #include "TWavesAlt.h"
 
-
 TWavesAlt::TWavesAlt(void) {};
 
-	void TWavesAlt::set_signal(vector<double> & filtered_signal)
+void TWavesAlt::set_signal(vector<double> & filtered_signal)
 	{
 		this->input_signal=filtered_signal;
 	};
 
-	void TWavesAlt::set_tsamples(vector<unsigned int> & tsamp)
+void TWavesAlt::set_tsamples(vector<unsigned int> & tsamp)
 	{
 		this->t_samples=tsamp;
 	};
 
-	double TWavesAlt::get_result()
+double TWavesAlt::get_result()
 	{
 		return this->coeff;
 	};
 
-/*	vector<double> TWavesAlt::get_fftres()
-	{
-		return this->fftres;
-	};
-*/
-	void TWavesAlt::alt_coeff()
+void TWavesAlt::alt_coeff()
 	{	
-		//preparing vector of t-wave amplitudes
 		vector<double> sig=this->input_signal;
 		vector<double> twaves;
 		for(int i=0;i<this->t_samples.size();i++)
 			twaves.push_back(sig[this->t_samples[i]]);
 		int osize=twaves.size();
 
-		//plan for FFT
-		fftw_complex *in; //tabliczka 2elementowa - taka jakby zespolona
+		fftw_complex *in; 
 		fftw_complex *out;
-		fftw_plan p; //wszystkie niezbêdbne info + in & out
+		fftw_plan p; 
 
 		in = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * 128);
 		out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * 128);
 		p = fftw_plan_dft_1d(128, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
 
-		//iterating along signal to compute AR in segments
 		int L = twaves.size();
 		int n = (int) floor((double) L/128.0);
-		//while(twaves.size()<(n*128+128))
-		//twaves.push_back(0.0);
 		n++;
 
 		double Tpeak;
@@ -71,7 +60,7 @@ TWavesAlt::TWavesAlt(void) {};
 			}
 			av=av/counter;
 
-			//input for fft, with mean subtracted
+			//input for fft
 			for(int i=j*128;i<(j*128+128);i++)
 			{
 				if(i<L)
@@ -86,10 +75,8 @@ TWavesAlt::TWavesAlt(void) {};
 				};
 			};
 		
-		//executing fft
 		fftw_execute(p);
 
-			//calculating AR
 			for(int i=0;i<128;i++)
 			{
 				fftabs[i]=out[i][0]*out[i][0]+out[i][1]*out[i][1];
@@ -145,18 +132,18 @@ TWavesAlt::TWavesAlt(void) {};
 
 
 		TWavesAltResult* TWavesAlt::compute(ResultKeeper* rkp)const {
-	//geting input from other classes
-		const vector<double>& inputFilt = *rkp->ecgBaseline; //signal from ECGBaseline
-		const vector<double>& twaves = *rkp->waves->; //vector numbers of T amplitudes 
+	
+		//signal from ECGBaseline
+		const vector<double>& inputFilt = *rkp->ecgBaseline; 
+		//vector numbers of T amplitudes 
+		const vector<double>& twaves = *rkp->waves->; 
 
-		//doing calculations
 		TWavesAlt twa=TWavesAlt::TWavesAlt();
 		twa.set_signal(& inputFilt);
 		twa.set_tsamples(twaves);
 		twa.alt_coeff();
 		double ar_coeff = twa.get_result();
 
-		//producing output
 		TWavesAltResult res = TWavesAltResult();
 		res.setTWavesAltResult(ar_coeff);
 		return res.getResult();

@@ -14,19 +14,21 @@ using namespace std;
 class TWavesAlt : public AbstractModule<TWavesAlt>
 {
 	public:
-		TWavesAlt(void);
-		void set_signal(vector<double> & filtered_signal); //setting signal filtered by BASELINE
-		void set_tsamples(vector<unsigned int> & tsamp); //setting number of smples of t-wave amplitude
-		double get_result(); //getting final result (alternans coefficient)
-		void alt_coeff(); //calculation of alternans coefficients
+		TWavesAlt(void
+		//setting signal (filtered - baseline)
+		void set_signal(vector<double> & filtered_signal);
+		//setting number of samples of t-wave amplitude
+		void set_tsamples(vector<unsigned int> & tsamp); 
+		double get_result(); 
+		void alt_coeff(); 
 		virtual TWavesAltResult* compute(ResultKeeper* rkp)const; //override;
 		virtual ~TWavesAlt(void);
 
 	private:
 		vector<double> input_signal; //input signal (filtered ECG)
 		vector<unsigned int> t_samples; //samples of t-wave amplitude
-		double coeff; //result
-		vector<double> fftres; //FFT, intermediate result - needed for testing, better remove this later
+		double coeff; 
+		vector<double> fftres; 
 };
 
 #endif
