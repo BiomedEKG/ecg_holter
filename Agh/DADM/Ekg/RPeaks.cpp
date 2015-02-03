@@ -299,6 +299,17 @@ vector<double> RPeaks::squere(vector<double> data){
 
 vector<double> RPeaks::hilbertCalculate(vector<double> data){
 	
+            vector<double> diffSignal;
+	    double x;
+		for(int i = 0 ; i<data.size()-3; i++){	
+		
+			x = data.at(i+1) - data.at(i);
+			x = x/2/fs;
+			diffSignal.push_back(x);
+		}
+		
+		data = diffSignal;
+		
 		fftw_complex *in;
 		fftw_complex *out;
 		fftw_plan p;
@@ -420,15 +431,15 @@ vector<unsigned int> RPeaks::compute2(std::vector<double> data_input, int sampli
 
 vector<unsigned int> RPeaks::compute2HIlbert(std::vector<double> data_input, int sampling_frequency){
 	this->data_input = data_input;
-	this->derivative_data = this->differentation(this->data_input);
-	this->squered_data = this->hilbertCalculate(this->derivative_data);
+//	this->derivative_data = this->differentation(this->data_input);
+	this->hilbert_vec = this->hilbertCalculate(this->data_input);
 	//this->integral_data = this->integration(this->squered_data, this->sampling_frequency, this->window_width);
 	
-	this->tresholded_data = this->treshold_data(this->integral_data, this->treshold);
+	this->tresholded_data = this->treshold_data(this->hilbert_vec, this->treshold);
 	this->R_Peaks = this->find_R(this->tresholded_data);
-	this->R_indexes_second = this->select_R_indexes(this->R_Peaks);
-	this->R_Peaks = this->delete_if_zero(this->R_indexes_second);
-	this->R_Peaks = this->calc_filter_shift(this->R_Peaks);
+	this->R_indexes_first = this->select_R_indexes(this->R_Peaks);
+	this->R_indexes_second = this->delete_if_zero(this->R_indexes_first);
+	this->R_Peaks = this->calc_filter_shift(this->R_indexes_second);
 	return this->R_Peaks;
 } 
     /*************************************************************************
