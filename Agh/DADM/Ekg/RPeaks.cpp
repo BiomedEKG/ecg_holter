@@ -299,7 +299,7 @@
 //}
 //
 //RPeaksResult* RPeaks::compute(ResultKeeper *rkp){
-//s
+//
 //	double sampling_frequency = 360; // to powinno byc pobierane z result keepera
 //	int window_width = 40; // [ms] // of sampling_frequency = 200 { window_width = 30}
 //	
