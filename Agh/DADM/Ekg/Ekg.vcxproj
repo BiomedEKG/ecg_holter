@@ -76,7 +76,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="calculationsVCG.cpp" />
     <ClCompile Include="ekg.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_channelsmenu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -131,6 +130,7 @@
     <ClCompile Include="methodsVCG.cpp" />
     <ClCompile Include="ResultVCG.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="VCGTLOOP.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">

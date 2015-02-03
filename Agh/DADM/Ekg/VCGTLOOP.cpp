@@ -1,7 +1,6 @@
 #include <math.h>
 #include <methodsVCG.h>
 #include <VCGTLOOP.h>
-#include <ResultVCG.h>
 
 using namespace std;
 
