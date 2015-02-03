@@ -77,8 +77,8 @@ public:
 	//vector<unsigned int> find_R2(vector<double> data);
 	vector<double> find_local_max(vector<double> data);
 	vector<unsigned int> find_R_indexes(vector<double> data);
-	vector<unsigned int> select_R_indexes(vector<unsigned int> R_indexes, vector<double> data);
 	vector<unsigned int> delete_if_zero(vector<unsigned int> data);
+	vector<unsigned int> select_R_indexes(vector<unsigned int> R_indexes);
 	int find_filter_shift(vector<double> data_input, vector<unsigned int> R_peak, unsigned int sampling_frequency);
 	vector<unsigned int> calc_filter_shift(vector<unsigned int> data);
 	vector<double> hilbertCalculate(vector<double> data);
