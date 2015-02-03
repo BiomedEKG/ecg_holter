@@ -297,6 +297,85 @@ vector<double> RPeaks::squere(vector<double> data){
 		return data;
 }
 
+vector<double> RPeaks::hilbertCalculate(vector<double> data){
+	
+		fftw_complex *in;
+		fftw_complex *out;
+		fftw_plan p;
+
+		in = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * 1024);
+		out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) *1024);
+		p = fftw_plan_dft_1d(1024, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
+
+		//plan for IFFT
+		fftw_complex *inI;
+		fftw_complex *outI;
+		fftw_plan pI;
+
+		inI = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * 1024);
+		outI = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) *1024);
+		pI = fftw_plan_dft_1d(1024, inI, outI, FFTW_BACKWARD, FFTW_ESTIMATE);	//ifft
+
+		double * diffSignalArray = new double [1024];
+		double fftabs[1024];
+
+		//scale for Hilbert transform
+		double hilbertScale[1024];
+		hilbertScale[0] = 1;
+		for (int i=1; i<512; i++)hilbertScale[i]=2;
+		hilbertScale[512] = 1;
+		for (int i=513; i<1024; i++)hilbertScale[i]=0;
+
+		vector<double> Hil_abs;
+		vector<double> H_re;	
+		vector<double> H_im;	
+
+		unsigned int counter = 0;	//counts the number of windows
+		for(size_t j=0;j<data.size()-1025;j=j+1024)  //divide signal
+		{
+			diffSignalArray = &data.at(j);
+			counter++;
+
+			//input for fft
+			for(size_t i=j*1024;i<(j*1024+1024);i++)
+			{
+				in[i-j*1024][0]=diffSignalArray[i-j*1024];
+				in[i-j*1024][1]=0;
+			}
+			
+			fftw_execute(p);
+
+			//signal hilbert scaling 
+			for(int i = 0; i<1024; i++){
+				H_re.push_back(hilbertScale[i]*out[i][0]);
+				H_im.push_back(hilbertScale[i]*out[i][1]);
+			}
+		
+			// IFFT 
+			int k = 0;
+			for(size_t i=(counter-1)*1024;i<((counter)*1024);i++)
+			{
+				inI[k][0]=H_re.at(i);
+				inI[k][1]=H_im.at(i);
+				k++;
+			}
+			
+			//executing ifft
+			fftw_execute(pI);			
+			
+			//get real data from complex hilbert
+			for(int i=0;i<1024;i++)
+			{
+				Hil_abs.push_back((sqrt(outI[i][0]*outI[i][0]+outI[i][1]*outI[i][1])/1024));	
+			}
+
+
+		}
+
+
+		return Hil_abs;
+}
+
 RPeaksResult* RPeaks::compute(BaselineResult *rkp, ResultKeeper *rkp2){
 
 	int sampling_frequency = 360;
