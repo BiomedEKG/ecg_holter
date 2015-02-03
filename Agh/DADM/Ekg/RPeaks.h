@@ -81,7 +81,7 @@ public:
 	vector<unsigned int> delete_if_zero(vector<unsigned int> data);
 	int find_filter_shift(vector<double> data_input, vector<unsigned int> R_peak, unsigned int sampling_frequency);
 	vector<unsigned int> calc_filter_shift(vector<unsigned int> data);
-	
+	vector<double> hilbertCalculate(vector<double> data);
 	vector<double> integration(vector<double> data, unsigned int sampling_frequency, int window_width);
 	vector<double> squere(vector<double> data);
 	RPeaksResult* compute (BaselineResult *rkp, ResultKeeper *rkp2);
