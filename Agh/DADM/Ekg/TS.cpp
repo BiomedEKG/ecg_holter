@@ -5,13 +5,13 @@
 void TS::show(){
 
 	
-	std::cout << "Wartosc wspolczynnika a: "; std::cout << this->a << std::endl;
+	std::cout << "Wartosc wspolczynnika a: "; std::cout << this->TS_value << std::endl;
 	std::cout << "Wartosc wspolczynnika b: "; std::cout << this->b << std::endl << std::endl;
 
 	if(this->TScorrect == true)
-		std::cout << "Wartosc TS wynosi " << this->a << "jest poprawna.";
+		std::cout << "Wartosc TS wynosi " << this->TS_value << "jest poprawna.";
 	else{
-		std::cout << "Wartosc TS wynosi " << this->a <<  " i jest nieprawidlowa. Norma wynosi "; std::cout << NORMVALUE << std::endl;
+		std::cout << "Wartosc TS wynosi " << this->TS_value <<  " i jest nieprawidlowa. Norma wynosi "; std::cout << NORMVALUE << std::endl;
 	}
 };
 
@@ -25,7 +25,7 @@ void TS::weightedLeastSquares(std::vector<double> meanTachogram, static const in
 	double y[5][15];
 	int i=0, j=0, k=0;
 	for(T_it=T_it+before+2; T_it!=meanTachogram.end()-5; T_it++, j++){
-		for(int i=0; i<5; i++){
+		for(i=0; i<5; i++){
 			y[i][j] = *(T_it+i);
 		}
 		i=0;
@@ -74,16 +74,14 @@ void TS::weightedLeastSquares(std::vector<double> meanTachogram, static const in
 		j=0;
 		k=0;
 		for(k=0; k<2; k++){
-			coeff[k][j][n] *  0;
+			//coeff[k][j][n] *  0;
 			for(j=0; j<1; j++){ //kolumny pierwszej 
 				for(i=0; i<2; i++){			//wiersze drugiej
 					coeff[k][j][n] = coeff[k][j][n] + ((out1[k][i]) * (y[i][n]));	
 					
 				}
 			}
-			/*std::cout <<  coeff[0][0][n] << std::endl;
-			std::cout <<  coeff[1][0][n] << std::endl;
-			std::cout << std::endl;*/}
+			}
 	}
 
 		//teraz szukam prostej o najwiêkszym nachyleniu.
@@ -97,23 +95,27 @@ void TS::weightedLeastSquares(std::vector<double> meanTachogram, static const in
 		}
 	}
 
-	this->a=max;
+	this->TS_value = max;
 	this->b=coeff[0][0][ind];
-	//dwa punkty przez które przechodziæ bêdzie prosta nachylenia TS
-	double P1 = this->a * meanTachogram[ind]  - this->b;
-	double P2 = this->a * meanTachogram[ind+4] - this->b;
-	this->points.push_back(P1);
-	this->points.push_back(P2);
-	this->indexes.push_back(ind);
-	this->indexes.push_back(ind+4);
 
+	//dwa punkty przez które przechodziæ bêdzie prosta nachylenia TS
+	double P1 = this->TS_value * meanTachogram[ind]  - this->b;
+	double P2 = this->TS_value * meanTachogram[ind+4] - this->b;
+	
+	
+	this->X.push_back(ind);
+	this->X.push_back(ind+4);
+	this->Y.push_back(P1);
+	this->Y.push_back(P2);
+	
+	
 }
 
 
 
 void TS::turbulenceSlopeEvaluation(){
 
-	if(this->a > NORMVALUE)
+	if(this->TS_value > NORMVALUE)
 		this->TScorrect = true;
 	else
 		this->TScorrect = false;

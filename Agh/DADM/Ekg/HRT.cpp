@@ -1,16 +1,14 @@
 #include "HRT.h"
-#include "HRTResult.h"
 #include "PVC.h"
-#include "TO.h"
 #include "TS.h"
 #include <iostream>
 #include <vector>
 
-HRTResult* HRT:: compute (ResultKeeper *rkp) const{
+HRTResult* HRT :: compute (ResultKeeper *rkp) const{
 
-	 double samplingFrequency = rkp->samplingFrequency;
-	 std::vector <double> R_peaks = rkp->RPEAKS;   //jeszcze nie wiem jak to bêdzie wygl¹daæ
-	 std::vector <double> R_class = rkp->R_class;	//ani to...
+	 double samplingFrequency = rkp->getNAZWAMODU£U.samplingFrequency;
+	 std::vector <double> R_peaks = rkp->getR_PEAKS.wektorRpeaksow;   //jeszcze nie wiem jak to bêdzie wygl¹daæ
+	 std::vector <double> R_class = rkp->getR_class.wektor_z_numerkami_klas;	//ani to...
 
 	 PVC a;
 
@@ -18,8 +16,12 @@ HRTResult* HRT:: compute (ResultKeeper *rkp) const{
 
 	 a.isolatePVC(a.qqq.indeks.sampleIndex, R_peaks, R_class, samplingFrequency);
 	
-	 // a.ArtefactsRemover(a.qqq.QRSclass, a.qqq.tachogram);
-     a.www.meanTachogram = a.qqq.tachogram[0];
+	 a.ArtefactsRemover(a.qqq.QRSclass, a.qqq.tachogram);
+     
+	 if(a.accepted_counter == 0){
+		 std::cout << "Nie ma tachogramów do ogarniania! Sorry!";
+	 }
+	 else{
 	 TO turbOnset;
 
 	 turbOnset.turbulenceOnsetEvaluation(a.www.meanTachogram, a.before);
@@ -31,15 +33,26 @@ HRTResult* HRT:: compute (ResultKeeper *rkp) const{
 	 turbSlope.turbulenceSlopeEvaluation();
 
 	 HRTResult *output = new HRTResult;
+	 HRT k;
 	 
 	 if(turbOnset.TO_correct == true && turbSlope.TScorrect == true)
-		output->setGroup(HRT0);
+		output->setGroup(0);
 	else {if(turbOnset.TO_correct == false && turbSlope.TScorrect == false)
-		output->setGroup(HRT2);
+		output->setGroup(2);
 	
 	else
-		output->setGroup(HRT1);
+		output->setGroup(1);
 	}
+		
+		output->setTOvalue(turbOnset.TOvalue);
+		output->setTS_value(turbSlope.TS_value);
+		output->setMeanTachogram(a.www.meanTachogram);
+		output->setY(turbSlope.Y);
+		output->setX(turbSlope.X);
+		output->setTableParameters("HRT group", output->getGroupRisk());
 	
 	return output->getResult();
+	}
+
+	
 }

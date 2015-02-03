@@ -6,13 +6,12 @@
 void TO::turbulenceOnsetEvaluation(std::vector<double> meanTachogram, static const int before){
 
 	std::vector<double>::iterator T_it = meanTachogram.begin();
-
 	this->TOvalue = 100*((*(T_it+before)+*(T_it+before+1)) - (*(T_it+before-1)+*(T_it+before-2)))/(*(T_it+before-1)+*(T_it+before-2));
 
 	if(this->TOvalue > NORMAL_VALUE)
-		this->TO_correct = false;
+		this->TO_correct =false;
 	else
-		this->TO_correct = true;
+		this->TO_correct=true;
 
 }
 

@@ -20,13 +20,15 @@ struct Artefacts{
 
 
 class PVC{
-public:
+private:
 	struct inputSignal qqq;
 	struct Artefacts www; 
+	static int accepted_counter;
 	static const int before = 6;
 	static const int after = 22;
-		
-	void findPVC(std::vector<double>, std::vector<double>);			//zwraca wektor z indeksami pobudzeñ; plus z indksami próbek w wektorze wejœciowym
+public:	
+	friend class HRT;
+	void findPVC(std::vector<double>, std::vector<double>);			//zwraca wektor z indeksami pobudzeñ; plus z indeksami próbek w wektorze wejœciowym
 	void isolatePVC(std::vector<double>, std::vector<double>, std::vector<double>, double);
 
 	void ArtefactsRemover(std::vector< std::vector<double> >, std::vector< std::vector<double> >);

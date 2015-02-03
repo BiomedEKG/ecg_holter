@@ -4,16 +4,15 @@ HRTResult::HRTResult(){}
 HRTResult::~HRTResult(){}
 
 
-
-
 HRTResult* HRTResult :: getResult(){
 	HRTResult *res = new HRTResult;
-	res->group = this->getGroup();
+	res->GroupRisk = this->getGroupRisk();				
 	res->MeanTachogram = this->getTachogram();
-	res->TO_value = this->getTO();
-	res->TS_value = this->getTS();
-	res->TS_match = this->getTSMatch();
-	res->param_Type = HRT;    //tutaj jakiœ enum czy co tam ma byæ =)
+	res->setTOvalue(this->getTOvalue());
+	res->setTS_value(this->getTS_value());
+	res->setY(this->getY());
+	res->setX(this->getX());
+					//tutaj jakiœ enum czy co tam ma byæ =)
 
 	return res;
 }

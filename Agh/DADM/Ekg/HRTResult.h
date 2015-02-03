@@ -1,51 +1,49 @@
 #include <AbstractResult.h>
+#include "TO.h"
+#include "TS.h"
 #include <vector>
 #include <string>
-
-enum RiskGroup{
-	HRT0,
-	HRT1,
-	HRT2
-};
+#include <map>
 
 
-class HRTResult : public AbstractResult{
+class HRTResult : public AbstractResult, TS, TO{
 
 private:
-enum RiskGroup group;
-double TO_value;
-double TS_value;
-std::vector<double> TS_match;
+std::map<std::string, double> TableParameters;
+double GroupRisk;							
 std::vector<double> MeanTachogram;
-//enum paramType param_Type;       to dziedziczymy po klasie AbstractResult
+//enum paramType param_Type;		to dziedziczymy po klasie AbstractResult
 
 public:
 virtual HRTResult* getResult();
 HRTResult();
 ~HRTResult();
 
-
-void setGroup(enum RiskGroup a){
-	this->group = a;
+void setTableParameters(std::string key, double val){
+	this->TableParameters[key] = val;
 }
 
-enum RiskGroup getGroup(){
-	return group;
+void setMeanTachogram(std::vector<double> a){
+	this->MeanTachogram = a;
 }
 
-double getTO(){
-	return TO_value;
+
+
+void setGroup(double a){
+	this->GroupRisk = a;
 }
 
-double getTS(){
-	return TS_value;
+double getTableParamteres(std::string key){
+	return TableParameters[key];
 }
+
+double getGroupRisk(){
+	return GroupRisk;
+}
+
 
 std::vector<double> getTachogram(){
 	return MeanTachogram;
-}
-std::vector<double> getTSMatch(){
-	return TS_match;
 }
 
 

@@ -2,12 +2,31 @@
 
 class TO{
 	
-public:
+private:
 
 	double TOvalue;
 	bool TO_correct;
 	//methods:
 
+public:
+	friend class HRT;
 	void turbulenceOnsetEvaluation(std::vector<double>, static const int);
 	void show();
+
+	void setTOvalue(double a){
+		this->TOvalue = a;
+	}
+
+	void setTO_correct(double a){
+		this->TO_correct=a;
+	}
+
+	double getTOvalue(){
+		return TOvalue;
+	}
+
+	bool getTO_correct(){
+		return TO_correct;
+	}
+
 };

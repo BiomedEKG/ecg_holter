@@ -7,6 +7,8 @@
 #define RR_min 300
 
 
+int PVC::accepted_counter;
+
 
 void PVC::show(){
 	std::vector<double>::iterator it, it1, it2, it3;
@@ -164,6 +166,8 @@ void PVC::ArtefactsRemover(std::vector<std::vector<double>> QRSc, std::vector<st
 		}
 	}
 
+
+	this->accepted_counter = 0;
 	int z=0, x=0;
 	//przekazujemy wszystkie tachogramy które spe³niaj¹ powy¿szy warunek do 
 	for(i=0; i<tach.size(); i++){
@@ -172,25 +176,35 @@ void PVC::ArtefactsRemover(std::vector<std::vector<double>> QRSc, std::vector<st
 				std::cout<< "rejected!!!";
 				this->www.rejected.push_back(std::vector<double>());
 				this->www.rejected[i].insert(this->www.rejected[i].begin(), tach_it, tach[i].end()-1);
+				break;
 			}
 			else{
 				this->www.accepted.push_back(std::vector<double>());
 				this->www.accepted.insert(this->www.accepted.begin(),tach_it, tach[i].end()-1);
+				this->accepted_counter++;
+				break;
 			}
 		}
 	}
+	std::cout<<"chujowo";
+	if(this->accepted_counter!=0){
+		
+		i=0;
+		std::vector<double> meanTach;
 
-	i=0;
-	std::vector<double> meanTach;
-
-	for(i=0; i<this->www.accepted.size(); i++){
-		this->www.meanTachogram.push_back(0);
-		for(int j=0; j<www.accepted[i].size(); j++){
-			this->www.meanTachogram[j] = this->www.meanTachogram[j] + this->www.accepted[i][j];
+		for(i=0; i<this->www.accepted.size(); i++){
+			this->www.meanTachogram.push_back(0);
+			for(int j=0; j<www.accepted[i].size(); j++){
+				this->www.meanTachogram[j] = this->www.meanTachogram[j] + this->www.accepted[i][j];
+			}
+		}
+		std::vector<double>::iterator it = this->www.meanTachogram.begin();
+		for(it=it; it!=this->www.meanTachogram.end(); it++){
+			*it=*it/this->www.accepted.size();
 		}
 	}
-	std::vector<double>::iterator it = this->www.meanTachogram.begin();
-	for(it=it; it!=this->www.meanTachogram.end(); it++){
-		*it=*it/this->www.accepted.size();
-	}
+
+	std::cout<< "SUMVEK     " << SUMvek[0] << std::endl << "inRRange   " << inRRrange[0] << std::endl << "MeanRange   " << RR_mean[0] << std::endl << "inMeanRange   " << inMeanRange[0] << std::endl;
+	
+
 }
