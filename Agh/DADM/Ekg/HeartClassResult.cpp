@@ -1,6 +1,7 @@
 #include "AbstractResult.h"
 #include "ReturnType.h"
 #include <vector>
+#include "HeartClassResult.h"
 
 HeartClassResult::HeartClassResult(void){
 

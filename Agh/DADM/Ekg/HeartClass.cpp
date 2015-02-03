@@ -363,9 +363,9 @@ void HeartClass::Conditioning(HeartClassResult tempHeartClassResult){
 	bool fifthCondition = false;
 	bool sixthCondition = false;
 	bool seventhCondition = false;
-	int n = 0;
-	int v = 0;
-	int a = 0;
+	double n = 0;
+	double v = 0;
+	double a = 0;
 	this->frequency = 340;
 	for(unsigned int z = 0; z < this->signalMap.size(); z++){
 		
@@ -454,20 +454,30 @@ void HeartClass::Conditioning(HeartClassResult tempHeartClassResult){
 				n++;
 			}
 		}
+
 		/*for(unsigned int i = 0; i < tempHeartClassResults.qrsClass.size(); i++){
 		
 			cout << tempHeartClassResults.qrsClass.at(i) << endl;
 		}*/
 	}
 
-	tempHeartClassResult.mapParameters.insert(pair<string, int>("Mean maximum amplitude", this->meanMaxAmplitude));
-	tempHeartClassResult.mapParameters.insert(pair<string, int>("Mean minimum amplitude", this->meanMinAmplitude));
-	tempHeartClassResult.mapParameters.insert(pair<string, int>("Mean area", this->meanMaxArea));
-	tempHeartClassResult.mapParameters.insert(pair<string, int>("Mean length of maximum", this->meanSamplesBetweenMax));
-	tempHeartClassResult.mapParameters.insert(pair<string, int>("Mean length of minimum", this->meanSamplesBetweenMin));
-	tempHeartClassResult.mapParameters.insert(pair<string, int>("Number of normal QRS", n));
-	tempHeartClassResult.mapParameters.insert(pair<string, int>("Number of ventricular QRS", v));
-	tempHeartClassResult.mapParameters.insert(pair<string, int>("Number of artifacts", a));
+	tempHeartClassResult.mapParameters.insert(pair<string, double>("Mean maximum amplitude", this->meanMaxAmplitude));
+	tempHeartClassResult.mapParameters.insert(pair<string, double>("Mean minimum amplitude", this->meanMinAmplitude));
+	tempHeartClassResult.mapParameters.insert(pair<string, double>("Mean area", this->meanMaxArea));
+	tempHeartClassResult.mapParameters.insert(pair<string, double>("Mean length of maximum", this->meanSamplesBetweenMax));
+	tempHeartClassResult.mapParameters.insert(pair<string, double>("Mean length of minimum", this->meanSamplesBetweenMin));
+	tempHeartClassResult.mapParameters.insert(pair<string, double>("Number of normal QRS", n));
+	tempHeartClassResult.mapParameters.insert(pair<string, double>("Number of ventricular QRS", v));
+	tempHeartClassResult.mapParameters.insert(pair<string, double>("Number of artifacts", a));
+
+	tempHeartClassResult.qrsParams.push_back("mV");
+	tempHeartClassResult.qrsParams.push_back("mV");
+	tempHeartClassResult.qrsParams.push_back("mv^2");
+	tempHeartClassResult.qrsParams.push_back("-");
+	tempHeartClassResult.qrsParams.push_back("-");
+	tempHeartClassResult.qrsParams.push_back("-");
+	tempHeartClassResult.qrsParams.push_back("-");
+	tempHeartClassResult.qrsParams.push_back("-");
 }
 
 
