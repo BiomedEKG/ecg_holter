@@ -144,6 +144,8 @@
     <ClCompile Include="RaportGenerator.cpp" />
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="ResultKeeper.cpp" />
+    <ClCompile Include="RPeaks.cpp" />
+    <ClCompile Include="RPeaksResult.cpp" />
     <ClCompile Include="SavitzkyGolay.cpp" />
     <ClCompile Include="ScatterPlot.cpp" />
     <ClCompile Include="TestModule.cpp" />
@@ -163,6 +165,8 @@
     <ClInclude Include="LeastMeanSquares.h" />
     <ClInclude Include="MajesticEngineOfGlory.h" />
     <ClInclude Include="MovingAverage.h" />
+    <ClInclude Include="RPeaks.h" />
+    <ClInclude Include="RPeaksResult.h" />
     <ClInclude Include="SavitzkyGolay.h" />
     <ClInclude Include="TestModule.h" />
     <ClInclude Include="VAbstractModule.h" />

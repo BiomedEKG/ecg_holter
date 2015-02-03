@@ -35,9 +35,9 @@ ResultKeeper::~ResultKeeper()
 	//return atrialFibrillation;
  //}
 
- //BaselineResult* ResultKeeper::getECGBaseline(){
-	//return ecgBaseline;
- //}
+ BaselineResult* ResultKeeper::getECGBaseline(){
+	return ecgBaseline;
+ }
 
  //Hrv2Result* ResultKeeper::getHrv2() {
 	//return hrv2;
@@ -53,6 +53,10 @@ ResultKeeper::~ResultKeeper()
 	this->ecgBaseline = baseline;
  }
 
+
+ void ResultKeeper::setRPeaks(RPeaksResult* rPeaks) {
+	this->rPeaks = rPeaks;
+ }
  //void ResultKeeper::setAtrialFibrillation(AtrfibrResult* atr) {
 	//this->atrialFibrillation = atr;
  //}

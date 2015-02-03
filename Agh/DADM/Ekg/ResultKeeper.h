@@ -4,6 +4,7 @@
 #include <Input.h>
 #include "AbstractResult.h"
 //#include "AtrFibr.h"
+#include <RPeaksResult.h>
 #include "BaselineResult.h"
 //#include "WavesResult.h"
 //#include "SigEDResult.h"
@@ -31,7 +32,7 @@ class ResultKeeper
 
 	/*	AtrfibrResult* getAtrialFibrillation();
 		Hrv2Result* getHrv2();*/
-	//	RPeaks* getRPeaks();
+		RPeaksResult* getRPeaks();
 	//	HRV1* getHRV1();
 	//	HeartClass* getHeartClass();
 		BaselineResult* getECGBaseline();
@@ -49,7 +50,7 @@ class ResultKeeper
 
 		void setAtrialFibrillation(AtrfibrResult* atr);
 		void setHrv2(Hrv2Result* hrv2);*/
-	//	RPeaks* getRPeaks();
+		void setRPeaks(RPeaksResult* rpr);
 	//	HRV1* getHRV1();
 	//	HeartClass* getHeartClass();
 		void setECGBaseline(BaselineResult* baseline);
@@ -59,7 +60,7 @@ class ResultKeeper
 	//	HRT* getHRT();
 	//	SleepApnea* getSleepApnea();
 	//	QTDisp* getQTDisp();
-	//	Input* getInput();
+		Input* getInput();
 	//	RaportGenerator* getRaportGenerator();
 		/*void setSIG_EDR(SigEDResult* sigEdr);
 		void setWaves(WavesResult* waveRes);*/
@@ -82,10 +83,10 @@ class ResultKeeper
 		Input handler;
 		/*AtrfibrResult *atrialFibrillation;
 		Hrv2Result *hrv2;*/
-	//	RPeaks *rPeaks;
+		RPeaksResult *rPeaks;
 	//	HRV1 *hrv1;
 	//	HeartClass *heartClass;
-	BaselineResult *ecgBaseline;
+		BaselineResult *ecgBaseline;
 	
 	//	EctopicBeat *ectopicBeat;
 	//	STSegmentResult *stSegmentResult;

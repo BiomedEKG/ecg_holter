@@ -9,7 +9,7 @@ public:
 	BaselineResult* getResult();
 	BaselineResult();
     ~BaselineResult();
-protected:
+
 	std::vector <double> filteredSignal;
 public:
 	std::vector <double> getFilteredSignal();
