@@ -72,6 +72,9 @@
     <Filter Include="Modules\RPeaks">
       <UniqueIdentifier>{90a504a8-2ccd-40fa-afd2-787c20662060}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\VCGLoop">
+      <UniqueIdentifier>{8bb24f5b-ed5c-4aac-a09a-0ebd28617ffa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -224,6 +227,33 @@
     <ClCompile Include="RPeaksResult.cpp">
       <Filter>Modules\RPeaks</Filter>
     </ClCompile>
+    <ClCompile Include="AtrFibr.cpp">
+      <Filter>Modules\AtrialFibrilation</Filter>
+    </ClCompile>
+    <ClCompile Include="AtrfibrResult.cpp">
+      <Filter>Modules\AtrialFibrilation</Filter>
+    </ClCompile>
+    <ClCompile Include="SIG_EDR.cpp">
+      <Filter>Modules\SigEDR</Filter>
+    </ClCompile>
+    <ClCompile Include="SigEDResult.cpp">
+      <Filter>Modules\SigEDR</Filter>
+    </ClCompile>
+    <ClCompile Include="Waves.cpp">
+      <Filter>Modules\Waves</Filter>
+    </ClCompile>
+    <ClCompile Include="WavesResult.cpp">
+      <Filter>Modules\Waves</Filter>
+    </ClCompile>
+    <ClCompile Include="methodsVCG.cpp">
+      <Filter>Modules\VCGLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultVCG.cpp">
+      <Filter>Modules\VCGLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="VCGTLOOP.cpp">
+      <Filter>Modules\VCGLoop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -353,6 +383,33 @@
     </ClInclude>
     <ClInclude Include="RPeaksResult.h">
       <Filter>Modules\RPeaks</Filter>
+    </ClInclude>
+    <ClInclude Include="AtrFibr.h">
+      <Filter>Modules\AtrialFibrilation</Filter>
+    </ClInclude>
+    <ClInclude Include="AtrfibrResult.h">
+      <Filter>Modules\AtrialFibrilation</Filter>
+    </ClInclude>
+    <ClInclude Include="SIG_EDR.h">
+      <Filter>Modules\SigEDR</Filter>
+    </ClInclude>
+    <ClInclude Include="SigEDResult.h">
+      <Filter>Modules\SigEDR</Filter>
+    </ClInclude>
+    <ClInclude Include="Waves.h">
+      <Filter>Modules\Waves</Filter>
+    </ClInclude>
+    <ClInclude Include="WavesResult.h">
+      <Filter>Modules\Waves</Filter>
+    </ClInclude>
+    <ClInclude Include="methodsVCG.h">
+      <Filter>Modules\VCGLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultVCG.h">
+      <Filter>Modules\VCGLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="VCGTLOOP.h">
+      <Filter>Modules\VCGLoop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
