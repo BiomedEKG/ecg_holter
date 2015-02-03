@@ -8,7 +8,7 @@
 class TestModule : public AbstractModule<Result>
 {
    public:
-	virtual Result* compute(ResultKeeper* rkp) const override;
+	virtual Result* compute(ResultKeeper* rkp) override;
 };
 
 #endif // TESTMODULE_H

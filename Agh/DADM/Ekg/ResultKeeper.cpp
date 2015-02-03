@@ -5,13 +5,13 @@
 
 ResultKeeper::ResultKeeper()
 {
-  this->atrialFibrillation=0;
-  this->ecgBaseline=0;
-  this->hrv2=0;
-  this->rawSignalADU=0;
-  this->rawSignalMV=0;
-  this->sigEDR=0;
-  this->waves=0;
+  //this->atrialFibrillation=0;
+  //this->ecgBaseline=0;
+  //this->hrv2=0;
+  //this->rawSignalADU=0;
+  //this->rawSignalMV=0;
+  //this->sigEDR=0;
+  //this->waves=0;
 }
 
 ResultKeeper::~ResultKeeper()
@@ -20,27 +20,32 @@ ResultKeeper::~ResultKeeper()
 }
 
  ResultKeeper& ResultKeeper :: getInstance() {
+	// ResultKeeper();
 	 static ResultKeeper instance;
 	 return instance;
 } 
 
  
 
- AtrFibr* ResultKeeper::getAtrialFibrillation() {
-	return atrialFibrillation;
+  Input ResultKeeper::getSignalHandler() {
+	return Input();
  }
 
- BaselineResult* ResultKeeper::getECGBaseline(){
-	return ecgBaseline;
- }
+ //AtrFibr* ResultKeeper::getAtrialFibrillation() {
+	//return atrialFibrillation;
+ //}
 
- Hrv2Result* ResultKeeper::getHrv2() {
-	return hrv2;
- }
+ //BaselineResult* ResultKeeper::getECGBaseline(){
+	//return ecgBaseline;
+ //}
 
- SigEDResult* ResultKeeper::getSIG_EDR() {
-	return sigEDR;
- }
+ //Hrv2Result* ResultKeeper::getHrv2() {
+	//return hrv2;
+ //}
+
+ //SigEDResult* ResultKeeper::getSIG_EDR() {
+	//return sigEDR;
+ //}
 
 
 
@@ -48,18 +53,18 @@ ResultKeeper::~ResultKeeper()
 	this->ecgBaseline = baseline;
  }
 
- void ResultKeeper::setAtrialFibrillation(AtrfibrResult* atr) {
-	this->atrialFibrillation = atr;
- }
+ //void ResultKeeper::setAtrialFibrillation(AtrfibrResult* atr) {
+	//this->atrialFibrillation = atr;
+ //}
 
- void ResultKeeper::setHrv2(Hrv2Result* hrv2) {
-	this->hrv2 = hrv2;
- }
+ //void ResultKeeper::setHrv2(Hrv2Result* hrv2) {
+	//this->hrv2 = hrv2;
+ //}
 
- void ResultKeeper::setSIG_EDR(SigEDResult* sig) {
-	this->sigEDR = sig;
- }
+ //void ResultKeeper::setSIG_EDR(SigEDResult* sig) {
+	//this->sigEDR = sig;
+ //}
 
- void ResultKeeper::setWaves(WavesResult* waves) {
-	this->waves = waves;
- }
+ //void ResultKeeper::setWaves(WavesResult* waves) {
+	//this->waves = waves;
+ //}

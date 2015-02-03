@@ -4,15 +4,17 @@
 #include <vector> 
 #include "ResultKeeper.h"
 
-BaselineResult* ECGBaseline::compute (ResultKeeper *rkp){
+BaselineResult* ECGBaseline::compute (ResultKeeper *rkp) {
 
 
 
 //	samplingFrequency = rkp->samplingFrequency;   // nie ma tego w result keeperze
-	std::vector <double> signal = (*rkp->input);//
-	enum baselineMethod = (*rkp->BASELINEMETHOD);
+	Input in = rkp->getSignalHandler();
+	in.Open(rkp->pathToFile);
+	std::vector <double> signal = in.vdGetChannelData(); 
+	enum BASELINEMETHOD bM = BUTTERWORTH;
 
-	switch (baselineMethod){
+	switch (bM){
 
 		case  BUTTERWORTH:
 			output = butterworthFilter (&signal, samplingFrequency);

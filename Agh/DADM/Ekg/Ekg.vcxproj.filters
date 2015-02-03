@@ -74,9 +74,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -146,9 +143,6 @@
     <ClCompile Include="ScatterPlot.cpp">
       <Filter>Modules\VisualizationModule</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Modules\I/O</Filter>
     </ClCompile>
@@ -188,9 +182,6 @@
     <ClCompile Include="VAbstractModule.cpp">
       <Filter>Modules\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="ReturnType.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BaselineResult.cpp">
       <Filter>Modules\Baseline</Filter>
     </ClCompile>
@@ -218,11 +209,11 @@
     <ClCompile Include="Filter.cpp">
       <Filter>Modules\Baseline</Filter>
     </ClCompile>
-    <ClCompile Include="RPeaks.cpp">
-      <Filter>Modules\RPeaks</Filter>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RPeaksResult.cpp">
-      <Filter>Modules\RPeaks</Filter>
+    <ClCompile Include="MajesticEngineOfGlory.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,9 +270,6 @@
     <ClInclude Include="RaportGenerator.h">
       <Filter>Modules\I/O</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gui\ECGFiltrationWidget.h">
       <Filter>Modules\GUI</Filter>
     </ClInclude>
@@ -311,9 +299,6 @@
     </ClInclude>
     <ClInclude Include="VAbstractModule.h">
       <Filter>Modules\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="ReturnType.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BaselineResult.h">
       <Filter>Modules\Baseline</Filter>
@@ -345,14 +330,8 @@
     <ClInclude Include="FilterType.h">
       <Filter>Modules\Baseline</Filter>
     </ClInclude>
-    <ClInclude Include="Methods.h">
+    <ClInclude Include="MajesticEngineOfGlory.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RPeaks.h">
-      <Filter>Modules\RPeaks</Filter>
-    </ClInclude>
-    <ClInclude Include="RPeaksResult.h">
-      <Filter>Modules\RPeaks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

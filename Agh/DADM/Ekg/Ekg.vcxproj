@@ -78,8 +78,6 @@
   <ItemGroup>
     <ClCompile Include="AbstractModule.cpp" />
     <ClCompile Include="AbstractResult.cpp" />
-    <ClCompile Include="AtrFibr.cpp" />
-    <ClCompile Include="AtrfibrResult.cpp" />
     <ClCompile Include="BaselineResult.cpp" />
     <ClCompile Include="Butterworth.cpp" />
     <ClCompile Include="Chebyshev.cpp" />
@@ -131,11 +129,10 @@
     <ClCompile Include="gui\RPeaksDetectionWidget.cpp" />
     <ClCompile Include="gui\selectmodulemenu.cpp" />
     <ClCompile Include="gui\selectmodulesprivate.cpp" />
-    <ClCompile Include="Hrv2.cpp" />
-    <ClCompile Include="Hrv2Result.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LeastMeanSquares.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MajesticEngineOfGlory.cpp" />
     <ClCompile Include="ModuleThread.cpp" />
     <ClCompile Include="ModuleTimer.cpp" />
     <ClCompile Include="MovingAverage.cpp" />
@@ -147,24 +144,14 @@
     <ClCompile Include="RaportGenerator.cpp" />
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="ResultKeeper.cpp" />
-    <ClCompile Include="ReturnType.cpp" />
-    <ClCompile Include="RPeaks.cpp" />
-    <ClCompile Include="RPeaksResult.cpp" />
     <ClCompile Include="SavitzkyGolay.cpp" />
     <ClCompile Include="ScatterPlot.cpp" />
-    <ClCompile Include="SigEDResult.cpp" />
-    <ClCompile Include="SIG_EDR.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="TestModule.cpp" />
     <ClCompile Include="VAbstractModule.cpp" />
-    <ClCompile Include="Waves.cpp" />
-    <ClCompile Include="WavesResult.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractModule.h" />
     <ClInclude Include="AbstractResult.h" />
-    <ClInclude Include="AtrFibr.h" />
-    <ClInclude Include="AtrfibrResult.h" />
     <ClInclude Include="BaselineResult.h" />
     <ClInclude Include="Butterworth.h" />
     <ClInclude Include="Chebyshev.h" />
@@ -173,20 +160,12 @@
     <ClInclude Include="ECGBaseline.h" />
     <ClInclude Include="Filter.h" />
     <ClInclude Include="FilterType.h" />
-    <ClInclude Include="Hrv2.h" />
-    <ClInclude Include="Hrv2Result.h" />
     <ClInclude Include="LeastMeanSquares.h" />
+    <ClInclude Include="MajesticEngineOfGlory.h" />
     <ClInclude Include="MovingAverage.h" />
-    <ClInclude Include="ReturnType.h" />
-    <ClInclude Include="RPeaks.h" />
-    <ClInclude Include="RPeaksResult.h" />
     <ClInclude Include="SavitzkyGolay.h" />
-    <ClInclude Include="SigEDResult.h" />
-    <ClInclude Include="SIG_EDR.h" />
     <ClInclude Include="TestModule.h" />
     <ClInclude Include="VAbstractModule.h" />
-    <ClInclude Include="Waves.h" />
-    <ClInclude Include="WavesResult.h" />
     <CustomBuild Include="gui\channelsmenu.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing channelsmenu.h...</Message>
@@ -249,7 +228,6 @@
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PdfGenerator.h" />
     <ClInclude Include="RaportGenerator.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Result.h" />
     <ClInclude Include="ResultKeeper.h" />
     <ClInclude Include="ScatterPlot.h" />

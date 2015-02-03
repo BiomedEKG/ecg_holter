@@ -14,6 +14,7 @@ private:
     WFDB_Siginfo *SignalInfo;
 	char *Path; 
 	char **ChannelNames;
+	char *Patient;
 	int Counter;
 	int Fs; //Czestotliwosc probkowania
 	int SigTotNumber; // Liczba kanalow w sygnale
@@ -25,10 +26,10 @@ private:
 	//map< char *, vector <double>> dmData; //Do przyszlego rozwoju
 	//map< char *, vector <int>> imData; // Do przyszlego rozwoju
 	map<char *, int> ChannelID;
-	
+	void PrepairPath(char *RawPath);
 	
 public:
-	void PrepairPath(char *RawPath);
+	
 	Input():Counter(0){};///Na razie do okreslenia czy przydzielamy nowa pamiec dla pliku
 
 	int Open(char *SignalPath); 
@@ -40,10 +41,12 @@ public:
 	int GetFs(void); 
 	int GetSignalLength(void);
 	int GetNumberOfChannels(void);
+	char * GetPatientInfo(void);
 	char * GetChannelName(void);
-	char ** GetChannelsNames(void);
+	char ** GetChannelsNames(void); 
 	vector <double> vdGetChannelData(void);
 	vector <int> viGetChannelData(void);
+
 	~Input(void);
 };
 
