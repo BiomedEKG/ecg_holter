@@ -17,4 +17,6 @@ void HRV1Result::setHRV1Result(map<string, double> timeParameters, map<string, d
 	this -> prvfreqParameters = freqParameters;
 	this -> prvpower = power;
 	this -> prvfrequency = frequency;
+	this -> prvtimetab[8] = tabtime;
+	this -> prvfreqtab[6] = tabfreq;
 }

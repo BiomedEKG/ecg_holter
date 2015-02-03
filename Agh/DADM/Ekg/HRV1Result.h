@@ -18,4 +18,6 @@ private:
 	map<string, double> prvfreqParameters;
 	vector<double> prvpower;
 	vector<double> prvfrequency;
+	string prvtimetab[8];
+	string prvfreqtab[6];
 };
