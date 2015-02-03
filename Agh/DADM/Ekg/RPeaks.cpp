@@ -209,16 +209,16 @@ vector<unsigned int> RPeaks::find_R_indexes(vector<double> data){
 	*
 	*************************************************************************/
 
-vector<unsigned int> RPeaks::select_R_indexes(vector<unsigned int> R_indexes, vector<double> data){
+vector<unsigned int> RPeaks::select_R_indexes(vector<unsigned int> R_indexes){
 	vector<unsigned int> R_indexes_selected = R_indexes;
-	int min_distance = (this->sampling_frequency)*60/250; // maks tetno
+	int min_distance = (this->sampling_frequency)*60/250; // ograniczenie fizjologiczne
 		for(size_t i = 0 ; i<R_indexes.size()-1; i++){	
 			if((R_indexes.at(i+1) - R_indexes.at(i)) < min_distance) {
-				if(data.at(R_indexes.at(i+1)) < data.at(R_indexes.at(i))){
+			//	if(data.at(R_indexes.at(i+1)) < data.at(R_indexes.at(i))){
 					R_indexes_selected.at(i+1) = 0;	
-		    	}
-				else 
-					R_indexes_selected.at(i) = 0;
+		    //	}
+			//	else 
+				//	R_indexes_selected.at(i) = 0;
 			}
 		}
 		
@@ -426,7 +426,7 @@ vector<unsigned int> RPeaks::compute2HIlbert(std::vector<double> data_input, int
 	
 	this->tresholded_data = this->treshold_data(this->integral_data, this->treshold);
 	this->R_Peaks = this->find_R(this->tresholded_data);
-	this->R_indexes_second = this->select_R_indexes(this->R_Peaks, this->tresholded_data);
+	this->R_indexes_second = this->select_R_indexes(this->R_Peaks);
 	this->R_Peaks = this->delete_if_zero(this->R_indexes_second);
 	this->R_Peaks = this->calc_filter_shift(this->R_Peaks);
 	return this->R_Peaks;
