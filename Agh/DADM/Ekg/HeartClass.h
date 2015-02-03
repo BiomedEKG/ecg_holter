@@ -15,15 +15,13 @@ using namespace std;
 class HeartClass : public AbstractModule<{
 	
 	public:
-		
-		//TODO dowiedzieæ siê sk¹d wzi¹æ frequency
+
 		double frequency;
 		
 		map<int, vector<double> > signalMap;
 		map<int, vector<double> > yQRS;
 		map<int, vector<double> > samplesBetweenMax;
 
-		//Wype³niæ w compute!!!
 		vector<double> qrsMinAmplitudes;
 		vector<double> qrsMaxAmplitudes;
 		vector<double> qrsMinAmplitudesSamples;
@@ -46,8 +44,9 @@ class HeartClass : public AbstractModule<{
 		double meanSamplesBetweenMax;
 		double meanSamplesBetweenMin;
 		
-		HeartClass();
-		HeartClass(ResultKeeper* rpk);
+		HeartClass(void);
+		~HeartClass(void);
+		HeartClass(ResultKeeper* rkp);
 		
 		virtual HeartClassResult* compute(ResultKeeper* rkp); const override;
 		
@@ -56,7 +55,7 @@ class HeartClass : public AbstractModule<{
 		void FrameLocator();
 		void MeanAmplitude();
 		void SamplesBetween();
-		void Conditioning();
+		void Conditioning(HeartClassResult tempHeartClassResult);
 };
 
 #endif // HEART_CLASS_H

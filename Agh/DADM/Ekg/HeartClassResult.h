@@ -13,9 +13,14 @@ class HeartClassResult{
 	
 	public:
 		
-		map<string, vector<double> > qrsParameters;
+		string qrsParameters[] = {"mV", "mV", "mv^2", "-", "-", "-", "-", "-"};
+		map<string, int> mapParameters;
 		map<string, vector<double> > qrsClassificationMap;
-		vector<double> qrsClass;		
+		vector<double> qrsClass;
+
+		HeartClassResult(void);
+		~HeartClassResult(void);
+		HeartClassResult* getReult();
 };
 
 #endif // HEART_CLASS_RESULT_H
