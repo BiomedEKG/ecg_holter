@@ -418,6 +418,19 @@ vector<unsigned int> RPeaks::compute2(std::vector<double> data_input, int sampli
 	return this->R_Peaks;
 }
 
+vector<unsigned int> RPeaks::compute2HIlbert(std::vector<double> data_input, int sampling_frequency){
+	this->data_input = data_input;
+	this->derivative_data = this->differentation(this->data_input);
+	this->squered_data = this->hilbertCalculate(this->derivative_data);
+	//this->integral_data = this->integration(this->squered_data, this->sampling_frequency, this->window_width);
+	
+	this->tresholded_data = this->treshold_data(this->integral_data, this->treshold);
+	this->R_Peaks = this->find_R(this->tresholded_data);
+	this->R_indexes_second = this->select_R_indexes(this->R_Peaks, this->tresholded_data);
+	this->R_Peaks = this->delete_if_zero(this->R_indexes_second);
+	this->R_Peaks = this->calc_filter_shift(this->R_Peaks);
+	return this->R_Peaks;
+} 
     /*************************************************************************
 	*
 	*   TEST static method purpose - reading input_data from .txt file 
