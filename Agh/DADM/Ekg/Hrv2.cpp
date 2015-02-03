@@ -175,13 +175,14 @@ using namespace std;
 
 		vector<double> usun, tabplus, tabminus ;
 		double a=300, b=2000;
-
+		/*
         for( int i = 0; i < val.size(); i++ ){
             if (val[i]<a || val[i]>b){
                 if((i>0) && !(usun.back() == (i-1)))    usun.push_back(i-1);
 				usun.push_back(i);
 				}
 			}
+			*/
 		//tworzenie wektora plus
 		for( int i = 0; i < val.size() - 1; i++ ){
             tabplus.push_back( val[i] );
