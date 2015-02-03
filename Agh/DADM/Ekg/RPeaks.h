@@ -86,6 +86,7 @@ public:
 	vector<double> squere(vector<double> data);
 	RPeaksResult* compute (BaselineResult *rkp, ResultKeeper *rkp2);
 	vector<unsigned int> compute2(std::vector<double> data_input, int sampling_frequency);
+	vector<unsigned int> compute2HIlbert(std::vector<double> data_input, int sampling_frequency)
 
 	~RPeaks(void);
 
