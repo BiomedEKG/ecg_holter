@@ -146,28 +146,10 @@
     <ClCompile Include="gui\RPeaksDetectionWidget.cpp">
       <Filter>Modules\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractModule.cpp">
-      <Filter>Modules\WAVES</Filter>
-    </ClCompile>
-    <ClCompile Include="AbstractResult.cpp">
-      <Filter>Modules\WAVES</Filter>
-    </ClCompile>
-    <ClCompile Include="ResultKeeper.cpp">
-      <Filter>Modules\WAVES</Filter>
-    </ClCompile>
-    <ClCompile Include="ReturnType.cpp">
-      <Filter>Modules\WAVES</Filter>
-    </ClCompile>
-    <ClCompile Include="VAbstractModule.cpp">
-      <Filter>Modules\WAVES</Filter>
-    </ClCompile>
     <ClCompile Include="Waves.cpp">
       <Filter>Modules\WAVES</Filter>
     </ClCompile>
     <ClCompile Include="WavesResult.cpp">
-      <Filter>Modules\WAVES</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceMain.cpp">
       <Filter>Modules\WAVES</Filter>
     </ClCompile>
   </ItemGroup>
@@ -233,21 +215,6 @@
     </ClInclude>
     <ClInclude Include="gui\RPeaksDetectionWidget.h">
       <Filter>Modules\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractModule.h">
-      <Filter>Modules\WAVES</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractResult.h">
-      <Filter>Modules\WAVES</Filter>
-    </ClInclude>
-    <ClInclude Include="ResultKeeper.h">
-      <Filter>Modules\WAVES</Filter>
-    </ClInclude>
-    <ClInclude Include="ReturnType.h">
-      <Filter>Modules\WAVES</Filter>
-    </ClInclude>
-    <ClInclude Include="VAbstractModule.h">
-      <Filter>Modules\WAVES</Filter>
     </ClInclude>
     <ClInclude Include="Waves.h">
       <Filter>Modules\WAVES</Filter>

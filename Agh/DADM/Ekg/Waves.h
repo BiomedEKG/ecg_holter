@@ -6,7 +6,7 @@
 #include<iterator>
 #include <QVector>
 #include "qvector.h"
-#include <cmath> //chuja tam, pewnie i tak nie ma w projekcie (dzialaloby INFINITY??)
+#include <cmath>
 
 using namespace std;
 
@@ -14,7 +14,6 @@ void envelope(vector<double>::iterator, vector<double>::iterator, vector<double>
 
 class Waves: public AbstractModule<WavesResult>{
 private:
-	QVector <double> Waves::set_chuj(); // wtf??
 	/*
 	vector<double> Waves::set_qrs_onset(vector<double> ECGBaselineData, vector<double> RPeaksData, int sampling_frequency);
 	vector<double> Waves::set_qrs_end(vector<double> ECGBaselineData, vector<double> RPeaksData, int sampling_frequency);
@@ -37,20 +36,12 @@ private:
 	vector<vector<double>::const_iterator> qrs_end_it;
 	vector<vector<double>::const_iterator> p_onset_it;
 	vector<vector<double>::const_iterator> p_end_it;
+	vector<vector<double>::const_iterator> t_onset_it;
+	vector<vector<double>::const_iterator> t_end_it;
 	//const vector<vector<double>::const_iterator> & get_qrs_begin(); // trzeba to sprawdzic w chuuuj
 	//vector<vector<double>::const_iterator> p_onset_it;
 	//const vector<vector<double>::const_iterator> & get_p_onset();
 
 public:
 	virtual WavesResult* compute(ResultKeeper *rkp)const override;
-	
-	/*
-	OLD ARGUMENTS:
-	vector<double> resultFromECKBaseline, vector<double> resultFromRPeaks
-	*/
-	/*
-	OLD OUTPUT:
-	map <string, vector<int>>
-	*/
-
 };
