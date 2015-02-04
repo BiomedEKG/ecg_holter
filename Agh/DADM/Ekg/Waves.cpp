@@ -4,10 +4,10 @@ WavesResult* Waves::compute(ResultKeeper *rkp)const {
 
 	vector<double> *ECGBaselineData;
 	vector<double> *RPeaksData;
-	/*
+	
 	ECGBaselineData = rkp.GetResultECGBaseline.GetECGBaselineData(); /// Przypisanie danych ECGBaseline na ktorych beda wykonywane obliczenia
 	RPeaksData = rkp.GetResultRPeaks.GetRPeaksData(); /// Przypisanie danych RPeaks na ktorych beda wykonywane obliczenia
-	*/
+	
 
 	WavesResult  ResultHolder = WavesResult();///stworz obiekt rezultatu
 	ResultHolder.SetWavesResultData(WavesData);////Przypisz dane z klasy liczacej do danych klasy z klasy rezultatu
