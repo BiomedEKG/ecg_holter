@@ -14,7 +14,7 @@ class SleepApnea : public AbstractModule<SleepApneaResult>{
 
 
 public:
-
+	/*  niepotrzebne jesli get result sam wprowadza stringi
 	string XUnit;
 	string YUnit;
 		
@@ -55,7 +55,7 @@ public:
 	vector < float > SleepApnea::wyborAnalizowanych(int poczatek, int koniec, vector<float> RX);
 
 	SleepApneaResult* SleepApnea :: Rampl(int fs, vector<float> R_peaks_in, int size_Rpeaks, int metoda);
-	SleepApneaResult* SleepApnea :: compute(ResultKeeper* rkp) const ;
+	SleepApneaResult* SleepApnea :: compute(ResultKeeper* rkp);//   ZAPYTAC czy byl wazny const ;
 	
 
 

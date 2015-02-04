@@ -752,13 +752,14 @@ SleepApneaResult* SleepApnea :: Rampl(int fs, vector<float> R_peaks_in, int size
 }
 
 
-SleepApneaResult* SleepApnea :: compute(ResultKeeper* rkp) const {
+SleepApneaResult* SleepApnea :: compute(ResultKeeper* rkp) {
 	
-	int fs=rkp->GETjakisInput()->fs // albo getfs() itd dla reszty
-	R_peaks_in
-	size_Rpeaks
-	metoda
+	int fs=rkp->getInput()->GetFs();
+	vector<unsigned int> uintR_peaks_in =rkp->getRPeaks()->getRPeaks();
+	vector<float> R_peaks_in(uintR_peaks_in.begin(),uintR_peaks_in.end());
+	int size_Rpeaks=R_peaks_in.size();
+	int metoda=1 ;//                                                            z UI rkp->;                                                              
 
-	return Rampl( fs , R_peaks_in, size_Rpeaks,metoda);  // Czemu w edr puste? Brak argumentow
+	return Rampl( fs , R_peaks_in, size_Rpeaks,metoda);
 }
 
