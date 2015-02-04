@@ -1,3 +1,4 @@
+#pragma once
 #include <AbstractResult.h>
 #include <vector>
 
@@ -8,7 +9,7 @@ public:
 	BaselineResult* getResult();
 	BaselineResult();
     ~BaselineResult();
-protected:
+
 	std::vector <double> filteredSignal;
 public:
 	std::vector <double> getFilteredSignal();

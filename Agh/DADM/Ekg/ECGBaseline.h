@@ -1,8 +1,7 @@
 #pragma once
-
 #include "AbstractModule.h"     
 #include "Result.h"   
-
+#include<BaselineResult.h>
 #include "Methods.h"
 #include "FilterType.h"
 #include "MovingAverage.h"
@@ -18,7 +17,7 @@ class ECGBaseline: public AbstractModule<BaselineResult> {
 
 public:
 	// BaselineResult* compute (ResultKeeper *rkp, BASELINEMETHOD baselineMethod);
-	BaselineResult* compute (ResultKeeper *rkp);
+	BaselineResult* compute (ResultKeeper *rkp) override;
 	std::vector <double> output;
 	
 private:

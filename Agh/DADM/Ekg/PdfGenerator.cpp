@@ -1,6 +1,7 @@
 #include "PdfGenerator.h"
 #include <QtCore/qdatetime.h>
 
+
 //Constructor
 PdfGenerator::PdfGenerator(QString path2file) 
 	: pdfPrinter(), docCreator(), plotInserter(), currentPos(leftRightMargin,topBottomMargin), pageCounter(1)
@@ -12,8 +13,10 @@ PdfGenerator::PdfGenerator(QString path2file)
 	pdfPrinter.setOrientation(QPrinter::Portrait);
 	pdfPrinter.setFullPage(true);
 	plotInserter.setDiscardFlag(QwtPlotRenderer::DiscardBackground );
+	if (!docCreator.begin(&pdfPrinter))
+		throw std::exception("Error during file opening. File missing or it is opened in another application.");
 	//Qwt plot renderer settings
-	plotInserter.setDiscardFlag(QwtPlotRenderer::DiscardLegend);
+	//plotInserter.setDiscardFlag(QwtPlotRenderer::DiscardLegend);
 }
 //Private copy constructor (coping disabled)
 PdfGenerator::PdfGenerator(const PdfGenerator &p){
@@ -114,11 +117,14 @@ bool PdfGenerator::addHeader(QString title){
 }
 	
 /***************Inserts plot do the document************************/
-bool PdfGenerator::addPlot(QwtPlot* ptrPlot,bool strechToPageWidth){
+bool PdfGenerator::addPlot(QwtPlot* ptrPlot,bool strechToPageWidth,bool discardLegend){
 	//If QPainter is not active
 	if (!docCreator.isActive())
 		if (!docCreator.begin(&pdfPrinter))
 			return false;
+	//Set flag
+	plotInserter.setDiscardFlag(QwtPlotRenderer::DiscardLegend, discardLegend);
+
 	//Get size of the plot
 	QSize sizePlot = ptrPlot->size();
 	//Check whether plot would fit in the current page
@@ -145,11 +151,13 @@ bool PdfGenerator::addPlot(QwtPlot* ptrPlot,bool strechToPageWidth){
 	return true;
 }
 /***************Insert plot to the document - overloaded************/
-bool PdfGenerator::addPlot(QwtPlot* ptrPlot,int plotWidth, directionOfCursorMove dir){
+bool PdfGenerator::addPlot(QwtPlot* ptrPlot,int plotWidth, directionOfCursorMove dir, bool discardLegend){
 	//If QPainter is not active
 	if (!docCreator.isActive())
 		if (!docCreator.begin(&pdfPrinter))
 			return false;
+	//Set flag
+	plotInserter.setDiscardFlag(QwtPlotRenderer::DiscardLegend, discardLegend);
 	//Get size of the plot
 	QSize sizePlot = ptrPlot->size();
 	//Check whether plot would fit in the current page

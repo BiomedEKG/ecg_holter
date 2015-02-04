@@ -54,14 +54,29 @@
     <Filter Include="Modules\Engine">
       <UniqueIdentifier>{b9b88387-f9a3-4cf8-a570-4bd3e67f374b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\AtrialFibrilation">
+      <UniqueIdentifier>{b835c4d0-4894-4495-aba0-3409ee3e8a17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Baseline">
+      <UniqueIdentifier>{7df171cb-1ab3-47a5-bd8a-83d4899e6830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\SigEDR">
+      <UniqueIdentifier>{f3d0237a-9b64-43b6-82ff-ee03b1a82e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Waves">
+      <UniqueIdentifier>{e030cbd9-ac55-4177-909e-2d9576180c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\HRV2">
+      <UniqueIdentifier>{75a0c724-9101-4c82-8868-4f5b17f6eab6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\RPeaks">
+      <UniqueIdentifier>{90a504a8-2ccd-40fa-afd2-787c20662060}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Modules\SleepApnea">
       <UniqueIdentifier>{7c88d567-f17c-4e02-b2cb-b6a50fdbb6b9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -131,9 +146,6 @@
     <ClCompile Include="ScatterPlot.cpp">
       <Filter>Modules\VisualizationModule</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Modules\I/O</Filter>
     </ClCompile>
@@ -173,8 +185,44 @@
     <ClCompile Include="VAbstractModule.cpp">
       <Filter>Modules\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="ReturnType.cpp">
+    <ClCompile Include="BaselineResult.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="ECGBaseline.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="Butterworth.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="Chebyshev.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="CubicSpline.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="LeastMeanSquares.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingAverage.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="SavitzkyGolay.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="Filter.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MajesticEngineOfGlory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RPeaks.cpp">
+      <Filter>Modules\RPeaks</Filter>
+    </ClCompile>
+    <ClCompile Include="RPeaksResult.cpp">
+      <Filter>Modules\RPeaks</Filter>
     </ClCompile>
     <ClCompile Include="SleepApnea.cpp">
       <Filter>Modules\SleepApnea</Filter>
@@ -237,9 +285,6 @@
     <ClInclude Include="RaportGenerator.h">
       <Filter>Modules\I/O</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gui\ECGFiltrationWidget.h">
       <Filter>Modules\GUI</Filter>
     </ClInclude>
@@ -279,11 +324,51 @@
     <ClInclude Include="StructApnea.h">
       <Filter>Modules\SleepApnea</Filter>
     </ClInclude>
-    <ClInclude Include="ReturnType.h">
-      <Filter>Modules\Engine</Filter>
+
+    <ClInclude Include="BaselineResult.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="ECGBaseline.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="Butterworth.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="Chebyshev.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="CubicSpline.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="LeastMeanSquares.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingAverage.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="SavitzkyGolay.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="Filter.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterType.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="MajesticEngineOfGlory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RPeaks.h">
+      <Filter>Modules\RPeaks</Filter>
+    </ClInclude>
+    <ClInclude Include="RPeaksResult.h">
+      <Filter>Modules\RPeaks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Ekg.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

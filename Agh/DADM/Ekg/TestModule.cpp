@@ -2,9 +2,9 @@
 #include <iostream>
 
 
-Result* TestModule::compute(ResultKeeper* rkp) const  {
+Result* TestModule::compute(ResultKeeper* rkp)   {
 	for(int i = 0; i < 10; i++) {
-		rkp->someParam = rkp->someParam;
+		//rkp->someParam = rkp->someParam;
 		std::cout <<"Jestem Compute! " << i << endl;
 	}
 	Result* r = new Result();

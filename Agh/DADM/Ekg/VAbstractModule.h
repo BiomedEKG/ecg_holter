@@ -7,7 +7,7 @@
 class VAbstractModule
 {
 public:
-	virtual AbstractResult* compute(ResultKeeper* ap) const = 0;
+	virtual AbstractResult* compute(ResultKeeper* ap) = 0;
 	virtual ~VAbstractModule(void);
 
 

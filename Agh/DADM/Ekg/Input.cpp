@@ -28,7 +28,7 @@ int Input::Open(char *SignalPath)
 	  Counter++;
 	
 	if (isigopen(Path, SignalInfo, SigTotNumber) != SigTotNumber)  exit(2009);
-
+	Patient = getinfo(NULL);
 	  for(int i = 0; i < SigTotNumber; i++){
 
 	  ChannelID[SignalInfo[i].desc] = i+1 ;
@@ -55,7 +55,7 @@ vector <double> Input:: vdGetChannelData(void)
 {
 	dvData.clear();
 	isigsettime(0L); // Ustaw sie na poczatku pliku 
-	ivData.reserve(SigLength); dvData.reserve(SigLength); // Przydziel miejsce dla vectorow
+	dvData.reserve(SigLength); // Przydziel miejsce dla vectorow
 	while(getvec(Sample) > 0) {
 		  dvData.push_back(aduphys(SelectedChannelID-1,Sample[SelectedChannelID-1])); //Dane w mV
 	  }
@@ -67,7 +67,7 @@ vector <int> Input:: viGetChannelData(void)
 {
 	ivData.clear();
 	isigsettime(0L); // Ustaw sie na poczatku pliku 
-	ivData.reserve(SigLength); dvData.reserve(SigLength); // Przydziel miejsce dla vectorow
+	ivData.reserve(SigLength);  // Przydziel miejsce dla vectorow
 	while(getvec(Sample) > 0) {
 		  ivData.push_back(Sample[SelectedChannelID-1]); // Dane int
 	  }
@@ -82,6 +82,9 @@ int Input::GetFs(void)
 int Input::GetNumberOfChannels(void)
 {
 	return SigTotNumber;
+}
+char * Input::GetPatientInfo(void){
+	return Patient;
 }
 char * Input::GetChannelName(void)
 {
@@ -110,6 +113,9 @@ void Input::PrepairPath(char *RawPath){
 	if (LocalString.contains("/")){
 		LocalString.replace(QString("/"),QString("\\"));
 	}
+	if (LocalString.contains("//")){
+		LocalString.replace(QString("//"),QString("\\"));
+	}
 	LocalString.remove(QString(".hea"),Qt::CaseInsensitive);
 	LocalString.remove(QString(".dat"),Qt::CaseInsensitive);
 
@@ -129,5 +135,7 @@ void Input::Close(void)
 Input::~Input(void)
 {
 }
+
+
 
 
