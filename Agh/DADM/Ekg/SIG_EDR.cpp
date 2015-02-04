@@ -16,8 +16,8 @@ SIG_EDResult* SIG_EDR::compute(ResultKeeper* rkp) const
 
 	vector<double> signal_in = rkp->getBaseline();
 	vector<double> R_peaks_in = rkp->getRpeaks();
-	int size_signal = rkp->getBaseline(); //Size
-	int size_Rpeaks = rkp->getRpeaks();
+	int size_signal =  signal_in.size();
+	int size_Rpeaks = R_peaks_in.size();
 
 // powy¿ej maj¹ byæ obiekty zwracane przez inne modu³y i rozpakowane !!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -254,6 +254,7 @@ vector<double> SIG_EDR :: Rampl(vector<double> signal_in, int size_signal, int f
 vector<double> SIG_EDR :: Rx(vector<double> R_peaks_in, int size_Rpeaks)
 {
 	  
+
   	  float* R_peaks = new float[size_Rpeaks];
       for(int i=0; i<size_Rpeaks; i++) R_peaks[i] = R_peaks_in[i];
 
