@@ -1,5 +1,6 @@
 #include <map>
 #include<vector>
+#include <algorithm>
 #include<string>
 #include "WavesResult.h"
 #include "Result.h" 
@@ -14,6 +15,7 @@ void envelope(vector<double>::iterator, vector<double>::iterator, vector<double>
 
 class Waves: public AbstractModule<WavesResult>{
 private:
+	QVector <double> Waves::set_chuj(); // wtf??
 	/*
 	vector<double> Waves::set_qrs_onset(vector<double> ECGBaselineData, vector<double> RPeaksData, int sampling_frequency);
 	vector<double> Waves::set_qrs_end(vector<double> ECGBaselineData, vector<double> RPeaksData, int sampling_frequency);
@@ -29,8 +31,18 @@ private:
 	void Waves::set_t_onset(vector<double> ECGBaselineData, vector<double> RPeaksData, int sampling_frequency);
 	void Waves::set_t_end(vector<double> ECGBaselineData, vector<double> RPeaksData, int sampling_frequency);
 
+	void Waves::ustaw_qrs_onset(vector<double> ECGBaselineData, vector<double> RPeaksData, int sampling_frequency);
+	void Waves::ustaw_qrs_end(vector<double> ECGBaselineData, vector<double> RPeaksData, int sampling_frequency);
+	void Waves::ustaw_p_onset(vector<double> ECGBaselineData, vector<double> RPeaksData, int sampling_frequency);
+	void Waves::ustaw_p_end(vector<double> ECGBaselineData, vector<double> RPeaksData, int sampling_frequency);
+	void Waves::ustaw_t_onset(vector<double> ECGBaselineData, vector<double> RPeaksData, int sampling_frequency);
+	void Waves::ustaw_t_end(vector<double> ECGBaselineData, vector<double> RPeaksData, int sampling_frequency);
+
+
+	double Waves::get_vector_median(vector<double> v);
+	double Waves::get_derivative(vector<double> d);
+
 	map <string, vector<int>> WavesData;
-	vector<double>* qrs_onset_vector1; //tu zostala gwiazdka
 	
 	vector<vector<double>::const_iterator> qrs_onset_it; //o lol co za kombos o_O
 	vector<vector<double>::const_iterator> qrs_end_it;
@@ -44,4 +56,12 @@ private:
 
 public:
 	virtual WavesResult* compute(ResultKeeper *rkp)const override;
+	
+	vector<int> qrs_onset_index_vector;
+	vector<int> qrs_end_index_vector;
+	vector<int> p_onset_index_vector;
+	vector<int> p_end_index_vector;
+	vector<int> t_onset_index_vector;
+	vector<int> t_end_index_vector;
+
 };
