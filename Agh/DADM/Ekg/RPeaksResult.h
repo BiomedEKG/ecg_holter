@@ -1,3 +1,4 @@
+#pragma once
 #include "AbstractResult.h"
 #include <vector>
 
