@@ -2,7 +2,6 @@
 #include "ReturnType.h"
 #include <vector>
 
-
 RPeaksResult::RPeaksResult(void)
 {
 }
