@@ -1,0 +1,40 @@
+#include "graphswidget.h"
+
+#include <QVBoxLayout>
+<<<<<<< HEAD
+=======
+#include <QTabWidget>
+
+>>>>>>> origin/develop
+
+GraphsWidget::GraphsWidget(QWidget *parent) :
+    QWidget(parent)
+{
+    setLayout(new QVBoxLayout(this));
+<<<<<<< HEAD
+}
+
+QWidget *GraphsWidget::addGraph(QWidget *graphWidget)
+=======
+	tabWidget = new QTabWidget(this);
+	tabWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+   
+	layout()->addWidget(tabWidget);
+}
+
+QWidget *GraphsWidget::addGraph(QWidget *graphWidget, const QString &tabName)
+>>>>>>> origin/develop
+{
+    if (graphWidget == NULL)
+    {
+        return NULL;
+    }
+
+<<<<<<< HEAD
+    layout()->addWidget(graphWidget);
+=======
+	tabWidget->addTab(graphWidget, tabName);
+>>>>>>> origin/develop
+
+    return graphWidget;
+}

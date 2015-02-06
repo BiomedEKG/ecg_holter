@@ -1,0 +1,29 @@
+#ifndef GRAPHSWIDGET_H
+#define GRAPHSWIDGET_H
+
+#include <QWidget>
+#include <QList>
+
+class QVBoxLayout;
+<<<<<<< HEAD
+=======
+class QTabWidget;
+>>>>>>> origin/develop
+
+class GraphsWidget : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit GraphsWidget(QWidget *parent = 0);
+
+<<<<<<< HEAD
+    QWidget *addGraph(QWidget * graphWidget);
+=======
+    QWidget *addGraph(QWidget *graph, const QString &tabName);
+
+private:
+	QTabWidget *tabWidget;
+>>>>>>> origin/develop
+};
+
+#endif // GRAPHSWIDGET_H

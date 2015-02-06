@@ -1,0 +1,60 @@
+#ifndef SELECTMODULESPRIVATE_H
+#define SELECTMODULESPRIVATE_H
+
+#include <QList>
+
+class QAction;
+class QObject;
+<<<<<<< HEAD
+
+=======
+class QActionGroup;
+>>>>>>> origin/develop
+
+class SelectModulesPrivate
+{
+public:
+    SelectModulesPrivate(QObject *parent);
+
+<<<<<<< HEAD
+    QAction *rPeeksDetection;
+    QAction *qrsDetection;
+=======
+	QAction *plotECG;
+	QAction *ecgFiltration;
+    QAction *rPeeksDetection;
+    QAction *qrsDetection;
+	QAction *edrExtraction;
+>>>>>>> origin/develop
+
+    QAction *qrsAnalysis; //Submenu
+    QAction *qrsClassification;
+    QAction *stAnalysis;
+    QAction *tAlternans;
+    QAction *qtLengthTAnalysis;
+
+    QAction *hrv; //Submenu
+    QAction *freqAndTimeDomainAnalysis;
+    QAction *dfa;
+    QAction *geometricAnalysis;
+
+    QAction *hrt;
+    QAction *vcg;
+    QAction *sleepApnea;
+    QAction *atrialFibrilation;
+<<<<<<< HEAD
+
+    QList<QAction *> allModules;
+    QList<QAction *> mainModules;
+    QList<QAction *> otherModules;
+=======
+	QAction *ectopicBeat;
+
+    QList<QAction *> allModules;
+	QList<QAction *> *rPeeksDetectionGroup;
+	QList<QAction *> *qrsDetectionGroup;
+	QList<QAction *> *restGroup;
+>>>>>>> origin/develop
+};
+
+#endif // SELECTMODULESPRIVATE_H

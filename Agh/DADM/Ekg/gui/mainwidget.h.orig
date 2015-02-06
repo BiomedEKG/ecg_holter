@@ -1,0 +1,44 @@
+#ifndef MAINWIDGET_H
+#define MAINWIDGET_H
+
+#include <QWidget>
+
+<<<<<<< HEAD
+class QProgressBar;
+class QTableWidget;
+class GraphsWidget;
+=======
+class QTableWidget;
+class QTabWidget;
+class GraphsWidget;
+class PlotManager;
+>>>>>>> origin/develop
+
+class MainWidget : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit MainWidget(QWidget *parent = 0);
+
+    GraphsWidget *getGraphsWidget();
+    QTableWidget *getTableWidget();
+<<<<<<< HEAD
+    QProgressBar *getProgressBar();
+
+private:
+    GraphsWidget *graphsWidget;
+    QTableWidget *tableWidget;
+    QProgressBar *progressBar;
+=======
+	PlotManager  *getPlotManager();
+	QTabWidget   *getTabWidget();
+
+private:
+    GraphsWidget *graphsWidget;
+	PlotManager  *plotManager;
+    QTableWidget *tableWidget;
+	QTabWidget   *tabWidget;
+>>>>>>> origin/develop
+};
+
+#endif // MAINWIDGET_H
