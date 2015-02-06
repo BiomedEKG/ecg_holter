@@ -13,8 +13,7 @@
 #include <qwt_symbol.h>
 #include <qwt_legend.h>
 #include <wfdb.h>
-#include <Ectopic.h>
-#include <Testy.h>
+
 
 
 int main(int argc, char *argv[])
