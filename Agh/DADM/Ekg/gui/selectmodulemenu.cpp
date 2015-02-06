@@ -1,62 +1,108 @@
 #include "selectmodulemenu.h"
-#include <QList>
-#include <QDebug>
 #include "selectmodulesprivate.h"
+#include <QList>
 
 
 SelectModuleMenu::SelectModuleMenu(QWidget *parent) :
     QMenu(parent),
     d(new SelectModulesPrivate(this))
 {
-    setMultipleChoice(d->mainModules);
+	addAction(d->plotECG);
+	addSeparator();
 
-    QActionGroup *actionGroup = new QActionGroup(this);
-    setSingleChoice(d->otherModules, actionGroup);
+	addAction(d->ecgFiltration);
+	addSeparator();
 
-    addActions(d->mainModules);
-    addSeparator();
-    addActions(d->otherModules);
+	addAction(d->rPeeksDetection);
+	addSeparator();
 
-    QList<QAction *> qrsAnalysisModules;
-    qrsAnalysisModules.append(d->qrsClassification);
-    qrsAnalysisModules.append(d->stAnalysis);
-    qrsAnalysisModules.append(d->tAlternans);
-    qrsAnalysisModules.append(d->qtLengthTAnalysis);
-    setMultipleChoice(qrsAnalysisModules);
+	d->rPeeksDetectionGroup = new QList<QAction *>();
+	d->rPeeksDetectionGroup->append(d->hrv);
+	d->rPeeksDetectionGroup->append(d->qrsDetection);
+	d->rPeeksDetectionGroup->append(d->edrExtraction);
+	d->rPeeksDetectionGroup->append(d->vcg);
+	addActions(*(d->rPeeksDetectionGroup));
 
-    QMenu *qrsAnalysisMenu = new QMenu(this);
-    qrsAnalysisMenu->addActions(qrsAnalysisModules);
-    d->qrsAnalysis->setMenu(qrsAnalysisMenu);
+	QList<QAction *> hrvModules;
+	hrvModules.append(d->freqAndTimeDomainAnalysis);
+	hrvModules.append(d->dfa);
+	hrvModules.append(d->geometricAnalysis);
+	setMultipleChoice(hrvModules);
 
-    QList<QAction *> hrvModules;
-    hrvModules.append(d->freqAndTimeDomainAnalysis);
-    hrvModules.append(d->dfa);
-    hrvModules.append(d->geometricAnalysis);
-    setMultipleChoice(hrvModules);
+	QMenu *hrvMenu = new QMenu(this);
+	hrvMenu->addActions(hrvModules);
+	d->hrv->setMenu(hrvMenu);
+	addSeparator();
 
-    QMenu *hrvMenu = new QMenu(this);
-    hrvMenu->addActions(hrvModules);
-    d->hrv->setMenu(hrvMenu);
+	d->qrsDetectionGroup = new QList<QAction *>();
+	d->qrsDetectionGroup->append(d->qrsAnalysis);
+	d->qrsDetectionGroup->append(d->qrsClassification);
+	d->qrsDetectionGroup->append(d->atrialFibrilation);
+	d->qrsDetectionGroup->append(d->sleepApnea);
+	addActions(*(d->qrsDetectionGroup));
 
-    connect(d->rPeeksDetection, SIGNAL(toggled(bool)), this, SLOT(enableModules(bool)));
-    enableModules(false);
+	QList<QAction *> qrsAnalysisModules;
+	qrsAnalysisModules.append(d->stAnalysis);
+	qrsAnalysisModules.append(d->tAlternans);
+	qrsAnalysisModules.append(d->qtLengthTAnalysis);
+	setMultipleChoice(qrsAnalysisModules);
 
-    connect(actionGroup, SIGNAL(triggered(QAction*)), this, SLOT(setActionsChecked(QAction*)));
-    connect(qrsAnalysisMenu, SIGNAL(triggered(QAction*)), this, SLOT(setActionsChecked(QAction*)));
-    connect(hrvMenu, SIGNAL(triggered(QAction*)), this, SLOT(setActionsChecked(QAction*)));
+	QMenu *qrsAnalysisMenu = new QMenu(this);
+	qrsAnalysisMenu->addActions(qrsAnalysisModules);
+	d->qrsAnalysis->setMenu(qrsAnalysisMenu);
+	addSeparator();
 
+	d->restGroup = new QList<QAction *>();
+	d->restGroup->append(d->ectopicBeat);
+	d->restGroup->append(d->hrt);
+	addActions(*(d->restGroup));
+
+	setMultipleChoice(d->allModules);
+
+	connect(d->ecgFiltration, SIGNAL(toggled(bool)), this, SLOT(setRPeeksDetectionEnabled(bool)));
+	connect(d->rPeeksDetection, SIGNAL(toggled(bool)), this, SLOT(setRPeeksDetectionGroupEnabled(bool)));
+	connect(d->qrsDetection, SIGNAL(toggled(bool)), this, SLOT(setQRSDetectionGroupEnabled(bool)));
+	connect(d->qrsClassification, SIGNAL(toggled(bool)), this, SLOT(setRestGroupEnabled(bool)));
+
+	setRPeeksDetectionEnabled(false);
+	setRPeeksDetectionGroupEnabled(false);
+	setQRSDetectionGroupEnabled(false);
+	setRestGroupEnabled(false);
+	
 }
 
 
-void SelectModuleMenu::enableModules(bool enabled)
+void SelectModuleMenu::setRPeeksDetectionEnabled(bool enabled)
 {
-    foreach (QAction *action, actions())
+	d->rPeeksDetection->setEnabled(enabled);
+	d->rPeeksDetection->setChecked(false);
+}
+
+void SelectModuleMenu::setRPeeksDetectionGroupEnabled(bool enabled)
+{
+	setModulesEnabled(enabled, *(d->rPeeksDetectionGroup));
+}
+
+
+void SelectModuleMenu::setQRSDetectionGroupEnabled(bool enabled)
+{
+	setModulesEnabled(enabled, *(d->qrsDetectionGroup));
+}
+
+
+void SelectModuleMenu::setRestGroupEnabled(bool enabled)
+{
+	setModulesEnabled(enabled, *(d->restGroup));
+}
+
+
+void SelectModuleMenu::setModulesEnabled(bool enabled, const QList<QAction *> &actions)
+{
+    foreach (QAction *action, actions)
     {
         action->setEnabled(enabled);
+		action->setChecked(false);
     }
-
-    d->rPeeksDetection->setEnabled(true);
-    d->vcg->setEnabled(true);
 }
 
 
@@ -79,12 +125,9 @@ void setActionChecked(QAction *action, QAction *triggeredAction)
 }
 
 
-void SelectModuleMenu::setActionsChecked(QAction *triggeredAction)
+SelectModulesPrivate *SelectModuleMenu::getSelectModulesPrivate()
 {
-    foreach (QAction *action, d->otherModules)
-    {
-        setActionChecked(action, triggeredAction);
-    }
+	return d;
 }
 
 
