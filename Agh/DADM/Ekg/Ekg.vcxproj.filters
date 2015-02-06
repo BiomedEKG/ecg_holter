@@ -51,6 +51,9 @@
     <Filter Include="Modules\I/O">
       <UniqueIdentifier>{53e62d74-8ba7-4f63-91c0-5d59db56fec2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\NowyFolderNaKazdyModul\EctopicBeat">
+      <UniqueIdentifier>{ff570ff3-171e-42e9-9eb7-4c084885a57e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -167,6 +170,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_SleepApneaWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="EctopicBeatModule.cpp">
+      <Filter>Modules\NowyFolderNaKazdyModul\EctopicBeat</Filter>
+    </ClCompile>
+    <ClCompile Include="EctopicBeatResult.cpp">
+      <Filter>Modules\NowyFolderNaKazdyModul\EctopicBeat</Filter>
+    </ClCompile>
+    <ClCompile Include="EctopicBeatTest.cpp">
+      <Filter>Modules\NowyFolderNaKazdyModul\EctopicBeat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -236,6 +248,15 @@
     </ClInclude>
     <ClInclude Include="gui\PlotManager.h">
       <Filter>Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="EctopicBeatModule.h">
+      <Filter>Modules\NowyFolderNaKazdyModul\EctopicBeat</Filter>
+    </ClInclude>
+    <ClInclude Include="EctopicBeatResult.h">
+      <Filter>Modules\NowyFolderNaKazdyModul\EctopicBeat</Filter>
+    </ClInclude>
+    <ClInclude Include="EctopicBeatTest.h">
+      <Filter>Modules\NowyFolderNaKazdyModul\EctopicBeat</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -32,7 +32,10 @@ void testEctopicBeat::wyswietlWynik () {
 
     map<string, vector<double> > sklasyfikowane = classificationOfBeats (klasy, ectopowe);
 
-    for (vector<double>::size_type i = 0; i < sklasyfikowane["S"].size(); i++ ) {
+    if (sklasyfikowane["S"].size()==0){
+        cout << "test2 wypadl niepomyslnie - bledna klasyfikacja" << endl;
+    }
+    else {
         cout << "test2 wypadl pomyslnie: Wykryte uderzenie ektopowe jest nadkomorowe." << endl;
     }
 

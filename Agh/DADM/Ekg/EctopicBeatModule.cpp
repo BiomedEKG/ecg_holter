@@ -68,7 +68,7 @@ ectopicBeatResult* EctopicBeatModule::compute(ResultKeeper* rkp) const  {
 	map<int, vector<double> > HeartClass;
 
 	//wyszukanie uderzen ektopowych
-	ectopicBeat = searchEctopic(RPeak)
+	ectopicBeat = searchEctopic(RPeak);
 	//reklasyfikacja jezeli znleziono jakies uderzenia ektopowe
     classifiedBeats = classificationOfBeats(HeartClass, ectopicBeat);
 
