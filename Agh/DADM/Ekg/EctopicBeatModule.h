@@ -16,6 +16,10 @@ class EctopicBeatModule : public AbstractModule<EctopicBeatResult>
         vector<double> odstepyZaKrotkie;
         vector<double> odstepyZaDlugie;
 
+//uderzeniaEktopowe >> ectopicBeat
+//uderzeniaSklasyfikowane >> classifiedBeats
+//wykrywanieEktopowych >> searchEctopic
+//ostatecznaKlasyfikacja >> classificationOfBeats
 
     public:
         vector<double> ectopicBeat;
@@ -27,3 +31,4 @@ class EctopicBeatModule : public AbstractModule<EctopicBeatResult>
 };
 
 #endif // ECTOPICBEATMODULE_H
+

@@ -1,6 +1,14 @@
 #ifndef ECTOPICBEATRESULT_H
 #define ECTOPICBEATRESULT_H
 
+#include <iostream>
+#include <cstdlib>
+#include <cmath>
+#include <vector>
+#include<map>
+
+using namespace std;
+
 #include <AbstractResult.h>
 
 class EctopicBeatResult : public AbstractResult

@@ -2,9 +2,10 @@
 
  ectopicBeatResult* EctopicBeatResult:: getResult() {
 
-    this->ectopicBeat;
-    this->classifiedBeats;
+    ectopicBeat = this->ectopicBeat;
+    classifiedBeats = this->classifiedBeats;
     paramType = ECTOPICBEAT;
 
-	return this;
+    return this;
 }
+
