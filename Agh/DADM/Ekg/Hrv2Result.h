@@ -7,7 +7,7 @@
 
 class Hrv2Result : public AbstractResult{
 	public:
-		void setHrv2Result(map<string,double> params ,map<string,vector<double>> h, map<string,vector<double>> p );
+		void setHrv2Result(map<string,double> params, map<string,vector<double>> h, map<string,vector<double>> p,map<string,vector<double>> sd  );
 		Hrv2Result getResult();
 		Hrv2Result(void);
 		~Hrv2Result(void);
@@ -15,4 +15,5 @@ class Hrv2Result : public AbstractResult{
 		map<string,double> paramsResult;
 		map<string,vector<double>> histResult;
 		map<string,vector<double>> poincareResult;
+		map<string,vector<double>> sdResult;
 };

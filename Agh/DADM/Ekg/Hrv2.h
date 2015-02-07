@@ -29,6 +29,7 @@ private:
 		vector<double> create_RR_intervals();
         map<string, vector<double>> poincareVectors(vector<double> val);
 		map<string, vector<double>> createHist(vector<double> val, double s);
+		double mean2(vector<double> z);
         double stDeviation2 (vector<double> z);
         double sum(vector<double> elem);
 		double maxIndex(vector<double> v);
@@ -38,6 +39,7 @@ private:
         double calculateApen(vector<double> val, double s, int dim = 2);
         double calculateSamen(vector<double> val, double s, int dim = 2);
         map<string, double> poincareParams(map<string,vector<double>> x1_x2);
+		map<string, vector<double>> sdPoints(map<string,vector<double>> x1_x2 );
         double triangleRR(map<string,vector<double>> histValues);
         double tinn(map<string,vector<double>> histValues);
 		

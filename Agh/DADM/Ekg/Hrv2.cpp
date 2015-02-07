@@ -47,16 +47,25 @@ using namespace std;
 
 
 
-//odchylenie standardowe
-    double Hrv2::stDeviation2 (vector<double> z){
-        double mean_result=0;
-        double sd=0;
-        double std2=0;
+//œrednia arytmetyczna
+double Hrv2::mean2(vector<double> z){
+	double mean_result=0;
 
-        for(int i=0; i<z.size(); i++){
+		for(int i=0; i<z.size(); i++){
             mean_result+=z[i];
             }
         mean_result=mean_result/(z.size()-1);
+
+		return mean_result;
+}
+
+//odchylenie standardowe
+    double Hrv2::stDeviation2 (vector<double> z){
+      
+        double sd=0;
+        double std2=0;
+		double mean_result = mean2(z);
+        
         for(int i=0; i< z.size(); i++){
             sd+=pow((z[i]-mean_result),2);
             }
@@ -400,7 +409,36 @@ using namespace std;
         return poinParams;
     }
 
+ //wyznaczanie  wspolrzednych osi sd1 i sd2 na wykresie Poincere
+	map<string, vector<double>> Hrv2::sdPoints(map<string,vector<double>> x1_x2 ){
+		vector <double> tabplus;
+		map<string,double> poinParams=poincareParams(x1_x2);
+        map<string, vector<double>> sdPoint;
+		double SD1, SD2, centroid;
+		vector<double> X1, Y1, X2, Y2;
 
+		tabplus = x1_x2["x1"];
+		SD1 = poinParams["sd1"];
+		SD2 = poinParams["sd2"];
+		centroid=mean2(tabplus);
+
+		X2.push_back(centroid);
+		X2.push_back(centroid);
+		Y2.push_back(centroid+((sqrt(2)/2)*SD2));
+		Y2.push_back(centroid+((sqrt(2)/2)*SD2));
+		X1.push_back(centroid-((sqrt(2)/2)*SD1));
+		X1.push_back(centroid+((sqrt(2)/2)*SD1));
+		Y1.push_back(centroid);
+		Y1.push_back(centroid);
+
+		sdPoint["sd1_p1"] = X1; //wspolrzedne (x,y) -poczatek osi SD1
+		sdPoint["sd1_p2"] = Y1;//wspolrzedne (x,y) -koniec osi SD1
+		sdPoint["sd2_p1"] = X2;//wspolrzedne (x,y)-poczatek osi SD2
+		sdPoint["sd2_p2"] = Y2;//wspolrzedne (x,y) -koniec osi SD2
+
+		return sdPoint;
+
+    }
 
 // generowanie histogramu
     map<string, vector<double>> Hrv2::createHist(vector<double> val, double s){
@@ -522,11 +560,13 @@ using namespace std;
 		double apen, samen, triRR, tinnP;
 		map<string,double> sd1_sd2;
 		map<string,double> hrv2p;
+		map<string,vector<double>> sdPoint;
 		apen=calculateApen(RR,std);
 		samen=calculateSamen(RR,std);
 		tinnP= tinn(histValues);
 		triRR= triangleRR(histValues);
 		sd1_sd2 = poincareParams(x1_x2);
+		sdPoint=sdPoints(x1_x2);
 		sd1=sd1_sd2["sd1"];
 		sd2=sd1_sd2["sd2"];
 		
@@ -538,7 +578,7 @@ using namespace std;
 		hrv2p["sd2"]=sd2;
 
 		Hrv2Result res = Hrv2Result();
-		res.setHrv2Result(hrv2p, histValues, x1_x2);
+		res.setHrv2Result(hrv2p, histValues, x1_x2,sdPoint);
 		return res.getResult();
 
 	}
