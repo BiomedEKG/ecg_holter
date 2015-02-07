@@ -74,6 +74,170 @@ using namespace std;
     }
 
 
+// wspolczynniki prostej obliczone metod¹ najmniejszych kwadratów
+	map<string,double> Hrv2:: getCoff(vector<double> war, vector<double> c){
+		vector <double> xiy;
+		vector <double> xix;
+		double n,sum_x, sum_y, sum_xy, sum_x2, varb1, varb2;
+		map<string, double> coff;
+		n=c.size();
+			
+			for(int i=0; i<n; i++){
+				xiy.push_back((war[i] * c[i]));
+				}
+
+			for(int i=0; i<n; i++){
+				xix.push_back((c[i] * c[i]));
+				}
+
+			sum_x=sum(c);
+			sum_y=sum(war);
+			sum_xy=sum(xiy);
+			sum_x2=sum(xix);
+
+			varb1=(n*sum_xy- sum_x*sum_y)/(n*sum_x2-pow(sum_x, 2));
+			varb2=(sum_y-varb1*sum_x)/n;
+			coff["b1"]=varb1;
+			coff["b2"]=varb2;
+			xiy.clear();
+			xix.clear();
+
+			return coff;
+	}
+
+
+//obliczanie korelacji
+	double Hrv2:: getCorrelation(double varb1, double varb2, vector<double> war, vector<double> c){
+		vector <double> ziL;
+		vector <double> ziz;
+		vector <double> LiL;
+		vector <double> sygnal;
+			
+		double sum_z_L, sum_L, sum_z, sum_z_z, sum_L_L,nz1;
+		int n=c.size();
+
+			for(int i=0; i<n; i++){
+				sygnal.push_back((c[i]*varb1)+varb2);
+				}
+			
+			for(int i=0; i<n; i++){
+				ziL.push_back((sygnal[i] * war[i]));
+				}
+
+			for(int i=0; i<n; i++){
+				ziz.push_back((sygnal[i] * sygnal[i]));
+				}
+
+			for(int i=0; i<n; i++){
+				LiL.push_back((war[i] * war[i]));
+				}
+
+			nz1=sygnal.size();
+
+			sum_z_L=sum(ziL);
+			sum_L=sum(war);
+			sum_z=sum(sygnal);
+			sum_z_z=sum(ziz);
+			sum_L_L=sum(LiL);
+			ziL.clear();
+			ziz.clear();
+			LiL.clear();
+			sygnal.clear();
+
+			return ((nz1*sum_z_L-sum_L*sum_z)/(sqrt(nz1*sum_z_z-(sum_z*sum_z))*sqrt(nz1*sum_L_L-pow(sum_L, 2))));	
+		}
+
+//znajdywanie indeksu wartosci max
+	double Hrv2:: maxIndex(vector<double> v){
+			vector<double> v2;
+			v2=v;
+			sort(v.begin(), v.end());
+			double max_v;
+			int s_v=v.size();
+			for (int i = 0; i < s_v; i++){
+				if(v2[i]==v[s_v-1]) max_v=i;
+			}
+			return max_v;
+
+	}
+
+
+
+// dopasowanie
+    map<string, double> Hrv2 :: fit(map<string,vector<double>> histValues){
+        vector<double>::iterator nrprobka;
+		vector<double>::iterator nrprobka_lewe;
+		vector<double>::iterator nrprobka_prawe;
+		vector <double> hist = histValues["values"];
+		vector <double> czas = histValues["start_time"];
+		vector <double> lewewartosci;
+		vector <double> leweczas;
+		vector <double> prawewartosci;
+		vector <double> praweczas;
+		map<string, double> coff, coff2;
+		vector<double> b1_lewe;
+		vector<double> b2_lewe;
+		vector<double> b1_prawe;
+		vector<double> b2_prawe; 
+		double b1,b2, wsp, b11, b22, wsp2;
+		vector <double> wspPL, wspPP;
+		
+		nrprobka = (max_element(hist.begin(), hist.end())); //wartosc max
+		auto probka= distance(hist.begin(), nrprobka); //index wartosci max
+
+		for(int k=0; k<probka-2; k++){ 
+			//wyznaczanie kolenych punktow dla ktorych ma byc dopasowanie (1,2...,maksimum),(2,3,..., maksimum) i a¿ zostan¹ 3 probki
+			for(int j=k;j<=probka;j++) {
+				lewewartosci.push_back(hist[j]);
+				leweczas.push_back(czas[j]);
+			}
+			coff=getCoff(lewewartosci, leweczas);
+			b1=coff["b1"];
+			b2=coff["b2"];
+			b1_lewe.push_back(b1);
+			b2_lewe.push_back(b2);
+
+			wsp=getCorrelation(b1,b2,lewewartosci, leweczas);
+			wspPL.push_back(wsp);
+			lewewartosci.clear();
+			leweczas.clear();
+
+		}
+
+		nrprobka_lewe = (max_element(wspPL.begin(), wspPL.end()));
+		auto probka_lewe= distance(wspPL.begin(), nrprobka_lewe);
+		double x0_lewe=(-b2_lewe[probka_lewe]/b1_lewe[probka_lewe]);
+
+		for(int k=probka+2; k<hist.size(); k++){
+			for(int j=probka;j<=k;j++) {
+				prawewartosci.push_back(hist[j]);
+				praweczas.push_back(czas[j]);
+			}
+			coff2=getCoff(prawewartosci, praweczas);
+			b11=coff2["b1"];
+			b22=coff2["b2"];
+			b1_prawe.push_back(b11);
+			b2_prawe.push_back(b22);
+
+			wsp2=getCorrelation(b11,b22,prawewartosci, praweczas);
+			wspPP.push_back(wsp2);
+			prawewartosci.clear();
+			praweczas.clear();
+
+		}	
+
+		nrprobka_prawe = (max_element(wspPP.begin(), wspPP.end()));
+		auto probka_prawe= distance(wspPP.begin(), nrprobka_prawe);
+		double x0_prawe=(-b2_prawe[probka_prawe]/b1_prawe[probka_prawe]);
+		
+		// wpisywanie do mapy wartosci wpsolczynnikow, ktore stanowia najlepsze dopasownie
+		map<string, double> fitValues;
+		fitValues["x0_lewe"]=x0_lewe; 
+		fitValues["x0_prawe"]=x0_prawe;
+		
+        return fitValues;
+    }
+
 // obliczanie entropii aproksymacji
     double Hrv2::calculateApen(vector<double> val, double s, int dim){
         
@@ -172,38 +336,41 @@ using namespace std;
 
  //poincare- wektory
     map<string, vector<double>> Hrv2::poincareVectors (vector<double> val){
-
 		vector<double> usun, tabplus, tabminus ;
 		double a=300, b=2000;
-		/*
-        for( int i = 0; i < val.size(); i++ ){
-            if (val[i]<a || val[i]>b){
-                if((i>0) && !(usun.back() == (i-1)))    usun.push_back(i-1);
+
+		for( int i = 0; i < val.size(); i++ ){
+			if (val[i]<a || val[i]>b){
+				if(i>0)    usun.push_back(i-1);
 				usun.push_back(i);
 				}
 			}
-			*/
+
 		//tworzenie wektora plus
 		for( int i = 0; i < val.size() - 1; i++ ){
-            tabplus.push_back( val[i] );
-			}
-        //tworzenie wektora minus
-        for( int i = 1; i < val.size(); i++ ){
-            tabminus.push_back( val[i] );
+			tabplus.push_back( val[i] );
 			}
 
-        int s=usun.size();
-		for (int i=s-1; i>=0; i--){
-            tabplus.erase(tabplus.begin() + usun[i]);
+        //tworzenie wektora minus
+		for( int i = 1; i < val.size(); i++ ){
+			tabminus.push_back( val[i] );
 			}
+		
+		int s=usun.size();
+
+		for (int i=s-1; i>=0; i--){
+			tabplus.erase(tabplus.begin() + usun[i]);
+			}
+
 		x1_x2["x1"]=tabplus;
 
 		for (int i=s-1; i>=0; i--){
-             tabminus.erase(tabminus.begin() + usun[i]);
+			tabminus.erase(tabminus.begin() + usun[i]);
 			}
-        x1_x2["x2"]=tabminus;
 
+        x1_x2["x2"]=tabminus;
         return x1_x2;
+
     }
 
 //wyznaczanie parametrów sd1, sd2
@@ -294,10 +461,20 @@ using namespace std;
 
 
  //index trójk¹tny
-    double Hrv2::triangleRR(map<string,vector<double>> histValues, int a, int b){
-        
+      double Hrv2::triangleRR(map<string,vector<double>>histValues){
+        map<string, double> fitValues= fit(histValues);
+		vector <double> start= histValues["start_time"];
+		vector <double> kon= histValues["end_time"];
+		vector <double> hist= histValues["values"];
+		double x0_lewe, x0_prawe;
+		x0_lewe= fitValues["x0_lewe"];
+		x0_prawe= fitValues["x0_prawe"];
+		
         double triRR;
-        vector <double> hist= histValues["values"];
+		double c=kon[0]-start[0];
+		int a= ceil((x0_lewe-start[0])/c); 
+		int b= ceil((x0_prawe-start[0])/c); 
+        
         double suma=0;
         for( int i=a; i < b; i++ ){
 			suma=suma+ hist[i];
@@ -311,117 +488,44 @@ using namespace std;
 			}
 
         return triRR=suma/maksimumhist;
-        }
+	}
 
 
 
  //TINN
-    double Hrv2:: tinn(map<string,vector<double>> histValues, int a, int b){
-		
-		vector<double>::iterator nrprobka;
-		vector <double> hist = histValues["values"];
-		vector <double> czas = histValues["start_time"];
-
-		nrprobka = (max_element(hist.begin(), hist.end()));
-		auto probka= distance(hist.begin(), nrprobka);
-		vector <double> lewewartosci;
-		vector <double> leweczas;
-		vector <double> prawewartosci;
-		vector <double> praweczas;
-		double TINN;
-
-		for(int i=a;i<=probka;i++) {
-			lewewartosci.push_back(hist[i]);
-			leweczas.push_back(czas[i]);
-			}
-
-		for(int i = probka;i < b;i++) {
-			prawewartosci.push_back(hist[i]);
-			praweczas.push_back(czas[i]);
-			}
-
-		double b1_lewe, b2_lewe, b1_prawe, b2_prawe;
-		double n=lewewartosci.size();
-		double n1=prawewartosci.size();
-		vector <double> lewe_xiy;
-		
-		for(int i=0; i<n; i++){
-			lewe_xiy.push_back((lewewartosci[i] * leweczas[i]));
-			}
-
-		vector <double> lewe_xix;
-
-		for(int i=0; i<n; i++){
-			lewe_xix.push_back((leweczas[i] * leweczas[i]));
-			}
-
-		double sum_x_lewe, sum_y_lewe, sum_xy_lewe, sum_x2_lewe;
-
-		sum_x_lewe=sum(leweczas);
-		sum_y_lewe=sum(lewewartosci);
-		sum_xy_lewe=sum(lewe_xiy);
-		sum_x2_lewe=sum(lewe_xix);
-
-		b1_lewe=(n*sum_xy_lewe - sum_x_lewe*sum_y_lewe)/(n*sum_x2_lewe-pow(sum_x_lewe, 2));
-		b2_lewe=(sum_y_lewe-b1_lewe*sum_x_lewe)/n;
-
-		vector <double> prawe_xiy;
-
-		for(int i=0; i<n1; i++){
-			prawe_xiy.push_back((prawewartosci[i] * praweczas[i]));
-			}
-
-		vector <double> prawe_xix;
-		
-		for(int i=0; i<n1; i++){
-			prawe_xix.push_back((praweczas[i] * praweczas[i]));
-			}
-
-		double sum_x_prawe, sum_y_prawe, sum_xy_prawe, sum_x2_prawe;
-
-		sum_x_prawe=sum(praweczas);
-		sum_y_prawe=sum(prawewartosci);
-		sum_xy_prawe=sum(prawe_xiy);
-		sum_x2_prawe=sum(prawe_xix);
-
-		b1_prawe=(n1*sum_xy_prawe - sum_x_prawe*sum_y_prawe)/(n1*sum_x2_prawe-pow(sum_x_prawe, 2));
-		b2_prawe=(sum_y_prawe-b1_prawe*sum_x_prawe)/n1;
-
-		double x0_lewe, x0_prawe;
-
-		x0_lewe=(-b2_lewe/b1_lewe);
-		x0_prawe=(-b2_prawe/b1_prawe);
+    double Hrv2:: tinn(map<string,vector<double>> histValues){
+        
+		map<string, double> fitValues= fit(histValues);
+		double x0_lewe, x0_prawe, TINN;
+		x0_lewe= fitValues["x0_lewe"];
+		x0_prawe= fitValues["x0_prawe"];
 
 		TINN=x0_prawe - x0_lewe;
-
+		
 		return TINN;
     }
 
 
 
 // funkcja zwracaj¹ca parametry geometryczne sd1, sd2, tinn, inteks trójk¹tny, entropie aproksymacji i próby
-	Hrv2Result* Hrv2 :: compute(ResultKeeper* rkp) const{
+	Hrv2Result* Hrv2 :: compute(ResultKeeper* rkp) {
 
-		r_peaks = *rkp->rpeaks;// vector r pików
-        freq= *rkp->freq; // czestotliwosc próbkowania
+		r_peaks = *rkp->rpeaks;//(?) pobieranie vectora r_peaków (do poprawienia)
+        freq= *rkp->freq;//(?) pobieranie czestotliwosci próbkowania (do poprawienia)
         N = r_peaks.size() -1; 
 		vector<double> RR;
 		double std, sd1,sd2;
 		RR=create_RR_intervals();
 		std=stDeviation2(RR);
 		this->histValues=createHist(RR,std);
-		vector <double> h=histValues["values"];
-		int start, koniec;
-		start = 0; //wartoœæ domyœlna pocz¹tkowego punktu histogramu potrzebny do wyznaczenia parameterów tinn i trianRR
-		koniec = h.size(); //wartoœæ domyœlna koñcowego punktu histogramu potrzebny do wyznaczenia parameterów tinn i trianRR
 		this->x1_x2=poincareVectors(RR);
 		double apen, samen, triRR, tinnP;
 		map<string,double> sd1_sd2;
 		map<string,double> hrv2p;
 		apen=calculateApen(RR,std);
 		samen=calculateSamen(RR,std);
-		tinnP= tinn(histValues, start, koniec);
-		triRR= triangleRR(histValues,start,koniec);
+		tinnP= tinn(histValues);
+		triRR= triangleRR(histValues);
 		sd1_sd2 = poincareParams(x1_x2);
 		sd1=sd1_sd2["sd1"];
 		sd2=sd1_sd2["sd2"];
@@ -437,56 +541,5 @@ using namespace std;
 		res.setHrv2Result(hrv2p, histValues, x1_x2);
 		return res.getResult();
 
-	}
-
-	
-
-
-// zmiana wartoœci parametrów Tinn i triangle RR po zadaniu wartoœci granicznych
-
-	/*nie wiem co tutaj ... u¿ytkownik po wyœwietleniu histogramu, czyli jak ju¿ 
-	sie pokaz¹ wykresy i parametry ma opcje zmiany granicznych punktór histogramu, wg których 
-	obliczy sie tinn i triangle index (na pocz¹tku oblicza siê dla domœlnych wartoœci)*/
-
-	map<string,double> Hrv2::updateHistParams(double f, double l, vector<double> x, unsigned int y){
-
-		int a,b;
-		double c;
-		map<string, double> updatedValues;
-		setValues(x,y);
-		if(histValues.empty()){
-			vector<double> RR;
-			double std;
-			RR=create_RR_intervals();
-			std=stDeviation2(RR);
-			this->histValues=createHist(RR,std);
-
-		}
-		
-		vector<double> v, t;
-		v=histValues["values"];
-		t=histValues["start_time"];
-		sort(v.begin(), v.end());
-		double max_v=t[0];
-		int s_v=v.size();
-		for (int i = 0; i < s_v; ++i){
-			if(histValues["values"][i]==v[s_v-1]) max_v=t[i];
-			}
-
-		if(f>t[0] && f<max_v &&  l<t[s_v-1] && l>max_v){
-			c=ceil(histValues["end_time"][0]-histValues["start_time"][0]-0.5);
-			a=(int)(f-histValues["start_time"][0])/(int)c;
-			b=(int)(l-histValues["start_time"][0])/(int)c;
-			}
-		else{
-			a=0;
-			b=s_v;
-			}
-
-
-		updatedValues["tinn"]= tinn(histValues, a, b);
-		updatedValues["tri"]= triangleRR(histValues,a,b);
-
-		return updatedValues;
 	}
 

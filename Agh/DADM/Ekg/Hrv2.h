@@ -23,8 +23,7 @@ class Hrv2 : public AbstractModule<Hrv2Result>{
 		//metody
 		Hrv2();
 		void setValues(vector<double> x, unsigned int y);
-		virtual Hrv2Result* compute(ResultKeeper* rkp)const override;
-		map<string,double> updateHistParams(double f, double l, vector<double> x, unsigned int y);
+		virtual Hrv2Result* compute(ResultKeeper* rkp);
 
 private:
 		vector<double> create_RR_intervals();
@@ -32,11 +31,16 @@ private:
 		map<string, vector<double>> createHist(vector<double> val, double s);
         double stDeviation2 (vector<double> z);
         double sum(vector<double> elem);
+		double maxIndex(vector<double> v);
+		map<string,double>  getCoff(vector<double> war, vector<double> c);
+		double Hrv2:: getCorrelation(double varb1, double varb2, vector<double> war, vector<double> c);
+		map<string, double> fit(map<string,vector<double>> histValues);
         double calculateApen(vector<double> val, double s, int dim = 2);
         double calculateSamen(vector<double> val, double s, int dim = 2);
         map<string, double> poincareParams(map<string,vector<double>> x1_x2);
-        double triangleRR(map<string,vector<double>> histValues, int a, int b);
-        double tinn(map<string,vector<double>> histValues, int a, int b);
+        double triangleRR(map<string,vector<double>> histValues);
+        double tinn(map<string,vector<double>> histValues);
+		
 		
       
 };
