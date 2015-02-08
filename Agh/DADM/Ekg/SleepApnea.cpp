@@ -121,7 +121,7 @@ int SleepApnea::iloscMinut(vector<float> RX, int size_Rpeaks){
 	float czasPomiaru=0;
 	
 	
-	for(int i=0;i<size_Rpeaks;i++){
+	for(int i=0;i<size_Rpeaks-1;i++){
 		czasPomiaru=czasPomiaru+RX[i];
 	}
 
@@ -354,7 +354,7 @@ float  SleepApnea::obliczMediane(int liczbaUderzen, vector < float > sortowanaAn
 
 	if(liczbaUderzen%2==1){
 	
-		mediana=sortowanaAnalizowanych[(liczbaUderzen-1)/2];
+		mediana=sortowanaAnalizowanych[(liczbaUderzen+1)/2];
 	}
 	
 	else{
@@ -374,14 +374,14 @@ float  SleepApnea::obliczIQR(int liczbaUderzen, vector < float > sortowanaAnaliz
 	float IQR;
 
 	if(liczbaUderzen%4==0){
-		kwartyl1=0.75*sortowanaAnalizowanych[(liczbaUderzen/4)-1]+0.25*sortowanaAnalizowanych[(liczbaUderzen/4)];
-		kwartyl3=0.25*sortowanaAnalizowanych[(liczbaUderzen*3/4)-1]+0.75*sortowanaAnalizowanych[(liczbaUderzen*3/4)];
+		kwartyl1=0.5*sortowanaAnalizowanych[(liczbaUderzen  /4)]+0.5*sortowanaAnalizowanych[(liczbaUderzen   /4)+1];
+		kwartyl3=0.5*sortowanaAnalizowanych[(liczbaUderzen*3/4)]+0.5*sortowanaAnalizowanych[(liczbaUderzen*3/4)+1];
 
 	}
 
 	else if (liczbaUderzen%4==1){
-		kwartyl1=0.5*sortowanaAnalizowanych[(int)((floor(liczbaUderzen/4))-1)]+0.5*sortowanaAnalizowanych[(int)(floor(liczbaUderzen/4))];
-		kwartyl3=0.5*sortowanaAnalizowanych[(int)((ceil(liczbaUderzen*3/4)-1))]+0.5*sortowanaAnalizowanych[(int)(ceil(liczbaUderzen*3/4))];
+		kwartyl1=0.25*sortowanaAnalizowanych[(int)(floor(liczbaUderzen /4))]+0.75*sortowanaAnalizowanych[(int)(floor(liczbaUderzen /4))+1];
+		kwartyl3=0.75*sortowanaAnalizowanych[(int)(ceil(liczbaUderzen*3/4))]+0.25*sortowanaAnalizowanych[(int)(ceil(liczbaUderzen*3/4))+1];
 
 	}
 
@@ -393,8 +393,8 @@ float  SleepApnea::obliczIQR(int liczbaUderzen, vector < float > sortowanaAnaliz
 		}
 
 		else{
-			kwartyl1=0.25*sortowanaAnalizowanych[int((floor(liczbaUderzen/4))-1)]+0.75*sortowanaAnalizowanych[int(floor(liczbaUderzen/4))];
-			kwartyl3=0.75*sortowanaAnalizowanych[int((ceil(liczbaUderzen*3/4))-1)]+0.25*sortowanaAnalizowanych[int(ceil(liczbaUderzen*3/4))];
+			kwartyl1=sortowanaAnalizowanych[int(ceil(liczbaUderzen/4))];
+			kwartyl3=sortowanaAnalizowanych[int(ceil(liczbaUderzen*3/4))];
 		}	
 	}
 	
@@ -406,8 +406,8 @@ float  SleepApnea::obliczIQR(int liczbaUderzen, vector < float > sortowanaAnaliz
 		}
 
 		else{
-			kwartyl1=sortowanaAnalizowanych[int(floor(liczbaUderzen/4))];
-			kwartyl3=sortowanaAnalizowanych[int(ceil(liczbaUderzen*3/4))];
+			kwartyl1=0.75*sortowanaAnalizowanych[(int)(ceil(liczbaUderzen  /4))  ]+0.25*sortowanaAnalizowanych[(int)(ceil(liczbaUderzen  /4))+1];
+			kwartyl3=0.25*sortowanaAnalizowanych[(int)(ceil(liczbaUderzen*3/4))+1]+0.75*sortowanaAnalizowanych[(int)(ceil(liczbaUderzen*3/4))+2];
 		}	
 	
 	}
@@ -730,6 +730,37 @@ SleepApneaResult* SleepApnea :: Rampl(int fs, vector<float> R_peaks_in, int size
 	vector<int> result;
 	for(int i = 0; i < liczbaMinut; i++ ) result.push_back(wynik[i]);
 	
+	vector<int> dres;
+	int roz=result.size();
+
+	for(int i=0; i<roz;i++)
+	{
+		if(i==0)			dres.push_back(result[0]);
+		else if(i==roz-1)	dres.push_back(result[roz-1]*-1);
+		else				dres.push_back(result[i]-result[i-1]);
+	}
+
+	vector<string> NrEpizodu;
+	vector<double> PoczEpizo;
+	vector<double> KoniEpizo;
+
+
+	for(int i=0; i<roz;i++)
+	{
+		if(dres[i]==-1)		KoniEpizo.push_back(floor(i/60)+(i%60)/100);
+		else if(dres[i]==1)	
+		{
+			PoczEpizo.push_back(floor(i/60)+(i%60)/100);
+			NrEpizodu.push_back(to_string(i));
+		}
+	}
+	if(NrEpizodu.size()==0)
+	{
+		KoniEpizo.push_back( 0 );
+		PoczEpizo.push_back( 0 );
+		NrEpizodu.push_back("0");
+	}
+	/*
 	map<string,vector<double>> ResMap;
 	vector<double> ResVal;
 	vector<double> ResXbeg;
@@ -745,9 +776,10 @@ SleepApneaResult* SleepApnea :: Rampl(int fs, vector<float> R_peaks_in, int size
 	ResMap["values"]=ResVal;
 	ResMap["start_time"]=ResXbeg;
 	ResMap["end_time"]=ResXend;
+	*/
 
 	SleepApneaResult res = SleepApneaResult();
-	res.setMapResult(ResMap);
+	res.setResult(NrEpizodu,PoczEpizo,KoniEpizo);
 	return res.getResult();
 }
 
@@ -757,9 +789,10 @@ SleepApneaResult* SleepApnea :: compute(ResultKeeper* rkp) {
 	int fs=rkp->getInput()->GetFs();
 	vector<unsigned int> uintR_peaks_in =rkp->getRPeaks()->getRPeaks();
 	vector<float> R_peaks_in(uintR_peaks_in.begin(),uintR_peaks_in.end());
-	int size_Rpeaks=R_peaks_in.size();
-	int metoda=1 ;//                                                            z UI rkp->;                                                              
+	int size_Rpeaks =R_peaks_in.size();
 
-	return Rampl( fs , R_peaks_in, size_Rpeaks,metoda);
+	int metoda=1;															  //  z UI rkp->;                                                              
+
+	return Rampl( fs , R_peaks_in, size_Rpeaks ,metoda);
 }
 

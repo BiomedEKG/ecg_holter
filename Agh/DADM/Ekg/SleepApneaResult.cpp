@@ -15,18 +15,21 @@ SleepApneaResult::~SleepApneaResult(void)
 SleepApneaResult* SleepApneaResult::getResult()
 {
 	SleepApneaResult* odp = new  SleepApneaResult();
-	odp->Xlab="min";
-	odp->Ylab="";
-	odp->MapResult=MapResult;
+	odp->NrEp=NrEp;
+	odp->Tstart=Tstart;
+	odp->Tend=Tend;
+
 	odp->paramType=SLEEP_APNEA;
 
 	return odp;
 
 }
 
-void SleepApneaResult::setMapResult(map<string,vector<double>> rez)
+void SleepApneaResult::setResult(vector<string> Nrepi,vector<double> ts,vector<double> te)
 {
-	this->MapResult = rez;
+	this->NrEp=Nrepi;
+	this->Tstart=ts;
+	this->Tend=te;
 }
 
 /*
