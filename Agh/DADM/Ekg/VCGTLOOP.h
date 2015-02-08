@@ -9,12 +9,12 @@
 
 class VCGTLoop: public AbstractModule<ResultVCG>
 {
-       
-public: 
-	ResultVCG* compute (ResultKeeper *rkp);
-    map <char, vector<double>> VCG;
-	map <string,double> parameters;
-       
+
+public:
+ ResultVCG* compute (ResultKeeper *rkp);
+ map <char, vector<double>> VCG;
+ map <string,double> parameters;
+
 private:
 
 };
