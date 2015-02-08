@@ -744,14 +744,15 @@ SleepApneaResult* SleepApnea :: Rampl(int fs, vector<float> R_peaks_in, int size
 	vector<double> PoczEpizo;
 	vector<double> KoniEpizo;
 
-
-	for(int i=0; i<roz;i++)
+	
+	for(int i=0, a=1; i<roz;i++)
 	{
 		if(dres[i]==-1)		KoniEpizo.push_back(floor(i/60)+(i%60)/100);
 		else if(dres[i]==1)	
 		{
 			PoczEpizo.push_back(floor(i/60)+(i%60)/100);
-			NrEpizodu.push_back(to_string(i));
+			NrEpizodu.push_back(to_string(a));
+			a=a++;
 		}
 	}
 	if(NrEpizodu.size()==0)
