@@ -68,6 +68,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_plot3D.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">

@@ -23,6 +23,9 @@
 #include <qwt_samples.h>
 #include <QMap>
 #include <QtGui>
+#include <vector>
+#include <string>
+using namespace std;
 
 #define FFTW_DLL
 
@@ -55,10 +58,12 @@ int main(int argc, char *argv[])
 	 map["seven"] = 7;
 
 	 //wektor jednostek do tabeli
-	 QVector<QString> units(3);
+	 vector<QString> units(3);
 	  units[0] = "mm" ;
 	  units[1] = "min" ;
 	  units[2] = "s^2" ;
+
+   QVector<QString> qVec = QVector<QString>::fromStdVector(units);
 
 	/**************************************Wektory do VCG**************************************************************/
 	QVector<double> X(126);
@@ -101,10 +106,11 @@ int main(int argc, char *argv[])
 		hp.HistogramPlotInit(histmap, mp2.plotarea);
 		hp.setHistogramPlotArea(mp2,histmap["start_time"].first(),histmap["end_time"].last(),1,0,1,1,"RRx","value","sample Histogram");
 
-		//Table t(map, units, mp2.plotarea->canvas());
+		Table t(map, qVec, mp2.plotarea->canvas());
 
 		Plot3D p(X,Z,Y); // wykres VCG - trzeba podaæ najpierw wektor Y a potem Z;
 		p.show();
+
 
 		return a.exec();
 }
