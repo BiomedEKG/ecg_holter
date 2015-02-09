@@ -72,6 +72,12 @@
     <Filter Include="Modules\RPeaks">
       <UniqueIdentifier>{90a504a8-2ccd-40fa-afd2-787c20662060}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\VCGLOOP">
+      <UniqueIdentifier>{e21689b0-6065-45ed-9012-421335b07df3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\STSegment">
+      <UniqueIdentifier>{b3696cd4-d99d-45b8-b5e9-733555dc789a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
@@ -221,6 +227,39 @@
     <ClCompile Include="RPeaksResult.cpp">
       <Filter>Modules\RPeaks</Filter>
     </ClCompile>
+    <ClCompile Include="AtrFibr.cpp">
+      <Filter>Modules\AtrialFibrilation</Filter>
+    </ClCompile>
+    <ClCompile Include="AtrfibrResult.cpp">
+      <Filter>Modules\AtrialFibrilation</Filter>
+    </ClCompile>
+    <ClCompile Include="SIG_EDR.cpp">
+      <Filter>Modules\SigEDR</Filter>
+    </ClCompile>
+    <ClCompile Include="SigEDResult.cpp">
+      <Filter>Modules\SigEDR</Filter>
+    </ClCompile>
+    <ClCompile Include="Waves.cpp">
+      <Filter>Modules\Waves</Filter>
+    </ClCompile>
+    <ClCompile Include="WavesResult.cpp">
+      <Filter>Modules\Waves</Filter>
+    </ClCompile>
+    <ClCompile Include="methodsVCG.cpp">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultVCG.cpp">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClCompile>
+    <ClCompile Include="VCGTLOOP.cpp">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClCompile>
+    <ClCompile Include="stsegment.cpp">
+      <Filter>Modules\STSegment</Filter>
+    </ClCompile>
+    <ClCompile Include="stsegmentresult.cpp">
+      <Filter>Modules\STSegment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -344,6 +383,39 @@
     </ClInclude>
     <ClInclude Include="RPeaksResult.h">
       <Filter>Modules\RPeaks</Filter>
+    </ClInclude>
+    <ClInclude Include="AtrFibr.h">
+      <Filter>Modules\AtrialFibrilation</Filter>
+    </ClInclude>
+    <ClInclude Include="AtrfibrResult.h">
+      <Filter>Modules\AtrialFibrilation</Filter>
+    </ClInclude>
+    <ClInclude Include="SIG_EDR.h">
+      <Filter>Modules\SigEDR</Filter>
+    </ClInclude>
+    <ClInclude Include="SigEDResult.h">
+      <Filter>Modules\SigEDR</Filter>
+    </ClInclude>
+    <ClInclude Include="Waves.h">
+      <Filter>Modules\Waves</Filter>
+    </ClInclude>
+    <ClInclude Include="WavesResult.h">
+      <Filter>Modules\Waves</Filter>
+    </ClInclude>
+    <ClInclude Include="methodsVCG.h">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultVCG.h">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClInclude>
+    <ClInclude Include="VCGTLOOP.h">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClInclude>
+    <ClInclude Include="stsegment.h">
+      <Filter>Modules\STSegment</Filter>
+    </ClInclude>
+    <ClInclude Include="stsegmentresult.h">
+      <Filter>Modules\STSegment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
