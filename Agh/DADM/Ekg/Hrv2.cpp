@@ -422,19 +422,19 @@ double Hrv2::mean2(vector<double> z){
 		SD2 = poinParams["sd2"];
 		centroid=mean2(tabplus);
 
-		X2.push_back(centroid);
-		X2.push_back(centroid);
-		Y2.push_back(centroid+((sqrt(2)/2)*SD2));
-		Y2.push_back(centroid+((sqrt(2)/2)*SD2));
 		X1.push_back(centroid-((sqrt(2)/2)*SD1));
-		X1.push_back(centroid+((sqrt(2)/2)*SD1));
+		X1.push_back(centroid);
+		Y1.push_back(centroid+((sqrt(2)/2)*SD1));
 		Y1.push_back(centroid);
-		Y1.push_back(centroid);
-
-		sdPoint["sd1_p1"] = X1; //wspolrzedne (x,y) -poczatek osi SD1
-		sdPoint["sd1_p2"] = Y1;//wspolrzedne (x,y) -koniec osi SD1
-		sdPoint["sd2_p1"] = X2;//wspolrzedne (x,y)-poczatek osi SD2
-		sdPoint["sd2_p2"] = Y2;//wspolrzedne (x,y) -koniec osi SD2
+		X2.push_back(centroid);
+		X2.push_back(centroid+((sqrt(2)/2)*SD2));
+		Y2.push_back(centroid);
+		Y2.push_back(centroid+((sqrt(2)/2)*SD2));
+	
+		sdPoint["sd1_x"] = X1;
+		sdPoint["sd1_y"] = Y1;
+		sdPoint["sd2_x"] = X2;
+		sdPoint["sd2_y"] = Y2;
 
 		return sdPoint;
 
