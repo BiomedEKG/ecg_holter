@@ -89,12 +89,15 @@ double PanTompkins::find_cut_level(std::vector<double> data, unsigned int size){
 	    double cut_level = 0.0;
 	    double RMS = root_mean_squere(data, size);
 		double max = find_max(data);
-		if(RMS > 0.18*max) {
-			cut_level = 0.4*max;
-		}
-		else {
-			cut_level = 1.5*RMS;
-		}
+		if(RMS > 0.18*max ) {
+		   cut_level = 0.4*max;
+		  }
+		  else if (RMS == 0){
+		  cut_level = 0.3*max;
+		  }
+		  else{
+		   cut_level = 1.5*RMS;
+		  }
 
 		return cut_level;
 }
@@ -170,6 +173,11 @@ std::vector<unsigned int> PanTompkins::find_R(std::vector<double> data, unsigned
  					start_samples.push_back(i +1);
 			//std::cout << i << std::endl;
  		}
+
+		if(start_samples.size() == 0 ) {
+			start_samples.push_back(1);
+			start_samples.push_back(1);
+		}
  	
  		unsigned int k = start_samples.at(0);
  		for(size_t i = 0; i < start_samples.size()-1; i ++ ) {
@@ -229,6 +237,8 @@ std::vector<unsigned int> PanTompkins :: find_R_indexes(std::vector<double> data
 	*************************************************************************/
 
 std::vector<unsigned int> PanTompkins::select_R_indexes(std::vector<unsigned int> R_indexes, std::vector<double> data, unsigned int sampling_frequency) {
+
+
 
 	std::vector<unsigned int> R_indexes_selected = R_indexes;
 	int min_distance = sampling_frequency*60/250; // maks tetno
@@ -293,7 +303,11 @@ int PanTompkins::find_filter_shift(std::vector<double> data_input, std::vector<u
 	*************************************************************************/
 std::vector<unsigned int> PanTompkins::calc_filter_shift(std::vector<double> data_input, std::vector<unsigned int> data, unsigned int sampling_frequency){
 		
-	    this->filter_shift = find_filter_shift(data_input, data, sampling_frequency);
+		if(data.size() == 0 ) {
+			data.push_back(1);
+			data.push_back(1);
+		}
+ 	    this->filter_shift = find_filter_shift(data_input, data, sampling_frequency);
 		for(size_t i = 0 ; i<data.size(); i++){	
 			if(static_cast<int>(data.at(i)) > (this->filter_shift))
 				data.at(i) -= (this->filter_shift) ;
