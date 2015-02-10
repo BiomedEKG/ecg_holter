@@ -21,6 +21,10 @@ void BaselineResult::setFilteredSignal(std::vector <double> signal)
 }
 
 BaselineResult* BaselineResult:: getResult() {
+	BaselineResult* br  = new BaselineResult();
 	paramType = BASELINE;
-	return this;
+	br->filteredSignal = filteredSignal;
+	size = filteredSignal.size();
+	br->size = size;
+	return br;
 	}

@@ -21,12 +21,23 @@ void MajesticEngineOfGlory::tryMe(){
 	
 	ResultKeeper* rkp  =  &ResultKeeper::getInstance();
 	rkp->pathToFile = "D://Dadm//100s";
-	ECGBaseline* ecgBaseline = new ECGBaseline();
-	BaselineResult* bslResult = new BaselineResult();
-	bslResult = ecgBaseline->compute(rkp);
-	rkp->setECGBaseline(ecgBaseline->compute(rkp));
-	RPeaks* rPeaks =  new RPeaks();
-	rkp->setRPeaks(rPeaks->compute(rkp));
+	ECGBaseline ecgBaseline =  ECGBaseline();
+	BaselineResult *bslResult = new BaselineResult();
+	bslResult = ecgBaseline.compute(rkp);
+	vector<double>w = bslResult->getFilteredSignal();
+	rkp->setECGBaseline(bslResult);
+	bslResult = rkp->getECGBaseline();
+	vector<double> *x = &bslResult->filteredSignal;
+	cout << bslResult->size << endl;
+	RPeaks rp = RPeaks();
+	rp.compute(rkp);
 
+	//vector<double> x = rkp->getECGBaseline()->filteredSignal;
+	
 
+	//x.size();
+	//RPeaks* rPeaks =  new RPeaks();
+	//rkp->setRPeaks(rPeaks->compute(rkp));
+	 
+	
 }

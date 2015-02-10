@@ -142,4 +142,7 @@
 int main() {
 	MajesticEngineOfGlory engine = MajesticEngineOfGlory();
 	engine.tryMe();
+	cout << "skonczylem";
+	//system("PAUSE");
+	return 0;
 }

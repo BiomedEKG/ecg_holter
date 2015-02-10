@@ -14,5 +14,6 @@ public:
 public:
 	std::vector <double> getFilteredSignal();
 	void setFilteredSignal(std::vector <double>);
+	unsigned int size;
 	
 };

@@ -221,6 +221,9 @@
     <ClCompile Include="RPeaksResult.cpp">
       <Filter>Modules\RPeaks</Filter>
     </ClCompile>
+    <ClCompile Include="PanTompkins.cpp">
+      <Filter>Modules\RPeaks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -343,6 +346,9 @@
       <Filter>Modules\RPeaks</Filter>
     </ClInclude>
     <ClInclude Include="RPeaksResult.h">
+      <Filter>Modules\RPeaks</Filter>
+    </ClInclude>
+    <ClInclude Include="PanTompkins.h">
       <Filter>Modules\RPeaks</Filter>
     </ClInclude>
   </ItemGroup>

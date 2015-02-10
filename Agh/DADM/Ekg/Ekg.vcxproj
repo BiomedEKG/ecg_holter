@@ -140,6 +140,7 @@
     <ClCompile Include="MajorPlot.cpp" />
     <ClCompile Include="CurvePlot.cpp" />
     <ClCompile Include="HistogramPlot.cpp" />
+    <ClCompile Include="PanTompkins.cpp" />
     <ClCompile Include="PdfGenerator.cpp" />
     <ClCompile Include="RaportGenerator.cpp" />
     <ClCompile Include="Result.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="LeastMeanSquares.h" />
     <ClInclude Include="MajesticEngineOfGlory.h" />
     <ClInclude Include="MovingAverage.h" />
+    <ClInclude Include="PanTompkins.h" />
     <ClInclude Include="RPeaks.h" />
     <ClInclude Include="RPeaksResult.h" />
     <ClInclude Include="SavitzkyGolay.h" />

@@ -39,6 +39,10 @@ ResultKeeper::~ResultKeeper()
 	return ecgBaseline;
  }
 
+ RPeaksResult* ResultKeeper::getRPeaks() {
+	return rPeaks;
+ }
+
  //Hrv2Result* ResultKeeper::getHrv2() {
 	//return hrv2;
  //}

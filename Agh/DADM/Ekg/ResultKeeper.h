@@ -51,9 +51,10 @@ class ResultKeeper
 		void setAtrialFibrillation(AtrfibrResult* atr);
 		void setHrv2(Hrv2Result* hrv2);*/
 		void setRPeaks(RPeaksResult* rpr);
+		
 	//	HRV1* getHRV1();
 	//	HeartClass* getHeartClass();
-		void setECGBaseline(BaselineResult* baseline);
+		void setECGBaseline(BaselineResult *baseline);
 	//	EctopicBeat* getEctopicBeat();
 	//	STSegmentResult* getSTSegmentResult();
 	//	TWaves* getTWaves();
