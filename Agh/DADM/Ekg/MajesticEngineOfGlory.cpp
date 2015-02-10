@@ -30,8 +30,9 @@ void MajesticEngineOfGlory::tryMe(){
 	vector<double> *x = &bslResult->filteredSignal;
 	cout << bslResult->size << endl;
 	RPeaks rp = RPeaks();
-	rp.compute(rkp);
-
+	rkp->setRPeaks(rp.compute(rkp));
+	RPeaksResult*r =  rkp->getRPeaks();
+	vector<unsigned int>xxx = r->getRPeaks();
 	//vector<double> x = rkp->getECGBaseline()->filteredSignal;
 	
 

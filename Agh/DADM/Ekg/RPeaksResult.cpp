@@ -21,6 +21,8 @@ void RPeaksResult::setRPeaks(std::vector <unsigned int> signal)
 }
 
 RPeaksResult* RPeaksResult:: getResult() {
-	paramType = RPEAKS;
-	return this;
+	RPeaksResult* rp = new RPeaksResult();
+	rp->R_Peaks = R_Peaks;
+	//paramType = RPEAKS;
+	return rp;
 	}
