@@ -2,7 +2,6 @@
 #include "AbstractModule.h"     
 #include "Result.h"   
 #include<BaselineResult.h>
-#include "Methods.h"
 #include "FilterType.h"
 #include "MovingAverage.h"
 #include "Butterworth.h"
@@ -21,9 +20,7 @@ public:
 	std::vector <double> output;
 	
 private:
-	BASELINEMETHOD baselineMethod;
 	FILTERTYPE filterType;
-	int samplingFrequency;
 	std::vector<double> butterworthFilter (std::vector<double>* signal, int samplingFrequency);
 	std::vector<double> chebyshevFilter (std::vector<double>* signal, int samplingFrequency);
 	std::vector<double> movingAverage (std::vector<double>* signal);

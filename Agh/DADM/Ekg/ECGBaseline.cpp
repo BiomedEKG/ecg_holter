@@ -4,45 +4,42 @@
 #include <vector> 
 #include "ResultKeeper.h"
 
-BaselineResult* ECGBaseline::compute (ResultKeeper *rkp) {
+#include "ECGFiltrationMethod.h"
 
+BaselineResult* ECGBaseline::compute (ResultKeeper *rkp)
+{
+	Input *inputHandler = rkp->getInput();
+	int samplingFrequency = inputHandler->GetFs();
+	std::vector <double> signal = inputHandler->vdGetChannelData(); 
 
-
-//	samplingFrequency = rkp->samplingFrequency;   // nie ma tego w result keeperze
-	Input in = rkp->getSignalHandler();
-	in.Open(rkp->pathToFile);
-	std::vector <double> signal = in.vdGetChannelData(); 
-	enum BASELINEMETHOD bM = BUTTERWORTH;
-
-	switch (bM){
-
-		case  BUTTERWORTH:
-			output = butterworthFilter (&signal, samplingFrequency);
-			break;
-		case  CHEBYSHEV:
-			output = chebyshevFilter (&signal, samplingFrequency);
-			break;
-		case  LMS:
-			output = leastMeanSquares (&signal, samplingFrequency);
-			break;
-		case  MOVINGAVERAGE:
-			output = movingAverage (&signal);
-			break;
-		case  CUBICSPLINE:
-			output = cubicSpline (&signal, samplingFrequency);
-			break;
-		case  SAVITZKYGOLAY:
-			output = savitzkyGolay (&signal, samplingFrequency);
-			break;
-		default:
-			output = movingAverage (&signal);
-			break;
+	switch (rkp->getECGBaselineMethod())
+	{
+	case  BUTTERWORTH_FILTER:
+		output = butterworthFilter (&signal, samplingFrequency);
+		break;
+	case  CZEBYSZEW_FILTER:
+		output = chebyshevFilter (&signal, samplingFrequency);
+		break;
+	case  LMS:
+		output = leastMeanSquares (&signal, samplingFrequency);
+		break;
+	case  MOVING_AVERAGE:
+		output = movingAverage (&signal);
+		break;
+	case  CUBIC_SPLINE:
+		output = cubicSpline (&signal, samplingFrequency);
+		break;
+	case  SAVITZKY_GOLAY_FILTER:
+		output = savitzkyGolay (&signal, samplingFrequency);
+		break;
+	default:
+		output = movingAverage (&signal);
+		break;
 	} 
 	BaselineResult b = BaselineResult(); 
 	b.setFilteredSignal(output);
 	return b.getResult();
 }
-
 
 
 std::vector<double> ECGBaseline::butterworthFilter (std::vector<double>* signal, int samplingFrequency){
@@ -82,7 +79,7 @@ std::vector<double> ECGBaseline::movingAverage (std::vector<double>* signal){
 	MovingAverage movingAverage;
 	std::vector <double> output = movingAverage.calculateMovingAverage(signal);
 	return output;
-	
+
 }
 
 std::vector<double> ECGBaseline::cubicSpline (std::vector<double>* signal, int samplingFrequency){

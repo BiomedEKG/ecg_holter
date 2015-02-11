@@ -38,6 +38,7 @@ void ChannelsMenu::updateMenu()
 
 	if (d->allChannels.size() > 0)
 	{
+		d->allChannels[0]->setChecked(true);
 		setEnabled(true);
 	}
 }

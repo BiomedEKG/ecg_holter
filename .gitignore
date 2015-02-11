@@ -1,50 +1,18 @@
-/Agh/DADM/DADM.opensdf
+Agh/DADM/DADM.opensdf
 
-/Agh/DADM/DADM.sdf
+Agh/DADM/DADM.sdf
 
-/Agh/DADM/DADM.v11.suo
+Agh/DADM/DADM.v11.suo
 
-/Agh/DADM/Ekg/Debug/Ekg.log
+Agh/DADM/Ekg/Debug/*
 
-/Agh/DADM/Ekg/Debug/custombuild.command.1.tlog
+Agh/DADM/Win32/Debug/Ekg.exe
 
-/Agh/DADM/Ekg/Debug/custombuild.read.1.tlog
+Agh/DADM/Win32/Debug/Ekg.ilk
 
-/Agh/DADM/Ekg/Debug/custombuild.write.1.tlog
+Agh/DADM/Win32/Debug/Ekg.pdb
 
-/Agh/DADM/Ekg/Debug/Ekg.lastbuildstate
-
-/Agh/DADM/Ekg/Debug/Ekg.unsuccessfulbuild
-
-/Agh/DADM/Win32/Debug/Ekg.exe
-
-/Agh/DADM/Win32/Debug/Ekg.ilk
-
-/Agh/DADM/Win32/Debug/Ekg.pdb
-
-/Agh/DADM/Ekg/Ekg.vcxproj.user
-
-/Agh/DADM/Ekg/Debug/ekg.obj
-
-/Agh/DADM/Ekg/Debug/link.command.1.tlog
-
-/Agh/DADM/Ekg/Debug/link.read.1.tlog
-
-/Agh/DADM/Ekg/Debug/link.write.1.tlog
-
-/Agh/DADM/Ekg/Debug/main.obj
-
-/Agh/DADM/Ekg/Debug/moc_ekg.obj
-
-/Agh/DADM/Ekg/Debug/qrc_ekg.obj
-
-/Agh/DADM/Ekg/Debug/vc110.pdb
-
-/Agh/DADM/Ekg/Debug/cl.command.1.tlog
-
-/Agh/DADM/Ekg/Debug/CL.read.1.tlog
-
-/Agh/DADM/Ekg/Debug/CL.write.1.tlog
+Agh/DADM/Ekg/Ekg.vcxproj.user
 
 *.tlog
 *.log

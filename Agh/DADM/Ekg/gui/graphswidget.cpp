@@ -9,6 +9,7 @@ GraphsWidget::GraphsWidget(QWidget *parent) :
 {
     setLayout(new QVBoxLayout(this));
 	tabWidget = new QTabWidget(this);
+	tabWidget->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
    
 	layout()->addWidget(tabWidget);
 }

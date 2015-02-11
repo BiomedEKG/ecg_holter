@@ -9,6 +9,11 @@
 //#include "WavesResult.h"
 //#include "SigEDResult.h"
 //#include "Hrv2Result.h"
+
+#include "ECGFiltrationMethod.h"
+#include "RPeaksDetectionAlgorithms.h"
+#include "SleepApneaMetrics.h"
+
 using namespace std;
 
 
@@ -66,8 +71,14 @@ class ResultKeeper
 		/*void setSIG_EDR(SigEDResult* sigEdr);
 		void setWaves(WavesResult* waveRes);*/
 
+		void setECGBaselineMethod(ECGFiltrationMethod ecgBaselineMethod);
+		ECGFiltrationMethod getECGBaselineMethod();
 
+		void setRPeaksDetectionAlgorithm(RPeaksDetectionAlgorithm rPeaksDetectionAlgorithm);
+		RPeaksDetectionAlgorithm getRPeaksDetectionAlgorithm();
 
+		void setSleepApneaMetrics(SleepApneaMetrics sleepApneaMetrics);
+		SleepApneaMetrics getSleepApneaMetrics();
         
     private:
 		ResultKeeper();
@@ -75,7 +86,10 @@ class ResultKeeper
 		ResultKeeper(ResultKeeper const&);
 		void operator=(ResultKeeper const&);
 
-
+	private:
+		ECGFiltrationMethod m_ecgBaselineMethod;
+		RPeaksDetectionAlgorithm m_rPeaksDetectionAlgorithm;
+		SleepApneaMetrics m_sleepApneaMetrics;
 
 
 /********* MODULES DATA ***********/
