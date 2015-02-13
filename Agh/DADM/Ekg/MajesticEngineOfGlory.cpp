@@ -20,7 +20,7 @@ MajesticEngineOfGlory::~MajesticEngineOfGlory(void)
 void MajesticEngineOfGlory::tryMe(){
 	
 	ResultKeeper* rkp  =  &ResultKeeper::getInstance();
-	rkp->pathToFile = "D://Dadm//100s";
+	rkp->pathToFile = "D://Dadm//Patient001";
 	ECGBaseline ecgBaseline =  ECGBaseline();
 	BaselineResult *bslResult = new BaselineResult();
 	bslResult = ecgBaseline.compute(rkp);
@@ -33,6 +33,7 @@ void MajesticEngineOfGlory::tryMe(){
 	rkp->setRPeaks(rp.compute(rkp));
 	RPeaksResult*r =  rkp->getRPeaks();
 	vector<unsigned int>xxx = r->getRPeaks();
+	std::cout << xxx.size() << "rozmiar po rpiksach" << endl;;
 	//vector<double> x = rkp->getECGBaseline()->filteredSignal;
 	
 

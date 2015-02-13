@@ -61,6 +61,21 @@ ResultKeeper::~ResultKeeper()
  void ResultKeeper::setRPeaks(RPeaksResult* rPeaks) {
 	this->rPeaks = rPeaks;
  }
+
+
+ vector<double> ResultKeeper:: getSingleChannel(char* path, int channelNumber) {
+	Input input = this->getSignalHandler();
+	input.Open(path);
+	int numbOfChannels = input.GetNumberOfChannels();
+	char** channelsNames = input.GetChannelsNames();
+	char* singleChannel = channelsNames[channelNumber];
+	input.SelectChannel(singleChannel);
+	vector<double> single = input.vdGetChannelData();
+
+	input.Close();
+	return single;
+
+ }
  //void ResultKeeper::setAtrialFibrillation(AtrfibrResult* atr) {
 	//this->atrialFibrillation = atr;
  //}

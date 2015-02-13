@@ -390,6 +390,39 @@
     <ClInclude Include="PanTompkins.h">
       <Filter>Modules\RPeaks</Filter>
     </ClInclude>
+    <ClInclude Include="AtrFibr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AtrfibrResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="methodsVCG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultVCG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VCGTLOOP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Waves.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WavesResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SIG_EDR.h">
+      <Filter>Modules\SigEDR</Filter>
+    </ClInclude>
+    <ClInclude Include="SigEDResult.h">
+      <Filter>Modules\SigEDR</Filter>
+    </ClInclude>
+    <ClInclude Include="stsegment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stsegmentresult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Ekg.rc" />

@@ -65,7 +65,7 @@ class ResultKeeper
 	//	RaportGenerator* getRaportGenerator();
 		/*void setSIG_EDR(SigEDResult* sigEdr);
 		void setWaves(WavesResult* waveRes);*/
-
+		 vector<double>  getSingleChannel(char* path, int channelNumber);
 
 
         

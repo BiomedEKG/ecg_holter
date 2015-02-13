@@ -301,7 +301,7 @@ int PanTompkins::find_filter_shift(std::vector<double> data_input, std::vector<u
 	*   method purpose - recalculating the result, taking into account filter shift
 	*
 	*************************************************************************/
-std::vector<unsigned int> PanTompkins::calc_filter_shift(std::vector<double> data_input, std::vector<unsigned int> data, unsigned int sampling_frequency){
+std::vector<unsigned int> PanTompkins::calc_filter_shift(std::vector<double> &data_input, std::vector<unsigned int> data, unsigned int sampling_frequency){
 		
 		if(data.size() == 0 ) {
 			data.push_back(1);

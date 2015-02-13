@@ -45,7 +45,7 @@ public:
 	std::vector<unsigned int> find_R_indexes(std::vector<double> data, unsigned int size);
 	std::vector<unsigned int> select_R_indexes(std::vector<unsigned int> R_indexes, std::vector<double> data, unsigned int sampling_frequency);
 	int find_filter_shift(std::vector<double> data_input, std::vector<unsigned int> R_peak, unsigned int sampling_frequency);
-	std::vector<unsigned int> calc_filter_shift(std::vector<double> data_input, std::vector<unsigned int> data, unsigned int sampling_frequency);
+	std::vector<unsigned int> calc_filter_shift(std::vector<double> &data_input, std::vector<unsigned int> data, unsigned int sampling_frequency);
 	std::vector<double> integration(std::vector<double> data, unsigned int sampling_frequency, int window_width);
 	std::vector<double> squere(std::vector<double> data);
 //	std::vector<unsigned int> computePT(std::vector<double> data_input, unsigned int sampling_frequency);

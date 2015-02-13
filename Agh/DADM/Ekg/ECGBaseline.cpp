@@ -9,9 +9,19 @@ BaselineResult* ECGBaseline::compute (ResultKeeper *rkp) {
 
 
 //	samplingFrequency = rkp->samplingFrequency;   // nie ma tego w result keeperze
-	Input in = rkp->getSignalHandler();
-	in.Open(rkp->pathToFile);
-	std::vector <double> signal = in.vdGetChannelData(); 
+	//Input in = rkp->getSignalHandler();
+	//in.Open(rkp->pathToFile);
+	//int numbOfChannels = in.GetNumberOfChannels();
+	//char** channelsNames = in.GetChannelsNames();
+	//
+	//for(int i = 0; i < 12; i++) {
+	//	std::cout << channelsNames[i] << std::endl; 
+	//	in.SelectChannel(channelsNames[11]);
+	//}
+	//std::vector <double> signal = in.vdGetChannelData(); 
+
+	std::vector<double> signal = rkp->getSingleChannel(rkp->pathToFile, 4);
+
 	enum BASELINEMETHOD bM = BUTTERWORTH;
 
 	switch (bM){
