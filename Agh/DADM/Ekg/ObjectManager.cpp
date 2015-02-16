@@ -25,6 +25,11 @@ ObjectManager *ObjectManager::getInstance()
 	return theInstance;
 }
 
+Input &ObjectManager::inputHandler()
+{
+	return m_inputHandler;
+}
+
 void ObjectManager::populate()
 {
 	/*********************przyk³adowe wektory*****************************************************************/
