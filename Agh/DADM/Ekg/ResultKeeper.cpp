@@ -76,6 +76,15 @@ ResultKeeper::~ResultKeeper()
 	return single;
 
  }
+
+
+ void ResultKeeper::setWaves(WavesResult* wr) {
+	this->wavesResult = wr;
+ }
+
+ WavesResult* ResultKeeper:: getWaves() {
+	return this->wavesResult;
+ }
  //void ResultKeeper::setAtrialFibrillation(AtrfibrResult* atr) {
 	//this->atrialFibrillation = atr;
  //}

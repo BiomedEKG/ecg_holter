@@ -1,12 +1,13 @@
 #ifndef RESULTKEEPER_H
 #define RESULTKEEPER_H
+
 #include <vector>
 #include <Input.h>
 #include "AbstractResult.h"
 //#include "AtrFibr.h"
 #include <RPeaksResult.h>
 #include "BaselineResult.h"
-//#include "WavesResult.h"
+#include <WavesResult.h>
 //#include "SigEDResult.h"
 //#include "Hrv2Result.h"
 using namespace std;
@@ -62,6 +63,8 @@ class ResultKeeper
 	//	SleepApnea* getSleepApnea();
 	//	QTDisp* getQTDisp();
 		Input* getInput();
+		void setWaves(WavesResult* wr);
+		WavesResult* getWaves();
 	//	RaportGenerator* getRaportGenerator();
 		/*void setSIG_EDR(SigEDResult* sigEdr);
 		void setWaves(WavesResult* waveRes);*/
@@ -88,7 +91,7 @@ class ResultKeeper
 	//	HRV1 *hrv1;
 	//	HeartClass *heartClass;
 		BaselineResult *ecgBaseline;
-	
+		WavesResult *wavesResult;
 	//	EctopicBeat *ectopicBeat;
 	//	STSegmentResult *stSegmentResult;
 	//	TWaves *tWaves;
@@ -97,8 +100,8 @@ class ResultKeeper
 	//	QTDisp *qtDisp;
 	//	Input *input;
 	//	RaportGenerator *raportGenerator;
-	/*	SigEDResult *sigEDR;
-		WavesResult *waves;*/
+	/*	SigEDResult *sigEDR;*/
+		
 };
 
 

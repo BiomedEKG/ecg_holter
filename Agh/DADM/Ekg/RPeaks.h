@@ -11,7 +11,7 @@ class RPeaks: public AbstractModule<RPeaksResult> {
 
 public:
 	//RPeaksResult* compute(ResultKeeper *rkp, RPEAKSMETHOD RPeaksMethod) override; 
-	RPeaksResult* compute(ResultKeeper *rkp) override;
+	 RPeaksResult* compute(ResultKeeper *rkp) override;
 	std::vector <unsigned int> output;
 	
 private:

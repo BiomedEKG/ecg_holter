@@ -218,9 +218,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MajesticEngineOfGlory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RPeaks.cpp">
       <Filter>Modules\RPeaks</Filter>
     </ClCompile>
@@ -262,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="stsegmentresult.cpp">
       <Filter>Modules\STSegment</Filter>
+    </ClCompile>
+    <ClCompile Include="MajesticEngineOfGlory.cpp">
+      <Filter>Modules\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -378,9 +378,6 @@
     <ClInclude Include="FilterType.h">
       <Filter>Modules\Baseline</Filter>
     </ClInclude>
-    <ClInclude Include="MajesticEngineOfGlory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RPeaks.h">
       <Filter>Modules\RPeaks</Filter>
     </ClInclude>
@@ -405,12 +402,6 @@
     <ClInclude Include="VCGTLOOP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Waves.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WavesResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SIG_EDR.h">
       <Filter>Modules\SigEDR</Filter>
     </ClInclude>
@@ -422,6 +413,15 @@
     </ClInclude>
     <ClInclude Include="stsegmentresult.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Waves.h">
+      <Filter>Modules\Waves</Filter>
+    </ClInclude>
+    <ClInclude Include="WavesResult.h">
+      <Filter>Modules\Waves</Filter>
+    </ClInclude>
+    <ClInclude Include="MajesticEngineOfGlory.h">
+      <Filter>Modules\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,8 @@
 #include <ResultKeeper.h>
 #include <RPeaks.h>
 #include <ECGBaseline.h>
+#include <Waves.h>
+
 
 
 MajesticEngineOfGlory::MajesticEngineOfGlory(void)
@@ -33,7 +35,9 @@ void MajesticEngineOfGlory::tryMe(){
 	rkp->setRPeaks(rp.compute(rkp));
 	RPeaksResult*r =  rkp->getRPeaks();
 	vector<unsigned int>xxx = r->getRPeaks();
-	std::cout << xxx.size() << "rozmiar po rpiksach" << endl;;
+	std::cout << xxx.size() << "rozmiar po rpiksach" << endl;
+//	Waves waves = Waves();
+//	rkp->setWaves(waves.compute(rkp));
 	//vector<double> x = rkp->getECGBaseline()->filteredSignal;
 	
 
