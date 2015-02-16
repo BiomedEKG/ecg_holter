@@ -17,6 +17,17 @@ double TWavesAlt::get_result()
 		return this->coeff;
 	};
 
+vector<unsigned int> TWavesAlt::get_start()
+	{
+		return this->start;
+	};
+
+vector<unsigned int> TWavesAlt::get_end()
+	{
+		return this->end;
+	};
+
+
 void TWavesAlt::alt_coeff()
 	{	
 		vector<double> sig=this->input_signal;
@@ -75,7 +86,7 @@ void TWavesAlt::alt_coeff()
 				};
 			};
 		
-		fftw_execute(p);
+			fftw_execute(p);
 
 			for(int i=0;i<128;i++)
 			{
@@ -101,7 +112,19 @@ void TWavesAlt::alt_coeff()
 			nstd=sqrt(nstd);
 			ar=(Tpeak-nmean)/nstd;
 			if(ar>0)
+			{
 				ar=sqrt(ar);
+				if(ar>3) {
+					start.push_back(t_samples[j*128]);
+					if(t_samples[j*128+128] < t_samples.back()) {
+						end.push_back(t_samples[j*128+128]); 
+					}
+					else {
+						end.push_back(t_samples.back());
+					}
+				}
+			}
+
 			else
 				ar=0;
 
@@ -135,6 +158,7 @@ void TWavesAlt::alt_coeff()
 	
 		//signal from ECGBaseline
 		const vector<double>& inputFilt = *rkp->ecgBaseline; 
+		
 		//vector numbers of T amplitudes 
 		const vector<double>& twaves = *rkp->waves->; 
 

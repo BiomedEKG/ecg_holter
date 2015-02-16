@@ -14,13 +14,15 @@ using namespace std;
 class TWavesAlt : public AbstractModule<TWavesAlt>
 {
 	public:
-		TWavesAlt(void
+		TWavesAlt(void);
 		//setting signal (filtered - baseline)
 		void set_signal(vector<double> & filtered_signal);
 		//setting number of samples of t-wave amplitude
 		void set_tsamples(vector<unsigned int> & tsamp); 
 		double get_result(); 
 		void alt_coeff(); 
+		vector<unsigned int> get_start();
+		vector<unsigned int> get_end();
 		virtual TWavesAltResult* compute(ResultKeeper* rkp)const; //override;
 		virtual ~TWavesAlt(void);
 
@@ -29,6 +31,8 @@ class TWavesAlt : public AbstractModule<TWavesAlt>
 		vector<unsigned int> t_samples; //samples of t-wave amplitude
 		double coeff; 
 		vector<double> fftres; 
+		vector<unsigned int> start;
+		vector<unsigned int> end;
 };
 
 #endif

@@ -8,10 +8,12 @@ class TWavesAltResult :  public AbstractResult
 {
 public:
 	TWavesAltResult(void);
-	void setTWavesAltResult(double);
+	void setTWavesAltResult(double ar_coeff, vector<double> start, vector<double> end)
 	TWavesAltResult* getResult();
 	~TWavesAltResult(void);
 
 	private:
 		double paramsResult;
+		vector<double> startResult; 
+		vector<double> endResult;
 };
