@@ -36,8 +36,8 @@ void MajesticEngineOfGlory::tryMe(){
 	RPeaksResult*r =  rkp->getRPeaks();
 	vector<unsigned int>xxx = r->getRPeaks();
 	std::cout << xxx.size() << "rozmiar po rpiksach" << endl;
-//	Waves waves = Waves();
-//	rkp->setWaves(waves.compute(rkp));
+	//Waves waves = Waves();
+	//rkp->setWaves(waves.compute(rkp));
 	//vector<double> x = rkp->getECGBaseline()->filteredSignal;
 	
 

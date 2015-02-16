@@ -48,13 +48,14 @@ void Waves::ustaw_qrs_onset(vector<double> ECGBaselineData, vector<unsigned int>
 	//    szukac trzeba nie na ECGBaselineData, tylko na wektorze stworzonym w punkcie 1.
 	//    dostajemy w wyniku dzialania wektor qrs_lewo numerow probek
 	for (int i=RPeaksData.size()-1; i>=0; --i){
-		
+		//bo ponizej tej iteracji sie wypierdala;
+		if(i > 10){
 		double amp = 1;
 		int index = 0;
 		//while (RPeaksData.at(i) < ECGBaselineData.size()){
-			cout << "jak znam swatka to tu sie wypierdala" << endl;
+			//cout << "jak znam swatka to tu sie wypierdala" << i << endl;
 			for (int j = i; j>0; --j){
-				while (amp>=0.25*3.1415){
+				if (amp>=0.25*3.1415){
 					amp = ECGBaselineDataTP.at(j);
 					index = j;
 				}
@@ -67,10 +68,10 @@ void Waves::ustaw_qrs_onset(vector<double> ECGBaselineData, vector<unsigned int>
 	//    czyli bierzemy pod uwage 13 probek, tzn. TransformedECGBaseline(qrs_lewo-13) : TransformedECGBaseline(qrs_lewo-1)
 	//    TO ZAWSZE BEDZIE TAKIE SAMO OKNO
 		for (int j=13; j>0; --j){
-			
+				if(index >= j){
 				SortedMeasures.push_back(ECGBaselineData.at(index-j));
 				Measures.push_back(ECGBaselineData.at(index-j));
-			
+				}
 		}
 		// 4. w tym zakresie (13 probek) na ORYGINALNYM ECGBaselineData robimy po kolei:
 	//    a) liczymy mediane WARTOSCI tych 13 probek ECGBaselineData 
@@ -83,16 +84,20 @@ void Waves::ustaw_qrs_onset(vector<double> ECGBaselineData, vector<unsigned int>
 		double min = 4;
 		int min_index = 0;
 		for (int j=0; j<Measures.size(); ++j) {
+		//	cout << j << endl;
 			Measures[j] = atan(abs(Measures[j]-median)/0.005);
 			if (Measures[j] < min) {
 				min = Measures[j];
 				min_index = j;
 			}
 		}
-		ResultIndexVector.push_back(min_index);
+		ResultIndexVector.push_back(index-(13-min_index));
+	}else break;
+
 	}
 	qrs_onset_index_vector = ResultIndexVector;
 	WavesData["QRS_ONSET"] = qrs_onset_index_vector;
+	
 }
 
 void Waves::ustaw_qrs_end(vector<double> ECGBaselineData, vector<unsigned int> RPeaksData, int sampling_frequency){
@@ -108,6 +113,7 @@ void Waves::ustaw_qrs_end(vector<double> ECGBaselineData, vector<unsigned int> R
 		
 	for (int i=RPeaksData.size()-1; i>=0; --i){ // tak bylo dla qrs_onset, ale chyba przeszukiwanie od konca nie szkodzi
 	//for (int i=0; i<=(RPeaksData.size()-1); ++i){ // i to jest za ka?dym razem element RPeaksData, czyli nr piku R!!
+		if(i >=10){
 		double amp = 1;
 		int index = 0;
 		while (amp<=0.25*3.1415){
@@ -124,10 +130,10 @@ void Waves::ustaw_qrs_end(vector<double> ECGBaselineData, vector<unsigned int> R
 		// for (int j=13; j>0; --j){
 		for (int j=0; j<13; ++j){
 			//while (index-j>0){ // tak bylo dla qrs_onset
-			while (index+j<RPeaksData.size()){ // ZABEZPIECZENIE !!
+		//	while (index+j<RPeaksData.size()){ // ZABEZPIECZENIE !!
 				SortedMeasures.push_back(ECGBaselineData.at(index+j)); // bylo -j
 				Measures.push_back(ECGBaselineData.at(index+j)); //bylo -j
-			}
+			//}
 		}
 		// 4. w tym zakresie (13 probek) na ORYGINALNYM ECGBaselineData robimy po kolei:
 	//    a) liczymy mediane WARTOSCI tych 13 probek ECGBaselineData 
@@ -147,6 +153,7 @@ void Waves::ustaw_qrs_end(vector<double> ECGBaselineData, vector<unsigned int> R
 			}
 		}
 		ResultIndexVector.push_back(min_index);
+		}
 	}
 	qrs_end_index_vector = ResultIndexVector;
 	WavesData["QRS_END"] = qrs_end_index_vector;
@@ -168,7 +175,7 @@ void Waves::ustaw_p_onset(vector<double> ECGBaselineData, vector<unsigned int> R
 		int j=0;
 		// idziemy od poczatku RPeaksData dopoki nie dojdziemy do konca (pierwszy warunek) lub
 		// nie znajdziemy pierwszego elementu (indexu) ktory jest wiekszy od danego qrs_onset punktu
-		while (j<RPeaksData.size() || RPeaksData[j] < qrs_onset_index_vector[i])
+		while (j<RPeaksData.size()-1 )//|| RPeaksData[j] < qrs_onset_index_vector[i])
 			++j;
 		first_right_peak_index = RPeaksData[j];
 		immiediate_left_peak_index = RPeaksData[j-1]; // ZMIANA!!!!!    nie bylo zadeklarowane, ale czy moze byc j-1??
