@@ -47,9 +47,9 @@ ResultKeeper::~ResultKeeper()
 	//return hrv2;
  //}
 
- //SigEDResult* ResultKeeper::getSIG_EDR() {
-	//return sigEDR;
- //}
+ SigEDResult* ResultKeeper::getSIG_EDR() {
+	return sigEDR;
+ }
 
 
 
@@ -93,9 +93,9 @@ ResultKeeper::~ResultKeeper()
 	//this->hrv2 = hrv2;
  //}
 
- //void ResultKeeper::setSIG_EDR(SigEDResult* sig) {
-	//this->sigEDR = sig;
- //}
+ void ResultKeeper::setSIG_EDR(SigEDResult* sig) {
+	this->sigEDR = sig;
+ }
 
  //void ResultKeeper::setWaves(WavesResult* waves) {
 	//this->waves = waves;

@@ -6,7 +6,7 @@
 #include <RPeaks.h>
 #include <ECGBaseline.h>
 #include <Waves.h>
-
+#include <SIG_EDR.h>
 
 
 MajesticEngineOfGlory::MajesticEngineOfGlory(void)
@@ -36,6 +36,11 @@ void MajesticEngineOfGlory::tryMe(){
 	RPeaksResult*r =  rkp->getRPeaks();
 	vector<unsigned int>xxx = r->getRPeaks();
 	std::cout << xxx.size() << "rozmiar po rpiksach" << endl;
+	SIG_EDR sigEdr = SIG_EDR();
+	rkp->setSIG_EDR(sigEdr.compute(rkp));
+	SigEDResult* sigRes = rkp->getSIG_EDR();
+	//sigRes->getResult();
+	//cout << sigRes->getVectorResult()[45] << endl;
 	//Waves waves = Waves();
 	//rkp->setWaves(waves.compute(rkp));
 	//vector<double> x = rkp->getECGBaseline()->filteredSignal;
