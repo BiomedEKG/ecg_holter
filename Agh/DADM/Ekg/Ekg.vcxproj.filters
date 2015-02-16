@@ -71,6 +71,21 @@
     <ClCompile Include="Functions.cpp">
       <Filter>Modules\VisualizationModule</Filter>
     </ClCompile>
+    <ClCompile Include="ScatterPlot.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="MajorPlot.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="CurvePlot.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="HistogramPlot.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="Table.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -85,6 +100,9 @@
     <CustomBuild Include="plot3D.h">
       <Filter>Modules\VisualizationModule</Filter>
     </CustomBuild>
+    <CustomBuild Include="ScatterPlot.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ekg.h">
@@ -96,9 +114,6 @@
     <ClInclude Include="MajorPlot.h">
       <Filter>Modules\VisualizationModule</Filter>
     </ClInclude>
-    <ClInclude Include="ScatterPlot.h">
-      <Filter>Modules\VisualizationModule</Filter>
-    </ClInclude>
     <ClInclude Include="HistogramPlot.h">
       <Filter>Modules\VisualizationModule</Filter>
     </ClInclude>
@@ -107,6 +122,9 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>Modules\VisualizationModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

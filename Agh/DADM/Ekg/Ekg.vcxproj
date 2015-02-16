@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CurvePlot.cpp" />
     <ClCompile Include="ekg.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_ekg.cpp">
@@ -96,8 +97,12 @@
     <ClCompile Include="GeneratedFiles\Release\moc_plot3D.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="HistogramPlot.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MajorPlot.cpp" />
     <ClCompile Include="plot3D.cpp" />
+    <ClCompile Include="ScatterPlot.cpp" />
+    <ClCompile Include="Table.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.h">
@@ -125,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CurvePlot.h" />
+    <ClInclude Include="Functions.h" />
     <ClInclude Include="GeneratedFiles\ui_ekg.h" />
     <ClInclude Include="HistogramPlot.h" />
     <CustomBuild Include="plot3D.h">
@@ -139,7 +145,20 @@
     </CustomBuild>
     <ClInclude Include="MajorPlot.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="ScatterPlot.h" />
+    <CustomBuild Include="ScatterPlot.h">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+    </CustomBuild>
     <ClInclude Include="Table.h" />
   </ItemGroup>
   <ItemGroup>

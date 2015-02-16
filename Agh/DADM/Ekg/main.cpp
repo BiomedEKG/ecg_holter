@@ -5,6 +5,7 @@
 #include "HistogramPlot.h"
 #include "Table.h"
 #include "plot3D.h"
+#include "Functions.h"
 
 #include <QtWidgets/QApplication>
 #include <iostream>
@@ -104,7 +105,7 @@ int main(int argc, char *argv[])
 		//mp2.PlotAreaInit(0,400,0,0,600,0,"","","VCG");
 		HistogramPlot hp;
 		hp.HistogramPlotInit(histmap, mp2.plotarea);
-		hp.setHistogramPlotArea(mp2,histmap["start_time"].first(),histmap["end_time"].last(),1,0,1,1,"RRx","value","sample Histogram");
+		hp.setHistogramPlotArea(mp2,histmap["start_time"].first(),histmap["end_time"].last(),1,0,1,1,"RRx","value","sample Histogram",1);
 
 		Table t(map, qVec, mp2.plotarea->canvas());
 
@@ -114,4 +115,5 @@ int main(int argc, char *argv[])
 
 		return a.exec();
 }
+
  
