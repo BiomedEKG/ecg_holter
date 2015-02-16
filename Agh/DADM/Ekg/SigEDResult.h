@@ -11,7 +11,7 @@ public:
 	SigEDResult* getResult();
 	SigEDResult(void);
 	~SigEDResult(void);
-
+	 
 private:
 	vector<double> vectorResult;
 };

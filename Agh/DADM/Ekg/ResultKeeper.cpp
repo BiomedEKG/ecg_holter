@@ -56,7 +56,7 @@ ResultKeeper::~ResultKeeper()
  void ResultKeeper::setECGBaseline(BaselineResult* baseline) {
 	this->ecgBaseline = baseline;
  }
-
+  
 
  void ResultKeeper::setRPeaks(RPeaksResult* rPeaks) {
 	this->rPeaks = rPeaks;

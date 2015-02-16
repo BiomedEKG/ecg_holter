@@ -101,7 +101,7 @@ class ResultKeeper
 	//	Input *input;
 	//	RaportGenerator *raportGenerator;
 		SigEDResult *sigEDR;
-		
+		 
 };
 
 

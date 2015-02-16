@@ -11,7 +11,7 @@ float SIG_EDR :: mediana(float x[], int size) {
     sort(&x[0], &x[size]);       
     float mediana = size % 2 ? x[(size-1) / 2] : (x[size/2 -1] + x[size / 2]) / 2;
     return mediana;
-	
+	 
 }
 
 float* SIG_EDR ::  medfilt(float sig[], int window_size,int N){

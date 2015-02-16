@@ -17,7 +17,7 @@ SigEDResult* SigEDResult :: getResult() {
 	
 	SigEDResult* result = new SigEDResult();
 	result->vectorResult = this->vectorResult;
-	return result;
+	return result; 
 }
 
 void SigEDResult::setVectorResult(vector<double> vd) {
