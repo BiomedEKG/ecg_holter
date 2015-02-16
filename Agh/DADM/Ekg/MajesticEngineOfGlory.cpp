@@ -7,7 +7,7 @@
 #include <ECGBaseline.h>
 #include <Waves.h>
 #include <Hrv2.h>
-
+#include <SIG_EDR.h>
 
 
 MajesticEngineOfGlory::MajesticEngineOfGlory(void)
@@ -44,6 +44,13 @@ void MajesticEngineOfGlory::tryMe(){
 	map<string,vector<double>> histResult = hr->histResult;
 	map<string,vector<double>> poincareResult = hr->poincareResult;
 	map<string,vector<double>> sdResult = hr->sdResult;
+	SIG_EDR sigEdr = SIG_EDR();
+	rkp->setSIG_EDR(sigEdr.compute(rkp));
+	SigEDResult* sigRes = rkp->getSIG_EDR();
+	//sigRes->getResult();
+	//cout << sigRes->getVectorResult()[45] << endl;
+	//Waves waves = Waves();
+	//rkp->setWaves(waves.compute(rkp));
 	std::cout << paramsResult["apen"]<< endl;
 	std::cout << paramsResult["samen"]<<endl; 
 	std::cout << paramsResult["tinn"]<<endl;

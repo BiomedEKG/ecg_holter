@@ -8,7 +8,7 @@
 #include <RPeaksResult.h>
 #include "BaselineResult.h"
 #include <WavesResult.h>
-//#include "SigEDResult.h"
+#include "SigEDResult.h"
 #include "Hrv2Result.h"
 using namespace std;
 
@@ -47,8 +47,8 @@ class ResultKeeper
 	//	QTDisp* getQTDisp();
 	//	Input* getInput();
 	//	RaportGenerator* getRaportGenerator();
-		/*SigEDResult* getSIG_EDR();
-		WavesResult* getWaves();
+		SigEDResult* getSIG_EDR();
+		/*WavesResult* getWaves();
 
 		void setAtrialFibrillation(AtrfibrResult* atr);
 		void setHrv2(Hrv2Result* hrv2);*/
@@ -68,8 +68,8 @@ class ResultKeeper
 		void setWaves(WavesResult* wr);
 		WavesResult* getWaves();
 	//	RaportGenerator* getRaportGenerator();
-		/*void setSIG_EDR(SigEDResult* sigEdr);
-		void setWaves(WavesResult* waveRes);*/
+		void setSIG_EDR(SigEDResult* sigEdr);
+		//void setWaves(WavesResult* waveRes);*/
 		 vector<double>  getSingleChannel(char* path, int channelNumber);
 
 
@@ -103,7 +103,7 @@ class ResultKeeper
 	//	QTDisp *qtDisp;
 	//	Input *input;
 	//	RaportGenerator *raportGenerator;
-	/*	SigEDResult *sigEDR;*/
+		SigEDResult *sigEDR;
 		
 };
 
