@@ -6,6 +6,7 @@
 #include <RPeaks.h>
 #include <ECGBaseline.h>
 #include <Waves.h>
+#include <Hrv2.h>
 
 
 
@@ -36,6 +37,25 @@ void MajesticEngineOfGlory::tryMe(){
 	RPeaksResult*r =  rkp->getRPeaks();
 	vector<unsigned int>xxx = r->getRPeaks();
 	std::cout << xxx.size() << "rozmiar po rpiksach" << endl;
+	Hrv2 hrv2 = Hrv2();
+	rkp->setHrv2(hrv2.compute(rkp));
+	Hrv2Result*hr = rkp->getHrv2();
+	map<string,double> paramsResult = hr->paramsResult;
+	map<string,vector<double>> histResult = hr->histResult;
+	map<string,vector<double>> poincareResult = hr->poincareResult;
+	map<string,vector<double>> sdResult = hr->sdResult;
+	std::cout << paramsResult["apen"]<< endl;
+	std::cout << paramsResult["samen"]<<endl; 
+	std::cout << paramsResult["tinn"]<<endl;
+	std::cout << paramsResult["tri"]<<endl;
+	std::cout << paramsResult["sd1"]<<endl;
+	std::cout << paramsResult["sd2"] << " param hrv2" << endl;
+	std::cout << histResult["start_time"].size() << " hist size" << endl;
+	std::cout << poincareResult["x1"].size() << " poincare size" << endl;
+	std::cout << sdResult["sd1_x"].size() << " sdResult size" << endl;
+	//std::cout << histResult.size() << "rozmiar po rpiksach" << endl;
+	//std::cout << poincareResult.size() << "rozmiar po rpiksach" << endl;
+	//std::cout << sdResult.size() << "rozmiar po rpiksach" << endl;
 //	Waves waves = Waves();
 //	rkp->setWaves(waves.compute(rkp));
 	//vector<double> x = rkp->getECGBaseline()->filteredSignal;

@@ -43,9 +43,10 @@ ResultKeeper::~ResultKeeper()
 	return rPeaks;
  }
 
- //Hrv2Result* ResultKeeper::getHrv2() {
-	//return hrv2;
- //}
+
+ Hrv2Result* ResultKeeper::getHrv2() {
+	return hrv2;
+ }
 
  //SigEDResult* ResultKeeper::getSIG_EDR() {
 	//return sigEDR;
@@ -60,6 +61,10 @@ ResultKeeper::~ResultKeeper()
 
  void ResultKeeper::setRPeaks(RPeaksResult* rPeaks) {
 	this->rPeaks = rPeaks;
+ }
+
+ void ResultKeeper::setHrv2(Hrv2Result* hrv2){
+	 this->hrv2 = hrv2;
  }
 
 
@@ -87,10 +92,6 @@ ResultKeeper::~ResultKeeper()
  }
  //void ResultKeeper::setAtrialFibrillation(AtrfibrResult* atr) {
 	//this->atrialFibrillation = atr;
- //}
-
- //void ResultKeeper::setHrv2(Hrv2Result* hrv2) {
-	//this->hrv2 = hrv2;
  //}
 
  //void ResultKeeper::setSIG_EDR(SigEDResult* sig) {
