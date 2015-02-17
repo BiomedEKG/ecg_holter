@@ -8,9 +8,13 @@ std::vector <double> CubicSpline::calculateCubicSpline (std::vector<double>* sig
 
 	std::vector<double> input = *signal; 
 	std::vector<double> output;
+	input.resize(numberOfSamples);
+	output.resize(numberOfSamples);
+
 
 	std::vector<double> time;
-	double interval = 1/samplingFrequency;
+	time.resize(numberOfSamples);
+	double interval = 1/(double)samplingFrequency;
 	time[0] = interval;
 
 	//time vector
@@ -32,10 +36,13 @@ std::vector <double> CubicSpline::calculateCubicSpline (std::vector<double>* sig
 
 int currentNumberOfSamples = output.size();
 
+	std::vector<double> input2 = output;
+	input2.resize(numberOfSamples);
+
 		for(int i = 0; i < numberOfSamples - filterSize; i++){
 		double value = 0;
 		for(int j = 0; j < filterSize; j++){
-			value = value + coefficients15Array[j] * input[i + j];
+			value = value + coefficients15Array[j] * input2[i + j];
 			}
 		output[i]=value;
 		}
@@ -48,6 +55,7 @@ currentNumberOfSamples = output.size();
 
 const int windowLength = 24;
 std::vector<double> integr;
+integr.resize(numberOfSamples);
 double sum = 0;
 
 		for(int i = windowLength; i < currentNumberOfSamples; i++){
@@ -72,12 +80,13 @@ double mean = 0;
 			}
 
 mean = mean/currentNumberOfSamples;
-double threshold = mean + (max * 0.04);
+double threshold = mean + (max * 0.2);
 std::vector<double> over;
+over.resize(numberOfSamples);
 
 		for(int i = 0; i < currentNumberOfSamples; i++){
 			double inputValue = integr[i];
-			if(inputValue > threshold * max){
+			if(inputValue > threshold){
 				over[i]= 1;
 				}
 			else{
@@ -85,81 +94,97 @@ std::vector<double> over;
 				}
 			}
 
-std::vector<double> leftSide;
-std::vector<double> invertedRightSide;
-int left = 0;
-int right = 0;
-std::vector<double> copy = over;
 
-	if(copy[0] == 1){
-			leftSide[left]= 0;
-			left++;
-			}
-
-	if(copy[currentNumberOfSamples - 1] == 1){
-			invertedRightSide[right] = currentNumberOfSamples - 1;
-			right++;
-			}
-
-	for(int i = 0; i < currentNumberOfSamples - 1; i++){
-		if((copy[i + 1] - copy[i]) == 1){
-			leftSide[left]= i;
-			left++;
-			}
-		}
+int counter;
+std::vector<double> startingIndex;
 
 
-	for(int i = currentNumberOfSamples - 1; i > 0; i--){
-		if((copy[i - 1] - copy[i]) == 1){
-			invertedRightSide[right]= i;
-			right++;
-			}
-		}
+for (int i = 1;i<numberOfSamples;i++){
+	if (over[i] == 1){
+	   counter++;
+	   if (counter==5){
+		  startingIndex.push_back(i-4);  //trzyma pierwszy punkt  
+	      }
+       }
+	else {counter = 0;
+	}
+}
 
 
-std::vector<double> rightSide;
+for (int i=1;i<startingIndex.size();i++){
+	if (startingIndex[i]-startingIndex[i-1]<200){
+	startingIndex.erase(startingIndex.begin() + (i-1));
+	}
+}
 
-		for(int i = 0; i < right; i++){
-			rightSide[i]=invertedRightSide[right-i-1];
-			}
 
-		for(int i = 0; i < right; i++){
-			rightSide[i]= invertedRightSide[right-i -1];
-			}
+bool count = false;
+int number=0;
+std::vector<double> detectionSize;
 
-int partLength;
-std::vector<double> rPeaks;
-int numberOfDetectedRPeaks = 0;
 
-	if(left > 0 ){
-		for(int i = 0; i < left; i++){
-			partLength = rightSide[i] - leftSide[i];
-			double tmpMax = 0;
-			int tmpMaxI = 0;
-			for(int j = 0; j < partLength; j++){
-				if(input[leftSide[i] + j] > tmpMax){
-					tmpMax = input[leftSide[i] + j];
-					tmpMaxI = leftSide[i] + j;
-					}
-				}
-			rPeaks[i]=tmpMaxI;
-			numberOfDetectedRPeaks++;
-			}
-		}
-	
+int j=0;
 
-	std::vector<double> RPeaksTime;  // ?
-	std::vector<int> RPeaksIndexes;  //hmmm
+
+
+	for (int i = 0;i<numberOfSamples;i++){
+		if (j<startingIndex.size()){
+			if (i==startingIndex[j]) {
+	           count = true;
+			   number++;
+		       j++;
+		       }
+		      }
+
+		if (count && over[i]==1){
+		   number++;
+		   }
+
+		if (count && over[i]==0){
+		   count= false;
+		   detectionSize.push_back(number);
+		   number = 0;
+		   }
+        }
+
+   
+
+	if (detectionSize.size()<2){
+		return input;
+	}
+
+
+	std::vector<double> splineIndex;
+	// spline index = R peak index - 50
+	int calculateIndex;
+
+
+	for (int i = 0; i<startingIndex.size(); i++){
+        calculateIndex = (startingIndex[i] + (detectionSize[i])/2) - 50;
+	    splineIndex.push_back(calculateIndex);
+	    }
+
+
+	std::vector<double> RPeaksTime;
+	std::vector<double> RPeaks;
+    RPeaksTime.resize(startingIndex.size());
+    RPeaks.resize(startingIndex.size());
+
+
+	for (int i = 0; i<startingIndex.size(); i++){
+		int indexValue = splineIndex[i];
+        RPeaks[i] = input[indexValue];
+        RPeaksTime[i] = time[indexValue];
+	    }
+
 	std::vector<double> interpolatedBaseline;
-
-
-	//do interpolacji podawaæ R[index-50]!
+	interpolatedBaseline.resize(numberOfSamples);
 
 
     gsl_interp_accel *acc  = gsl_interp_accel_alloc ();
-    gsl_spline *spline  = gsl_spline_alloc (gsl_interp_cspline, numberOfDetectedRPeaks);
+    gsl_spline *spline  = gsl_spline_alloc (gsl_interp_cspline, startingIndex.size());
 
-    gsl_spline_init (spline, RPeaksTime.data(), rPeaks.data(), numberOfDetectedRPeaks);
+    gsl_spline_init (spline, RPeaksTime.data(), RPeaks.data(), startingIndex.size());
 
 
     for (int i = 0; i <numberOfSamples; i++){  
@@ -174,6 +199,7 @@ int numberOfDetectedRPeaks = 0;
 	  for (int j = 0; j <numberOfSamples; j++){  
 		  output[j] = input[j]-interpolatedBaseline[j];
         }
+
 
 
 	return output;

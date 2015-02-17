@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaselineResult.cpp" />
     <ClCompile Include="Butterworth.cpp" />
     <ClCompile Include="Chebyshev.cpp" />
     <ClCompile Include="CubicSpline.cpp" />
@@ -259,6 +260,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaselineResult.h" />
     <ClInclude Include="Butterworth.h" />
     <ClInclude Include="Chebyshev.h" />
     <ClInclude Include="CubicSpline.h" />

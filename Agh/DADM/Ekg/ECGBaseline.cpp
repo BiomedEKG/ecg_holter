@@ -1,35 +1,39 @@
 #include "ECGBaseline.h"
+#include "BaselineResult.h"
 #include "math.h"
 #include <vector>    
 
-std::vector<double> ECGBaseline::compute (std::vector<double>* signal, BASELINEMETHOD baselineMethod, int samplingFrequency){
+BaselineResult* ECGBaseline::compute (ResultKeeper *rkp, BASELINEMETHOD baselineMethod){
 
+	samplingFrequency = rkp->samplingFrequency;   // wlasciwe nazwy pól :P
+	std::vector <double> signal = rkp->signal;                          //
 
 	switch (baselineMethod){
 
 		case  BUTTERWORTH:
-			output = butterworthFilter (signal, samplingFrequency);
+			output = butterworthFilter (&signal, samplingFrequency);
 			break;
 		case  CHEBYSHEV:
-			output = chebyshevFilter (signal, samplingFrequency);
+			output = chebyshevFilter (&signal, samplingFrequency);
 			break;
 		case  LMS:
-			output = leastMeanSquares (signal, samplingFrequency);
+			output = leastMeanSquares (&signal, samplingFrequency);
 			break;
 		case  MOVINGAVERAGE:
-			output = movingAverage (signal);
+			output = movingAverage (&signal);
 			break;
 		case  CUBICSPLINE:
-			output = cubicSpline (signal, samplingFrequency);
+			output = cubicSpline (&signal, samplingFrequency);
 			break;
 		case  SAVITZKYGOLAY:
-			output = savitzkyGolay (signal);
+			output = savitzkyGolay (&signal, samplingFrequency);
 			break;
 		default:
-			output = movingAverage (signal);
+			output = movingAverage (&signal);
 			break;
 	} 
-	return output;   
+	rkp->signal = output;  // yyyy
+	return new BaselineResult();   
 }
 
 
@@ -40,9 +44,9 @@ std::vector<double> ECGBaseline::butterworthFilter (std::vector<double>* signal,
 	filterType = HIGHPASS;   
 	std::vector<std::vector<double>> butterworthCoefficients = butterworthFilter.setParameters(samplingFrequency, filterType);
 	std::vector <double> output = butterworthFilter.zeroPhaseFiltering(butterworthCoefficients[0], butterworthCoefficients[1], signal);
-	//filterType =LOWPASS;   
-//	butterworthCoefficients = butterworthFilter.setParameters(samplingFrequency, filterType);
-	//output = butterworthFilter.zeroPhaseFiltering(butterworthCoefficients[0], butterworthCoefficients[1], &output);  
+	filterType =LOWPASS;   
+	butterworthCoefficients = butterworthFilter.setParameters(samplingFrequency, filterType);
+	output = butterworthFilter.zeroPhaseFiltering(butterworthCoefficients[0], butterworthCoefficients[1], &output);  
 	return output;
 }
 
@@ -53,9 +57,9 @@ std::vector<double> ECGBaseline::chebyshevFilter (std::vector<double>* signal, i
 	filterType = HIGHPASS; 
 	std::vector<std::vector<double>> chebyshevCoefficients = chebyshevFilter.setParameters(samplingFrequency, filterType);
 	std::vector <double> output = chebyshevFilter.zeroPhaseFiltering(chebyshevCoefficients[0], chebyshevCoefficients[1], signal);
-//	filterType = LOWPASS;
-//	chebyshevCoefficients = chebyshevFilter.setParameters(samplingFrequency, filterType);
-//	output = chebyshevFilter.zeroPhaseFiltering(chebyshevCoefficients[0], chebyshevCoefficients[1], &output);
+	filterType = LOWPASS;
+	chebyshevCoefficients = chebyshevFilter.setParameters(samplingFrequency, filterType);
+	output = chebyshevFilter.zeroPhaseFiltering(chebyshevCoefficients[0], chebyshevCoefficients[1], &output);
 	return output;
 }
 
