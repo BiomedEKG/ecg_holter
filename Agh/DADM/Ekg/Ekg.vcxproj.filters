@@ -263,6 +263,12 @@
     <ClCompile Include="MajesticEngineOfGlory.cpp">
       <Filter>Modules\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Hrv2.cpp">
+      <Filter>Modules\HRV2</Filter>
+    </ClCompile>
+    <ClCompile Include="Hrv2Result.cpp">
+      <Filter>Modules\HRV2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -422,6 +428,12 @@
     </ClInclude>
     <ClInclude Include="MajesticEngineOfGlory.h">
       <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Hrv2.h">
+      <Filter>Modules\HRV2</Filter>
+    </ClInclude>
+    <ClInclude Include="Hrv2Result.h">
+      <Filter>Modules\HRV2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

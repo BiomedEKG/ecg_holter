@@ -12,7 +12,7 @@ public:
 
 	vector<double> EDR;
 	vector<double> X_AXIS;
-	 
+
 	float mediana(float x[], int size);
 	float* medfilt(float sig[], int window_size,int N);
 	float* linspace(int min, int max, int n);

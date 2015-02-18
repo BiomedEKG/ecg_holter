@@ -1,4 +1,4 @@
-#include "ECGBaseline.h"
+﻿#include "ECGBaseline.h"
 #include "BaselineResult.h"
 #include "math.h"
 #include <vector> 
@@ -19,38 +19,49 @@ BaselineResult* ECGBaseline::compute (ResultKeeper *rkp) {
 	//	in.SelectChannel(channelsNames[11]);
 	//}
 	//std::vector <double> signal = in.vdGetChannelData(); 
+static const unsigned int  chosenChannels[] = {0,1,6,7,8,9,10,11}; //kana³y, które maj¹ byæ wybrane (zak³adam numeracjê od 0)
+const std::string namesChannels[] = {"e1","e2","v1","v2","v3","v4","v5","v6"};
 
-	std::vector<double> signal = rkp->getSingleChannel(rkp->pathToFile, 4);
+	for (unsigned int i = 0; i<8; i++){
+	
+		std::vector<double> signal = rkp->getSingleChannel(rkp->pathToFile, i); 
 
-	enum BASELINEMETHOD bM = BUTTERWORTH;
+		enum BASELINEMETHOD bM = BUTTERWORTH;
 
-	switch (bM){
+		switch (bM){
 
-		case  BUTTERWORTH:
-			output = butterworthFilter (&signal, samplingFrequency);
-			break;
-		case  CHEBYSHEV:
-			output = chebyshevFilter (&signal, samplingFrequency);
-			break;
-		case  LMS:
-			output = leastMeanSquares (&signal, samplingFrequency);
-			break;
-		case  MOVINGAVERAGE:
-			output = movingAverage (&signal);
-			break;
-		case  CUBICSPLINE:
-			output = cubicSpline (&signal, samplingFrequency);
-			break;
-		case  SAVITZKYGOLAY:
-			output = savitzkyGolay (&signal, samplingFrequency);
-			break;
-		default:
-			output = movingAverage (&signal);
-			break;
-	} 
+			case  BUTTERWORTH:
+				output = butterworthFilter (&signal, samplingFrequency);
+				break;
+			case  CHEBYSHEV:
+				output = chebyshevFilter (&signal, samplingFrequency);
+				break;
+			case  LMS:
+				output = leastMeanSquares (&signal, samplingFrequency);
+				break;
+			case  MOVINGAVERAGE:
+				output = movingAverage (&signal);
+				break;
+			case  CUBICSPLINE:
+				output = cubicSpline (&signal, samplingFrequency);
+				break;
+			case  SAVITZKYGOLAY:
+				output = savitzkyGolay (&signal, samplingFrequency);
+				break;
+			default:
+				output = movingAverage (&signal);
+				break;
+		} 
+
+		//M
+		string key = namesChannels[i];
+		signals[key] = output;
+	}
 	BaselineResult b = BaselineResult(); 
-	b.setFilteredSignal(output);
-	return b.getResult();
+	b.setSignalMap(signals);
+	b.setFilteredSignal(signals["e2"]);
+ 	return b.getResult();
+	//return b.getResult();
 }
 
 

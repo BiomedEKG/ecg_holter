@@ -26,5 +26,18 @@ BaselineResult* BaselineResult:: getResult() {
 	br->filteredSignal = filteredSignal;
 	size = filteredSignal.size();
 	br->size = size;
+	br->filteredSignalMap = filteredSignalMap;
 	return br;
 	}
+
+//M
+void BaselineResult::setSignalMap (std::map<std::string, std::vector<double>> mapS){
+
+	filteredSignalMap = mapS;
+}
+
+//M
+std::map <std::string, std::vector<double>> BaselineResult::getSignalMap(){
+
+	return filteredSignalMap;
+}

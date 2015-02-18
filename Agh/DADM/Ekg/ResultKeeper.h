@@ -9,7 +9,7 @@
 #include "BaselineResult.h"
 #include <WavesResult.h>
 #include "SigEDResult.h"
-//#include "Hrv2Result.h"
+#include "Hrv2Result.h"
 using namespace std;
 
 
@@ -32,7 +32,8 @@ class ResultKeeper
 		Input getSignalHandler();
 
 	/*	AtrfibrResult* getAtrialFibrillation();
-		Hrv2Result* getHrv2();*/
+		*/
+		Hrv2Result* getHrv2();
 		RPeaksResult* getRPeaks();
 	//	HRV1* getHRV1();
 	//	HeartClass* getHeartClass();
@@ -56,6 +57,7 @@ class ResultKeeper
 	//	HRV1* getHRV1();
 	//	HeartClass* getHeartClass();
 		void setECGBaseline(BaselineResult *baseline);
+		void setHrv2(Hrv2Result *hrv2);
 	//	EctopicBeat* getEctopicBeat();
 	//	STSegmentResult* getSTSegmentResult();
 	//	TWaves* getTWaves();
@@ -86,7 +88,8 @@ class ResultKeeper
 		//vector<double>* rawSignalMV;
 		Input handler;
 		/*AtrfibrResult *atrialFibrillation;
-		Hrv2Result *hrv2;*/
+		*/
+		Hrv2Result *hrv2;
 		RPeaksResult *rPeaks;
 	//	HRV1 *hrv1;
 	//	HeartClass *heartClass;
@@ -101,7 +104,7 @@ class ResultKeeper
 	//	Input *input;
 	//	RaportGenerator *raportGenerator;
 		SigEDResult *sigEDR;
-		 
+		
 };
 
 

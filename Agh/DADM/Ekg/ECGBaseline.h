@@ -10,6 +10,7 @@
 #include "LeastMeanSquares.h"
 #include "CubicSpline.h"
 #include "SavitzkyGolay.h"
+#include <map>
 
 
 
@@ -19,6 +20,8 @@ public:
 	// BaselineResult* compute (ResultKeeper *rkp, BASELINEMETHOD baselineMethod);
 	BaselineResult* compute (ResultKeeper *rkp) override;
 	std::vector <double> output;
+	static const unsigned int chosenChannels[];
+	static const std::string namesChannels[];
 	
 private:
 	BASELINEMETHOD baselineMethod;
@@ -30,4 +33,5 @@ private:
 	std::vector<double> leastMeanSquares (std::vector<double>* signal, int samplingFrequency);
 	std::vector<double> cubicSpline (std::vector<double>* signal, int samplingFrequency);
 	std::vector<double> savitzkyGolay (std::vector<double>* signal, int samplingFrequency);
+	std::map <std::string, std::vector <double>> signals;
 };
