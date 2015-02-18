@@ -5,23 +5,24 @@
 #include <string>
 #include <map>
 #include "ResultKeeper.h"
-#include "HeartClassResult.h"
-#include "AbstractModule.h"
+//#include "HeartClassResult.h"
 #ifndef HEART_CLASS_H
 #define HEART_CLASS_H
 
 using namespace std;
 
-class HeartClass : public AbstractModule<{
+class HeartClass{
 	
 	public:
-
+		
+		//TODO dowiedzieæ siê skad wziac frequency
 		double frequency;
 		
 		map<int, vector<double> > signalMap;
 		map<int, vector<double> > yQRS;
 		map<int, vector<double> > samplesBetweenMax;
 
+		//Wypelnic w compute!!!
 		vector<double> qrsMinAmplitudes;
 		vector<double> qrsMaxAmplitudes;
 		vector<double> qrsMinAmplitudesSamples;
@@ -34,9 +35,9 @@ class HeartClass : public AbstractModule<{
 		
 		vector<double> maxArea;
 		vector<double> maxSamplesBetween;
-    	vector<double> minSamplesBetween;
-    	vector<double> qrsOnset;
-    	vector<double> qrsEnd;
+		vector<double> minSamplesBetween;
+		vector<double> qrsOnset;
+		vector<double> qrsEnd;
 		
 		double meanMaxAmplitude;
 		double meanMinAmplitude;
@@ -44,18 +45,16 @@ class HeartClass : public AbstractModule<{
 		double meanSamplesBetweenMax;
 		double meanSamplesBetweenMin;
 		
-		HeartClass(void);
-		~HeartClass(void);
-		HeartClass(ResultKeeper* rkp);
+		HeartClass(ResultKeeper* rpk);
 		
-		virtual HeartClassResult* compute(ResultKeeper* rkp); const override;
+		//HeartClassResult* compute(ResultKeeper* rkp);
 		
 		double ComplexArea(vector<double>* tempArea);
 		void Amplitudes(vector<double>* temp);
 		void FrameLocator();
 		void MeanAmplitude();
 		void SamplesBetween();
-		void Conditioning(HeartClassResult tempHeartClassResult);
+		void Conditioning();
 };
 
 #endif // HEART_CLASS_H

@@ -7,29 +7,34 @@
 #include <fstream>
 #include "HeartClass.h"
 #include "HeartClassResult.h"
-#include "Input.h"
 
 using namespace std;
 
+double round( double fValue )
+{
+    return fValue < 0 ? ceil( fValue - 0.5 )
+        : floor( fValue + 0.5 );
+}
+
 HeartClass::HeartClass(ResultKeeper* rkp){
+	
+    unsigned int signalBegin = 0;
+	unsigned int signalEnd = 0; 
 
-    double signalBegin = 0;
-	double signalEnd = 0; 
-
-	for(unsigned int i = 0; i < rpk->qrsEnd.size(); i++){
+	for(unsigned int i = 0; i < rkp->qrsEnd.size(); i++){
 		
-		signalBegin = rpk->qrsOnset.at(i);
-		signalEnd = rpk->qrsEnd.at(i);
+		signalBegin = (unsigned int) rkp->qrsOnset.at(i);
+		signalEnd = (unsigned int) rkp->qrsEnd.at(i);
 
 		for(unsigned int j = 0; signalBegin < signalEnd+1; signalBegin++){
 			
-			this->signalMap[i].push_back(rpk->signal.at(signalBegin-1));
+			this->signalMap[i].push_back(rkp->signal.at(signalBegin-1));
 		}
 		
-		this->qrsEnd = rpk->qrsEnd;
-		this->qrsOnset = rpk->qrsOnset;
+		this->qrsEnd = rkp->qrsEnd;
+		this->qrsOnset = rkp->qrsOnset;
 	}
-
+	
 	// zapis do pliku
 	/*ofstream signalTestTxt;
     signalTestTxt.open("D:\\Dadm\\MójProjekt2\\signalTest.txt");
@@ -43,7 +48,6 @@ HeartClass::HeartClass(ResultKeeper* rkp){
 	}
     signalTestTxt.close();*/
 }
-
 
 
 double HeartClass::ComplexArea(vector<double>* tempArea){
@@ -67,8 +71,8 @@ void HeartClass::Amplitudes(vector<double>* temp){
 	
 	double maxAmplitude = 0;
 	double minAmplitude = 0;
-	double maxAmplitudeSample = 0;
-	double minAmplitudeSample = 0;
+	unsigned int maxAmplitudeSample = 0;
+	unsigned int  minAmplitudeSample = 0;
 	double tempSize = temp->size();
 	
 	for(unsigned int i = 0; i < tempSize; i++){
@@ -133,10 +137,10 @@ void HeartClass::MeanAmplitude(){
 void HeartClass::FrameLocator(){
 	
 	double tempMin;
-	double leftMaxSample;
-	double rightMaxSample;
-	double leftMinSample;
-	double rightMinSample;
+	unsigned int leftMaxSample;
+	unsigned int rightMaxSample;
+	unsigned int leftMinSample;
+	unsigned int rightMinSample;
 	
 	vector<double>* wskLeftMaxAmplitudeSamples;
 	vector<double>* wskRightMaxAmplitudeSamples;
@@ -156,10 +160,10 @@ void HeartClass::FrameLocator(){
 		this->rightMinAmplitudeSamples.clear();
 		
 		tempMin = 40;
-		leftMaxSample = this->qrsMaxAmplitudesSamples.at(i);
-		rightMaxSample = this->qrsMaxAmplitudesSamples.at(i);
-		leftMinSample = this->qrsMinAmplitudesSamples.at(i);
-		rightMinSample = this->qrsMinAmplitudesSamples.at(i);
+		leftMaxSample = (unsigned int) this->qrsMaxAmplitudesSamples.at(i);
+		rightMaxSample = (unsigned int) this->qrsMaxAmplitudesSamples.at(i);
+		leftMinSample = (unsigned int) this->qrsMinAmplitudesSamples.at(i);
+		rightMinSample = (unsigned int) this->qrsMinAmplitudesSamples.at(i);
 
 //LEFT_MAX		
 	
@@ -196,7 +200,7 @@ void HeartClass::FrameLocator(){
 		
 		tempMin = 50;
 		
-		for(unsigned int z = this->qrsMaxAmplitudesSamples.at(i) - 1; z < this->signalMap[i].size(); z++){
+		for(unsigned int z = (unsigned int) this->qrsMaxAmplitudesSamples.at(i) - 1; z < this->signalMap[i].size(); z++){
 			
 			wskRightMaxAmplitudeSamples->push_back(this->signalMap[i].at(z) - 0.3*this->qrsMaxAmplitudes.at(i));
 		}
@@ -216,12 +220,12 @@ void HeartClass::FrameLocator(){
 				if(wskRightMaxAmplitudeSamples->at(k) < tempMin){
 					
 					tempMin = wskRightMaxAmplitudeSamples->at(k);
-					rightMaxSample = k + this->qrsMaxAmplitudesSamples.at(i);
+					rightMaxSample = (unsigned int) (k + this->qrsMaxAmplitudesSamples.at(i));
 				}
 			}
 			else{
 				
-				k = this->signalMap[i].size() - this->qrsMaxAmplitudesSamples.at(i) + 1;
+				k = (unsigned int) (this->signalMap[i].size() - this->qrsMaxAmplitudesSamples.at(i) + 1);
 			}
 		}
 
@@ -229,7 +233,7 @@ void HeartClass::FrameLocator(){
 
 		tempMin = 5;
 		
-		for(unsigned int z = this->qrsMaxAmplitudesSamples.at(i) - 1; z < this->qrsMinAmplitudesSamples.at(i); z++){
+		for(unsigned int z = (unsigned int) (this->qrsMaxAmplitudesSamples.at(i) - 1); z < this->qrsMinAmplitudesSamples.at(i); z++){
 		
 			wskLeftMinAmplitudeSamples->push_back(this->signalMap[i].at(z) - 0.3*this->qrsMinAmplitudes.at(i));
 		}
@@ -245,7 +249,7 @@ void HeartClass::FrameLocator(){
 			
 			if(wskLeftMinAmplitudeSamples->size() < 2){
 				
-				leftMinSample = this->qrsMinAmplitudesSamples.at(i);
+				leftMinSample = (unsigned int) this->qrsMinAmplitudesSamples.at(i);
 			}
 			else{	
 						
@@ -254,7 +258,7 @@ void HeartClass::FrameLocator(){
 					if(wskLeftMinAmplitudeSamples->at(k) < tempMin){
 						
 						tempMin = wskLeftMinAmplitudeSamples->at(k);
-						leftMinSample = this->qrsMaxAmplitudesSamples.at(i) + k - 1;
+						leftMinSample = (unsigned int) (this->qrsMaxAmplitudesSamples.at(i) + k - 1);
 					}
 				}
 				else{
@@ -268,7 +272,7 @@ void HeartClass::FrameLocator(){
 
 		tempMin = 5;
 
-		for(unsigned int z = this->qrsMinAmplitudesSamples.at(i) - 1; z < this->signalMap[i].size(); z++){
+		for(unsigned int z = (unsigned int) (this->qrsMinAmplitudesSamples.at(i) - 1); z < this->signalMap[i].size(); z++){
 			
 			wskRightMinAmplitudeSamples->push_back(this->signalMap[i].at(z) - 0.3*this->qrsMinAmplitudes.at(i));
 		}
@@ -285,7 +289,7 @@ void HeartClass::FrameLocator(){
 			
 			if(wskRightMinAmplitudeSamples->size() < 2){
 				
-				rightMinSample = this->qrsMinAmplitudesSamples.at(i);
+				rightMinSample = (unsigned int) this->qrsMinAmplitudesSamples.at(i);
 			}			
 			else{
 				
@@ -294,7 +298,7 @@ void HeartClass::FrameLocator(){
 					if(wskRightMinAmplitudeSamples->at(k) < tempMin){
 						
 						tempMin = wskRightMinAmplitudeSamples->at(k);
-						rightMinSample = k + this->qrsMinAmplitudesSamples.at(i);
+						rightMinSample = (unsigned int) (k + this->qrsMinAmplitudesSamples.at(i));
 					}
 				}
 				else{
@@ -334,7 +338,7 @@ void HeartClass::SamplesBetween(){
 	
     for(unsigned int z = 0; z < this->signalMap.size(); z++){
     	
-		for(unsigned int k = this->yQRS[z].at(0); k < this->yQRS[z].at(1) + 1; k++){
+		for(unsigned int k = (unsigned int) this->yQRS[z].at(0); k < this->yQRS[z].at(1) + 1; k++){
 			
 			this->samplesBetweenMax[z].push_back(this->signalMap[z].at(k-1));
 		}
@@ -354,7 +358,7 @@ void HeartClass::SamplesBetween(){
 
 
 
-void HeartClass::Conditioning(HeartClassResult tempHeartClassResult){
+void HeartClass::Conditioning(){
 	
 	bool firstCondition = false;
 	bool secondCondition = false;
@@ -363,10 +367,7 @@ void HeartClass::Conditioning(HeartClassResult tempHeartClassResult){
 	bool fifthCondition = false;
 	bool sixthCondition = false;
 	bool seventhCondition = false;
-	double n = 0;
-	double v = 0;
-	double a = 0;
-	this->frequency = 340;
+	
 	for(unsigned int z = 0; z < this->signalMap.size(); z++){
 		
 		firstCondition = false;
@@ -402,12 +403,12 @@ void HeartClass::Conditioning(HeartClassResult tempHeartClassResult){
 			fifthCondition = true;
 		}
 		
-		if((1000*this->signalMap[z].size()/this->frequency) > 130){
+		if((1000*this->signalMap[z].size()/340) > 130){
 			
 			sixthCondition = true;
 		}
 		
-		if(round(1000*this->signalMap[z].size()/this->frequency) > 100){
+		if(round(1000*this->signalMap[z].size()/340) > 100){
 			
 			seventhCondition = true;
 		}
@@ -420,90 +421,65 @@ void HeartClass::Conditioning(HeartClassResult tempHeartClassResult){
 		cout << sixthCondition << endl;
 		cout << seventhCondition << endl << endl;*/
 			
+		HeartClassResult heartClassResults;	
+			
 		if((firstCondition == true) || (secondCondition == true) || (thirdCondition == true) || (fourthCondition == true) || (fifthCondition == true)){
 			
 			if(sixthCondition == true){
 				
-				tempHeartClassResults.qrsClass.push_back(2);
-				tempHeartClassResults.qrsClassificationMap["VQRS"].push_back(this->qrsOnset.at(z));
-				tempHeartClassResults.qrsClassificationMap["VQRS"].push_back(this->qrsEnd.at(z));
-				v++;
+				heartClassResults.qrsClass.push_back(2);
+				heartClassResults.qrsClassificationMap["VQRS"].push_back(this->qrsOnset.at(z));
+				heartClassResults.qrsClassificationMap["VQRS"].push_back(this->qrsEnd.at(z));
 			}
 			else{
 				
-				tempHeartClassResults.qrsClass.push_back(3);
-				tempHeartClassResults.qrsClassificationMap["Artifacts"].push_back(this->qrsOnset.at(z));
-				tempHeartClassResults.qrsClassificationMap["Artifacts"].push_back(this->qrsEnd.at(z));
-				a++;
+				heartClassResults.qrsClass.push_back(3);
+				heartClassResults.qrsClassificationMap["Artifacts"].push_back(this->qrsOnset.at(z));
+				heartClassResults.qrsClassificationMap["Artifacts"].push_back(this->qrsEnd.at(z));
 			}
 		}
 		else{
 			
 			if(seventhCondition == true){
 				
-				tempHeartClassResults.qrsClass.push_back(3);
-				tempHeartClassResults.qrsClassificationMap["Artifacts"].push_back(this->qrsOnset.at(z));
-				tempHeartClassResults.qrsClassificationMap["Artifacts"].push_back(this->qrsEnd.at(z));
-				a++;
+				heartClassResults.qrsClass.push_back(3);
+				heartClassResults.qrsClassificationMap["Artifacts"].push_back(this->qrsOnset.at(z));
+				heartClassResults.qrsClassificationMap["Artifacts"].push_back(this->qrsEnd.at(z));
 			}
 			else{
 				
-				tempHeartClassResults.qrsClass.push_back(1);
-				tempHeartClassResults.qrsClassificationMap["NormalQRS"].push_back(this->qrsOnset.at(z));
-				tempHeartClassResults.qrsClassificationMap["NormalQRS"].push_back(this->qrsEnd.at(z));
-				n++;
+				heartClassResults.qrsClass.push_back(1);
+				heartClassResults.qrsClassificationMap["NormalQRS"].push_back(this->qrsOnset.at(z));
+				heartClassResults.qrsClassificationMap["NormalQRS"].push_back(this->qrsEnd.at(z));
 			}
 		}
-
-		/*for(unsigned int i = 0; i < tempHeartClassResults.qrsClass.size(); i++){
+		for(unsigned int i = 0; i < heartClassResults.qrsClass.size(); i++){
 		
-			cout << tempHeartClassResults.qrsClass.at(i) << endl;
-		}*/
-	}
-
-	tempHeartClassResult.mapParameters.insert(pair<string, double>("Mean maximum amplitude", this->meanMaxAmplitude));
-	tempHeartClassResult.mapParameters.insert(pair<string, double>("Mean minimum amplitude", this->meanMinAmplitude));
-	tempHeartClassResult.mapParameters.insert(pair<string, double>("Mean area", this->meanMaxArea));
-	tempHeartClassResult.mapParameters.insert(pair<string, double>("Mean length of maximum", this->meanSamplesBetweenMax));
-	tempHeartClassResult.mapParameters.insert(pair<string, double>("Mean length of minimum", this->meanSamplesBetweenMin));
-	tempHeartClassResult.mapParameters.insert(pair<string, double>("Number of normal QRS", n));
-	tempHeartClassResult.mapParameters.insert(pair<string, double>("Number of ventricular QRS", v));
-	tempHeartClassResult.mapParameters.insert(pair<string, double>("Number of artifacts", a));
-
-	tempHeartClassResult.qrsParams.push_back("mV");
-	tempHeartClassResult.qrsParams.push_back("mV");
-	tempHeartClassResult.qrsParams.push_back("mv^2");
-	tempHeartClassResult.qrsParams.push_back("-");
-	tempHeartClassResult.qrsParams.push_back("-");
-	tempHeartClassResult.qrsParams.push_back("-");
-	tempHeartClassResult.qrsParams.push_back("-");
-	tempHeartClassResult.qrsParams.push_back("-");
+			cout << "QRS numer " << z << " nalezy do klasy numer: " << heartClassResults.qrsClass.at(i) << endl;
+		}
+	}	
 }
 
-
-
-HeartClassResult* HeartClass::compute(ResultKeeper* rkp){
+/*HeartClassResult* HeartClass::compute(ResultKeeper* rkp){
 	
 	vector<double>* tempSignal;
 	
-	HeartClassResult heartClassResult = HeartClassResult();
-
 	for(unsigned int i = 0; i < this->signalMap.size(); i++){
 		
 		tempSignal = &this->signalMap[i];
 		this->Amplitudes(tempSignal);	
 	}
-
+	
 	this->MeanAmplitude();
 	
 	this->FrameLocator();
 	
 	this->SamplesBetween();
 	
-	this->Conditioning(heartClassResult);
-
-	return heartClassResult.getResult();
-}
+	this->Conditioning();
+	
+	return new HeartClassResult();
+}*/
 
 
 
