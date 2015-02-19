@@ -10,6 +10,7 @@
 #include <WavesResult.h>
 #include "SigEDResult.h"
 #include "Hrv2Result.h"
+#include "SleepApneaResult.h"
 using namespace std;
 
 
@@ -43,7 +44,7 @@ class ResultKeeper
 	//	STSegmentResult* getSTSegmentResult();
 	//	TWaves* getTWaves();
 	//	HRT* getHRT();
-	//	SleepApnea* getSleepApnea();
+		SleepApneaResult* getSleepApnea();
 	//	QTDisp* getQTDisp();
 	//	Input* getInput();
 	//	RaportGenerator* getRaportGenerator();
@@ -58,11 +59,11 @@ class ResultKeeper
 	//	HeartClass* getHeartClass();
 		void setECGBaseline(BaselineResult *baseline);
 		void setHrv2(Hrv2Result *hrv2);
+		void setSleepApnea(SleepApneaResult *sleepApnea);
 	//	EctopicBeat* getEctopicBeat();
 	//	STSegmentResult* getSTSegmentResult();
 	//	TWaves* getTWaves();
 	//	HRT* getHRT();
-	//	SleepApnea* getSleepApnea();
 	//	QTDisp* getQTDisp();
 		Input* getInput();
 		void setWaves(WavesResult* wr);
@@ -95,11 +96,12 @@ class ResultKeeper
 	//	HeartClass *heartClass;
 		BaselineResult *ecgBaseline;
 		WavesResult *wavesResult;
+		SleepApneaResult *sleepApnea;
 	//	EctopicBeat *ectopicBeat;
 	//	STSegmentResult *stSegmentResult;
 	//	TWaves *tWaves;
 	//	HRT *hrt;
-	//	SleepApnea *sleepApnea;
+		
 	//	QTDisp *qtDisp;
 	//	Input *input;
 	//	RaportGenerator *raportGenerator;

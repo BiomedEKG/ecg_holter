@@ -157,6 +157,8 @@
     <ClCompile Include="ScatterPlot.cpp" />
     <ClCompile Include="SigEDResult.cpp" />
     <ClCompile Include="SIG_EDR.cpp" />
+    <ClCompile Include="SleepApnea.cpp" />
+    <ClCompile Include="SleepApneaResult.cpp" />
     <ClCompile Include="stsegment.cpp" />
     <ClCompile Include="stsegmentresult.cpp" />
     <ClCompile Include="TestModule.cpp" />
@@ -191,6 +193,9 @@
     <ClInclude Include="SavitzkyGolay.h" />
     <ClInclude Include="SigEDResult.h" />
     <ClInclude Include="SIG_EDR.h" />
+    <ClInclude Include="SleepApnea.h" />
+    <ClInclude Include="SleepApneaResult.h" />
+    <ClInclude Include="StructApnea.h" />
     <ClInclude Include="stsegment.h" />
     <ClInclude Include="stsegmentresult.h" />
     <ClInclude Include="TestModule.h" />
@@ -282,6 +287,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="SleepdanePCAProbek.txt" />
+    <Text Include="Sleepetykiety.txt" />
+    <Text Include="Sleepodchylenia.txt" />
+    <Text Include="SleepPCAWspolczynniki.txt" />
+    <Text Include="Sleepsrednie.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

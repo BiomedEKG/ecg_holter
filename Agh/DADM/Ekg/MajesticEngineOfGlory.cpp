@@ -8,6 +8,7 @@
 #include <Waves.h>
 #include <Hrv2.h>
 #include <SIG_EDR.h>
+#include <SleepApnea.h>
 
 
 MajesticEngineOfGlory::MajesticEngineOfGlory(void)
@@ -47,11 +48,17 @@ void MajesticEngineOfGlory::tryMe(){
 	SIG_EDR sigEdr = SIG_EDR();
 	rkp->setSIG_EDR(sigEdr.compute(rkp));
 	SigEDResult* sigRes = rkp->getSIG_EDR();
+	SleepApnea sleepApnea = SleepApnea();
+	rkp->setSleepApnea(sleepApnea.compute(rkp));
+	SleepApneaResult* sleepApneaRes = rkp->getSleepApnea();
+	std::cout << "sleep apnea: " << sleepApneaRes->Tend.size()<< endl;
+	std::cout << "sleep apnea: " << sleepApneaRes->Tstart.size()<< endl;
+	std::cout << "sleep apnea: " << sleepApneaRes->NrEp.size()<< endl;
 	//sigRes->getResult();
 	//cout << sigRes->getVectorResult()[45] << endl;
 	//Waves waves = Waves();
 	//rkp->setWaves(waves.compute(rkp));
-	std::cout << paramsResult["apen"]<< endl;
+	/*std::cout << paramsResult["apen"]<< endl;
 	std::cout << paramsResult["samen"]<<endl; 
 	std::cout << paramsResult["tinn"]<<endl;
 	std::cout << paramsResult["tri"]<<endl;
@@ -59,7 +66,7 @@ void MajesticEngineOfGlory::tryMe(){
 	std::cout << paramsResult["sd2"] << " param hrv2" << endl;
 	std::cout << histResult["start_time"].size() << " hist size" << endl;
 	std::cout << poincareResult["x1"].size() << " poincare size" << endl;
-	std::cout << sdResult["sd1_x"].size() << " sdResult size" << endl;
+	std::cout << sdResult["sd1_x"].size() << " sdResult size" << endl;*/
 	//std::cout << histResult.size() << "rozmiar po rpiksach" << endl;
 	//std::cout << poincareResult.size() << "rozmiar po rpiksach" << endl;
 	//std::cout << sdResult.size() << "rozmiar po rpiksach" << endl;

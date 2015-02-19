@@ -78,6 +78,9 @@
     <Filter Include="Modules\STSegment">
       <UniqueIdentifier>{b3696cd4-d99d-45b8-b5e9-733555dc789a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\SleepApnea">
+      <UniqueIdentifier>{0a68f4d7-b3b8-4086-b190-a5d9c2ad5b51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
@@ -269,6 +272,12 @@
     <ClCompile Include="Hrv2Result.cpp">
       <Filter>Modules\HRV2</Filter>
     </ClCompile>
+    <ClCompile Include="SleepApnea.cpp">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepApneaResult.cpp">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -435,11 +444,37 @@
     <ClInclude Include="Hrv2Result.h">
       <Filter>Modules\HRV2</Filter>
     </ClInclude>
+    <ClInclude Include="SleepApnea.h">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepApneaResult.h">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClInclude>
+    <ClInclude Include="StructApnea.h">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Ekg.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="SleepdanePCAProbek.txt">
+      <Filter>Modules\SleepApnea</Filter>
+    </Text>
+    <Text Include="Sleepetykiety.txt">
+      <Filter>Modules\SleepApnea</Filter>
+    </Text>
+    <Text Include="Sleepodchylenia.txt">
+      <Filter>Modules\SleepApnea</Filter>
+    </Text>
+    <Text Include="SleepPCAWspolczynniki.txt">
+      <Filter>Modules\SleepApnea</Filter>
+    </Text>
+    <Text Include="Sleepsrednie.txt">
+      <Filter>Modules\SleepApnea</Filter>
+    </Text>
   </ItemGroup>
 </Project>

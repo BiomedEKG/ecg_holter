@@ -47,6 +47,11 @@ ResultKeeper::~ResultKeeper()
  Hrv2Result* ResultKeeper::getHrv2() {
 	return hrv2;
  }
+
+ SleepApneaResult* ResultKeeper::getSleepApnea(){
+	 return sleepApnea;
+ }
+
  SigEDResult* ResultKeeper::getSIG_EDR() {
 	return sigEDR;
  }
@@ -68,6 +73,10 @@ ResultKeeper::~ResultKeeper()
 
  void ResultKeeper::setHrv2(Hrv2Result* hrv2){
 	 this->hrv2 = hrv2;
+ }
+
+ void ResultKeeper::setSleepApnea(SleepApneaResult* sleepApnea){
+	 this->sleepApnea = sleepApnea;
  }
 
 
