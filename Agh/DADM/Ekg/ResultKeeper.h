@@ -10,6 +10,7 @@
 #include <WavesResult.h>
 #include "SigEDResult.h"
 #include "Hrv2Result.h"
+#include "HRV1Result.h"
 #include "SleepApneaResult.h"
 using namespace std;
 
@@ -36,7 +37,7 @@ class ResultKeeper
 		*/
 		Hrv2Result* getHrv2();
 		RPeaksResult* getRPeaks();
-	//	HRV1* getHRV1();
+		HRV1Result* getHRV1();
 	//	HeartClass* getHeartClass();
 		BaselineResult* getECGBaseline();
 		char* pathToFile;
@@ -58,6 +59,7 @@ class ResultKeeper
 	//	HRV1* getHRV1();
 	//	HeartClass* getHeartClass();
 		void setECGBaseline(BaselineResult *baseline);
+		void setHRV1(HRV1Result *hrv1);
 		void setHrv2(Hrv2Result *hrv2);
 		void setSleepApnea(SleepApneaResult *sleepApnea);
 	//	EctopicBeat* getEctopicBeat();
@@ -92,6 +94,7 @@ class ResultKeeper
 		*/
 		Hrv2Result *hrv2;
 		RPeaksResult *rPeaks;
+		HRV1Result *hrv1;
 	//	HRV1 *hrv1;
 	//	HeartClass *heartClass;
 		BaselineResult *ecgBaseline;

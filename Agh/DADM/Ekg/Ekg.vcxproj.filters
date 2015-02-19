@@ -81,6 +81,9 @@
     <Filter Include="Modules\SleepApnea">
       <UniqueIdentifier>{0a68f4d7-b3b8-4086-b190-a5d9c2ad5b51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\HRV1">
+      <UniqueIdentifier>{7dd8ded6-e855-482c-8f3a-222dbf515046}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
@@ -278,6 +281,15 @@
     <ClCompile Include="SleepApneaResult.cpp">
       <Filter>Modules\SleepApnea</Filter>
     </ClCompile>
+    <ClCompile Include="HRV1.cpp">
+      <Filter>Modules\HRV1</Filter>
+    </ClCompile>
+    <ClCompile Include="HRV1Calculate.cpp">
+      <Filter>Modules\HRV1</Filter>
+    </ClCompile>
+    <ClCompile Include="HRV1Result.cpp">
+      <Filter>Modules\HRV1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -452,6 +464,15 @@
     </ClInclude>
     <ClInclude Include="StructApnea.h">
       <Filter>Modules\SleepApnea</Filter>
+    </ClInclude>
+    <ClInclude Include="HRV1.h">
+      <Filter>Modules\HRV1</Filter>
+    </ClInclude>
+    <ClInclude Include="HRV1Calculate.h">
+      <Filter>Modules\HRV1</Filter>
+    </ClInclude>
+    <ClInclude Include="HRV1Result.h">
+      <Filter>Modules\HRV1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

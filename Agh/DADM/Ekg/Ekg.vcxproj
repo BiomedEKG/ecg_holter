@@ -131,6 +131,9 @@
     <ClCompile Include="gui\RPeaksDetectionWidget.cpp" />
     <ClCompile Include="gui\selectmodulemenu.cpp" />
     <ClCompile Include="gui\selectmodulesprivate.cpp" />
+    <ClCompile Include="HRV1.cpp" />
+    <ClCompile Include="HRV1Calculate.cpp" />
+    <ClCompile Include="HRV1Result.cpp" />
     <ClCompile Include="Hrv2.cpp" />
     <ClCompile Include="Hrv2Result.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -180,6 +183,9 @@
     <ClInclude Include="ECGBaseline.h" />
     <ClInclude Include="Filter.h" />
     <ClInclude Include="FilterType.h" />
+    <ClInclude Include="HRV1.h" />
+    <ClInclude Include="HRV1Calculate.h" />
+    <ClInclude Include="HRV1Result.h" />
     <ClInclude Include="Hrv2.h" />
     <ClInclude Include="Hrv2Result.h" />
     <ClInclude Include="LeastMeanSquares.h" />

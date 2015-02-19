@@ -43,6 +43,9 @@ ResultKeeper::~ResultKeeper()
 	return rPeaks;
  }
 
+ HRV1Result* ResultKeeper::getHRV1() {
+	return hrv1;
+ }
 
  Hrv2Result* ResultKeeper::getHrv2() {
 	return hrv2;
@@ -69,6 +72,10 @@ ResultKeeper::~ResultKeeper()
 
  void ResultKeeper::setRPeaks(RPeaksResult* rPeaks) {
 	this->rPeaks = rPeaks;
+ }
+
+ void ResultKeeper::setHRV1(HRV1Result* HRV1) {
+	this->hrv1 = HRV1;
  }
 
  void ResultKeeper::setHrv2(Hrv2Result* hrv2){

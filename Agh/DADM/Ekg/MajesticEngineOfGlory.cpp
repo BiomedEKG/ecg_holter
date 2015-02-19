@@ -9,6 +9,7 @@
 #include <Hrv2.h>
 #include <SIG_EDR.h>
 #include <SleepApnea.h>
+#include <HRV1.h>
 
 
 MajesticEngineOfGlory::MajesticEngineOfGlory(void)
@@ -24,7 +25,7 @@ MajesticEngineOfGlory::~MajesticEngineOfGlory(void)
 void MajesticEngineOfGlory::tryMe(){
 	
 	ResultKeeper* rkp  =  &ResultKeeper::getInstance();
-	rkp->pathToFile = "D://Dadm//Patient001";
+	rkp->pathToFile = "C://Users//Kajczan//Desktop//te//Patient001";
 	ECGBaseline ecgBaseline =  ECGBaseline();
 	BaselineResult *bslResult = new BaselineResult();
 	bslResult = ecgBaseline.compute(rkp);
@@ -38,6 +39,15 @@ void MajesticEngineOfGlory::tryMe(){
 	RPeaksResult*r =  rkp->getRPeaks();
 	vector<unsigned int>xxx = r->getRPeaks();
 	std::cout << xxx.size() << "rozmiar po rpiksach" << endl;
+	
+	HRV1 hrv11 = HRV1();
+	rkp->setHRV1(hrv11.compute(rkp));
+	HRV1Result *hr1 = rkp->getHRV1();
+	std::map<std::string, double> prvtimeParameters = hr1->prvtimeParameters;
+	std::map<std::string, double> prvfreqParameters = hr1->prvfreqParameters;
+	std::vector<double> powerHRV1 = hr1->prvpower;
+	std::vector<double> freqHRV1 = hr1->prvfrequency;
+
 	Hrv2 hrv2 = Hrv2();
 	rkp->setHrv2(hrv2.compute(rkp));
 	Hrv2Result*hr = rkp->getHrv2();
