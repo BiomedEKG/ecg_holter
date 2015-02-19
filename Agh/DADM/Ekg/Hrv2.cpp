@@ -367,19 +367,23 @@ double Hrv2::mean2(vector<double> z){
 			}
 		
 		int s=usun.size();
+		
 
-		for (int i=s-1; i>=0; i--){
-			tabplus.erase(tabplus.begin() + usun[i]);
-			}
 
-		x1_x2["x1"]=tabplus;
-
-		for (int i=s-1; i>=0; i--){
-			tabminus.erase(tabminus.begin() + usun[i]);
+			for (int i=s-1; i>=0; i--){
+				tabminus.erase(tabminus.begin() + (usun[i]-2));
 			}
 
         x1_x2["x2"]=tabminus;
         return x1_x2;
+
+		for (int i=s-1; i>=0; i--){
+			tabplus.erase(tabplus.begin() + (usun[i]-2));
+			}
+
+		x1_x2["x1"]=tabplus;
+
+	
 
     }
 
