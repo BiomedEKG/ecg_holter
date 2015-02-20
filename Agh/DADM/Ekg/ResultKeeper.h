@@ -12,8 +12,12 @@
 #include "Hrv2Result.h"
 #include "HRV1Result.h"
 #include "SleepApneaResult.h"
-using namespace std;
 
+#include "ECGFiltrationMethod.h"
+#include "RPeaksDetectionAlgorithms.h"
+#include "SleepApneaMetrics.h"
+
+using namespace std;
 
 class ResultKeeper
 {
@@ -75,6 +79,14 @@ class ResultKeeper
 		//void setWaves(WavesResult* waveRes);*/
 		 vector<double>  getSingleChannel(char* path, int channelNumber);
 
+		 void setECGBaselineMethod(ECGFiltrationMethod ecgBaselineMethod);
+		ECGFiltrationMethod getECGBaselineMethod();
+
+		void setRPeaksDetectionAlgorithm(RPeaksDetectionAlgorithm rPeaksDetectionAlgorithm);
+		RPeaksDetectionAlgorithm getRPeaksDetectionAlgorithm();
+
+		void setSleepApneaMetrics(SleepApneaMetrics sleepApneaMetrics);
+		SleepApneaMetrics getSleepApneaMetrics();
 
         
     private:
@@ -83,7 +95,10 @@ class ResultKeeper
 		ResultKeeper(ResultKeeper const&);
 		void operator=(ResultKeeper const&);
 
-
+	private:
+		ECGFiltrationMethod m_ecgBaselineMethod;
+		RPeaksDetectionAlgorithm m_rPeaksDetectionAlgorithm;
+		SleepApneaMetrics m_sleepApneaMetrics;
 
 
 /********* MODULES DATA ***********/

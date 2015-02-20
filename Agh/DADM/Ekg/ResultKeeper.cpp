@@ -25,7 +25,40 @@ ResultKeeper::~ResultKeeper()
 	 return instance;
 } 
 
- 
+ void ResultKeeper::setECGBaselineMethod(ECGFiltrationMethod ecgBaselineMethod)
+{
+	m_ecgBaselineMethod = ecgBaselineMethod;
+}
+
+ECGFiltrationMethod ResultKeeper::getECGBaselineMethod()
+{
+	return m_ecgBaselineMethod;
+}
+
+void ResultKeeper::setRPeaksDetectionAlgorithm(RPeaksDetectionAlgorithm rPeaksDetectionAlgorithm)
+{
+	m_rPeaksDetectionAlgorithm = rPeaksDetectionAlgorithm;
+}
+
+RPeaksDetectionAlgorithm ResultKeeper::getRPeaksDetectionAlgorithm()
+{
+	return m_rPeaksDetectionAlgorithm;
+}
+
+void ResultKeeper::setSleepApneaMetrics(SleepApneaMetrics sleepApneaMetrics)
+{
+	m_sleepApneaMetrics = sleepApneaMetrics;
+}
+
+SleepApneaMetrics ResultKeeper::getSleepApneaMetrics()
+{
+	return m_sleepApneaMetrics;
+}
+
+Input* ResultKeeper::getInput()
+{
+	return &handler;
+}
 
   Input ResultKeeper::getSignalHandler() {
 	return Input();

@@ -1,0 +1,10 @@
+#ifndef R_PEAKS_DETECTION_ALGORITHM_H__		
+#define R_PEAKS_DETECTION_ALGORITHM_H__
+
+enum RPeaksDetectionAlgorithm
+{
+	PAN_TOMPKINS,
+	HILBERT
+};
+
+#endif // R_PEAKS_DETECTION_ALGORITHM_H__
