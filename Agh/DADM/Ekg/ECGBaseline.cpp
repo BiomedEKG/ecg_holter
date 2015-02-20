@@ -4,47 +4,64 @@
 #include <vector> 
 #include "ResultKeeper.h"
 
-#include "ECGFiltrationMethod.h"
+BaselineResult* ECGBaseline::compute (ResultKeeper *rkp) {
 
-BaselineResult* ECGBaseline::compute (ResultKeeper *rkp)
-{
-	Input *inputHandler = rkp->getInput();
-	int samplingFrequency = inputHandler->GetFs();
-	std::vector <double> signal = inputHandler->vdGetChannelData(); 
 
-	switch (rkp->getECGBaselineMethod())
-	{
-	case  BUTTERWORTH_FILTER:
-		output = butterworthFilter (&signal, samplingFrequency);
-		break;
-	case  CZEBYSZEW_FILTER:
-		output = chebyshevFilter (&signal, samplingFrequency);
-		break;
-	case  LMS:
-		output = leastMeanSquares (&signal, samplingFrequency);
-		break;
-	case  MOVING_AVERAGE:
-		output = movingAverage (&signal);
-		break;
-	case  CUBIC_SPLINE:
-		output = cubicSpline (&signal, samplingFrequency);
-		break;
-	case  SAVITZKY_GOLAY_FILTER:
-		output = savitzkyGolay (&signal, samplingFrequency);
-		break;
-	default:
-		output = movingAverage (&signal);
-		break;
-	} 
+
+//	samplingFrequency = rkp->samplingFrequency;   // nie ma tego w result keeperze
+	//Input in = rkp->getSignalHandler();
+	//in.Open(rkp->pathToFile);
+	//int numbOfChannels = in.GetNumberOfChannels();
+	//char** channelsNames = in.GetChannelsNames();
+	//
+	//for(int i = 0; i < 12; i++) {
+	//	std::cout << channelsNames[i] << std::endl; 
+	//	in.SelectChannel(channelsNames[11]);
+	//}
+	//std::vector <double> signal = in.vdGetChannelData(); 
+static const unsigned int  chosenChannels[] = {0,1,6,7,8,9,10,11}; //kana³y, które maj¹ byæ wybrane (zak³adam numeracjê od 0)
+const std::string namesChannels[] = {"e1","e2","v1","v2","v3","v4","v5","v6"};
+
+	for (unsigned int i = 0; i<8; i++){
+	
+		std::vector<double> signal = rkp->getSingleChannel(rkp->pathToFile, i); 
+
+		enum BASELINEMETHOD bM = BUTTERWORTH;
+
+		switch (bM){
+
+			case  BUTTERWORTH:
+				output = butterworthFilter (&signal, samplingFrequency);
+				break;
+			case  CHEBYSHEV:
+				output = chebyshevFilter (&signal, samplingFrequency);
+				break;
+			case  LMS:
+				output = leastMeanSquares (&signal, samplingFrequency);
+				break;
+			case  MOVINGAVERAGE:
+				output = movingAverage (&signal);
+				break;
+			case  CUBICSPLINE:
+				output = cubicSpline (&signal, samplingFrequency);
+				break;
+			case  SAVITZKYGOLAY:
+				output = savitzkyGolay (&signal, samplingFrequency);
+				break;
+			default:
+				output = movingAverage (&signal);
+				break;
+		} 
+
+		//M
+		string key = namesChannels[i];
+		signals[key] = output;
+	}
 	BaselineResult b = BaselineResult(); 
-
-	//M
-	/*	string key = namesChannels[i];
-		signals[key] = output;*/
-
-	b.setSignalMap(signals1);
-	b.setFilteredSignal(signals1["e2"]);
+	b.setSignalMap(signals);
+	b.setFilteredSignal(signals["e2"]);
  	return b.getResult();
+	//return b.getResult();
 }
 
 
@@ -101,5 +118,3 @@ std::vector<double> ECGBaseline::savitzkyGolay (std::vector<double>* signal, int
 	std::vector<double> output = savitzkyGolay.calculateSavitzkyGolay(signal);
 	return output;
 }
-
-
