@@ -17,8 +17,8 @@
 #include "mainwidget.h"
 #include "graphswidget.h"
 #include <QDebug>
-
 #include "MajesticEngineOfGlory.h"
+
 #include "ECGFiltrationWidget.h"
 #include "RPeaksDetectionWidget.h"
 #include "SleepApneaWidget.h"
@@ -157,6 +157,12 @@ void MainWindow::openFile()
 	inputHandler->Close();
 	channelsMenu->clearChannels();
 
+	ResultKeeper* rkp  =  &ResultKeeper::getInstance();
+	char *ppath = new char[filenameWithoutExtension.length()+1];
+	memcpy((void*) ppath, (void*)filenameWithoutExtension.toStdString().c_str(), filenameWithoutExtension.length());
+	ppath[filenameWithoutExtension.length()] = '\0';
+	rkp->pathToFile = ppath;
+
 	int err_code = inputHandler->Open((char *)filenameWithoutExtension.toStdString().c_str());
 	if (err_code != 0)
 	{
@@ -232,10 +238,8 @@ void MainWindow::compute()
 
 	//Obliczenia
 	qDebug() << "Obliczam...";
-
 	MajesticEngineOfGlory eng = MajesticEngineOfGlory();
 	eng.tryMe();
-
 	qDebug() << "Koniec obliczen";
 }
 

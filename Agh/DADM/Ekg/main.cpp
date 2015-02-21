@@ -7,6 +7,10 @@
 
 int main(int argc, char *argv[])
 {
+
+	MajesticEngineOfGlory eng = MajesticEngineOfGlory();
+	//eng.tryMe();
+
 	QApplication a( argc, argv );
 
 	MainWindow w;

@@ -25,6 +25,7 @@ MajesticEngineOfGlory::~MajesticEngineOfGlory(void)
 void MajesticEngineOfGlory::tryMe(){
 	
 	ResultKeeper* rkp  =  &ResultKeeper::getInstance();
+	//rkp->pathToFile = "C://ffol//Patient001";
 	ECGBaseline ecgBaseline =  ECGBaseline();
 	BaselineResult *bslResult = new BaselineResult();
 	bslResult = ecgBaseline.compute(rkp);
