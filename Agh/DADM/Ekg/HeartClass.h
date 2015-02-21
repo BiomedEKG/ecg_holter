@@ -5,13 +5,13 @@
 #include <string>
 #include <map>
 #include "ResultKeeper.h"
-//#include "HeartClassResult.h"
+#include "HeartClassResult.h"
 #ifndef HEART_CLASS_H
 #define HEART_CLASS_H
 
 using namespace std;
 
-class HeartClass{
+class HeartClass : public AbstractModule<HeartClassResult>{
 	
 	public:
 		
@@ -22,7 +22,6 @@ class HeartClass{
 		map<int, vector<double> > yQRS;
 		map<int, vector<double> > samplesBetweenMax;
 
-		//Wypelnic w compute!!!
 		vector<double> qrsMinAmplitudes;
 		vector<double> qrsMaxAmplitudes;
 		vector<double> qrsMinAmplitudesSamples;
@@ -45,16 +44,15 @@ class HeartClass{
 		double meanSamplesBetweenMax;
 		double meanSamplesBetweenMin;
 		
-		HeartClass(ResultKeeper* rpk);
+		HeartClassResult* compute(ResultKeeper* rkp);
 		
-		//HeartClassResult* compute(ResultKeeper* rkp);
-		
+		void InputPrepare(ResultKeeper* rkp);
 		double ComplexArea(vector<double>* tempArea);
 		void Amplitudes(vector<double>* temp);
 		void FrameLocator();
 		void MeanAmplitude();
 		void SamplesBetween();
-		void Conditioning();
+		void Conditioning(HeartClassResult heartClassResults);
 };
 
 #endif // HEART_CLASS_H

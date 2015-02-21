@@ -9,13 +9,15 @@
 
 using namespace std;
 
-class HeartClassResult{
+class HeartClassResult : public AbstractResult{
 	
 	public:
 		
 		map<string, vector<double> > qrsParameters;
 		map<string, vector<double> > qrsClassificationMap;
-		vector<double> qrsClass;		
+		vector<double> qrsClass;	
+
+		HeartClassResult* getResult();
 };
 
 #endif // HEART_CLASS_RESULT_H

@@ -16,40 +16,6 @@ double round( double fValue )
         : floor( fValue + 0.5 );
 }
 
-HeartClass::HeartClass(ResultKeeper* rkp){
-	
-    unsigned int signalBegin = 0;
-	unsigned int signalEnd = 0; 
-
-	for(unsigned int i = 0; i < rkp->qrsEnd.size(); i++){
-		
-		signalBegin = (unsigned int) rkp->qrsOnset.at(i);
-		signalEnd = (unsigned int) rkp->qrsEnd.at(i);
-
-		for(unsigned int j = 0; signalBegin < signalEnd+1; signalBegin++){
-			
-			this->signalMap[i].push_back(rkp->signal.at(signalBegin-1));
-		}
-		
-		this->qrsEnd = rkp->qrsEnd;
-		this->qrsOnset = rkp->qrsOnset;
-	}
-	
-	// zapis do pliku
-	/*ofstream signalTestTxt;
-    signalTestTxt.open("D:\\Dadm\\MójProjekt2\\signalTest.txt");
-	for(unsigned int i = 0; i < this->signalMap.size(); i++){
-	    	
-	    for(unsigned int j = 0; j < signalMap[i].size(); j++){
-	    		
-	    	signalTestTxt << this->signalMap[i].at(j) << ", ";
-	    }
-	    signalTestTxt << endl;
-	}
-    signalTestTxt.close();*/
-}
-
-
 double HeartClass::ComplexArea(vector<double>* tempArea){
 
 	double area = 0;
@@ -358,7 +324,7 @@ void HeartClass::SamplesBetween(){
 
 
 
-void HeartClass::Conditioning(){
+void HeartClass::Conditioning(HeartClassResult heartClassResults){
 	
 	bool firstCondition = false;
 	bool secondCondition = false;
@@ -421,8 +387,6 @@ void HeartClass::Conditioning(){
 		cout << sixthCondition << endl;
 		cout << seventhCondition << endl << endl;*/
 			
-		HeartClassResult heartClassResults;	
-			
 		if((firstCondition == true) || (secondCondition == true) || (thirdCondition == true) || (fourthCondition == true) || (fifthCondition == true)){
 			
 			if(sixthCondition == true){
@@ -453,15 +417,37 @@ void HeartClass::Conditioning(){
 				heartClassResults.qrsClassificationMap["NormalQRS"].push_back(this->qrsEnd.at(z));
 			}
 		}
-		for(unsigned int i = 0; i < heartClassResults.qrsClass.size(); i++){
-		
-			cout << "QRS numer " << z << " nalezy do klasy numer: " << heartClassResults.qrsClass.at(i) << endl;
-		}
 	}	
+	for(unsigned int i = 0; i < heartClassResults.qrsClass.size(); i++){
+		
+		cout << "QRS numer " << i << " nalezy do klasy numer: " << heartClassResults.qrsClass.at(i) << endl;
+	}
 }
 
-/*HeartClassResult* HeartClass::compute(ResultKeeper* rkp){
-	
+void HeartClass::InputPrepare(ResultKeeper* rkp){
+
+	unsigned int signalBegin = 0;
+	unsigned int signalEnd = 0; 
+
+	for(unsigned int i = 0; i < rkp->qrsEnd.size(); i++){
+		
+		signalBegin = (unsigned int) rkp->qrsOnset.at(i);
+		signalEnd = (unsigned int) rkp->qrsEnd.at(i);
+
+		for(unsigned int j = 0; signalBegin < signalEnd+1; signalBegin++){
+			
+			this->signalMap[i].push_back(rkp->signal.at(signalBegin-1));
+		}
+		
+		this->qrsEnd = rkp->qrsEnd;
+		this->qrsOnset = rkp->qrsOnset;
+	}
+}
+
+HeartClassResult* HeartClass::compute(ResultKeeper* rkp){
+
+	this->InputPrepare(rkp);
+
 	vector<double>* tempSignal;
 	
 	for(unsigned int i = 0; i < this->signalMap.size(); i++){
@@ -470,16 +456,18 @@ void HeartClass::Conditioning(){
 		this->Amplitudes(tempSignal);	
 	}
 	
+	HeartClassResult heartResult;
+
 	this->MeanAmplitude();
 	
 	this->FrameLocator();
 	
 	this->SamplesBetween();
 	
-	this->Conditioning();
+	this->Conditioning(heartResult);
 	
-	return new HeartClassResult();
-}*/
+	return heartResult.getResult();
+}
 
 
 
