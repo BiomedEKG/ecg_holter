@@ -5,27 +5,27 @@
 
 ResultKeeper::ResultKeeper()
 {
-  //this->atrialFibrillation=0;
-  //this->ecgBaseline=0;
-  //this->hrv2=0;
-  //this->rawSignalADU=0;
-  //this->rawSignalMV=0;
-  //this->sigEDR=0;
-  //this->waves=0;
+	//this->atrialFibrillation=0;
+	//this->ecgBaseline=0;
+	//this->hrv2=0;
+	//this->rawSignalADU=0;
+	//this->rawSignalMV=0;
+	//this->sigEDR=0;
+	//this->waves=0;
 }
 
 ResultKeeper::~ResultKeeper()
 {
-    //dtor
+	//dtor
 }
 
- ResultKeeper& ResultKeeper :: getInstance() {
+ResultKeeper& ResultKeeper :: getInstance() {
 	// ResultKeeper();
-	 static ResultKeeper instance;
-	 return instance;
+	static ResultKeeper instance;
+	return instance;
 } 
 
- void ResultKeeper::setECGBaselineMethod(ECGFiltrationMethod ecgBaselineMethod)
+void ResultKeeper::setECGBaselineMethod(ECGFiltrationMethod ecgBaselineMethod)
 {
 	m_ecgBaselineMethod = ecgBaselineMethod;
 }
@@ -60,96 +60,89 @@ Input* ResultKeeper::getInput()
 	return &handler;
 }
 
-  Input ResultKeeper::getSignalHandler() {
-	return Input();
- }
+Input ResultKeeper::getSignalHandler() {
+	return handler;
+}
 
- //AtrFibr* ResultKeeper::getAtrialFibrillation() {
-	//return atrialFibrillation;
- //}
+//AtrFibr* ResultKeeper::getAtrialFibrillation() {
+//return atrialFibrillation;
+//}
 
- BaselineResult* ResultKeeper::getECGBaseline(){
+BaselineResult* ResultKeeper::getECGBaseline(){
 	return ecgBaseline;
- }
+}
 
- RPeaksResult* ResultKeeper::getRPeaks() {
+RPeaksResult* ResultKeeper::getRPeaks() {
 	return rPeaks;
- }
+}
 
- HRV1Result* ResultKeeper::getHRV1() {
+HRV1Result* ResultKeeper::getHRV1() {
 	return hrv1;
- }
+}
 
- Hrv2Result* ResultKeeper::getHrv2() {
+Hrv2Result* ResultKeeper::getHrv2() {
 	return hrv2;
- }
+}
 
- SleepApneaResult* ResultKeeper::getSleepApnea(){
-	 return sleepApnea;
- }
+SleepApneaResult* ResultKeeper::getSleepApnea(){
+	return sleepApnea;
+}
 
- SigEDResult* ResultKeeper::getSIG_EDR() {
+SigEDResult* ResultKeeper::getSIG_EDR() {
 	return sigEDR;
- }
+}
 
- //SigEDResult* ResultKeeper::getSIG_EDR() {
-	//return sigEDR;
- //}
+//SigEDResult* ResultKeeper::getSIG_EDR() {
+//return sigEDR;
+//}
 
 
 
- void ResultKeeper::setECGBaseline(BaselineResult* baseline) {
+void ResultKeeper::setECGBaseline(BaselineResult* baseline) {
 	this->ecgBaseline = baseline;
- }
+}
 
 
- void ResultKeeper::setRPeaks(RPeaksResult* rPeaks) {
+void ResultKeeper::setRPeaks(RPeaksResult* rPeaks) {
 	this->rPeaks = rPeaks;
- }
+}
 
- void ResultKeeper::setHRV1(HRV1Result* HRV1) {
+void ResultKeeper::setHRV1(HRV1Result* HRV1) {
 	this->hrv1 = HRV1;
- }
+}
 
- void ResultKeeper::setHrv2(Hrv2Result* hrv2){
-	 this->hrv2 = hrv2;
- }
+void ResultKeeper::setHrv2(Hrv2Result* hrv2){
+	this->hrv2 = hrv2;
+}
 
- void ResultKeeper::setSleepApnea(SleepApneaResult* sleepApnea){
-	 this->sleepApnea = sleepApnea;
- }
+void ResultKeeper::setSleepApnea(SleepApneaResult* sleepApnea){
+	this->sleepApnea = sleepApnea;
+}
 
 
- vector<double> ResultKeeper:: getSingleChannel(char* path, int channelNumber) {
-	Input input = this->getSignalHandler();
-	input.Open(path);
-	int numbOfChannels = input.GetNumberOfChannels();
-	char** channelsNames = input.GetChannelsNames();
-	char* singleChannel = channelsNames[channelNumber];
-	input.SelectChannel(singleChannel);
-	vector<double> single = input.vdGetChannelData();
+vector<double> ResultKeeper:: getSingleChannel(char* path, int channelNumber) {
+	handler.SelectChannel(handler.GetChannelsNames()[channelNumber]);
+	vector<double> single = handler.vdGetChannelData();
 
-	input.Close();
 	return single;
+}
 
- }
 
-
- void ResultKeeper::setWaves(WavesResult* wr) {
+void ResultKeeper::setWaves(WavesResult* wr) {
 	this->wavesResult = wr;
- }
+}
 
- WavesResult* ResultKeeper:: getWaves() {
+WavesResult* ResultKeeper:: getWaves() {
 	return this->wavesResult;
- }
- //void ResultKeeper::setAtrialFibrillation(AtrfibrResult* atr) {
-	//this->atrialFibrillation = atr;
- //}
+}
+//void ResultKeeper::setAtrialFibrillation(AtrfibrResult* atr) {
+//this->atrialFibrillation = atr;
+//}
 
- void ResultKeeper::setSIG_EDR(SigEDResult* sig) {
+void ResultKeeper::setSIG_EDR(SigEDResult* sig) {
 	this->sigEDR = sig;
- }
+}
 
- //void ResultKeeper::setWaves(WavesResult* waves) {
-	//this->waves = waves;
- //}
+//void ResultKeeper::setWaves(WavesResult* waves) {
+//this->waves = waves;
+//}

@@ -18,6 +18,7 @@
 #include "graphswidget.h"
 #include <QDebug>
 
+#include "MajesticEngineOfGlory.h"
 #include "ECGFiltrationWidget.h"
 #include "RPeaksDetectionWidget.h"
 #include "SleepApneaWidget.h"
@@ -231,20 +232,10 @@ void MainWindow::compute()
 
 	//Obliczenia
 	qDebug() << "Obliczam...";
-	ResultKeeper *rkp = &ResultKeeper::getInstance();
 
-	ECGBaseline ecgBaseline =  ECGBaseline();
-	BaselineResult *bslResult = new BaselineResult();
-	bslResult = ecgBaseline.compute(rkp);
-	vector<double>w = bslResult->getFilteredSignal();
-	rkp->setECGBaseline(bslResult);
-	bslResult = rkp->getECGBaseline();
-	vector<double> *x = &bslResult->filteredSignal;
-	cout << bslResult->size << endl;
-	RPeaks rp = RPeaks();
-	rkp->setRPeaks(rp.compute(rkp));
-	RPeaksResult*r =  rkp->getRPeaks();
-	vector<unsigned int>xxx = r->getRPeaks();
+	MajesticEngineOfGlory eng = MajesticEngineOfGlory();
+	eng.tryMe();
+
 	qDebug() << "Koniec obliczen";
 }
 
