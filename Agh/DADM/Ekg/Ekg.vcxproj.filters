@@ -435,12 +435,6 @@
     <ClInclude Include="PanTompkins.h">
       <Filter>Modules\RPeaks</Filter>
     </ClInclude>
-    <ClInclude Include="AtrFibr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AtrfibrResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="methodsVCG.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -515,6 +509,12 @@
     </ClInclude>
     <ClInclude Include="Methods.h">
       <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="AtrFibr.h">
+      <Filter>Modules\AtrialFibrilation</Filter>
+    </ClInclude>
+    <ClInclude Include="AtrfibrResult.h">
+      <Filter>Modules\AtrialFibrilation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

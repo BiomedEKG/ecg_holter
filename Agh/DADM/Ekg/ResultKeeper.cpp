@@ -119,6 +119,10 @@ Input* ResultKeeper::getInput()
 	 this->sleepApnea = sleepApnea;
  }
 
+ void ResultKeeper::setAtrialFibrillation(AtrfibrResult *atr) {
+	atrialFibrillation = atr;
+ }
+
 
  vector<double> ResultKeeper:: getSingleChannel(char* path, int channelNumber) {
 	Input input = this->getSignalHandler();
