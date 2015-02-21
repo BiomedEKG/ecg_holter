@@ -418,10 +418,10 @@ void HeartClass::Conditioning(HeartClassResult heartClassResults){
 			}
 		}
 	}	
-	for(unsigned int i = 0; i < heartClassResults.qrsClass.size(); i++){
+	/*for(unsigned int i = 0; i < heartClassResults.qrsClass.size(); i++){
 		
 		cout << "QRS numer " << i << " nalezy do klasy numer: " << heartClassResults.qrsClass.at(i) << endl;
-	}
+	}*/
 }
 
 void HeartClass::InputPrepare(ResultKeeper* rkp){
