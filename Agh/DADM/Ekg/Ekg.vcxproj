@@ -296,6 +296,7 @@
     <ClInclude Include="Hrv2Result.h" />
     <ClInclude Include="LeastMeanSquares.h" />
     <ClInclude Include="MajesticEngineOfGlory.h" />
+    <ClInclude Include="Methods.h" />
     <ClInclude Include="methodsVCG.h" />
     <ClInclude Include="MovingAverage.h" />
     <ClInclude Include="PanTompkins.h" />

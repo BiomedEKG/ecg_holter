@@ -10,7 +10,7 @@ WavesResult* Waves::compute(ResultKeeper *rkp) {
 	ECGBaselineData = rkp->getECGBaseline()->getFilteredSignal(); /// Przypisanie danych ECGBaseline na ktorych beda wykonywane obliczenia
 	RPeaksData = rkp->getRPeaks()->getRPeaks();/// Przypisanie danych RPeaks na ktorych beda wykonywane obliczenia
 	int sampling_frequency = 360;
-	//ustaw_qrs_onset(ECGBaselineData, RPeaksData, sampling_frequency);
+	ustaw_qrs_onset(ECGBaselineData, RPeaksData, sampling_frequency);
 	ustaw_qrs_end(ECGBaselineData, RPeaksData, sampling_frequency);
 	ustaw_p_onset(ECGBaselineData, RPeaksData, sampling_frequency);
 	ustaw_p_end(ECGBaselineData, RPeaksData, sampling_frequency);

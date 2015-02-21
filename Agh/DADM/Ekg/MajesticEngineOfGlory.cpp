@@ -25,7 +25,7 @@ MajesticEngineOfGlory::~MajesticEngineOfGlory(void)
 void MajesticEngineOfGlory::tryMe(){
 	
 	ResultKeeper* rkp  =  &ResultKeeper::getInstance();
-	rkp->pathToFile = "C://Users//Kajczan//Desktop//te//Patient001";
+	rkp->pathToFile = "D://Dadm//Patient001";
 	ECGBaseline ecgBaseline =  ECGBaseline();
 	BaselineResult *bslResult = new BaselineResult();
 	bslResult = ecgBaseline.compute(rkp);
@@ -66,8 +66,8 @@ void MajesticEngineOfGlory::tryMe(){
 	std::cout << "sleep apnea: " << sleepApneaRes->NrEp.size()<< endl;
 	//sigRes->getResult();
 	//cout << sigRes->getVectorResult()[45] << endl;
-	//Waves waves = Waves();
-	//rkp->setWaves(waves.compute(rkp));
+	Waves waves = Waves();
+	rkp->setWaves(waves.compute(rkp));
 	/*std::cout << paramsResult["apen"]<< endl;
 	std::cout << paramsResult["samen"]<<endl; 
 	std::cout << paramsResult["tinn"]<<endl;

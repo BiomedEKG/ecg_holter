@@ -513,6 +513,9 @@
     <ClInclude Include="gui\SleepApneaMetrics.h">
       <Filter>Modules\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Methods.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Ekg.rc" />

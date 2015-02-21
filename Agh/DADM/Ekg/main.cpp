@@ -2,10 +2,14 @@
 #include <QString>
 #include "mainwindow.h"
 #include "ObjectManager.h"
+#include <MajesticEngineOfGlory.h>
 
 
 int main(int argc, char *argv[])
 {
+
+	MajesticEngineOfGlory eng = MajesticEngineOfGlory();
+	//eng.tryMe();
 	QApplication a( argc, argv );
 
 	MainWindow w;

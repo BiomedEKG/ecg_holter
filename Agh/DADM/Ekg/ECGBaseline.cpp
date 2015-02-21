@@ -26,26 +26,26 @@ const std::string namesChannels[] = {"e1","e2","v1","v2","v3","v4","v5","v6"};
 	
 		std::vector<double> signal = rkp->getSingleChannel(rkp->pathToFile, i); 
 
-		enum BASELINEMETHOD bM = BUTTERWORTH;
+		enum ECGFiltrationMethod bM = BUTTERWORTH_FILTER;
 
 		switch (bM){
 
-			case  BUTTERWORTH:
+			case  BUTTERWORTH_FILTER:
 				output = butterworthFilter (&signal, samplingFrequency);
 				break;
-			case  CHEBYSHEV:
+			case  CZEBYSZEW_FILTER:
 				output = chebyshevFilter (&signal, samplingFrequency);
 				break;
 			case  LMS:
 				output = leastMeanSquares (&signal, samplingFrequency);
 				break;
-			case  MOVINGAVERAGE:
+			case  MOVING_AVERAGE:
 				output = movingAverage (&signal);
 				break;
-			case  CUBICSPLINE:
+			case  CUBIC_SPLINE:
 				output = cubicSpline (&signal, samplingFrequency);
 				break;
-			case  SAVITZKYGOLAY:
+			case  SAVITZKY_GOLAY_FILTER:
 				output = savitzkyGolay (&signal, samplingFrequency);
 				break;
 			default:
@@ -55,11 +55,11 @@ const std::string namesChannels[] = {"e1","e2","v1","v2","v3","v4","v5","v6"};
 
 		//M
 		string key = namesChannels[i];
-		signals[key] = output;
+		ecgSignals[key] = output;
 	}
 	BaselineResult b = BaselineResult(); 
-	b.setSignalMap(signals);
-	b.setFilteredSignal(signals["e2"]);
+	b.setSignalMap(ecgSignals);
+	b.setFilteredSignal(ecgSignals["e2"]);
  	return b.getResult();
 	//return b.getResult();
 }
