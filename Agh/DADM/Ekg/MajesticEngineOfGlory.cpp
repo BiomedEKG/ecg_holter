@@ -71,6 +71,7 @@ void MajesticEngineOfGlory::tryMe(){
 
 	AtrFibr atrialFib = AtrFibr();
 	rkp->setAtrialFibrillation(atrialFib.compute(rkp));
+
 	/*std::cout << paramsResult["apen"]<< endl;
 	std::cout << paramsResult["samen"]<<endl; 
 	std::cout << paramsResult["tinn"]<<endl;
