@@ -320,9 +320,6 @@
     <ClCompile Include="TWavesAltResult.cpp">
       <Filter>Modules\T_Waves_Alt</Filter>
     </ClCompile>
-    <ClCompile Include="QTDispersion.cpp">
-      <Filter>Modules\QTDisp</Filter>
-    </ClCompile>
     <ClCompile Include="ResultVCG.cpp">
       <Filter>Modules\VCGLOOP</Filter>
     </ClCompile>
@@ -337,6 +334,9 @@
     </ClCompile>
     <ClCompile Include="HeartClassResult.cpp">
       <Filter>Modules\HEART_CLASS</Filter>
+    </ClCompile>
+    <ClCompile Include="Export2Pdf.cpp">
+      <Filter>Modules\I/O</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -537,9 +537,6 @@
     <ClInclude Include="stsegmentresult.h">
       <Filter>Modules\STSegment</Filter>
     </ClInclude>
-    <ClInclude Include="QTDispersion.h">
-      <Filter>Modules\QTDisp</Filter>
-    </ClInclude>
     <ClInclude Include="ResultVCG.h">
       <Filter>Modules\VCGLOOP</Filter>
     </ClInclude>
@@ -554,6 +551,9 @@
     </ClInclude>
     <ClInclude Include="HeartClassResult.h">
       <Filter>Modules\HEART_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="Export2Pdf.h">
+      <Filter>Modules\I/O</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

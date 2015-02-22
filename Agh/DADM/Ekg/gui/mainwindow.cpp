@@ -28,7 +28,7 @@
 #include "ObjectManager.h"
 #include "RaportGenerator.h"
 #include "Input.h"
-
+#include "Export2Pdf.h"
 #include "ECGBaseline.h"
 #include "RPeaks.h"
 
@@ -258,7 +258,7 @@ void MainWindow::generateReport()
 		filename += ".pdf";
 	}
 
-	myMap res;
+	/*myMap res;
 	res["RR"] = 0.0; 
 	res["SDNN"] = 0.0; 
 	res["SDANN"] = 0.0;
@@ -277,7 +277,9 @@ void MainWindow::generateReport()
 	//Proba zapisu do pliku
 	RaportGenerator r(filename);
 	r.drawHRV2(data, ObjectManager::getInstance()->wykres(), ObjectManager::getInstance()->wykres());
-	r.drawHRV1(ObjectManager::getInstance()->histogram(), data, data);
+	r.drawHRV1(ObjectManager::getInstance()->histogram(), data, data);*/
+	ResultKeeper* rkp = &ResultKeeper::getInstance();
+	Export2Pdf(rkp, filename.toUtf8().constData());
 }
 
 void MainWindow::addGraph(QWidget *graph, const QString &tabName)

@@ -37,8 +37,9 @@ void RaportGenerator::drawHRV1(QwtPlot* ptrPlot, QStringList hrvTimeData, QStrin
 	//Add section
 	addSubtitle("HRV time and frequency domain analyses results");
 	addPlot(ptrPlot,true);
-	addTable(hrvTimeData, noCols, tableWidth, PdfGenerator::toSide);
-	addTable(hrvFreqzData, noCols, tableWidth, PdfGenerator::toBottom);
+	addTable(hrvFreqzData, noCols, tableWidth, PdfGenerator::toSide);
+	addTable(hrvTimeData, noCols, tableWidth, PdfGenerator::toBottom);
+	
 }
 //Sekcja HRV2 - tabelka obok wykresu, pod spodem drugi wykres
 void RaportGenerator::drawHRV2(QStringList nonlinear, QwtPlot* pointCare, QwtPlot* hist){
