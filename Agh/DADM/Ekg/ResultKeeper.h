@@ -4,7 +4,7 @@
 #include <vector>
 #include <Input.h>
 #include "AbstractResult.h"
-//#include "AtrFibr.h"
+#include "AtrfibrResult.h"
 #include <RPeaksResult.h>
 #include "BaselineResult.h"
 #include <WavesResult.h>
@@ -12,10 +12,13 @@
 #include "Hrv2Result.h"
 #include "HRV1Result.h"
 #include "SleepApneaResult.h"
+#include "TWavesAltResult.h"
 #include "HeartClassResult.h"
+#include <stsegmentresult.h>
 #include "ECGFiltrationMethod.h"
 #include "RPeaksDetectionAlgorithms.h"
 #include "SleepApneaMetrics.h"
+#include <ResultVCG.h>
 
 using namespace std;
 
@@ -37,8 +40,8 @@ class ResultKeeper
 
 		Input getSignalHandler();
 
-	/*	AtrfibrResult* getAtrialFibrillation();
-		*/
+		AtrfibrResult* getAtrialFibrillation();
+		TWavesAltResult* getTWaves();		
 		Hrv2Result* getHrv2();
 		RPeaksResult* getRPeaks();
 		HRV1Result* getHRV1();
@@ -46,29 +49,26 @@ class ResultKeeper
 		BaselineResult* getECGBaseline();
 		char* pathToFile;
 	//	EctopicBeat* getEctopicBeat();
-	//	STSegmentResult* getSTSegmentResult();
-	//	TWaves* getTWaves();
+		STSegmentResult* getSTSegmentResult();
 	//	HRT* getHRT();
 		SleepApneaResult* getSleepApnea();
 	//	QTDisp* getQTDisp();
 	//	Input* getInput();
 	//	RaportGenerator* getRaportGenerator();
 		SigEDResult* getSIG_EDR();
-		/*WavesResult* getWaves();
+		ResultVCG* getVCG();
 
+		void setVCG(ResultVCG* vcg);
 		void setAtrialFibrillation(AtrfibrResult* atr);
-		void setHrv2(Hrv2Result* hrv2);*/
+		void setHrv2(Hrv2Result* hrv2);
 		void setRPeaks(RPeaksResult* rpr);
-		
-	//	HRV1* getHRV1();
 	//	HeartClass* getHeartClass();
 		void setECGBaseline(BaselineResult *baseline);
 		void setHRV1(HRV1Result *hrv1);
-		void setHrv2(Hrv2Result *hrv2);
 		void setSleepApnea(SleepApneaResult *sleepApnea);
+		void setTWaves(TWavesAltResult *tWaves);
 	//	EctopicBeat* getEctopicBeat();
-	//	STSegmentResult* getSTSegmentResult();
-	//	TWaves* getTWaves();
+	
 	//	HRT* getHRT();
 	//	QTDisp* getQTDisp();
 		Input* getInput();
@@ -77,7 +77,8 @@ class ResultKeeper
 		WavesResult* getWaves();
 	//	RaportGenerator* getRaportGenerator();
 		void setSIG_EDR(SigEDResult* sigEdr);
-		//void setWaves(WavesResult* waveRes);*/
+		
+	
 		 vector<double>  getSingleChannel(char* path, int channelNumber);
 
 		 void setECGBaselineMethod(ECGFiltrationMethod ecgBaselineMethod);
@@ -88,6 +89,8 @@ class ResultKeeper
 
 		void setSleepApneaMetrics(SleepApneaMetrics sleepApneaMetrics);
 		SleepApneaMetrics getSleepApneaMetrics();
+
+		void setStSegmentResult(STSegmentResult *st);
 
         
     private:
@@ -106,25 +109,26 @@ class ResultKeeper
 		//vector<int>* rawSignalADU;
 		//vector<double>* rawSignalMV;
 		Input handler;
-		/*AtrfibrResult *atrialFibrillation;
-		*/
+		AtrfibrResult *atrialFibrillation;
 		Hrv2Result *hrv2;
 		RPeaksResult *rPeaks;
 		HRV1Result *hrv1;
+		TWavesAltResult *tWaves;
 	//	HRV1 *hrv1;
 		HeartClassResult *heartClass;
 		BaselineResult *ecgBaseline;
 		WavesResult *wavesResult;
 		SleepApneaResult *sleepApnea;
 	//	EctopicBeat *ectopicBeat;
-	//	STSegmentResult *stSegmentResult;
-	//	TWaves *tWaves;
+		STSegmentResult *stSegmentResult;
+	
 	//	HRT *hrt;
 		
-	//	QTDisp *qtDisp;
+		int qtDisp;  // ja chce jeszcze troche pozyc a nie peknac z nerwów
 	//	Input *input;
 	//	RaportGenerator *raportGenerator;
 		SigEDResult *sigEDR;
+		ResultVCG* vcgResult;
 		
 };
 

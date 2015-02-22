@@ -12,6 +12,7 @@ ResultKeeper::ResultKeeper()
   //this->rawSignalMV=0;
   //this->sigEDR=0;
   //this->waves=0;
+	this->qtDisp = 30;
 }
 
 ResultKeeper::~ResultKeeper()
@@ -64,12 +65,16 @@ Input* ResultKeeper::getInput()
 	return Input();
  }
 
- //AtrFibr* ResultKeeper::getAtrialFibrillation() {
-	//return atrialFibrillation;
- //}
+ AtrfibrResult* ResultKeeper::getAtrialFibrillation() {
+	return atrialFibrillation;
+ }
 
  BaselineResult* ResultKeeper::getECGBaseline(){
 	return ecgBaseline;
+ }
+
+ TWavesAltResult* ResultKeeper::getTWaves(){
+	 return tWaves;
  }
 
  RPeaksResult* ResultKeeper::getRPeaks() {
@@ -84,6 +89,8 @@ Input* ResultKeeper::getInput()
 	return hrv2;
  }
 
+
+
  SleepApneaResult* ResultKeeper::getSleepApnea(){
 	 return sleepApnea;
  }
@@ -92,9 +99,7 @@ Input* ResultKeeper::getInput()
 	return sigEDR;
  }
 
- //SigEDResult* ResultKeeper::getSIG_EDR() {
-	//return sigEDR;
- //}
+ 
 
  HeartClassResult* ResultKeeper::getHeartClass(){
 	 return heartClass;
@@ -103,6 +108,12 @@ Input* ResultKeeper::getInput()
  void ResultKeeper::setECGBaseline(BaselineResult* baseline) {
 	this->ecgBaseline = baseline;
  }
+
+ void ResultKeeper::setTWaves(TWavesAltResult* tWaves){
+	 this->tWaves = tWaves;
+ }
+
+	
 
 
  void ResultKeeper::setRPeaks(RPeaksResult* rPeaks) {
@@ -119,6 +130,10 @@ Input* ResultKeeper::getInput()
 
  void ResultKeeper::setSleepApnea(SleepApneaResult* sleepApnea){
 	 this->sleepApnea = sleepApnea;
+ }
+
+ void ResultKeeper::setAtrialFibrillation(AtrfibrResult *atr) {
+	atrialFibrillation = atr;
  }
 
 
@@ -154,6 +169,15 @@ Input* ResultKeeper::getInput()
  void ResultKeeper::setHeartClass(HeartClassResult* ptrHeartClassRes){
 	 this->heartClass = ptrHeartClassRes;
  }
- //void ResultKeeper::setWaves(WavesResult* waves) {
-	//this->waves = waves;
- //}
+
+ void ResultKeeper::setStSegmentResult(STSegmentResult *st) {
+	this->stSegmentResult = st;
+ }
+
+ void ResultKeeper:: setVCG(ResultVCG* vcg) {
+	this->vcgResult = vcg;
+ }
+
+ ResultVCG* ResultKeeper:: getVCG() {
+ return vcgResult;
+ }

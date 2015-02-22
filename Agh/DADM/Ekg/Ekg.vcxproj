@@ -172,6 +172,7 @@
     <ClCompile Include="HistogramPlot.cpp" />
     <ClCompile Include="PanTompkins.cpp" />
     <ClCompile Include="PdfGenerator.cpp" />
+    <ClCompile Include="QTDispersion.cpp" />
     <ClCompile Include="RaportGenerator.cpp" />
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="ResultKeeper.cpp" />
@@ -187,6 +188,8 @@
     <ClCompile Include="stsegment.cpp" />
     <ClCompile Include="stsegmentresult.cpp" />
     <ClCompile Include="TestModule.cpp" />
+    <ClCompile Include="TWavesAlt.cpp" />
+    <ClCompile Include="TWavesAltResult.cpp" />
     <ClCompile Include="VAbstractModule.cpp" />
     <ClCompile Include="VCGTLOOP.cpp" />
     <ClCompile Include="Waves.cpp" />
@@ -304,6 +307,7 @@
     <ClInclude Include="methodsVCG.h" />
     <ClInclude Include="MovingAverage.h" />
     <ClInclude Include="PanTompkins.h" />
+    <ClInclude Include="QTDispersion.h" />
     <ClInclude Include="ResultVCG.h" />
     <ClInclude Include="RPeaks.h" />
     <ClInclude Include="RPeaksResult.h" />
@@ -316,6 +320,8 @@
     <ClInclude Include="stsegment.h" />
     <ClInclude Include="stsegmentresult.h" />
     <ClInclude Include="TestModule.h" />
+    <ClInclude Include="TWavesAlt.h" />
+    <ClInclude Include="TWavesAltResult.h" />
     <ClInclude Include="VAbstractModule.h" />
     <ClInclude Include="VCGTLOOP.h" />
     <ClInclude Include="Waves.h" />
