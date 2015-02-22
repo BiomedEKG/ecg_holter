@@ -185,6 +185,8 @@
     <ClCompile Include="stsegment.cpp" />
     <ClCompile Include="stsegmentresult.cpp" />
     <ClCompile Include="TestModule.cpp" />
+    <ClCompile Include="TWavesAlt.cpp" />
+    <ClCompile Include="TWavesAltResult.cpp" />
     <ClCompile Include="VAbstractModule.cpp" />
     <ClCompile Include="VCGTLOOP.cpp" />
     <ClCompile Include="Waves.cpp" />
@@ -312,6 +314,8 @@
     <ClInclude Include="stsegment.h" />
     <ClInclude Include="stsegmentresult.h" />
     <ClInclude Include="TestModule.h" />
+    <ClInclude Include="TWavesAlt.h" />
+    <ClInclude Include="TWavesAltResult.h" />
     <ClInclude Include="VAbstractModule.h" />
     <ClInclude Include="VCGTLOOP.h" />
     <ClInclude Include="Waves.h" />

@@ -72,6 +72,10 @@ Input* ResultKeeper::getInput()
 	return ecgBaseline;
  }
 
+ TWavesAltResult* ResultKeeper::getTWaves(){
+	 return tWaves;
+ }
+
  RPeaksResult* ResultKeeper::getRPeaks() {
 	return rPeaks;
  }
@@ -84,6 +88,8 @@ Input* ResultKeeper::getInput()
 	return hrv2;
  }
 
+
+
  SleepApneaResult* ResultKeeper::getSleepApnea(){
 	 return sleepApnea;
  }
@@ -92,15 +98,19 @@ Input* ResultKeeper::getInput()
 	return sigEDR;
  }
 
- //SigEDResult* ResultKeeper::getSIG_EDR() {
-	//return sigEDR;
- //}
+ 
 
 
 
  void ResultKeeper::setECGBaseline(BaselineResult* baseline) {
 	this->ecgBaseline = baseline;
  }
+
+ void ResultKeeper::setTWaves(TWavesAltResult* tWaves){
+	 this->tWaves = tWaves;
+ }
+
+	
 
 
  void ResultKeeper::setRPeaks(RPeaksResult* rPeaks) {

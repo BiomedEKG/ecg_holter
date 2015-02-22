@@ -84,6 +84,9 @@
     <Filter Include="Modules\HRV1">
       <UniqueIdentifier>{7dd8ded6-e855-482c-8f3a-222dbf515046}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\T_Waves_Alt">
+      <UniqueIdentifier>{63b190b3-ee65-4c0e-a6ae-4dfdf73395f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
@@ -314,6 +317,12 @@
     <ClCompile Include="GeneratedFiles\Release\moc_SleepApneaWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="TWavesAlt.cpp">
+      <Filter>Modules\T_Waves_Alt</Filter>
+    </ClCompile>
+    <ClCompile Include="TWavesAltResult.cpp">
+      <Filter>Modules\T_Waves_Alt</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -515,6 +524,12 @@
     </ClInclude>
     <ClInclude Include="AtrfibrResult.h">
       <Filter>Modules\AtrialFibrilation</Filter>
+    </ClInclude>
+    <ClInclude Include="TWavesAlt.h">
+      <Filter>Modules\T_Waves_Alt</Filter>
+    </ClInclude>
+    <ClInclude Include="TWavesAltResult.h">
+      <Filter>Modules\T_Waves_Alt</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

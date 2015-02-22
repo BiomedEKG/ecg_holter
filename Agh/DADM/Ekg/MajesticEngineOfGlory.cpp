@@ -11,6 +11,7 @@
 #include <SleepApnea.h>
 #include <HRV1.h>
 #include <AtrFibr.h>
+#include <TWavesAlt.h>
 
 
 MajesticEngineOfGlory::MajesticEngineOfGlory(void)
@@ -66,11 +67,20 @@ void MajesticEngineOfGlory::tryMe(){
 	//std::cout << "sleep apnea: " << sleepApneaRes->Tstart.size()<< endl;
 	//std::cout << "sleep apnea: " << sleepApneaRes->NrEp.size()<< endl;
 
-	//Waves waves = Waves();
-	//rkp->setWaves(waves.compute(rkp));
+	Waves waves = Waves();
+	rkp->setWaves(waves.compute(rkp));
 
 	AtrFibr atrialFib = AtrFibr();
 	rkp->setAtrialFibrillation(atrialFib.compute(rkp));
+
+	TWavesAlt tWaves = TWavesAlt();
+	rkp->setTWaves(tWaves.compute(rkp));
+	TWavesAltResult* tWavesRes = rkp->getTWaves();
+	std::cout << "t waves: " << tWavesRes->paramsResult<< endl;
+	std::cout << "t waves: " << tWavesRes->startResult.size()<< endl;
+	std::cout << "t waves: " << tWavesRes->endResult.size()<< endl;
+
+
 
 	/*std::cout << paramsResult["apen"]<< endl;
 	std::cout << paramsResult["samen"]<<endl; 

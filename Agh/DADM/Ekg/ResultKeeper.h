@@ -12,6 +12,7 @@
 #include "Hrv2Result.h"
 #include "HRV1Result.h"
 #include "SleepApneaResult.h"
+#include "TWavesAltResult.h"
 
 #include "ECGFiltrationMethod.h"
 #include "RPeaksDetectionAlgorithms.h"
@@ -38,7 +39,7 @@ class ResultKeeper
 		Input getSignalHandler();
 
 		AtrfibrResult* getAtrialFibrillation();
-		
+		TWavesAltResult* getTWaves();		
 		Hrv2Result* getHrv2();
 		RPeaksResult* getRPeaks();
 		HRV1Result* getHRV1();
@@ -47,7 +48,6 @@ class ResultKeeper
 		char* pathToFile;
 	//	EctopicBeat* getEctopicBeat();
 	//	STSegmentResult* getSTSegmentResult();
-	//	TWaves* getTWaves();
 	//	HRT* getHRT();
 		SleepApneaResult* getSleepApnea();
 	//	QTDisp* getQTDisp();
@@ -59,16 +59,13 @@ class ResultKeeper
 		void setAtrialFibrillation(AtrfibrResult* atr);
 		void setHrv2(Hrv2Result* hrv2);
 		void setRPeaks(RPeaksResult* rpr);
-		
-	//	HRV1* getHRV1();
 	//	HeartClass* getHeartClass();
 		void setECGBaseline(BaselineResult *baseline);
 		void setHRV1(HRV1Result *hrv1);
-//		void setHrv2(Hrv2Result *hrv2);
 		void setSleepApnea(SleepApneaResult *sleepApnea);
+		void setTWaves(TWavesAltResult *tWaves);
 	//	EctopicBeat* getEctopicBeat();
 	//	STSegmentResult* getSTSegmentResult();
-	//	TWaves* getTWaves();
 	//	HRT* getHRT();
 	//	QTDisp* getQTDisp();
 		Input* getInput();
@@ -76,7 +73,7 @@ class ResultKeeper
 		WavesResult* getWaves();
 	//	RaportGenerator* getRaportGenerator();
 		void setSIG_EDR(SigEDResult* sigEdr);
-		//void setWaves(WavesResult* waveRes);*/
+		
 		 vector<double>  getSingleChannel(char* path, int channelNumber);
 
 		 void setECGBaselineMethod(ECGFiltrationMethod ecgBaselineMethod);
@@ -109,6 +106,7 @@ class ResultKeeper
 		Hrv2Result *hrv2;
 		RPeaksResult *rPeaks;
 		HRV1Result *hrv1;
+		TWavesAltResult *tWaves;
 	//	HRV1 *hrv1;
 	//	HeartClass *heartClass;
 		BaselineResult *ecgBaseline;
@@ -116,7 +114,7 @@ class ResultKeeper
 		SleepApneaResult *sleepApnea;
 	//	EctopicBeat *ectopicBeat;
 	//	STSegmentResult *stSegmentResult;
-	//	TWaves *tWaves;
+	
 	//	HRT *hrt;
 		
 	//	QTDisp *qtDisp;
