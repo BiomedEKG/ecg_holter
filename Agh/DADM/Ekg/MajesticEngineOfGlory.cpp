@@ -11,7 +11,8 @@
 #include <SleepApnea.h>
 #include <HRV1.h>
 #include <AtrFibr.h>
-
+#include <stsegment.h>
+#include <VCGTLOOP.h>
 
 MajesticEngineOfGlory::MajesticEngineOfGlory(void)
 {
@@ -66,8 +67,15 @@ void MajesticEngineOfGlory::tryMe(){
 	//std::cout << "sleep apnea: " << sleepApneaRes->Tstart.size()<< endl;
 	//std::cout << "sleep apnea: " << sleepApneaRes->NrEp.size()<< endl;
 
-	//Waves waves = Waves();
-	//rkp->setWaves(waves.compute(rkp));
+	Waves waves = Waves();
+	rkp->setWaves(waves.compute(rkp));
+
+	VCGTLoop vcg = VCGTLoop();
+	rkp->setVCG(vcg.compute(rkp));
+	//STSegment jest tak Ÿle napisany, ze nie potrafiê go zaszpachlowaæ
+	/*STSegment stSegment = STSegment();
+	rkp->setStSegmentResult(stSegment.compute(rkp));*/
+
 
 	AtrFibr atrialFib = AtrFibr();
 	rkp->setAtrialFibrillation(atrialFib.compute(rkp));

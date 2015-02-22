@@ -84,6 +84,9 @@
     <Filter Include="Modules\HRV1">
       <UniqueIdentifier>{7dd8ded6-e855-482c-8f3a-222dbf515046}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\QTDisp">
+      <UniqueIdentifier>{d406fdb6-c56d-4304-a49f-1e0af5242795}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
@@ -193,15 +196,6 @@
     </ClCompile>
     <ClCompile Include="WavesResult.cpp">
       <Filter>Modules\Waves</Filter>
-    </ClCompile>
-    <ClCompile Include="methodsVCG.cpp">
-      <Filter>Modules\VCGLOOP</Filter>
-    </ClCompile>
-    <ClCompile Include="ResultVCG.cpp">
-      <Filter>Modules\VCGLOOP</Filter>
-    </ClCompile>
-    <ClCompile Include="VCGTLOOP.cpp">
-      <Filter>Modules\VCGLOOP</Filter>
     </ClCompile>
     <ClCompile Include="stsegment.cpp">
       <Filter>Modules\STSegment</Filter>
@@ -313,6 +307,18 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_SleepApneaWidget.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="QTDispersion.cpp">
+      <Filter>Modules\QTDisp</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultVCG.cpp">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClCompile>
+    <ClCompile Include="VCGTLOOP.cpp">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClCompile>
+    <ClCompile Include="methodsVCG.cpp">
+      <Filter>Modules\VCGLOOP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -435,26 +441,11 @@
     <ClInclude Include="PanTompkins.h">
       <Filter>Modules\RPeaks</Filter>
     </ClInclude>
-    <ClInclude Include="methodsVCG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ResultVCG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VCGTLOOP.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SIG_EDR.h">
       <Filter>Modules\SigEDR</Filter>
     </ClInclude>
     <ClInclude Include="SigEDResult.h">
       <Filter>Modules\SigEDR</Filter>
-    </ClInclude>
-    <ClInclude Include="stsegment.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stsegmentresult.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Waves.h">
       <Filter>Modules\Waves</Filter>
@@ -515,6 +506,24 @@
     </ClInclude>
     <ClInclude Include="AtrfibrResult.h">
       <Filter>Modules\AtrialFibrilation</Filter>
+    </ClInclude>
+    <ClInclude Include="stsegment.h">
+      <Filter>Modules\STSegment</Filter>
+    </ClInclude>
+    <ClInclude Include="stsegmentresult.h">
+      <Filter>Modules\STSegment</Filter>
+    </ClInclude>
+    <ClInclude Include="QTDispersion.h">
+      <Filter>Modules\QTDisp</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultVCG.h">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClInclude>
+    <ClInclude Include="VCGTLOOP.h">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClInclude>
+    <ClInclude Include="methodsVCG.h">
+      <Filter>Modules\VCGLOOP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

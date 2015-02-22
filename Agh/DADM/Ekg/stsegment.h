@@ -21,20 +21,20 @@ class STSegment : public AbstractModule<STSegmentResult>
 {
 	private:
 
-	vector<unsigned int> QRSonset ; 
-	vector<unsigned int> QRSend;
+	vector< int> QRSonset ; 
+	vector< int> QRSend;
 	vector<double> Signal;
-	vector<unsigned int> Tpeak;
-	vector<unsigned int> Rpeak;
+	vector< int> Tpeak;
+	vector< unsigned int> Rpeak;
 	int SizeVector;
 	double Frequency;
 
 
 	vector<double> HeartRate;
 	vector<unsigned int> J20;
-	vector<unsigned int> Ton;
+	vector< int> Ton;
 	vector<unsigned int> TE;
-	vector<unsigned int> TMax;
+	vector< int> TMax;
 	vector <double> SlopeTpeak;
 	vector <double> SlopeTon;
 	vector <double> SlopeSKST;
@@ -52,8 +52,8 @@ class STSegment : public AbstractModule<STSegmentResult>
 
 
 	vector<unsigned int>  computeJ20 ();
-	vector<double>  computeSlope (vector<unsigned int> TE);
-	vector<unsigned int> computeMaxDistanceIndex (vector <double> Slope,  vector<unsigned int> TE,vector<double>& MaxDistance);
+	vector<double>  computeSlope (vector< int> TE);
+	vector <int> computeMaxDistanceIndex (vector <double> Slope,  vector<int> TE,vector<double>& MaxDistance);
 	vector<string> defineOffsetLevel ();
 	vector<double> correctSlopeorMaxDistanceForShapeST(vector<double> StraightTpeak,vector <double> StraighTon);
 	vector<unsigned int> correctTEForShapeST ();
@@ -66,7 +66,7 @@ class STSegment : public AbstractModule<STSegmentResult>
 	public:
   
 
-	STSegmentResult* compute(ResultKeeper *rkp);
+	STSegmentResult* compute(ResultKeeper *rkp)override;
 
 	
 															
