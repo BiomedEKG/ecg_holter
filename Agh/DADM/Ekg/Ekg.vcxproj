@@ -170,6 +170,7 @@
     <ClCompile Include="HistogramPlot.cpp" />
     <ClCompile Include="PanTompkins.cpp" />
     <ClCompile Include="PdfGenerator.cpp" />
+    <ClCompile Include="QTDispersion.cpp" />
     <ClCompile Include="RaportGenerator.cpp" />
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="ResultKeeper.cpp" />
@@ -302,6 +303,7 @@
     <ClInclude Include="methodsVCG.h" />
     <ClInclude Include="MovingAverage.h" />
     <ClInclude Include="PanTompkins.h" />
+    <ClInclude Include="QTDispersion.h" />
     <ClInclude Include="ResultVCG.h" />
     <ClInclude Include="RPeaks.h" />
     <ClInclude Include="RPeaksResult.h" />

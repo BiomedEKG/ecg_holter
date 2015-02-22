@@ -12,6 +12,7 @@ ResultKeeper::ResultKeeper()
   //this->rawSignalMV=0;
   //this->sigEDR=0;
   //this->waves=0;
+	this->qtDisp = 30;
 }
 
 ResultKeeper::~ResultKeeper()
@@ -64,9 +65,9 @@ Input* ResultKeeper::getInput()
 	return Input();
  }
 
- //AtrFibr* ResultKeeper::getAtrialFibrillation() {
-	//return atrialFibrillation;
- //}
+ AtrfibrResult* ResultKeeper::getAtrialFibrillation() {
+	return atrialFibrillation;
+ }
 
  BaselineResult* ResultKeeper::getECGBaseline(){
 	return ecgBaseline;
@@ -164,6 +165,15 @@ Input* ResultKeeper::getInput()
 	this->sigEDR = sig;
  }
 
- //void ResultKeeper::setWaves(WavesResult* waves) {
-	//this->waves = waves;
- //}
+
+ void ResultKeeper::setStSegmentResult(STSegmentResult *st) {
+	this->stSegmentResult = st;
+ }
+
+ void ResultKeeper:: setVCG(ResultVCG* vcg) {
+	this->vcgResult = vcg;
+ }
+
+ ResultVCG* ResultKeeper:: getVCG() {
+ return vcgResult;
+ }

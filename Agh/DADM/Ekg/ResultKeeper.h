@@ -14,9 +14,11 @@
 #include "SleepApneaResult.h"
 #include "TWavesAltResult.h"
 
+#include <stsegmentresult.h>
 #include "ECGFiltrationMethod.h"
 #include "RPeaksDetectionAlgorithms.h"
 #include "SleepApneaMetrics.h"
+#include <ResultVCG.h>
 
 using namespace std;
 
@@ -47,15 +49,16 @@ class ResultKeeper
 		BaselineResult* getECGBaseline();
 		char* pathToFile;
 	//	EctopicBeat* getEctopicBeat();
-	//	STSegmentResult* getSTSegmentResult();
+		STSegmentResult* getSTSegmentResult();
 	//	HRT* getHRT();
 		SleepApneaResult* getSleepApnea();
 	//	QTDisp* getQTDisp();
 	//	Input* getInput();
 	//	RaportGenerator* getRaportGenerator();
 		SigEDResult* getSIG_EDR();
-		
+		ResultVCG* getVCG();
 
+		void setVCG(ResultVCG* vcg);
 		void setAtrialFibrillation(AtrfibrResult* atr);
 		void setHrv2(Hrv2Result* hrv2);
 		void setRPeaks(RPeaksResult* rpr);
@@ -65,7 +68,7 @@ class ResultKeeper
 		void setSleepApnea(SleepApneaResult *sleepApnea);
 		void setTWaves(TWavesAltResult *tWaves);
 	//	EctopicBeat* getEctopicBeat();
-	//	STSegmentResult* getSTSegmentResult();
+	
 	//	HRT* getHRT();
 	//	QTDisp* getQTDisp();
 		Input* getInput();
@@ -74,6 +77,7 @@ class ResultKeeper
 	//	RaportGenerator* getRaportGenerator();
 		void setSIG_EDR(SigEDResult* sigEdr);
 		
+	
 		 vector<double>  getSingleChannel(char* path, int channelNumber);
 
 		 void setECGBaselineMethod(ECGFiltrationMethod ecgBaselineMethod);
@@ -84,6 +88,8 @@ class ResultKeeper
 
 		void setSleepApneaMetrics(SleepApneaMetrics sleepApneaMetrics);
 		SleepApneaMetrics getSleepApneaMetrics();
+
+		void setStSegmentResult(STSegmentResult *st);
 
         
     private:
@@ -113,14 +119,15 @@ class ResultKeeper
 		WavesResult *wavesResult;
 		SleepApneaResult *sleepApnea;
 	//	EctopicBeat *ectopicBeat;
-	//	STSegmentResult *stSegmentResult;
+		STSegmentResult *stSegmentResult;
 	
 	//	HRT *hrt;
 		
-	//	QTDisp *qtDisp;
+		int qtDisp;  // ja chce jeszcze troche pozyc a nie peknac z nerwów
 	//	Input *input;
 	//	RaportGenerator *raportGenerator;
 		SigEDResult *sigEDR;
+		ResultVCG* vcgResult;
 		
 };
 
