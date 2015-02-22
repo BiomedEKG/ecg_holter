@@ -52,7 +52,7 @@ class HeartClass : public AbstractModule<HeartClassResult>{
 		void FrameLocator();
 		void MeanAmplitude();
 		void SamplesBetween();
-		void Conditioning(HeartClassResult heartClassResults);
+		HeartClassResult Conditioning(HeartClassResult heartClassResults);
 };
 
 #endif // HEART_CLASS_H

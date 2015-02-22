@@ -324,7 +324,7 @@ void HeartClass::SamplesBetween(){
 
 
 
-void HeartClass::Conditioning(HeartClassResult heartClassResults){
+HeartClassResult HeartClass::Conditioning(HeartClassResult heartClassResults){
 	
 	bool firstCondition = false;
 	bool secondCondition = false;
@@ -422,6 +422,7 @@ void HeartClass::Conditioning(HeartClassResult heartClassResults){
 		
 		cout << "QRS numer " << i << " nalezy do klasy numer: " << heartClassResults.qrsClass.at(i) << endl;
 	}*/
+	return heartClassResults;
 }
 
 void HeartClass::InputPrepare(ResultKeeper* rkp){
@@ -464,7 +465,7 @@ HeartClassResult* HeartClass::compute(ResultKeeper* rkp){
 	
 	this->SamplesBetween();
 	
-	this->Conditioning(heartResult);
+	heartResult = this->Conditioning(heartResult);
 	
 	return heartResult.getResult();
 }
