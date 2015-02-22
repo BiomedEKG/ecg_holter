@@ -96,7 +96,9 @@ Input* ResultKeeper::getInput()
 	//return sigEDR;
  //}
 
-
+ HeartClassResult* ResultKeeper::getHeartClass(){
+	 return heartClass;
+ }
 
  void ResultKeeper::setECGBaseline(BaselineResult* baseline) {
 	this->ecgBaseline = baseline;
@@ -149,7 +151,9 @@ Input* ResultKeeper::getInput()
  void ResultKeeper::setSIG_EDR(SigEDResult* sig) {
 	this->sigEDR = sig;
  }
-
+ void ResultKeeper::setHeartClass(HeartClassResult* ptrHeartClassRes){
+	 this->heartClass = ptrHeartClassRes;
+ }
  //void ResultKeeper::setWaves(WavesResult* waves) {
 	//this->waves = waves;
  //}

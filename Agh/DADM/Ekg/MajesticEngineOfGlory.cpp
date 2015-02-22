@@ -10,7 +10,7 @@
 #include <SIG_EDR.h>
 #include <SleepApnea.h>
 #include <HRV1.h>
-
+#include <HeartClass.h>
 
 MajesticEngineOfGlory::MajesticEngineOfGlory(void)
 {
@@ -68,6 +68,14 @@ void MajesticEngineOfGlory::tryMe(){
 	//cout << sigRes->getVectorResult()[45] << endl;
 	Waves waves = Waves();
 	rkp->setWaves(waves.compute(rkp));
+	std::cout << "Waves done\n";
+
+	/*HeartClass heartClass;
+	rkp->setHeartClass(heartClass.compute(rkp));
+	HeartClassResult* heartClassRes = rkp ->getHeartClass();
+	map<string, double> qrsparam = heartClassRes->getQrsParameters();
+	std::cout << "vQRS:" << qrsparam["Number of ventricular QRS"] << endl;
+	std::cout << "artefakty" << qrsparam["Number of artifacts"] << endl;*/
 	/*std::cout << paramsResult["apen"]<< endl;
 	std::cout << paramsResult["samen"]<<endl; 
 	std::cout << paramsResult["tinn"]<<endl;

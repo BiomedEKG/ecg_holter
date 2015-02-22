@@ -12,7 +12,7 @@
 #include "Hrv2Result.h"
 #include "HRV1Result.h"
 #include "SleepApneaResult.h"
-
+#include "HeartClassResult.h"
 #include "ECGFiltrationMethod.h"
 #include "RPeaksDetectionAlgorithms.h"
 #include "SleepApneaMetrics.h"
@@ -42,7 +42,7 @@ class ResultKeeper
 		Hrv2Result* getHrv2();
 		RPeaksResult* getRPeaks();
 		HRV1Result* getHRV1();
-	//	HeartClass* getHeartClass();
+		HeartClassResult* getHeartClass();
 		BaselineResult* getECGBaseline();
 		char* pathToFile;
 	//	EctopicBeat* getEctopicBeat();
@@ -73,6 +73,7 @@ class ResultKeeper
 	//	QTDisp* getQTDisp();
 		Input* getInput();
 		void setWaves(WavesResult* wr);
+		void setHeartClass(HeartClassResult* ptrHeartClassRes);
 		WavesResult* getWaves();
 	//	RaportGenerator* getRaportGenerator();
 		void setSIG_EDR(SigEDResult* sigEdr);
@@ -111,7 +112,7 @@ class ResultKeeper
 		RPeaksResult *rPeaks;
 		HRV1Result *hrv1;
 	//	HRV1 *hrv1;
-	//	HeartClass *heartClass;
+		HeartClassResult *heartClass;
 		BaselineResult *ecgBaseline;
 		WavesResult *wavesResult;
 		SleepApneaResult *sleepApnea;
