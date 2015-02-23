@@ -14,19 +14,26 @@
 
 using namespace std;
 
-class STSegmentResult 
-{
-	public:
-	vector <string> OffsetLevel;
-	vector <string> ShapeST;
-	vector <string> TypeShapeST; 
-	vector<unsigned int> QRSend;// pocz¹tek odcinka
-	vector<unsigned int> Ton;// koniec odcnika ST
-	STSegmentResult(vector<string> OffsetLevel, vector<string>ShapeST, vector <string> TypeShapeST,
-		vector<unsigned int> QRSend,vector<unsigned int> Ton);
+class STSegmentResult : public AbstractResult
 
-	map<string, vector<string>> ShapeLine;
-	map<string, vector<unsigned int>> STonset_end;
+{
+
+	public:
+
+	STSegmentResult();
+	~STSegmentResult();
+	STSegmentResult * getResult();
+	map <string, vector<string>> GeSTSegmentResultData(void);
+	void SetSTSegmentResultData(map <string, vector<string>> ComputedData);
+
+	private:
+	map <string, vector<string>> STSegmentResultData;
+	
+	//STSegmentResult(vector<string> OffsetLevel, vector<string>ShapeST, vector <string> TypeShapeST,
+	//	vector<unsigned int> QRSend,vector<unsigned int> Ton);
+
+	//map<string, vector<string>> ShapeLine;
+	//map<string, vector<unsigned int>> STonset_end;
 	
 
 

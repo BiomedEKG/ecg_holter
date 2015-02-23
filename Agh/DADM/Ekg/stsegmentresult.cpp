@@ -1,19 +1,27 @@
 #include "stsegmentresult.h"
 
 
-STSegmentResult::STSegmentResult(vector<string> OffsetLevel, vector<string>ShapeST, vector <string> TypeShapeST,
-		vector<unsigned int> QRSend,vector<unsigned int> Ton)
+STSegmentResult::STSegmentResult(void)
 {
-	this->OffsetLevel=OffsetLevel;
-	this->ShapeST=ShapeST;
-	this->TypeShapeST=TypeShapeST;
-	this->QRSend=QRSend;
-	this->Ton=Ton;
-
-	ShapeLine.insert(make_pair("OffsetLevel", OffsetLevel));
-	ShapeLine.insert(make_pair("ShapeST", ShapeST));
-	ShapeLine.insert(make_pair("TypeShapeST", TypeShapeST));
-
-	STonset_end.insert(make_pair("OffsetLevel", QRSend));
-	STonset_end.insert(make_pair("ShapeST", Ton));
 }
+
+STSegmentResult::~STSegmentResult(void)
+{
+}
+
+STSegmentResult * STSegmentResult::getResult(){
+	//this->paramType = BASELINE;
+	STSegmentResult *wr = new STSegmentResult();
+	wr->STSegmentResultData = this->STSegmentResultData;
+	return wr;
+}
+
+map <string, vector<string>> STSegmentResult::GeSTSegmentResultData(void){
+	
+	return STSegmentResultData;
+}
+
+void STSegmentResult::SetSTSegmentResultData(map <string, vector<string>> ComputedData){
+		STSegmentResultData = ComputedData;
+	}
+
