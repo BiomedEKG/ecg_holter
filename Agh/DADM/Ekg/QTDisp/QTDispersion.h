@@ -11,19 +11,17 @@
 
 using namespace std;
 
-		class qt_disp : public AbstractModule<QTDisp>
+		class qt_disp : public AbstractModule<QTDispResult>
 		{
 
 		public:
-			QTDispResult* compute(ResultKeeper* rkp) override;
-			qt_disp();
-			QTDispResult* run(unsigned int,vector<int>,vector<int>, vector < vector < double > >, int) const;
+
+			QTDispResult* compute(ResultKeeper* rkp);
+			QTDispResult* run(unsigned int,vector<unsigned int>, vector<unsigned int> , vector < vector < double > >, int) const;
 			//QTDisp* run(unsigned int channel, map<std::string, vector<unsigned int>*> &wavesResult,vector<double> *signal, int samplingFrequency) const;
-			~qt_disp();
+
             unsigned int channelsNumber;
 
-
-		private:
 			unsigned int tPeakSearchRange;
 			unsigned int intervalBeforeTEndGlobal;
 			unsigned int parabolaFittingPointsNumber;
@@ -62,6 +60,7 @@ using namespace std;
 			void sort(vector<unsigned int>*);
 			unsigned int IQR(vector<unsigned int>*);
 		};
+
 
 
 #endif

@@ -3,13 +3,8 @@
 #include "ResultKeeper.h"
 
 
-
-		QTDisp :: QTDisp(unsigned int _iqrDispersion) : iqrDispersion(_iqrDispersion)
-		{
-		}
-
-
-		qt_disp :: qt_disp() : AbstractModule(Parameters())
+/*
+		qt_disp :: qt_disp()
 		{
 			this->tPeakSearchRange = 0;
 			this->intervalBeforeTEndGlobal = 0;
@@ -38,7 +33,7 @@
 			this->parabolaCoefficientsPointer = NULL;
 			this->filteredDataPointerAllChannels = NULL;
 		}
-
+*/
 		void qt_disp :: diff(const vector<double>* filteredDataPointer, vector<double> *differentiatedDataPointer)
 		{
 
@@ -262,7 +257,7 @@
 		}
 
 		//Wyciąganie danych - pytanie czy dobre nazwy zmiennych odprowadzen? (tzn, e1, a1 itd....)
-
+/*
 		QTDispResult* compute(ResultKeeper* rkp) {
 			//Waves* resultWaves = rkp->getResultFromWaves();
 			//map<std::string, vector<unsigned int>*> resultWaves = rkp->getResultFromWaves();
@@ -301,6 +296,8 @@
             return qtResult.getResult();
 
 		}
+
+*/
 		/*
 		QTDisp qt_disp:: compute(map <string, vector<unsigned int> > *resultFromWaves, vector<double>*signal,int Frequency) {
 				this->Signal= signal;
@@ -311,7 +308,7 @@
 		}
 		*/
 
-		QTDispResult* qt_disp :: run(unsigned int channel,vector<int> QRSonset,vector<int> tPeak, vector < vector < double > >  *SignalsVector, int samplingFrequency) const
+		QTDispResult* qt_disp :: run(unsigned int channel,vector< unsigned int> QRSonset,vector<unsigned int> tPeak, vector < vector < double > >  SignalsVector, int samplingFrequency) const
 		{
 
 			qt_disp* QTDISP = new qt_disp();
@@ -320,7 +317,7 @@
 
 
 			//const map<std::string, vector<unsigned int>*> &inputwavesMap = wavesResult;
-			const vector<unsigned int> &qrsOnset_ = QRSonset_; // (*inputwavesMap)["QRS_ONSET"];
+			const vector<unsigned int> &qrsOnset_ = QRSonset; // (*inputwavesMap)["QRS_ONSET"];
 			const vector<unsigned int> &tEndGlobal_ = tPeak; // (*inputwavesMap)["T_END"];
 
 
@@ -348,144 +345,139 @@
 				qrsOnset = vector<unsigned int> (qrsOnset_.begin(), qrsOnset_.end());
 				tEndGlobal = vector<unsigned int> (tEndGlobal_.begin(), tEndGlobal_.end());
 			}
-            QTDISP.channelsNumber = channel;
-			vector<vector<double> > filteredDataAllChannels(QTDISP.channelsNumber);
-			QTDISP.filteredDataPointerAllChannels = &filteredDataAllChannels;
+            QTDISP->channelsNumber = channel;
+			vector<vector<double> > filteredDataAllChannels(QTDISP->channelsNumber);
+			QTDISP->filteredDataPointerAllChannels = &filteredDataAllChannels;
 			for ( int i =0; i < channel; i++) {
-                QTDISP.filteredDataPointerAllChannels->at(i) = SignalsVector.at(i);
+                QTDISP->filteredDataPointerAllChannels->at(i) = SignalsVector.at(i);
 			}
 			//QTDISP.filteredDataPointerAllChannels->at(0) = *input1; tak bylo dla wszystkich inputow
 
-			QTDISP.tPeakSearchRange = 0.150*samplingFrequency;
-			QTDISP.intervalBeforeTEndGlobal = 0.080*samplingFrequency;
-			QTDISP.parabolaFittingPointsNumber = 0.1*samplingFrequency;
-			QTDISP.tPeakSearchVectorLength = QTDISP.tPeakSearchRange-QTDISP.intervalBeforeTEndGlobal+1;
+			QTDISP->tPeakSearchRange = 0.150*samplingFrequency;
+			QTDISP->intervalBeforeTEndGlobal = 0.080*samplingFrequency;
+			QTDISP->parabolaFittingPointsNumber = 0.1*samplingFrequency;
+			QTDISP->tPeakSearchVectorLength = QTDISP->tPeakSearchRange-QTDISP->intervalBeforeTEndGlobal+1;
 
-			vector<double> tPeakSearchVector(QTDISP.tPeakSearchVectorLength);
-			QTDISP.tPeakSearchVectorPointer = &tPeakSearchVector;
-			vector<unsigned int> parabolaX(QTDISP.parabolaFittingPointsNumber);
-			QTDISP.parabolaXPointer = &parabolaX;
-			vector<double> parabolaY(QTDISP.parabolaFittingPointsNumber);
-			QTDISP.parabolaYPointer = &parabolaY;
+			vector<double> tPeakSearchVector(QTDISP->tPeakSearchVectorLength);
+			QTDISP->tPeakSearchVectorPointer = &tPeakSearchVector;
+			vector<unsigned int> parabolaX(QTDISP->parabolaFittingPointsNumber);
+			QTDISP->parabolaXPointer = &parabolaX;
+			vector<double> parabolaY(QTDISP->parabolaFittingPointsNumber);
+			QTDISP->parabolaYPointer = &parabolaY;
 			vector<unsigned int> tEndLocal(tEndGlobal.size());
-			QTDISP.tEndLocalPointer = &tEndLocal;
+			QTDISP->tEndLocalPointer = &tEndLocal;
 			vector<vector<unsigned int> > tEndLocalAllChannels;
-			QTDISP.tEndLocalPointerAllChannels = &tEndLocalAllChannels;
-			vector<unsigned int> qtDistanceMeanForAllChannels(QTDISP.channelsNumber);
-			QTDISP.qtDistancePointerMeanForAllChannels = &qtDistanceMeanForAllChannels;
-			vector<unsigned int> qtDistanceMeanForAllChannels_COPY(QTDISP.channelsNumber);
-			QTDISP.qtDistancePointerMeanForAllChannels_COPY = &qtDistanceMeanForAllChannels_COPY;
+			QTDISP->tEndLocalPointerAllChannels = &tEndLocalAllChannels;
+			vector<unsigned int> qtDistanceMeanForAllChannels(QTDISP->channelsNumber);
+			QTDISP->qtDistancePointerMeanForAllChannels = &qtDistanceMeanForAllChannels;
+			vector<unsigned int> qtDistanceMeanForAllChannels_COPY(QTDISP->channelsNumber);
+			QTDISP->qtDistancePointerMeanForAllChannels_COPY = &qtDistanceMeanForAllChannels_COPY;
 			vector<double> parabolaPeakSearchVector;
-			QTDISP.parabolaPeakSearchVectorPointer = &parabolaPeakSearchVector;
+			QTDISP->parabolaPeakSearchVectorPointer = &parabolaPeakSearchVector;
 			vector<double> parabolaCoefficients(3);
-			QTDISP.parabolaCoefficientsPointer = &parabolaCoefficients;
+			QTDISP->parabolaCoefficientsPointer = &parabolaCoefficients;
 
 
-			for (int i=0; i<QTDISP.channelsNumber; ++i)
+			for (int i=0; i<QTDISP->channelsNumber; ++i)
 			{
-				vector<double> filteredData = QTDISP.filteredDataPointerAllChannels->at(i);
+				vector<double> filteredData = QTDISP->filteredDataPointerAllChannels->at(i);
 				vector<double> *filteredDataPointer = &filteredData;
 				vector<double> differentiatedData;
-				QTDISP.differentiatedDataPointer = &differentiatedData;
+				QTDISP->differentiatedDataPointer = &differentiatedData;
 				vector<double> differentiatedAbsoluteData;
-				QTDISP.differentiatedAbsoluteDataPointer = &differentiatedAbsoluteData;
+				QTDISP->differentiatedAbsoluteDataPointer = &differentiatedAbsoluteData;
 				vector<unsigned int> mspVector;
-				QTDISP.mspVectorPointer = &mspVector;
+				QTDISP->mspVectorPointer = &mspVector;
 				vector<unsigned int> qtDistance(tEndGlobal.size());
-				QTDISP.qtDistancePointer = &qtDistance;
+				QTDISP->qtDistancePointer = &qtDistance;
 
-				QTDISP.diff(filteredDataPointer, QTDISP.differentiatedDataPointer);
-				QTDISP.abs(QTDISP.differentiatedDataPointer, QTDISP.differentiatedAbsoluteDataPointer);
+				QTDISP->diff(filteredDataPointer, QTDISP->differentiatedDataPointer);
+				QTDISP->abs(QTDISP->differentiatedDataPointer, QTDISP->differentiatedAbsoluteDataPointer);
 
 				for (int a=0; a<tEndGlobal.size(); ++a)
 				{
-					QTDISP.mspSearchVectorLength = 0;
-					for (int j=0; j<QTDISP.tPeakSearchVectorLength; ++j)
+					QTDISP->mspSearchVectorLength = 0;
+					for (int j=0; j<QTDISP->tPeakSearchVectorLength; ++j)
 					{
-						QTDISP.tPeakSearchVectorPointer->at(j) = QTDISP.differentiatedAbsoluteDataPointer->at(tEndGlobal.at(a)-QTDISP.tPeakSearchRange+j);
+						QTDISP->tPeakSearchVectorPointer->at(j) = QTDISP->differentiatedAbsoluteDataPointer->at(tEndGlobal.at(a)-QTDISP->tPeakSearchRange+j);
 					}
 
-					QTDISP.tPeak = QTDISP.min(QTDISP.tPeakSearchVectorPointer);
-					QTDISP.tPeak = QTDISP.tPeak+tEndGlobal.at(a)-QTDISP.tPeakSearchRange;
-					for (int j=QTDISP.tPeak; j<=tEndGlobal.at(a); ++j)
+					QTDISP->tPeak = QTDISP->min(QTDISP->tPeakSearchVectorPointer);
+					QTDISP->tPeak = QTDISP->tPeak+tEndGlobal.at(a)-QTDISP->tPeakSearchRange;
+					for (int j=QTDISP->tPeak; j<=tEndGlobal.at(a); ++j)
 					{
-						QTDISP.mspSearchVectorLength = QTDISP.mspSearchVectorLength+1;
+						QTDISP->mspSearchVectorLength = QTDISP->mspSearchVectorLength+1;
 					}
-					vector<double> mspSearchVector(QTDISP.mspSearchVectorLength);
+					vector<double> mspSearchVector(QTDISP->mspSearchVectorLength);
 					vector<double> *mspSearchVectorPointer = &mspSearchVector;
 					for (int j=0; j<mspSearchVectorPointer->size(); ++j)
 					{
-						mspSearchVectorPointer->at(j) = QTDISP.differentiatedAbsoluteDataPointer->at(QTDISP.tPeak+j);
+						mspSearchVectorPointer->at(j) = QTDISP->differentiatedAbsoluteDataPointer->at(QTDISP->tPeak+j);
 					}
-					QTDISP.msp = QTDISP.max(mspSearchVectorPointer);
-					QTDISP.mspVectorPointer->push_back(QTDISP.msp+QTDISP.tPeak);
+					QTDISP->msp = QTDISP->max(mspSearchVectorPointer);
+					QTDISP->mspVectorPointer->push_back(QTDISP->msp+QTDISP->tPeak);
 				}
 
 				for (int d=0; d<tEndGlobal.size(); ++d)
 				{
-					for (int j=0; j<QTDISP.parabolaFittingPointsNumber; ++j)
+					for (int j=0; j<QTDISP->parabolaFittingPointsNumber; ++j)
 					{
-						QTDISP.parabolaXPointer->at(j) = QTDISP.mspVectorPointer->at(d)+j;
-						QTDISP.parabolaYPointer->at(j) = filteredDataPointer->at(QTDISP.mspVectorPointer->at(d)+j);
+						QTDISP->parabolaXPointer->at(j) = QTDISP->mspVectorPointer->at(d)+j;
+						QTDISP->parabolaYPointer->at(j) = filteredDataPointer->at(QTDISP->mspVectorPointer->at(d)+j);
 					}
-					QTDISP.parabolaFitting(QTDISP.parabolaXPointer, QTDISP.parabolaYPointer, QTDISP.parabolaFittingPointsNumber, QTDISP.parabolaCoefficientsPointer);
-					double a = QTDISP.parabolaCoefficientsPointer->at(0);
-					double b = QTDISP.parabolaCoefficientsPointer->at(1);
-					double c = QTDISP.parabolaCoefficientsPointer->at(2);
+					QTDISP->parabolaFitting(QTDISP->parabolaXPointer, QTDISP->parabolaYPointer, QTDISP->parabolaFittingPointsNumber, QTDISP->parabolaCoefficientsPointer);
+					double a = QTDISP->parabolaCoefficientsPointer->at(0);
+					double b = QTDISP->parabolaCoefficientsPointer->at(1);
+					double c = QTDISP->parabolaCoefficientsPointer->at(2);
 
 					vector<double> parabolaPeakSearchVector;
-					QTDISP.parabolaPeakSearchVectorPointer = &parabolaPeakSearchVector;
-					for (int k=QTDISP.mspVectorPointer->at(d); k<=tEndGlobal.at(d); ++k)
+					QTDISP->parabolaPeakSearchVectorPointer = &parabolaPeakSearchVector;
+					for (int k=QTDISP->mspVectorPointer->at(d); k<=tEndGlobal.at(d); ++k)
 					{
-						QTDISP.parabolaPeakSearchVectorPointer->push_back(k);
+						QTDISP->parabolaPeakSearchVectorPointer->push_back(k);
 					}
 
-					vector<double> parabolaPoints(QTDISP.parabolaPeakSearchVectorPointer->size());
-					QTDISP.parabolaPointsPointer = &parabolaPoints;
-					for (int l=0; l<QTDISP.parabolaPeakSearchVectorPointer->size(); ++l)
+					vector<double> parabolaPoints(QTDISP->parabolaPeakSearchVectorPointer->size());
+					QTDISP->parabolaPointsPointer = &parabolaPoints;
+					for (int l=0; l<QTDISP->parabolaPeakSearchVectorPointer->size(); ++l)
 					{
-						double x = QTDISP.parabolaPeakSearchVectorPointer->at(l);
-						QTDISP.parabolaPointsPointer->at(l) = a*x*x+b*x+c;
+						double x = QTDISP->parabolaPeakSearchVectorPointer->at(l);
+						QTDISP->parabolaPointsPointer->at(l) = a*x*x+b*x+c;
 					}
 
 					if (a>0)
 					{
-						QTDISP.tEndLocalPointer->at(d) = QTDISP.min(QTDISP.parabolaPointsPointer)+QTDISP.mspVectorPointer->at(d);
+						QTDISP->tEndLocalPointer->at(d) = QTDISP->min(QTDISP->parabolaPointsPointer)+QTDISP->mspVectorPointer->at(d);
 					}
 					else
 					{
-						QTDISP.tEndLocalPointer->at(d) = QTDISP.max(QTDISP.parabolaPointsPointer)+QTDISP.mspVectorPointer->at(d);
+						QTDISP->tEndLocalPointer->at(d) = QTDISP->max(QTDISP->parabolaPointsPointer)+QTDISP->mspVectorPointer->at(d);
 					}
 				}
 
-				QTDISP.tEndLocalPointerAllChannels->push_back(tEndLocal);
+				QTDISP->tEndLocalPointerAllChannels->push_back(tEndLocal);
 
-				for (int j=0; j<QTDISP.tEndLocalPointer->size(); ++j)
+				for (int j=0; j<QTDISP->tEndLocalPointer->size(); ++j)
 				{
 					if (tEndLocal.at(j)>qrsOnset.at(j))
 					{
-						QTDISP.qtDistancePointer->at(j) = ((tEndLocal.at(j)-qrsOnset.at(j)-1)*1000)/samplingFrequency;
+						QTDISP->qtDistancePointer->at(j) = ((tEndLocal.at(j)-qrsOnset.at(j)-1)*1000)/samplingFrequency;
 					}
 					else
 					{
-						QTDISP.qtDistancePointer->at(j) = ((qrsOnset.at(j)-tEndLocal.at(j)-1)*1000)/samplingFrequency;
+						QTDISP->qtDistancePointer->at(j) = ((qrsOnset.at(j)-tEndLocal.at(j)-1)*1000)/samplingFrequency;
 					}
 				}
-				QTDISP.qtDistanceMeanForSingleChannel = QTDISP.avg(QTDISP.qtDistancePointer);
+				QTDISP->qtDistanceMeanForSingleChannel = QTDISP->avg(QTDISP->qtDistancePointer);
 
-				QTDISP.qtDistancePointerMeanForAllChannels->at(i) = QTDISP.qtDistanceMeanForSingleChannel;
+				QTDISP->qtDistancePointerMeanForAllChannels->at(i) = QTDISP->qtDistanceMeanForSingleChannel;
 			}
 
 			qtDistanceMeanForAllChannels_COPY = qtDistanceMeanForAllChannels;
-			QTDISP.sort(QTDISP.qtDistancePointerMeanForAllChannels);
-			QTDISP.iqrDispersion = QTDISP.IQR(QTDISP.qtDistancePointerMeanForAllChannels);
+			QTDISP->sort(QTDISP->qtDistancePointerMeanForAllChannels);
+			QTDISP->iqrDispersion = QTDISP->IQR(QTDISP->qtDistancePointerMeanForAllChannels);
 
-			return new QTDispResult(QTDISP.iqrDispersion);
-		}
-
-
-		qt_disp :: ~qt_disp()
-		{
+			return new QTDispResult(QTDISP->iqrDispersion);
 		}
 
 

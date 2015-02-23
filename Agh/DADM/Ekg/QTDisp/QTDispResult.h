@@ -1,8 +1,10 @@
 #ifndef QTDISP_H
 #define QTDISP_H
 
-#include "AbstractResult.h"
 
+
+#include "AbstractResult.h"
+#include "ReturnType.h"
 using namespace std;
 
 class QTDispResult : public AbstractResult
