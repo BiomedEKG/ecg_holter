@@ -81,6 +81,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 	engine = new MajesticEngineOfGlory();
 	engine->setSelectModuleMenu(selectModuleMenu);
+	connect(engine, SIGNAL(started()), this, SLOT(computationsStart()));
+	connect(engine, SIGNAL(finished()), this, SLOT(computationsEnd()));
+	connect(engine, SIGNAL(currentModule(QString)), this, SLOT(computingModuleSwitched(QString)));
 }
 
 QToolBar *MainWindow::createToolbar(SelectModuleMenu *selectModuleMenu)
@@ -216,10 +219,14 @@ void MainWindow::openFile()
 
 void MainWindow::compute()
 {
-	//Obliczenia
-	qDebug() << "Obliczam...";
-	engine->start();
-	qDebug() << "Koniec obliczen";
+	if (computeButton->text() == tr("Compute"))
+	{
+		engine->start();
+	}
+	else
+	{
+		engine->terminate();
+	}
 }
 
 void MainWindow::generateReport()
@@ -250,7 +257,7 @@ void MainWindow::generateReport()
 	QStringList data; 
 	data << "Variable" << "Value" << "Unit";
 	for (auto& x: res) {
-		data << QString::fromStdString(x.first) << QString::number(x.second) << "ms";
+	data << QString::fromStdString(x.first) << QString::number(x.second) << "ms";
 	}
 
 	//Proba zapisu do pliku
@@ -337,4 +344,20 @@ void MainWindow::graphPointerCursor()
 {
 	//here call graph pointer cursor function
 	statusBar()->showMessage("Graph: Pointer cursor", 2000);
+}
+
+void MainWindow::computationsStart()
+{
+	computeButton->setText(tr("Cancel"));
+}
+
+void MainWindow::computationsEnd()
+{
+	computeButton->setText(tr("Compute"));
+	statusBar()->showMessage(tr("Computing: Done"), 5000);
+}
+
+void MainWindow::computingModuleSwitched(const QString &msg)
+{
+	statusBar()->showMessage(msg);
 }

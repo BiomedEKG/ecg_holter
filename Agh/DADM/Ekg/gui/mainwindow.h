@@ -38,6 +38,9 @@ private slots:
 	void graphZoomOut();
 	void graphHandCursor();
 	void graphPointerCursor();
+	void computationsStart();
+	void computationsEnd();
+	void computingModuleSwitched(const QString &msg);
 
 private:
 	void addConfigurationTab(MainWidget *mainWidget, QWidget *tabWidget, const QString &label);

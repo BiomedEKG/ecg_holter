@@ -24,12 +24,18 @@ void MajesticEngineOfGlory::setSelectModuleMenu(SelectModuleMenu *smm)
 	selectModuleMenu = smm;
 }
 
+void MajesticEngineOfGlory::notifyCurrentModule(const QString &msg)
+{
+	emit currentModule("Computing: " + msg);
+}
+
 void MajesticEngineOfGlory::run()
 {	
 	ResultKeeper* rkp  =  &ResultKeeper::getInstance();
 
 	if (selectModuleMenu->isModuleChecked(ECG_FILTRATION_MODULE))
 	{
+		notifyCurrentModule("ECG filtration");
 
 		ECGBaseline ecgBaseline =  ECGBaseline();
 		BaselineResult *bslResult = new BaselineResult();
@@ -41,6 +47,7 @@ void MajesticEngineOfGlory::run()
 
 		if (selectModuleMenu->isModuleChecked(R_PEEKS_DETECTION_MODULE))
 		{
+			notifyCurrentModule("RPeaks detection");
 			RPeaks rp = RPeaks();
 			rkp->setRPeaks(rp.compute(rkp));
 			RPeaksResult*r =  rkp->getRPeaks();
@@ -75,6 +82,7 @@ void MajesticEngineOfGlory::run()
 
 		if (selectModuleMenu->isModuleChecked(QRS_DETECTION_MODULE))
 		{
+			notifyCurrentModule("QRS detection");
 			Waves waves = Waves();
 			rkp->setWaves(waves.compute(rkp));
 
@@ -89,6 +97,7 @@ void MajesticEngineOfGlory::run()
 		std::cout << "artefakty" << qrsparam["Number of artifacts"] << endl;*/
 		if (selectModuleMenu->isModuleChecked(VCG_MODULE))
 		{
+			notifyCurrentModule("VCG");
 			VCGTLoop vcg = VCGTLoop();
 			rkp->setVCG(vcg.compute(rkp));
 		}
@@ -98,12 +107,14 @@ void MajesticEngineOfGlory::run()
 
 		if (selectModuleMenu->isModuleChecked(ATRIAL_FIBRILATION_MODULE))
 		{
+			notifyCurrentModule("Atrial fibrilation");
 			AtrFibr atrialFib = AtrFibr();
 			rkp->setAtrialFibrillation(atrialFib.compute(rkp));
 		}
 
 		if (selectModuleMenu->isModuleChecked(T_ALTERNANS_MODULE))
 		{
+			notifyCurrentModule("T alternans");
 			TWavesAlt tWaves = TWavesAlt();
 			rkp->setTWaves(tWaves.compute(rkp));
 			TWavesAltResult* tWavesRes = rkp->getTWaves();
