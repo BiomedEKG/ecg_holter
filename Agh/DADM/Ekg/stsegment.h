@@ -16,7 +16,7 @@
 using namespace std;
 
 
-class STSegment //: public AbstractModule
+class STSegment : AbstractModule<STsegmentResult>
 {
 	private:
 
@@ -65,8 +65,7 @@ class STSegment //: public AbstractModule
 	public:
   
 
-	STSegmentResult compute(map <string, vector<unsigned int> >*resultFromWaves, vector<double>* 
-		signal,vector<unsigned int>*Rpeaks,int Frequency);
+	STSegmentResult compute(map <string, vector<unsigned int> >*resultFromWaves, vector<double>* signal,vector<unsigned int>*Rpeaks,int Frequency);
 
 	
 															
