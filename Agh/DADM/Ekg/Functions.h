@@ -29,7 +29,8 @@ void HRV2_Poincare_Line_Visualization(QMap<QString,QVector<double>> sdPoints, Ma
 void HeartClass_Visualization(QMap<QString, QVector<double>> qrsClassificationMap, MajorPlot mp, QVector<double> FilteredSignal, QVector<double> TimeDomain);
 void HeartClass_Table_Visualization(QMap<QString,double> mapParameters,QVector<QString> qrsParams, MajorPlot mp);
 void T_Waves_Alt_Visualization(QVector<double> FilteredSignal, QVector<double> TimeDomain, QVector<double> PUPA, MajorPlot mp, QString Title);
-
-
+void Atrial_Fibr_Visualization(QVector<double> FilteredSignal, QVector<double> TimeDomain, QVector<double> PUPA, MajorPlot mp, QString Title);
+void Qt_Disp_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp);
+void St_Segment_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp);
 
 #endif

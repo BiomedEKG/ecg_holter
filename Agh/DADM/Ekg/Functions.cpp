@@ -39,26 +39,10 @@ void HRV1_Visualization1(QVector<double> Frequency, QVector<double> Power,  Majo
 }
 
 void HRV1_Table1_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp){
-	//QVector<QString> units(8);
-	//	units[0] = "ms" ;
-	//	units[1] = "ms" ;
-	//	units[2] = "ms" ;
-	//	units[3] = " " ;
-	//	units[4] = "%" ;
-	//	units[5] = "ms" ;
-	//	units[6] = "ms" ;
-	//	units[7] = "ms" ;
 	Table t(map, units, mp.plotarea->canvas());
 }
 
 void HRV1_Table2_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp){
-	//QVector<QString> units(6);
-	//	units[0] = "ms^2";
-	//	units[1] = "ms^2";
-	//	units[2] = "ms^2";
-	//	units[3] = "ms^2";
-	//	units[4] = "ms^2";
-	//	units[5] = "-" ;
 	Table t(map, units, mp.plotarea->canvas());
 }
 
@@ -147,3 +131,46 @@ void T_Waves_Alt_Visualization(QVector<double> FilteredSignal, QVector<double> T
 	ScatterPlot sp;
 	sp.ScatterPlotInit(8, Qt:: red, Time, Values, mp.plotarea,"T_Waves Alternens",QwtPlotCurve::CurveStyle::Dots, QwtSymbol::Style::Star2);
 }
+
+void Atrial_Fibr_Visualization(QVector<double> FilteredSignal, QVector<double> TimeDomain, QVector<double> PUPA, MajorPlot mp, QString Title){
+	ECGBaselineVisualization(FilteredSignal, TimeDomain, mp, Title );
+	QVector<double> Time;
+	QVector<double> Values;
+	for (int i = 0; i < PUPA.size(); ++i) {
+		Time[i] = TimeDomain[PUPA[i]];
+		Values[i] = FilteredSignal[PUPA[i]];
+	}
+	ScatterPlot sp;
+	sp.ScatterPlotInit(8, Qt:: red, Time, Values, mp.plotarea,"Atrial Fibrillation",QwtPlotCurve::CurveStyle::Dots, QwtSymbol::Style::Star2);
+}
+
+void Qt_Disp_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp){
+	Table t(map, units, mp.plotarea->canvas());
+}
+
+void St_Segment_Table_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp){
+	Table t(map, units, mp.plotarea->canvas());
+}
+
+//void St_Segment_Visualization(QVector<double> FilteredSignal, QVector<double> TimeDomain, map<string, vector<double>> STonset_end, MajorPlot mp, QString Title){
+//	ECGBaselineVisualization(FilteredSignal, TimeDomain, mp, Title );
+//	QVector<double> pupaX;
+//	
+//	for(int i = 0; i < STonset_end["QRSend"].size(); ++i){
+//		int aktualna=STonset_end["QRSend"][i];
+//		for(int j=0; aktualna<=STonset_end["Ton"][i]; ++j){
+//		pupaX[j]=STonset_end["QRSend"][i]+j;
+//		}
+//	}
+//	//STonset_end["QRSend"];
+//	//STonset_end["Ton"];
+//
+//	QVector<double> Time;
+//	QVector<double> Values;
+//	for (int i = 0; i < PUPA.size(); ++i) {
+//		Time[i] = TimeDomain[PUPA[i]];
+//		Values[i] = FilteredSignal[PUPA[i]];
+//	}
+//	ScatterPlot sp;
+//	sp.ScatterPlotInit(8, Qt:: red, Time, Values, mp.plotarea,"ST Segment",QwtPlotCurve::CurveStyle::Dots, QwtSymbol::Style::Star2);
+//}
