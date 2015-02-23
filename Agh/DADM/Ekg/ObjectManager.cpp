@@ -67,10 +67,10 @@ void ObjectManager::populate()
 	//Table t0(5,2,mp.plotarea->canvas());	
 
 	/***********************Histogram*****************************************************************************/
-	HistogramPlot hp;
+	/*HistogramPlot hp;
 	hp.HistogramPlotInit(hist,m_histogram.plotarea);
 	hp.setHistogramPlotArea(m_histogram,0.0,7.0,1.0,0.0,6.0,1.0,"RRx","value","sample Histogram");
-
+*/
 	//Table t(map, units, mp2.plotarea->canvas());
 }
 

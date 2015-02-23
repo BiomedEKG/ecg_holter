@@ -344,6 +344,21 @@
     <ClCompile Include="GeneratedFiles\Release\moc_MajesticEngineOfGlory.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="plot3D.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_plot3D.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_plot3D.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Table.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -375,6 +390,9 @@
     </CustomBuild>
     <CustomBuild Include="MajesticEngineOfGlory.h">
       <Filter>Modules\Engine</Filter>
+    </CustomBuild>
+    <CustomBuild Include="plot3D.h">
+      <Filter>Modules\VisualizationModule</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -560,6 +578,9 @@
     </ClInclude>
     <ClInclude Include="Export2Pdf.h">
       <Filter>Modules\I/O</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>Modules\VisualizationModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
