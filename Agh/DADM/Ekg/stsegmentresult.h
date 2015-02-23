@@ -2,6 +2,7 @@
 #define STSEGMENTRESULT_H
 
 
+//#include "stsegment.h"
 #include <vector>
 #include <iterator>
 #include <iostream>
@@ -10,42 +11,34 @@
 #include <algorithm>
 #include <string>
 #include <fstream>
+#include <AbstractResult.h>
 #include <map>
-#include "AbstractResult.h"
-
-
 using namespace std;
 
-class STSegmentResult: public AbstractResult 
+class STSegmentResult : public AbstractResult
+
 {
+
 	public:
+
 	STSegmentResult();
 	~STSegmentResult();
-	vector <string> OffsetLevel;
-	vector <string> ShapeST;
-	vector <string> TypeShapeST; 
-	//vector<unsigned int> QRSend;// pocz¹tek odcinka
-	//vector<unsigned int> Ton;// koniec odcnika ST
-	//vector<string> OffsetLevel;
-	//vector<string>ShapeST;
-	//vector <string> TypeShapeST;
-	vector< int> QRSend;
-	vector< int> Ton;
+	STSegmentResult * getResult();
+	map <string, vector<string>> GeSTSegmentResultData(void);
+	void SetSTSegmentResultData(map <string, vector<string>> ComputedData);
 
-	map<string, vector<string>> ShapeLine;
+	public:
+	map <string, vector<string>> STSegmentResultData;
+	
+	/*STSegmentResult(vector<string> OffsetLevel, vector<string>ShapeST, vector <string> TypeShapeST,
+		vector< int> QRSend,vector< int> Ton);*/
 
-	//ShapeLine["OffsetLevel"] = OffsetLevel;
-	//ShapeLine["ShapeST"] =  ShapeST;
-	//ShapeLine["TypeShapeST"] = TypeShapeST;
+	//map<string, vector<string>> ShapeLine;
+	//map<string, vector<unsigned int>> STonset_end;
+	
 
 
-	map<string, vector<unsigned int>> STonset_end;
-
-	/*STonset_end["QRSend"] = QRSend;
-	STonset_end["Ton"] = Ton;*/
-
-
-	STSegmentResult* getResult();
+	//STSegmentResult(map<string, vector<string>> ShapeLine, map<string, vector<unsigned int>> STonset_end);
 
 };
 
