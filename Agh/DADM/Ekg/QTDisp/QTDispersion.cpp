@@ -257,7 +257,7 @@
 		}
 
 		//Wyciąganie danych - pytanie czy dobre nazwy zmiennych odprowadzen? (tzn, e1, a1 itd....)
-/*
+
 		QTDispResult* compute(ResultKeeper* rkp) {
 			//Waves* resultWaves = rkp->getResultFromWaves();
 			//map<std::string, vector<unsigned int>*> resultWaves = rkp->getResultFromWaves();
@@ -277,9 +277,6 @@
             SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["e1"] );
             SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["e2"] );
             SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["e3"] );
-            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["a1"] );
-            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["a2"] );
-            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["a3"] );
             SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["v1"] );
             SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["v2"] );
             SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["v3"] );
