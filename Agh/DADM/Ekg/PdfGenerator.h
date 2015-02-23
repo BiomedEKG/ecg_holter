@@ -39,7 +39,7 @@ public:
 	bool addPlot(QwtPlot* ptrPlot, bool strechToPageWidth = false, bool discardLegend = false);
 	bool addPlots(QwtPlot* ptrPlotLeft, QwtPlot* ptrPlotRight);
 	bool addPlot(QwtPlot* ptrPlot, int plotWidth, directionOfCursorMove dir,  bool discardLegend = false);
-	bool addSubtitle(QString title);
+	bool addSubtitle(QString title, int fontSize = 18);
 	bool addTable(QStringList data, int colsNr, int width, directionOfCursorMove dir);
 };
 

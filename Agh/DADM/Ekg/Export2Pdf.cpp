@@ -8,6 +8,11 @@ void Export2Pdf(ResultKeeper* res, const char* filename){
 			QString pName = res->getInput()->GetPatientInfo();
 			pdfWriter.addSubtitle(pName);
 		}
+		//Rpeaks
+		if (res->getRPeaks() != NULL){
+			/*vector<unsigned int>* ptrRpeaks = &res->getRPeaks()->getRPeaks();
+			pdfWriter.drawRPeaks();*/
+		}
 		//WAVES
 		if (res->getWaves() != NULL){
 			//Tworzenie wykresu

@@ -232,7 +232,7 @@ bool PdfGenerator::addPlots(QwtPlot* ptrPlotLeft, QwtPlot* ptrPlotRight){
 	return true;
 }
 /*********************Adds title of the section******************************/
-bool PdfGenerator::addSubtitle(QString title){
+bool PdfGenerator::addSubtitle(QString title, int fontSize){
 	//If QPainter is not active
 	if (!docCreator.isActive())
 		if (!docCreator.begin(&pdfPrinter))

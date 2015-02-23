@@ -29,6 +29,16 @@ QStringList RaportGenerator::prepareDataForTable(const std::map<std::string, dou
 	}
 	return data;
 }
+//Rysuje sekcje dla Rpeaks -> ile Rpeaków wykryto + plot
+void RaportGenerator::drawRPeaks(QwtPlot* ptrPlot, int howManyRpeaks){
+	//Check whether at leat first object would fit in the page, so we can add subtitle 
+	if (isTooBig(ptrPlot->size().height() + subTitleHeight))
+		createNewPage();
+	//Add section
+	QString title = QString("R-peaks detection results. Detected: %1 r-peaks").arg(howManyRpeaks);
+	addSubtitle(title);
+	addPlot(ptrPlot,true);
+}
 //Rysuje sekcje dla HRV1 - wykres, a pod nimi 2 tabele (tabele obok siebie)
 void RaportGenerator::drawHRV1(QwtPlot* ptrPlot, QStringList hrvTimeData, QStringList hrvFreqzData){
 	//Check whether at leat first object would fit in the page, so we can add subtitle 

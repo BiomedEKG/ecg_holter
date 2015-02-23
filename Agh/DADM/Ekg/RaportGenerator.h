@@ -19,6 +19,7 @@ public:
 	QStringList prepareDataForTable(const std::map<std::string, double>& paramValue, const std::string units[]);
 	QStringList prepareDataForTable(const std::map<std::string, double>& paramValue);
 	//Funkcje to rysowania poszczegolnych sekcji 
+	void drawRPeaks(QwtPlot* ptrPlot, int howManyRpeaks);
 	void drawHRV1(QwtPlot* ptrPlot, QStringList hrvTime, QStringList hrvFreqz);
 	void drawHRV2(QStringList nonlinear, QwtPlot* pointCare, QwtPlot* hist);
 	void drawEDR(QwtPlot* ptrPlot);
