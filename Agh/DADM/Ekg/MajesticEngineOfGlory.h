@@ -1,12 +1,22 @@
 #pragma once
-#include <ResultKeeper.h>
+#include <QThread>
+#include "ResultKeeper.h"
 
-class MajesticEngineOfGlory
+
+class SelectModuleMenu;
+
+class MajesticEngineOfGlory : public QThread
 {
-public:
-	MajesticEngineOfGlory(void);
-	~MajesticEngineOfGlory(void);
+     Q_OBJECT
 
-	void tryMe();
+public:
+	MajesticEngineOfGlory();
+
+	void setSelectModuleMenu(SelectModuleMenu *smm);
+
+	void run();
+
+private:
+	SelectModuleMenu *selectModuleMenu;
 };
 

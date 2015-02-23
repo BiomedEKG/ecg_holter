@@ -51,7 +51,7 @@ RPeaksResult* RPeaks::compute(ResultKeeper *rkp){
 }
 
 std::vector<unsigned int> RPeaks::computePT(std::vector<double> signal, unsigned int sampling_frequency, unsigned int size){
-
+	cout << size;
     int window_width = 40;
 	PanTompkins PTobject = PanTompkins();
 	std::vector<double> derivative_data = PTobject.differentation(signal, size);

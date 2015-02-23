@@ -13,6 +13,7 @@ class QPushButton;
 class MainWidget;
 class ChannelsMenu;
 class SelectModuleMenu;
+class MajesticEngineOfGlory;
 
 
 class MainWindow : public QMainWindow
@@ -53,6 +54,7 @@ private:
 	QPushButton *computeButton;
 
 	QMap<QString, int> configTabsMap;
+	MajesticEngineOfGlory *engine;
 };
 
 #endif // MAINWINDOW_H

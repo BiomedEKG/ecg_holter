@@ -78,6 +78,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 	setCentralWidget(mainWidget);
 	setStatusBar(new QStatusBar(this));
+
+	engine = new MajesticEngineOfGlory();
+	engine->setSelectModuleMenu(selectModuleMenu);
 }
 
 QToolBar *MainWindow::createToolbar(SelectModuleMenu *selectModuleMenu)
@@ -118,11 +121,8 @@ void MainWindow::addConfigurationTab(MainWidget *mainWidget, QWidget *tabWidget,
 
 MainWindow::~MainWindow()
 {
-	//Input *inputHandler = ResultKeeper::getInstance().getInput();
-	//if (inputHandler->inputIsOpen())
-	//{
-	//	inputHandler->Close();
-	//}
+	Input *inputHandler = ResultKeeper::getInstance().getInput();
+	inputHandler->Close();
 }
 
 void MainWindow::openFile()
@@ -216,30 +216,9 @@ void MainWindow::openFile()
 
 void MainWindow::compute()
 {
-	qDebug() << "PLOT_ECG_MODULE" << selectModuleMenu->isModuleChecked(PLOT_ECG_MODULE);
-	qDebug() << "ECG_FILTRATION_MODULE" << selectModuleMenu->isModuleChecked(ECG_FILTRATION_MODULE);
-	qDebug() << "R_PEEKS_DETECTION_MODULE" << selectModuleMenu->isModuleChecked(R_PEEKS_DETECTION_MODULE);
-	qDebug() << "QRS_DETECTION_MODULE" << selectModuleMenu->isModuleChecked(QRS_DETECTION_MODULE);
-	qDebug() << "EDR_EXTRACTION_MODULE" << selectModuleMenu->isModuleChecked(EDR_EXTRACTION_MODULE);
-	qDebug() << "QRS_ANALYSIS_MODULE" << selectModuleMenu->isModuleChecked(QRS_ANALYSIS_MODULE);
-	qDebug() << "QRS_CLASSIFICATION_MODULE" << selectModuleMenu->isModuleChecked(QRS_CLASSIFICATION_MODULE);
-	qDebug() << "ST_ANALYSIS_MODULE" << selectModuleMenu->isModuleChecked(ST_ANALYSIS_MODULE);
-	qDebug() << "T_ALTERNANS_MODULE" << selectModuleMenu->isModuleChecked(T_ALTERNANS_MODULE);
-	qDebug() << "QT_LENGTH_T_ANALYSIS_MODULE" << selectModuleMenu->isModuleChecked(QT_LENGTH_T_ANALYSIS_MODULE);
-	qDebug() << "HRV_MODULE" << selectModuleMenu->isModuleChecked(HRV_MODULE);
-	qDebug() << "FREQ_AND_TIME_DOMAIN_ANALYSIS_MODULE" << selectModuleMenu->isModuleChecked(FREQ_AND_TIME_DOMAIN_ANALYSIS_MODULE);
-	qDebug() << "DFA_MODULE" << selectModuleMenu->isModuleChecked(DFA_MODULE);
-	qDebug() << "GEOMETRIC_ANALYSIS_MODULE" << selectModuleMenu->isModuleChecked(GEOMETRIC_ANALYSIS_MODULE);
-	qDebug() << "HRT_MODULE" << selectModuleMenu->isModuleChecked(HRT_MODULE);
-	qDebug() << "VCG_MODULE" << selectModuleMenu->isModuleChecked(VCG_MODULE);
-	qDebug() << "SLEEP_APNEA_MODULE" << selectModuleMenu->isModuleChecked(SLEEP_APNEA_MODULE);
-	qDebug() << "ATRIAL_FIBRILATION_MODULE" << selectModuleMenu->isModuleChecked(ATRIAL_FIBRILATION_MODULE);
-	qDebug() << "ECTOPIC_BEAT_MODULE" << selectModuleMenu->isModuleChecked(ECTOPIC_BEAT_MODULE);
-
 	//Obliczenia
 	qDebug() << "Obliczam...";
-	MajesticEngineOfGlory eng = MajesticEngineOfGlory();
-	eng.tryMe();
+	engine->start();
 	qDebug() << "Koniec obliczen";
 }
 

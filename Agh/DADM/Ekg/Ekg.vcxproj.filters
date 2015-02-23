@@ -338,6 +338,12 @@
     <ClCompile Include="Export2Pdf.cpp">
       <Filter>Modules\I/O</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_MajesticEngineOfGlory.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_MajesticEngineOfGlory.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -366,6 +372,9 @@
     </CustomBuild>
     <CustomBuild Include="gui\SleepApneaWidget.h">
       <Filter>Modules\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MajesticEngineOfGlory.h">
+      <Filter>Modules\Engine</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -470,9 +479,6 @@
     </ClInclude>
     <ClInclude Include="WavesResult.h">
       <Filter>Modules\Waves</Filter>
-    </ClInclude>
-    <ClInclude Include="MajesticEngineOfGlory.h">
-      <Filter>Modules\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Hrv2.h">
       <Filter>Modules\HRV2</Filter>

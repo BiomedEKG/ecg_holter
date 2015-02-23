@@ -113,8 +113,6 @@ Input* ResultKeeper::getInput()
 	 this->tWaves = tWaves;
  }
 
-	
-
 
  void ResultKeeper::setRPeaks(RPeaksResult* rPeaks) {
 	this->rPeaks = rPeaks;
