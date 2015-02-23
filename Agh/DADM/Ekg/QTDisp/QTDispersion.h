@@ -11,19 +11,16 @@
 
 using namespace std;
 
-		class Parameters {};
-
-		
-
 		class qt_disp : public AbstractModule<QTDisp>
 		{
 
 		public:
-			virtual QTDisp* compute(ResultKeeper* rkp) const override;
+			QTDispResult* compute(ResultKeeper* rkp) override;
 			qt_disp();
-			QTDisp* run(unsigned int channel, map<std::string, vector<unsigned int>*> &wavesResult,vector<double> *signal, int samplingFrequency) const;
+			QTDispResult* run(unsigned int,vector<int>,vector<int>, vector < vector < double > >, int) const;
+			//QTDisp* run(unsigned int channel, map<std::string, vector<unsigned int>*> &wavesResult,vector<double> *signal, int samplingFrequency) const;
 			~qt_disp();
-			
+            unsigned int channelsNumber;
 
 
 		private:
@@ -34,7 +31,7 @@ using namespace std;
 			unsigned int mspSearchVectorLength;
 			unsigned int tPeak;
 			unsigned int msp;
-			unsigned int channelsNumber;
+
 			unsigned int qtDistanceMeanForSingleChannel;
 			unsigned int iqrDispersion;
 			unsigned int qtMeanOneChannel;
@@ -55,6 +52,7 @@ using namespace std;
 			vector<double> *parabolaCoefficientsPointer;
 			vector<vector<double> > *filteredDataPointerAllChannels;
 
+
 			void diff(const vector<double>*, vector<double>*);
 			void abs(vector<double>*, vector<double>*);
 			unsigned int min(vector<double>*);
@@ -66,5 +64,5 @@ using namespace std;
 		};
 
 
-//#endif
+#endif
 

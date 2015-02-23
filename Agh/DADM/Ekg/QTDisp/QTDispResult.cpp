@@ -2,31 +2,28 @@
 #include "ReturnType.h"
 #include <vector>
 
-QTDisp::QTDisp(void)
+QTDispResult::QTDispResult(void)
 {
 
 }
 
-QTDisp::~QTDisp(void)
+QTDispResult::~QTDispResult(void)
 {
 
 }
 
+QTDisp::QTDisp(unsigned int o)
+{
+	_iqrDispersion = o;
+}
 
-QTDisp* QTDisp:: getResult() {
-					QTDisp* o = new QTDisp();
-					o->setDispersion(this->iqrDispersion);
+QTDispResult* QTDispResult:: getResult() {
+					QTDispResult *o = new QTDispResult();
+					o->_iqrDispersion=this->_iqrDispersion;
 					o->paramType = "QTDisp";
 					return o;
 				};
-				
 
 
 
 
-
- 
-void QTDisp::QTDisp(unsigned int o)
-{
-	this->QTDispResult = o;
-}

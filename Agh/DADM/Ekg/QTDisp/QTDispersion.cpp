@@ -1,4 +1,6 @@
-﻿#include "QTDISP.h"
+﻿#include "QTDispersion.h"
+#include "QTDispResult.h"
+#include "ResultKeeper.h"
 
 
 
@@ -259,70 +261,68 @@
 			return IQR;
 		}
 
-		//Wyciąganie danych - pytanie czy dobre nazwy zmiennych odprowadzen? (tzn, i, ii, aVr itd....)
-		
-		QTDisp* compute(ResultKeeper* rkp) {
+		//Wyciąganie danych - pytanie czy dobre nazwy zmiennych odprowadzen? (tzn, e1, a1 itd....)
+
+		QTDispResult* compute(ResultKeeper* rkp) {
 			//Waves* resultWaves = rkp->getResultFromWaves();
 			//map<std::string, vector<unsigned int>*> resultWaves = rkp->getResultFromWaves();
 			//this->QRSonset_=(*resultWaves)["QRS_ONSET"];
-			//this->tPeak=(*resultWaves)["T_END"]; 
-			vector<double> QRSonset = rkp->QRS_ONSET; 
-			vector<double> tPeak = rkp->T_END; 
+			//this->tPeak=(*resultWaves)["T_END"];
+			vector<int> QRSonset = rkp->getWaves()->getResult()->GetWavesResultData()["QRS_ONSET"];
+			vector<int> tPeak = rkp->getWaves()->getResult()->GetWavesResultData()["T_END"];
 
 
 			//ECGBaseline* resultECGBaseline = rkp->getResultFrom_ECGBaseline();
 			//this->Signal= rkp->getResultFrom_ECGBaseline();
 
-			const unsigned int samplingFrequency = rkp->samplingFrequency;
+			const unsigned int samplingFrequency = 360;
 
-			vector<double> Signal1 = rkp->i; 
-			vector<double> Signal2 = rkp->ii;
-			vector<double> Signal3 = rkp->iii;
-			vector<double> Signal4 = rkp->aVf;
-			vector<double> Signal5 = rkp->aVr;
-			vector<double> Signal6 = rkp->aVl;
-			vector<double> Signal7 = rkp->v1;
-			vector<double> Signal8 = rkp->v2;
-			vector<double> Signal5 = rkp->v3;
-			vector<double> Signal6 = rkp->v4;
-			vector<double> Signal7 = rkp->v5;
-			vector<double> Signal8 = rkp->v6;
+            vector < vector < double > > SignalsVector;
+
+            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["e1"] );
+            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["e2"] );
+            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["e3"] );
+            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["a1"] );
+            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["a2"] );
+            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["a3"] );
+            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["v1"] );
+            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["v2"] );
+            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["v3"] );
+            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["v4"] );
+            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["v5"] );
+            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["v6"] );
+
+			//vector<double> Signal1 = rkp->getECGBaseline()->getSignalMap()["e1"]; takie cos bylo wczesniej
+
+			//run(SignalsVector.size(),QRSonset,tPeak,SignalsVector,samplingFrequency);
+
+			QTDispResult qtResult = run(SignalsVector.size(),QRSonset,tPeak,SignalsVector,samplingFrequency);
+
+            return qtResult.getResult();
 
 		}
 		/*
 		QTDisp qt_disp:: compute(map <string, vector<unsigned int> > *resultFromWaves, vector<double>*signal,int Frequency) {
-				this->Signal= signal;	
+				this->Signal= signal;
 				this->samplingFrequency=Frequency;
-	
-				this->QRSonset_= (*resultFromWaves)["QRS_ONSET"];  
-				this->tPeak=(*resultFromWaves)["T_END"]; 
+
+				this->QRSonset_= (*resultFromWaves)["QRS_ONSET"];
+				this->tPeak=(*resultFromWaves)["T_END"];
 		}
 		*/
 
-		QTDisp* qt_disp :: run(unsigned int channel, map<std::string, vector<unsigned int>*> &wavesResult,vector<double> *signal, int samplingFrequency) const
+		QTDispResult* qt_disp :: run(unsigned int channel,vector<int> QRSonset,vector<int> tPeak, vector < vector < double > >  *SignalsVector, int samplingFrequency) const
 		{
 
 			qt_disp* QTDISP = new qt_disp();
-			const unsigned int samplingFrequency = this->samplingFrequency;
 
-			
-			const vector<double>* input1 = this->Signal1;
-			const vector<double>* input2 = this->Signal2;
-			const vector<double>* input3 = this->Signal3;
-			const vector<double>* input4 = this->Signal4;
-			const vector<double>* input5 = this->Signal5;
-			const vector<double>* input6 = this->Signal6;
-			const vector<double>* input7 = this->Signal7;
-			const vector<double>* input8 = this->Signal8;
-			const vector<double>* input9 = this->Signal9;
-			const vector<double>* input10 = this->Signal10;
-			const vector<double>* input11 = this->Signal11;
-			const vector<double>* input12 = this->Signal12;
-		
+			//const vector<double>* input1 = this->Signal1; to bylo kiedys
+
+
 			//const map<std::string, vector<unsigned int>*> &inputwavesMap = wavesResult;
-			const vector<unsigned int> &qrsOnset_ =this->QRSonset_; // (*inputwavesMap)["QRS_ONSET"];
-			const vector<unsigned int> &tEndGlobal_ =this->tPeak; // (*inputwavesMap)["T_END"];
-			
+			const vector<unsigned int> &qrsOnset_ = QRSonset_; // (*inputwavesMap)["QRS_ONSET"];
+			const vector<unsigned int> &tEndGlobal_ = tPeak; // (*inputwavesMap)["T_END"];
+
 
 			unsigned int sizeQrsOnsetVector = qrsOnset_.size();
 			unsigned int sizeTEndGlobalVector = tEndGlobal_.size();
@@ -348,21 +348,13 @@
 				qrsOnset = vector<unsigned int> (qrsOnset_.begin(), qrsOnset_.end());
 				tEndGlobal = vector<unsigned int> (tEndGlobal_.begin(), tEndGlobal_.end());
 			}
-
+            QTDISP.channelsNumber = channel;
 			vector<vector<double> > filteredDataAllChannels(QTDISP.channelsNumber);
 			QTDISP.filteredDataPointerAllChannels = &filteredDataAllChannels;
-			QTDISP.filteredDataPointerAllChannels->at(0) = *input1;
-			QTDISP.filteredDataPointerAllChannels->at(1) = *input2;
-			QTDISP.filteredDataPointerAllChannels->at(2) = *input3;
-			QTDISP.filteredDataPointerAllChannels->at(3) = *input4;
-			QTDISP.filteredDataPointerAllChannels->at(4) = *input5;
-			QTDISP.filteredDataPointerAllChannels->at(5) = *input6;
-			QTDISP.filteredDataPointerAllChannels->at(6) = *input7;
-			QTDISP.filteredDataPointerAllChannels->at(7) = *input8;
-			QTDISP.filteredDataPointerAllChannels->at(8) = *input9;
-			QTDISP.filteredDataPointerAllChannels->at(9) = *input10;
-			QTDISP.filteredDataPointerAllChannels->at(10) = *input11;
-			QTDISP.filteredDataPointerAllChannels->at(11) = *input12;
+			for ( int i =0; i < channel; i++) {
+                QTDISP.filteredDataPointerAllChannels->at(i) = SignalsVector.at(i);
+			}
+			//QTDISP.filteredDataPointerAllChannels->at(0) = *input1; tak bylo dla wszystkich inputow
 
 			QTDISP.tPeakSearchRange = 0.150*samplingFrequency;
 			QTDISP.intervalBeforeTEndGlobal = 0.080*samplingFrequency;
@@ -488,7 +480,7 @@
 			QTDISP.sort(QTDISP.qtDistancePointerMeanForAllChannels);
 			QTDISP.iqrDispersion = QTDISP.IQR(QTDISP.qtDistancePointerMeanForAllChannels);
 
-			return new QTDisp(QTDISP.iqrDispersion);
+			return new QTDispResult(QTDISP.iqrDispersion);
 		}
 
 
