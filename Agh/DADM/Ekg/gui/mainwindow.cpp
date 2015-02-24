@@ -265,7 +265,13 @@ void MainWindow::generateReport()
 	r.drawHRV2(data, ObjectManager::getInstance()->wykres(), ObjectManager::getInstance()->wykres());
 	r.drawHRV1(ObjectManager::getInstance()->histogram(), data, data);*/
 	ResultKeeper* rkp = &ResultKeeper::getInstance();
-	Export2Pdf(rkp, filename.toUtf8().constData());
+	const char* msg = Export2Pdf(rkp, filename.toUtf8().constData());
+	QMessageBox msgBox;
+	msgBox.setText(msg);
+	msgBox.setDefaultButton(QMessageBox::Ok);
+	msgBox.exec();
+
+
 }
 
 void MainWindow::addGraph(QWidget *graph, const QString &tabName)

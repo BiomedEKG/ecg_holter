@@ -16,7 +16,6 @@
 			WAVES,
 			SLEEP_APNEA,
 			QT_DISP,
-			INPUT,
 			RAPORT
 
 	}; 

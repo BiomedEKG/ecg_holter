@@ -1,6 +1,6 @@
 #include "Export2Pdf.h" 
 
-void Export2Pdf(ResultKeeper* res, const char* filename){
+const char* Export2Pdf(ResultKeeper* res, const char* filename){
 	try{
 		RaportGenerator pdfWriter(filename);
 		//INPUT
@@ -10,8 +10,10 @@ void Export2Pdf(ResultKeeper* res, const char* filename){
 		}
 		//Rpeaks
 		if (res->getRPeaks() != NULL){
-			/*vector<unsigned int>* ptrRpeaks = &res->getRPeaks()->getRPeaks();
+			/*MajorPlot mp; 
+			RPeaksVisualization(res->getECGBaseline()->filteredSignal,);
 			pdfWriter.drawRPeaks();*/
+
 		}
 		//WAVES
 		if (res->getWaves() != NULL){
@@ -27,13 +29,15 @@ void Export2Pdf(ResultKeeper* res, const char* filename){
 			QStringList hrvFreqz = pdfWriter.prepareDataForTable(res->getHRV1()->prvfreqParameters, tabfreq);
 			//Tworzenie wykresu
 			MajorPlot mp;
-			
+			HRV1_Visualization1(res->getHRV1()->prvfrequency, res->getHRV1()->prvpower, mp);
 			pdfWriter.drawHRV1(mp.plotarea,hrvTime, hrvFreqz);
 		}
 		//HRV2
 		if (res->getHrv2() != NULL){
 			MajorPlot mpHist; 
 			MajorPlot mpPointCare; 
+			HRV2_Poincare_Visualization(res->getHrv2()->poincareResult, mpPointCare);
+			HRV2_Hist_Visualization(res->getHrv2()->histResult, mpHist);
 			//Tworzenie tabeli 
 			std::string units[] = {"-", "-", "ms", "-", "ms", "ms"}; 
 			QStringList data = pdfWriter.prepareDataForTable(res->getHrv2()->paramsResult, units);
@@ -78,6 +82,8 @@ void Export2Pdf(ResultKeeper* res, const char* filename){
 
 	}
 	catch (std::exception &e){
-		e.what();
+		const char* msg = e.what();
 	}
+	const char* msg = "Raport generation finished.";
+	return msg;
 }

@@ -16,13 +16,13 @@ using namespace std;
 
 
 void ECGBaseline_Visualization(vector<double> FilteredSignal, vector<double> TimeDomain, MajorPlot mp, QString Title);
-void RPeaksVisualization(vector<double> FilteredSignal, vector<double> TimeDomain, vector<double> RPeaks, MajorPlot mp, QString Title);
+void RPeaksVisualization(vector<double>& FilteredSignal, vector<double> TimeDomain, vector<double> RPeaks, MajorPlot mp, QString Title);
 void SIG_EDR_Visualization(vector<double> Edr, vector<double> Xaxis, MajorPlot mp);
 void HRV1_Visualization1(vector<double> Frequency, vector<double> Power,  MajorPlot mp);
 void HRV1_Table1_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp);
 void HRV1_Table2_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp);
 void VCG_Visualization(map<char,vector<double>> XYZ);
-void HRV2_Poincare_Visualization(map<char,vector<double>> p, MajorPlot mp);
+void HRV2_Poincare_Visualization(map<string,vector<double>> p, MajorPlot mp);
 void HRV2_Hist_Visualization(map<string, vector<double>> h, MajorPlot mp);
 void HRV2_Table_Visualization(QMap<QString,double> params, QVector<QString> units, MajorPlot mp);
 void HRV2_Poincare_Line_Visualization(map<string,vector<double>> sdPoints, MajorPlot mp);

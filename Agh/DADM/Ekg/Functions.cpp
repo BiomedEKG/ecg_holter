@@ -13,7 +13,7 @@ void ECGBaselineVisualization(vector<double> FilteredSignal, vector<double> Time
 	cp.setCurvePlotArea(mp, 0, 60.0, 10.0, -2.0,2.0,0.5, "Time [s]", "Amplitude [mV]", "ECG");
 }
 
-void RPeaksVisualization(vector<double> FilteredSignal, vector<double> TimeDomain, vector<double> RPeaks, MajorPlot mp, QString Title){
+void RPeaksVisualization(vector<double>& FilteredSignal, vector<double> TimeDomain, vector<double> RPeaks, MajorPlot mp, QString Title){
 	QVector<double> QRPeaks = QVector<double>::fromStdVector(RPeaks);
 	ECGBaselineVisualization(FilteredSignal, TimeDomain, mp, Title );
 	QVector<double> Time;
@@ -60,9 +60,9 @@ QVector<double> QZ = QVector<double>::fromStdVector(XYZ['Z']);
 	p.show();
 }
 
-void HRV2_Poincare_Visualization(map<char,vector<double>> p, MajorPlot mp){
-QVector<double> p1 = QVector<double>::fromStdVector(p['x1']);
-QVector<double> p2 = QVector<double>::fromStdVector(p['x2']);
+void HRV2_Poincare_Visualization(map<string,vector<double>> p, MajorPlot mp){
+QVector<double> p1 = QVector<double>::fromStdVector(p["x1"]);
+QVector<double> p2 = QVector<double>::fromStdVector(p["x2"]);
 	ScatterPlot sp;
 	sp.ScatterPlotInit(8, Qt:: red, p1 , p2, mp.plotarea," ",QwtPlotCurve::CurveStyle::Dots, QwtSymbol::Style::Star2);
 	sp.setScatterPlotArea(mp,400, 1000, 200, 400, 1000, 200, "RRn [ms]", "RRn+1 [ms]", "Poincare Plot");
