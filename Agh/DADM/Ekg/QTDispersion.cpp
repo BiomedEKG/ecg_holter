@@ -310,7 +310,7 @@
             QTDISP->channelsNumber = channel;
 			vector<vector<double> > filteredDataAllChannels(QTDISP->channelsNumber);
 			QTDISP->filteredDataPointerAllChannels = &filteredDataAllChannels;
-			for ( int i =0; i < channel; i++) {
+			for ( int i =0; i < QTDISP->channelsNumber; i++) {    /////zmiana channel na chanelsNumber!!!!!!!!!!!!!!!!!!!!!!!!!!11
                 QTDISP->filteredDataPointerAllChannels->at(i) = SignalsVector.at(i);
 			}
 			//QTDISP.filteredDataPointerAllChannels->at(0) = *input1; tak bylo dla wszystkich inputow
@@ -438,12 +438,13 @@
 			qtDistanceMeanForAllChannels_COPY = qtDistanceMeanForAllChannels;
 			QTDISP->sort(QTDISP->qtDistancePointerMeanForAllChannels);
 			QTDISP->iqrDispersion = QTDISP->IQR(QTDISP->qtDistancePointerMeanForAllChannels);
-
+			cout << "iqrDispersion =" << QTDISP->iqrDispersion << "\n\n\n\n\n";
 			return new QTDispResult(QTDISP->iqrDispersion);
 		}
 
 
 			QTDispResult* qt_disp:: compute(ResultKeeper* rkp) {
+				cout << "QTDISP\n\n\n\n" <<endl;
 			//Waves* resultWaves = rkp->getResultFromWaves();
 			//map<std::string, vector<unsigned int>*> resultWaves = rkp->getResultFromWaves();
 			//this->QRSonset_=(*resultWaves)["QRS_ONSET"];
@@ -461,7 +462,6 @@
 
             SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["e1"] );
             SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["e2"] );
-            SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["e3"] );
             SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["v1"] );
             SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["v2"] );
             SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["v3"] );
@@ -469,12 +469,16 @@
             SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["v5"] );
             SignalsVector.push_back( rkp->getECGBaseline()->getSignalMap()["v6"] );
 
+			int chanel= SignalsVector.size(); ////nowe
+
+
+
 			//vector<double> Signal1 = rkp->getECGBaseline()->getSignalMap()["e1"]; takie cos bylo wczesniej
 
 			//run(SignalsVector.size(),QRSonset,tPeak,SignalsVector,samplingFrequency);
 			qt_disp q = qt_disp();
-			q.runF(SignalsVector.size(),QRSonset,tPeak,SignalsVector,samplingFrequency);
-			QTDispResult *qtResult = q.runF(SignalsVector.size(),QRSonset,tPeak,SignalsVector,samplingFrequency);
+			q.runF(chanel,QRSonset,tPeak,SignalsVector,samplingFrequency);
+			QTDispResult *qtResult = q.runF(chanel,QRSonset,tPeak,SignalsVector,samplingFrequency);
 
             return qtResult->getResult();
 

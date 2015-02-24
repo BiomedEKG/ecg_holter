@@ -13,7 +13,7 @@ ResultKeeper::ResultKeeper()
 	//this->rawSignalMV=0;
 	//this->sigEDR=0;
 	//this->waves=0;
-	this->qtDisp = 30;
+	
 }
 
 ResultKeeper::~ResultKeeper()
@@ -175,6 +175,14 @@ void ResultKeeper::setStSegmentResult(STSegmentResult *st) {
 
 void ResultKeeper:: setVCG(ResultVCG* vcg) {
 	this->vcgResult = vcg;
+}
+void ResultKeeper:: setQTDispersion(QTDispResult* qtDisp) {
+	this->qtDisp = qtDisp;
+}
+
+
+QTDispResult* ResultKeeper::getQTDispersion() {
+	return qtDisp;
 }
 
 ResultVCG* ResultKeeper:: getVCG() {
