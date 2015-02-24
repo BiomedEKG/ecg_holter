@@ -1,4 +1,4 @@
-﻿#include "stsegment.h"
+﻿#include <stsegment.h>
 #include <ResultKeeper.h>
 //#include "stdafx.h"
 #include <math.h>
@@ -6,12 +6,12 @@
 // czêstotliwoœæ w Hercach
 vector< int> STSegment:: computeJ20  ( )
 {
-	int ms20= (double)(Frequency*0.001*20);
-	//int ms20= 2;
+	//int ms20= (double)(Frequency*0.001*20);
+	int ms20= 2;
 	
 	vector < int> J20;
 	
-	for(int i=0; i<50;i++)
+	for(int i=0; i<SizeVector;i++)
 	{
 		J20.push_back(QRSend[i]+ms20);
 	}
@@ -23,7 +23,7 @@ vector<double> STSegment:: computeSlope (vector<int> TE)
 {
 	vector <double> Slope;
 	
-	for(int i=0; i<50;i++)
+	for(int i=0; i<SizeVector;i++)
 	{
 		Slope.push_back((Signal[TE[i]]-Signal[J20[i]])/(TE[i]-J20[i]));		
 	}
@@ -39,7 +39,7 @@ vector<int> STSegment :: computeMaxDistanceIndex (vector <double> Slope,  vector
 	
 	vector <int> MaxDistanceIndex;
 	
-	for(int i=0; i<TE.size(); i++)
+	for(int i=0; i<SizeVector; i++)
 	{
 		vector <double> Distance;
 		
@@ -203,7 +203,8 @@ void STSegment :: CorrectSize()
 	Size.push_back(QRSend.size());
 	Size.push_back(Tpeak.size());
 	Size.push_back(Rpeak.size());
-	SizeVector=*min_element(begin(Size), end(Size));
+	SizeVector=*min_element(begin(Size), end(Size))-1;
+	//SizeVector=2;
 }
 
 STSegmentResult* STSegment:: compute(ResultKeeper* rkp)
@@ -213,7 +214,9 @@ STSegmentResult* STSegment:: compute(ResultKeeper* rkp)
 	
 	this->QRSonset= rkp->getWaves()->GetWavesResultData()["QRS_ONSET"]; // zmieniæ nazwe klucza jeœli inna !!!
 	this->QRSend = rkp->getWaves()->GetWavesResultData()["QRS_END"];  
-	this->Tpeak = rkp->getWaves()->GetWavesResultData()["T_PEAKS"]; 
+	//this->Tpeak = rkp->getWaves()->GetWavesResultData()["T_PEAKS"]; 
+	this->Tpeak = rkp->getWaves()->GetWavesResultData()["T_PEAK"];
+
 	this->Rpeak = rkp->getRPeaks()->getRPeaks();
 	k1offset=-0.1;
 	k2offset=0.1;
