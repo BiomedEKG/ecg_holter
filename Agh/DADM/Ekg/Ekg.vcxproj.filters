@@ -45,9 +45,6 @@
     <Filter Include="Modules\GUI">
       <UniqueIdentifier>{a71780aa-fa53-457b-b580-e7882ac02e90}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Common">
-      <UniqueIdentifier>{e2e2d8d4-0bd2-49db-a31a-a93e96777b82}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Modules\I/O">
       <UniqueIdentifier>{53e62d74-8ba7-4f63-91c0-5d59db56fec2}</UniqueIdentifier>
     </Filter>
@@ -97,9 +94,6 @@
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
       <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectManager.cpp">
-      <Filter>Modules\Common</Filter>
     </ClCompile>
     <ClCompile Include="MajorPlot.cpp">
       <Filter>Modules\VisualizationModule</Filter>
@@ -359,6 +353,12 @@
     <ClCompile Include="Table.cpp">
       <Filter>Modules\VisualizationModule</Filter>
     </ClCompile>
+    <ClCompile Include="QTDispersion.cpp">
+      <Filter>Modules\QTDisp</Filter>
+    </ClCompile>
+    <ClCompile Include="QTDispResult.cpp">
+      <Filter>Modules\QTDisp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -410,9 +410,6 @@
     </ClInclude>
     <ClInclude Include="Table.h">
       <Filter>Modules\VisualizationModule</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectManager.h">
-      <Filter>Modules\Common</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Modules\I/O</Filter>
@@ -581,6 +578,12 @@
     </ClInclude>
     <ClInclude Include="Functions.h">
       <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="QTDispersion.h">
+      <Filter>Modules\QTDisp</Filter>
+    </ClInclude>
+    <ClInclude Include="QTDispResult.h">
+      <Filter>Modules\QTDisp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

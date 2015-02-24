@@ -26,11 +26,28 @@ void MajorPlot:: PlotPickerInit(){
 	picker->setRubberBand(QwtPicker::RubberBand::CrossRubberBand);
 }
 
+void MajorPlot:: PlotPickerOff(){
+	picker->setEnabled(false);
+}
+
 void MajorPlot:: PlotZoomerInit(){
+	zoomer->setEnabled(true);
 	zoomer->setRubberBandPen(QColor(Qt::red));
 	zoomer->setTrackerPen(QColor(Qt::white));
 	zoomer->initMousePattern(2);
 	zoomer->setMousePattern(QwtEventPattern::MouseSelect1, Qt::LeftButton);
 	zoomer->setZoomBase(false);
 	zoomer->setMaxStackDepth(3);
+}
+
+void MajorPlot:: PlotZoomerOff(){
+	zoomer->setEnabled(false);
+}
+
+void MajorPlot:: PlotPannerInit(){
+	panner->setEnabled(true);
+}
+
+void MajorPlot:: PlotPannerOff(){
+	panner->setEnabled(false);
 }

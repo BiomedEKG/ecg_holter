@@ -1,6 +1,4 @@
-
 #include "Functions.h"
-
 
 #include <iostream>
 #include <sstream>
@@ -190,3 +188,30 @@ void St_Segment_Table_Visualization(QMap<QString, double> map,QVector<QString> u
 //	ScatterPlot sp;
 //	sp.ScatterPlotInit(8, Qt:: red, Time, Values, mp.plotarea,"ST Segment",QwtPlotCurve::CurveStyle::Dots, QwtSymbol::Style::Star2);
 //}
+
+
+//funkcje do przycisków zoom,pick i pan:
+
+void ZoomIn(MajorPlot mp){
+	mp.PlotZoomerInit();
+}
+
+void ZoomOut(MajorPlot mp){
+	mp.PlotZoomerOff();
+}
+
+void PickerOn(MajorPlot mp){
+	mp.PlotPickerInit();
+}
+
+void PickerOff(MajorPlot mp){
+	mp.PlotPickerOff();
+}
+
+void PannerOn(MajorPlot mp){
+	mp.PlotPannerInit();
+}
+
+void PannerOff(MajorPlot mp){
+	mp.PlotPannerOff();
+}

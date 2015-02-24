@@ -14,8 +14,7 @@
 #include <vector>
 using namespace std; 
 
-
-void ECGBaseline_Visualization(vector<double> FilteredSignal, vector<double> TimeDomain, MajorPlot mp, QString Title);
+void ECGBaselineVisualization(vector<double> FilteredSignal, vector<double> TimeDomain, MajorPlot mp, QString Title);
 void RPeaksVisualization(const vector<double>& FilteredSignal, const vector<double>& TimeDomain, const vector<unsigned int>& RPeaks, MajorPlot mp, QString Title);
 void SIG_EDR_Visualization(vector<double> Edr, vector<double> Xaxis, MajorPlot mp);
 void HRV1_Visualization1(vector<double> Frequency, vector<double> Power,  MajorPlot mp);
@@ -32,5 +31,12 @@ void T_Waves_Alt_Visualization(vector<double> FilteredSignal, vector<double> Tim
 void Atrial_Fibr_Visualization(vector<double> FilteredSignal, vector<double> TimeDomain, vector<double> PUPA, MajorPlot mp, QString Title);
 void Qt_Disp_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp);
 void St_Segment_Table_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp);
+
+void ZoomIn(MajorPlot mp);
+void ZoomOut(MajorPlot mp);
+void PickerOn(MajorPlot mp);
+void PickerOff(MajorPlot mp);
+void PannerOn(MajorPlot mp);
+void PannerOff(MajorPlot mp);
 
 #endif
