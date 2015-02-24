@@ -29,7 +29,11 @@ public:
 	MajorPlot();  //konstruktor domyœlny
 	void PlotAreaInit(double xMin, double xMax, double xStep, double yMin, double yMax, double yStep, QString xTitle, QString yTitle, QString plotTitle );
 	void PlotPickerInit();
+	void PlotPickerOff();
 	void PlotZoomerInit();
+	void PlotZoomerOff();
+	void PlotPannerInit();
+	void PlotPannerOff();
 };
 
 #endif

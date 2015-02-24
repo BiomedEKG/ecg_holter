@@ -33,4 +33,11 @@ void Atrial_Fibr_Visualization(vector<double> FilteredSignal, vector<double> Tim
 void Qt_Disp_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp);
 void St_Segment_Table_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp);
 
+void ZoomIn(MajorPlot mp);
+void ZoomOut(MajorPlot mp);
+void PickerOn(MajorPlot mp);
+void PickerOff(MajorPlot mp);
+void PannerOn(MajorPlot mp);
+void PannerOff(MajorPlot mp);
+
 #endif
