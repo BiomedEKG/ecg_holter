@@ -85,9 +85,17 @@ void MajesticEngineOfGlory::run()
 			notifyCurrentModule("QRS detection");
 			Waves waves = Waves();
 			rkp->setWaves(waves.compute(rkp));
+			/*HeartClass heartClass;
+			rkp->setHeartClass(heartClass.compute(rkp));
+			HeartClassResult* heartClassRes = rkp ->getHeartClass();*/
+		/*map<string, double> qrsparam = heartClassRes->getQrsParameters();
+		std::cout << "vQRS:" << qrsparam["Number of ventricular QRS"] << endl;
+		std::cout << "artefakty" << qrsparam["Number of artifacts"] << endl;*/
 
 			std::cout << "Waves done\n";
 		}
+
+
 
 		/*HeartClass heartClass;
 		rkp->setHeartClass(heartClass.compute(rkp));

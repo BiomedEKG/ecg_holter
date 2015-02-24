@@ -70,7 +70,7 @@ void SleepApnea::wczytywanie (probkaPCA tablicaProbekUczacych[16841],float wspol
 	for ( i=0; i < 11; i++){
 		for (k=0; k < 11; k++){
 	
-		PCA >> wspolczynnikiPCA[k][i];
+		PCA >> wspolczynnikiPCA[i][k];
 		}
 	}
 	
@@ -578,7 +578,7 @@ char SleepApnea::klasyfikuj(probkaPCA analizowanaProbka, probkaPCA tablicaProbek
 				}
 			
 			
-				else if(sasiedziZBezdechem<sasiedzBezBezdechu){
+				else if(sasiedziZBezdechem>sasiedzBezBezdechu){
 			
 			
 					rodzaj='A';

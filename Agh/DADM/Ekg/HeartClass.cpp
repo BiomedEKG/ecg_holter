@@ -449,7 +449,7 @@ HeartClassResult* HeartClass::compute(ResultKeeper* rkp){
 
 	this->InputPrepare(rkp);
 	
-	for(unsigned int i = 0; i < this->signalMap.size(); i++){
+	for(unsigned int i = 0; i < ((this->signalMap.size())-1); i++){
 		
 		this->Amplitudes(signalMap[i]);	
 	}
