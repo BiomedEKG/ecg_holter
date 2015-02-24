@@ -134,22 +134,23 @@ void HeartClass_Table_Visualization(QMap<QString,double> mapParameters,QVector<Q
 Table t(mapParameters, qrsParams, mp.plotarea->canvas());
 }
 
-void T_Waves_Alt_Visualization(vector<double> FilteredSignal, vector<double> TimeDomain, vector<double> PUPA, MajorPlot mp, QString Title){
+void T_Waves_Alt_Visualization(vector<double>& FilteredSignal, vector<double>& TimeDomain, vector<unsigned int>& onsetTwave,  vector<unsigned int>& endTwave, MajorPlot mp, QString Title){
 	ECGBaselineVisualization(FilteredSignal, TimeDomain, mp, Title );
-	QVector<double> Time;
-	QVector<double> Values;
-	for (int i = 0; i < PUPA.size(); ++i) {
-		Time[i] = TimeDomain[PUPA[i]];
-		Values[i] = FilteredSignal[PUPA[i]];
+	int vecSize = onsetTwave.size() > endTwave.size() ?  endTwave.size() : onsetTwave.size();
+	QVector<double> Time(vecSize);
+	QVector<double> Values(vecSize);
+	for (int i = 0; i < vecSize ; ++i) {
+		Time[i] = TimeDomain[onsetTwave[i]];
+		Values[i] = FilteredSignal[endTwave[i]];
 	}
 	ScatterPlot sp;
 	sp.ScatterPlotInit(8, Qt:: red, Time, Values, mp.plotarea,"T_Waves Alternens",QwtPlotCurve::CurveStyle::Dots, QwtSymbol::Style::Star2);
 }
 
-void Atrial_Fibr_Visualization(vector<double> FilteredSignal, vector<double> TimeDomain, vector<double> PUPA, MajorPlot mp, QString Title){
+void Atrial_Fibr_Visualization(vector<double>& FilteredSignal, vector<double>& TimeDomain, vector<unsigned int>& PUPA, MajorPlot mp, QString Title){
 	ECGBaselineVisualization(FilteredSignal, TimeDomain, mp, Title );
-	QVector<double> Time;
-	QVector<double> Values;
+	QVector<double> Time(PUPA.size());
+	QVector<double> Values(PUPA.size());
 	for (int i = 0; i < PUPA.size(); ++i) {
 		Time[i] = TimeDomain[PUPA[i]];
 		Values[i] = FilteredSignal[PUPA[i]];

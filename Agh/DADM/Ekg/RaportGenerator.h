@@ -27,7 +27,7 @@ public:
 	void drawQtDisp(QStringList dt);
 	void drawHrt(QStringList tabData, QwtPlot* hrtPlot);
 	void drawSleepApnea(QwtPlot* plot);
-	void drawTWaveAlt(QStringList tab);
+	void drawTWaveAlt(QwtPlot* plot);
 	void drawVCG(QwtPlot* plot);
 	void drawWaves(QwtPlot* plot);
 	void drawAtrialFibr(bool isDetected, QwtPlot* plot);

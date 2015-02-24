@@ -70,8 +70,8 @@ void MajesticEngineOfGlory::run()
 		//map<string,vector<double>> histResult = hr->histResult;
 		//map<string,vector<double>> poincareResult = hr->poincareResult;
 		//map<string,vector<double>> sdResult = hr->sdResult;
-		//SIG_EDR sigEdr = SIG_EDR();
-		//rkp->setSIG_EDR(sigEdr.compute(rkp));
+		SIG_EDR sigEdr = SIG_EDR();
+		rkp->setSIG_EDR(sigEdr.compute(rkp));
 		//SigEDResult* sigRes = rkp->getSIG_EDR();
 		//SleepApnea sleepApnea = SleepApnea();
 		//rkp->setSleepApnea(sleepApnea.compute(rkp));

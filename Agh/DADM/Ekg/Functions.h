@@ -27,8 +27,8 @@ void HRV2_Table_Visualization(QMap<QString,double> params, QVector<QString> unit
 void HRV2_Poincare_Line_Visualization(map<string,vector<double>> sdPoints, MajorPlot mp);
 void HeartClass_Visualization(map<string, vector<double>> qrsClassificationMap, MajorPlot mp, QVector<double> FilteredSignal, QVector<double> TimeDomain);
 void HeartClass_Table_Visualization(QMap<QString,double> mapParameters,QVector<QString> qrsParams, MajorPlot mp);
-void T_Waves_Alt_Visualization(vector<double> FilteredSignal, vector<double> TimeDomain, vector<double> PUPA, MajorPlot mp, QString Title);
-void Atrial_Fibr_Visualization(vector<double> FilteredSignal, vector<double> TimeDomain, vector<double> PUPA, MajorPlot mp, QString Title);
+void T_Waves_Alt_Visualization(vector<double>& FilteredSignal, vector<double>& TimeDomain, vector<unsigned int>& onsetTwave,  vector<unsigned int>& endTwave, MajorPlot mp, QString Title);
+void Atrial_Fibr_Visualization(vector<double>& FilteredSignal, vector<double>& TimeDomain, vector<unsigned int>& PUPA, MajorPlot mp, QString Title);
 void Qt_Disp_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp);
 void St_Segment_Table_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp);
 

@@ -106,15 +106,13 @@ void RaportGenerator::drawSleepApnea(QwtPlot* plot){
 	addSubtitle("Slep Apnea");
 	addPlot(plot, true);
 }
-//Sekcja T_WAVE_ALT - jedna tabela
-void RaportGenerator::drawTWaveAlt(QStringList tab){
-	int r = int((float) tab.size() / (float) noCols + 0.5);
-	r *= cellHeight;
-	//Check whether table and text would fit in this page, if not skip to next page
-	if (isTooBig(r + subTitleHeight))
+//Sekcja T_WAVE_ALT - jeden wykres
+void RaportGenerator::drawTWaveAlt(QwtPlot* plot){
+		//Check whether plot and text would fit in this page, if not skip to next page
+	if (isTooBig(plot -> size().height() + subTitleHeight))
 		createNewPage();
 	addSubtitle("T Wave Alternans");
-	addTable(tab, noCols, tableWidth, PdfGenerator::toBottom);
+	addPlot(plot, true);
 }
 
 //Sekcja VCG_T_LOOP - wykres (co z rzutami?)
