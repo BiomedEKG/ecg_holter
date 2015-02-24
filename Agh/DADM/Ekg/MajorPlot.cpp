@@ -16,7 +16,7 @@ void MajorPlot:: PlotAreaInit(double xMin, double xMax, double xStep,double yMin
 	plotarea->setAxisScale(QwtPlot::yLeft, yMin, yMax, yStep);
 	plotarea->setAxisTitle( QwtPlot::xBottom, xTitle);
 	plotarea->setAxisTitle( QwtPlot::yLeft, yTitle);
-	plotarea->resize(600,400);
+	//plotarea->resize(600,400);
 	plotarea->show();
 }
 

@@ -7,12 +7,17 @@
 #include <QStringList>
 #include <QAbstractTableModel>
 #include <QMap>
+#include <map>
+#include <vector>
+#include <string>
+#include <iostream>
+using namespace std;
 
 class Table : public MajorPlot{
 public:
 		QTableWidget *tableView;
 
-		Table:: Table(QMap<QString, double> map, QVector<QString> units, QWidget* p);
+		Table:: Table(map<string, double> map, vector<string> units, QWidget* p);
 };
 
 
