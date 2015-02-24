@@ -89,12 +89,10 @@ void Waves::ustaw_qrs_onset(vector<double> ECGBaselineData, vector<unsigned int>
 		}
 
 		//double val = std::min_element(resultVector[startIndex-windowSize], resultVector[startIndex]);
-		int temp;
+		int temp=0;
 		//Iscie murzynskie poszukiwanie iteratora o najmniejszej wartosci próbki ;p
 		for(int i = startIndex-windowSize; i < startIndex; i++) {
-			if(resultVector[i] < resultVector[i+1]) {
-				temp = i;
-			}else {
+			if(resultVector[i] > resultVector[i+1]) {
 				temp = i+1;
 			}
 
@@ -151,19 +149,19 @@ void Waves::ustaw_qrs_end(vector<double> ECGBaselineData, vector<unsigned int> R
 			afterMedian[i] = abs(afterMedian[i]);
 		}
 
-		int Rv2 = 0.005;
+		int Rv2 = 0.05;
 		vector<double> resultVector;
 		for (int i=0, size = afterMedian.size()-1; i < size; ++i){
-			resultVector.push_back(atan(afterMedian.at(i)/Rv2));
+		 double d1 = (afterMedian.at(i)/Rv2)/10000000;
+			 double d2 = atan(d1);
+			resultVector.push_back(d2);
 		}
 
 		//double val = std::min_element(resultVector[startIndex-windowSize], resultVector[startIndex]);
-		int temp;
+		int temp=0;
 		//Iscie murzynskie poszukiwanie iteratora o najmniejszej wartosci próbki ;p
 		for(int i = startIndex-windowSize; i < startIndex-1; i++) {
-			if(resultVector[i] < resultVector[i+1]) {
-				temp = i;
-			}else {
+			if(resultVector[i] >= resultVector[i+1]) {
 				temp = i+1;
 			}
 
@@ -394,6 +392,7 @@ void Waves::ustaw_t_onset(vector<double> ECGBaselineData, vector<unsigned int> R
         vector<int>tOnSet;
         vector<int>qrsEnd = WavesData["QRS_END"];
         for(int i = 0; i < qrsEnd.size(); i++) {
+			//cout << "TonSet i Iterator: " << i << endl;
                 int mainLoopIterator  = i;
                 vector<double> Mainwindow;
                 int MainlocalMax ;
@@ -404,6 +403,7 @@ void Waves::ustaw_t_onset(vector<double> ECGBaselineData, vector<unsigned int> R
                 double MainMaxVal;
  
                 for(int j = 0; j < RPeaksData.size()-2; j++) {
+					//cout << "TonSet j Iterator: " << i << endl;
                         //window.erase(window.begin(), window.end());
                         //derivativeVector.erase(window.begin(), window.end());
                         vector<double> window;
@@ -412,8 +412,8 @@ void Waves::ustaw_t_onset(vector<double> ECGBaselineData, vector<unsigned int> R
                         int smallWindowSize;
                         vector<double>derivativeVector;
                         int maxValIndex;
-     
-                                int windowSize = (RPeaksData[j+1] - RPeaksData[j])/4;
+									int diff = RPeaksData[j+1] - RPeaksData[j];
+                                int windowSize = diff/4;
                                 //if(qrsEnd[i] + windowSize > ECGBaselineData.size()){ //chyba o takie zabezpieczenie chodzi
                                 //        windowSize = ECGBaselineData.size()-1 - qrsEnd[i];
                                 //}

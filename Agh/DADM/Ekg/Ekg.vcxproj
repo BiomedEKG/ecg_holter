@@ -187,6 +187,8 @@
     <ClCompile Include="PanTompkins.cpp" />
     <ClCompile Include="PdfGenerator.cpp" />
     <ClCompile Include="plot3D.cpp" />
+    <ClCompile Include="QTDispersion.cpp" />
+    <ClCompile Include="QTDispResult.cpp" />
     <ClCompile Include="RaportGenerator.cpp" />
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="ResultKeeper.cpp" />
@@ -343,6 +345,8 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtPrintSupport"</Command>
     </CustomBuild>
+    <ClInclude Include="QTDispersion.h" />
+    <ClInclude Include="QTDispResult.h" />
     <ClInclude Include="ResultVCG.h" />
     <ClInclude Include="RPeaks.h" />
     <ClInclude Include="RPeaksResult.h" />
