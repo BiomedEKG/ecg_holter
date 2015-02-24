@@ -7,8 +7,8 @@ void ECGBaselineVisualization(vector<double> FilteredSignal, vector<double> Time
 	QVector<double> QFilteredSignal = QVector<double>::fromStdVector(FilteredSignal);
 	QVector<double> QTimeDomain = QVector<double>::fromStdVector(TimeDomain);	
 	CurvePlot cp;
-	cp.CurvePlotInit(2, Qt::blue, QTimeDomain, QFilteredSignal, mp.plotarea, Title);
-	cp.setCurvePlotArea(mp, 0, 60.0, 10.0, -2.0,2.0,0.5, "Time [s]", "Amplitude [mV]", "ECG");
+	cp.CurvePlotInit(2, Qt::blue, QTimeDomain, QFilteredSignal, mp.plotarea, "Filtered signal");
+	cp.setCurvePlotArea(mp, 0, 2.0, 0.5, -5.0,5.0,1.0, "Time [s]", "Amplitude [mV]", "ECG");
 }
 
 void RPeaksVisualization(const vector<double>& FilteredSignal, const vector<double>& TimeDomain, const vector<unsigned int>& RPeaks, MajorPlot mp, QString Title){
@@ -41,11 +41,11 @@ void HRV1_Visualization1(vector<double> Frequency, vector<double> Power,  MajorP
 	cp.setCurvePlotArea(mp, 0, 0.5, 0.1, 0.0, 40.0, 10.0, "Freque-ncy [Hz]", "Power [ms^2/Hz]", "spectrum");
 }
 
-void HRV1_Table1_Visualization(QMap<QString, double> map, QVector<QString> units, MajorPlot mp){
+void HRV1_Table1_Visualization(map<string, double> map, vector<string> units, MajorPlot mp){
 	Table t(map, units, mp.plotarea->canvas());
 }
 
-void HRV1_Table2_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp){
+void HRV1_Table2_Visualization(map<string, double> map,vector<string> units, MajorPlot mp){
 	Table t(map, units, mp.plotarea->canvas());
 }
 
@@ -73,7 +73,7 @@ void HRV2_Hist_Visualization(map<string, vector<double>> h, MajorPlot mp){
 	hp.setHistogramPlotArea(mp,h1.first(),h2.last(),1,0,1,1,"time [ms]","number of ","Distributions",1);
 }
 
-void HRV2_Table_Visualization(QMap<QString,double> params, QVector<QString> units, MajorPlot mp){
+void HRV2_Table_Visualization(map<string,double> params, vector<string> units, MajorPlot mp){
 Table t(params, units, mp.plotarea->canvas());
 }
 
@@ -130,7 +130,7 @@ void HeartClass_Visualization(map<string, vector<double>> qrsClassificationMap, 
 	cp5.setCurvePlotArea(mp, 0, 60.0, 10.0, -2.0,2.0,0.5, "Time [s]", "Amplitude [mV]", "Artifacts");
 
 }
-void HeartClass_Table_Visualization(QMap<QString,double> mapParameters,QVector<QString> qrsParams, MajorPlot mp){
+void HeartClass_Table_Visualization(map<string,double> mapParameters,vector<string> qrsParams, MajorPlot mp){
 Table t(mapParameters, qrsParams, mp.plotarea->canvas());
 }
 
@@ -158,11 +158,11 @@ void Atrial_Fibr_Visualization(vector<double> FilteredSignal, vector<double> Tim
 	sp.ScatterPlotInit(8, Qt:: red, Time, Values, mp.plotarea,"Atrial Fibrillation",QwtPlotCurve::CurveStyle::Dots, QwtSymbol::Style::Star2);
 }
 
-void Qt_Disp_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp){
+void Qt_Disp_Visualization(map<string, double> map,vector<string> units, MajorPlot mp){
 	Table t(map, units, mp.plotarea->canvas());
 }
 
-void St_Segment_Table_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp){
+void St_Segment_Table_Visualization(map<string, double> map,vector<string> units, MajorPlot mp){
 	Table t(map, units, mp.plotarea->canvas());
 }
 
