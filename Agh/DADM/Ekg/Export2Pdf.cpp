@@ -3,16 +3,35 @@
 const char* Export2Pdf(ResultKeeper* res, const char* filename){
 	try{
 		RaportGenerator pdfWriter(filename);
+		const double TIME_SCALE = 1.5;
 		//INPUT
 		if (res->getInput() != NULL){
-			QString pName = res->getInput()->GetPatientInfo();
-			pdfWriter.addSubtitle(pName);
+			QString title = "Analyzed signal: ";
+			title.append(QString::fromUtf8(res->getInput()->GetChannelName()));
+			pdfWriter.addSubtitle(title);
+			
 		}
+	
 		//Rpeaks
 		if (res->getRPeaks() != NULL){
-			/*MajorPlot mp; 
-			RPeaksVisualization(res->getECGBaseline()->filteredSignal,);
-			pdfWriter.drawRPeaks();*/
+			//Przygotuj zmienne 
+			MajorPlot mp; 
+			double dt = 1.0/(double)res->getInput()->GetFs();
+			double counter = 0.0;
+			int sigLen = res->getECGBaseline()->getFilteredSignal().size();
+			vector <double> timeDomain(sigLen);
+			//Wype³nij wektor czasu
+			for (vector <double> :: iterator it = timeDomain.begin(); it!=timeDomain.end(); it++){
+				*it = dt * counter;
+				counter++;
+			}
+			//Stworz wykres & ustaw oœ czasu
+			RPeaksVisualization(res->getECGBaseline()->filteredSignal, timeDomain, res->getRPeaks()->getRPeaks(), mp, "");
+			mp.plotarea->setAxisScale(QwtPlot::xBottom, 0.0, TIME_SCALE < dt*sigLen ? TIME_SCALE : dt*sigLen);
+			//Esport do pdfa
+			pdfWriter.drawRPeaks(mp.plotarea, res->getRPeaks()->getRPeaks().size());
+			//Usun okno 
+			delete mp.plotarea;
 
 		}
 		//WAVES
@@ -31,6 +50,7 @@ const char* Export2Pdf(ResultKeeper* res, const char* filename){
 			MajorPlot mp;
 			HRV1_Visualization1(res->getHRV1()->prvfrequency, res->getHRV1()->prvpower, mp);
 			pdfWriter.drawHRV1(mp.plotarea,hrvTime, hrvFreqz);
+			delete mp.plotarea;//usuwanie okienka
 		}
 		//HRV2
 		if (res->getHrv2() != NULL){
@@ -41,7 +61,9 @@ const char* Export2Pdf(ResultKeeper* res, const char* filename){
 			//Tworzenie tabeli 
 			std::string units[] = {"-", "-", "ms", "-", "ms", "ms"}; 
 			QStringList data = pdfWriter.prepareDataForTable(res->getHrv2()->paramsResult, units);
-			pdfWriter.drawHRV2(data, mpHist.plotarea, mpHist.plotarea);
+			pdfWriter.drawHRV2(data, mpPointCare.plotarea, mpHist.plotarea);
+			delete mpHist.plotarea;
+			delete mpPointCare.plotarea;
 		}
 		//SIG_EDR
 		if (res->getSIG_EDR() != NULL){

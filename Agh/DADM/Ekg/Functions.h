@@ -16,7 +16,7 @@ using namespace std;
 
 
 void ECGBaseline_Visualization(vector<double> FilteredSignal, vector<double> TimeDomain, MajorPlot mp, QString Title);
-void RPeaksVisualization(vector<double>& FilteredSignal, vector<double> TimeDomain, vector<double> RPeaks, MajorPlot mp, QString Title);
+void RPeaksVisualization(const vector<double>& FilteredSignal, const vector<double>& TimeDomain, const vector<unsigned int>& RPeaks, MajorPlot mp, QString Title);
 void SIG_EDR_Visualization(vector<double> Edr, vector<double> Xaxis, MajorPlot mp);
 void HRV1_Visualization1(vector<double> Frequency, vector<double> Power,  MajorPlot mp);
 void HRV1_Table1_Visualization(QMap<QString, double> map,QVector<QString> units, MajorPlot mp);

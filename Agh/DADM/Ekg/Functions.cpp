@@ -13,14 +13,13 @@ void ECGBaselineVisualization(vector<double> FilteredSignal, vector<double> Time
 	cp.setCurvePlotArea(mp, 0, 60.0, 10.0, -2.0,2.0,0.5, "Time [s]", "Amplitude [mV]", "ECG");
 }
 
-void RPeaksVisualization(vector<double>& FilteredSignal, vector<double> TimeDomain, vector<double> RPeaks, MajorPlot mp, QString Title){
-	QVector<double> QRPeaks = QVector<double>::fromStdVector(RPeaks);
+void RPeaksVisualization(const vector<double>& FilteredSignal, const vector<double>& TimeDomain, const vector<unsigned int>& RPeaks, MajorPlot mp, QString Title){
 	ECGBaselineVisualization(FilteredSignal, TimeDomain, mp, Title );
-	QVector<double> Time;
-	QVector<double> Values;
-	for (int i = 0; i < QRPeaks.size(); ++i) {
-		Time[i] = TimeDomain[QRPeaks[i]];
-		Values[i] = FilteredSignal[QRPeaks[i]];
+	QVector<double> Time(RPeaks.size());
+	QVector<double> Values(RPeaks.size());
+	for (int i = 0; i < RPeaks.size(); i++) {
+		Time[i] = TimeDomain[RPeaks[i]];
+		Values[i] = FilteredSignal[RPeaks[i]];
 	}
 	ScatterPlot sp;
 	sp.ScatterPlotInit(8, Qt:: red, Time, Values, mp.plotarea,"R-Peaks",QwtPlotCurve::CurveStyle::Dots, QwtSymbol::Style::Star2);
