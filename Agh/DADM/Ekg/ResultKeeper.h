@@ -20,6 +20,7 @@
 #include "SleepApneaMetrics.h"
 #include <ResultVCG.h>
 #include <QTDispResult.h>
+#include "MajorPlot.h"
 
 using namespace std;
 
@@ -93,6 +94,9 @@ class ResultKeeper
 
 		void setStSegmentResult(STSegmentResult *st);
 
+		vector<double> getTimeDomain();
+
+		MajorPlot &ecgBaselineGraph();
         
     private:
 		ResultKeeper();
@@ -104,6 +108,7 @@ class ResultKeeper
 		ECGFiltrationMethod m_ecgBaselineMethod;
 		RPeaksDetectionAlgorithm m_rPeaksDetectionAlgorithm;
 		SleepApneaMetrics m_sleepApneaMetrics;
+		MajorPlot m_ecgBaselineGraph;
 
 
 /********* MODULES DATA ***********/

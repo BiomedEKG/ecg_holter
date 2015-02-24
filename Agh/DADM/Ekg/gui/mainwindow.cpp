@@ -22,10 +22,10 @@
 #include "ECGFiltrationWidget.h"
 #include "RPeaksDetectionWidget.h"
 #include "SleepApneaWidget.h"
+#include "Functions.h"
 
 #include "PlotManager.h"
 #include "ResultKeeper.h"
-#include "ObjectManager.h"
 #include "RaportGenerator.h"
 #include "Input.h"
 #include "Export2Pdf.h"
@@ -84,6 +84,8 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(engine, SIGNAL(started()), this, SLOT(computationsStart()));
 	connect(engine, SIGNAL(finished()), this, SLOT(computationsEnd()));
 	connect(engine, SIGNAL(currentModule(QString)), this, SLOT(computingModuleSwitched(QString)));
+
+	mainWidget->getGraphsWidget()->addGraph(ResultKeeper::getInstance().ecgBaselineGraph().plotarea, "Graph");
 }
 
 QToolBar *MainWindow::createToolbar(SelectModuleMenu *selectModuleMenu)
@@ -213,8 +215,11 @@ void MainWindow::openFile()
 		qDebug() << channelNames[i];
 		viData = inputHandler->viGetChannelData();
 		vdData = inputHandler->vdGetChannelData();
+		break;
 		for(int j = 0; j < 10;j++) {printf("ADU: %d\t mV:%f \n",viData[j], vdData[j]);}
 	}
+
+
 }
 
 void MainWindow::compute()
@@ -330,25 +335,29 @@ void MainWindow::sleepApneaMethodChanged(SleepApneaMetrics method, const QString
 
 void MainWindow::graphZoomIn()
 {
-	//here call graph zoomIn function
+	ZoomIn(ResultKeeper::getInstance().ecgBaselineGraph());
 	statusBar()->showMessage("Graph: Zoom in", 2000);
 }
 
 void MainWindow::graphZoomOut()
 {
-	//here call graph zoomOut function
+	ZoomOut(ResultKeeper::getInstance().ecgBaselineGraph());
 	statusBar()->showMessage("Graph: Zoom out", 2000);
 }
 
 void MainWindow::graphHandCursor()
 {
-	//here call graph hand cursor function
+	PickerOff(ResultKeeper::getInstance().ecgBaselineGraph());
+	PannerOn(ResultKeeper::getInstance().ecgBaselineGraph());
+
 	statusBar()->showMessage("Graph: Hand cursor", 2000);
 }
 
 void MainWindow::graphPointerCursor()
 {
-	//here call graph pointer cursor function
+	PannerOff(ResultKeeper::getInstance().ecgBaselineGraph());
+	PickerOn(ResultKeeper::getInstance().ecgBaselineGraph());
+
 	statusBar()->showMessage("Graph: Pointer cursor", 2000);
 }
 
@@ -361,6 +370,11 @@ void MainWindow::computationsEnd()
 {
 	computeButton->setText(tr("Compute"));
 	statusBar()->showMessage(tr("Computing: Done"), 5000);
+
+	ResultKeeper *rkp = &ResultKeeper::getInstance();
+	vector<double> signal = rkp->getECGBaseline()->getFilteredSignal();
+	vector<double> timeDomain = rkp->getTimeDomain();
+	ECGBaselineVisualization(signal, timeDomain, rkp->ecgBaselineGraph(), "signal");
 }
 
 void MainWindow::computingModuleSwitched(const QString &msg)

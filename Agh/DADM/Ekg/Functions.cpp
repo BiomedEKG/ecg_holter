@@ -1,6 +1,4 @@
-
 #include "Functions.h"
-
 
 #include <iostream>
 #include <sstream>

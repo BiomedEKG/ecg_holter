@@ -1,32 +1,33 @@
 #include "ResultKeeper.h"
 #include "AbstractResult.h"
 #include "ReturnType.h"
+#include "MajorPlot.h"
 #include <iostream>
 
 ResultKeeper::ResultKeeper()
 {
-  //this->atrialFibrillation=0;
-  //this->ecgBaseline=0;
-  //this->hrv2=0;
-  //this->rawSignalADU=0;
-  //this->rawSignalMV=0;
-  //this->sigEDR=0;
-  //this->waves=0;
+	//this->atrialFibrillation=0;
+	//this->ecgBaseline=0;
+	//this->hrv2=0;
+	//this->rawSignalADU=0;
+	//this->rawSignalMV=0;
+	//this->sigEDR=0;
+	//this->waves=0;
 	this->qtDisp = 30;
 }
 
 ResultKeeper::~ResultKeeper()
 {
-    //dtor
+	//dtor
 }
 
- ResultKeeper& ResultKeeper :: getInstance() {
+ResultKeeper& ResultKeeper :: getInstance() {
 	// ResultKeeper();
-	 static ResultKeeper instance;
-	 return instance;
+	static ResultKeeper instance;
+	return instance;
 } 
 
- void ResultKeeper::setECGBaselineMethod(ECGFiltrationMethod ecgBaselineMethod)
+void ResultKeeper::setECGBaselineMethod(ECGFiltrationMethod ecgBaselineMethod)
 {
 	m_ecgBaselineMethod = ecgBaselineMethod;
 }
@@ -61,81 +62,81 @@ Input* ResultKeeper::getInput()
 	return &handler;
 }
 
-  Input ResultKeeper::getSignalHandler() {
+Input ResultKeeper::getSignalHandler() {
 	return Input();
- }
+}
 
- AtrfibrResult* ResultKeeper::getAtrialFibrillation() {
+AtrfibrResult* ResultKeeper::getAtrialFibrillation() {
 	return atrialFibrillation;
- }
+}
 
- BaselineResult* ResultKeeper::getECGBaseline(){
+BaselineResult* ResultKeeper::getECGBaseline(){
 	return ecgBaseline;
- }
+}
 
- TWavesAltResult* ResultKeeper::getTWaves(){
-	 return tWaves;
- }
+TWavesAltResult* ResultKeeper::getTWaves(){
+	return tWaves;
+}
 
- RPeaksResult* ResultKeeper::getRPeaks() {
+RPeaksResult* ResultKeeper::getRPeaks() {
 	return rPeaks;
- }
+}
 
- HRV1Result* ResultKeeper::getHRV1() {
+HRV1Result* ResultKeeper::getHRV1() {
 	return hrv1;
- }
+}
 
- Hrv2Result* ResultKeeper::getHrv2() {
+Hrv2Result* ResultKeeper::getHrv2() {
 	return hrv2;
- }
+}
 
 
 
- SleepApneaResult* ResultKeeper::getSleepApnea(){
-	 return sleepApnea;
- }
+SleepApneaResult* ResultKeeper::getSleepApnea(){
+	return sleepApnea;
+}
 
- SigEDResult* ResultKeeper::getSIG_EDR() {
+SigEDResult* ResultKeeper::getSIG_EDR() {
 	return sigEDR;
- }
+}
 
- 
 
- HeartClassResult* ResultKeeper::getHeartClass(){
-	 return heartClass;
- }
 
- void ResultKeeper::setECGBaseline(BaselineResult* baseline) {
+HeartClassResult* ResultKeeper::getHeartClass(){
+	return heartClass;
+}
+
+void ResultKeeper::setECGBaseline(BaselineResult* baseline) {
 	this->ecgBaseline = baseline;
- }
+}
 
- void ResultKeeper::setTWaves(TWavesAltResult* tWaves){
-	 this->tWaves = tWaves;
- }
+void ResultKeeper::setTWaves(TWavesAltResult* tWaves){
+	this->tWaves = tWaves;
+}
 
 
- void ResultKeeper::setRPeaks(RPeaksResult* rPeaks) {
+void ResultKeeper::setRPeaks(RPeaksResult* rPeaks) {
 	this->rPeaks = rPeaks;
- }
+}
 
- void ResultKeeper::setHRV1(HRV1Result* HRV1) {
+void ResultKeeper::setHRV1(HRV1Result* HRV1) {
 	this->hrv1 = HRV1;
- }
+}
 
- void ResultKeeper::setHrv2(Hrv2Result* hrv2){
-	 this->hrv2 = hrv2;
- }
+void ResultKeeper::setHrv2(Hrv2Result* hrv2){
+	this->hrv2 = hrv2;
+}
 
- void ResultKeeper::setSleepApnea(SleepApneaResult* sleepApnea){
-	 this->sleepApnea = sleepApnea;
- }
+void ResultKeeper::setSleepApnea(SleepApneaResult* sleepApnea){
+	this->sleepApnea = sleepApnea;
+}
 
- void ResultKeeper::setAtrialFibrillation(AtrfibrResult *atr) {
+void ResultKeeper::setAtrialFibrillation(AtrfibrResult *atr) {
 	atrialFibrillation = atr;
- }
+}
 
 
- vector<double> ResultKeeper:: getSingleChannel(char* path, int channelNumber) {
+vector<double> ResultKeeper:: getSingleChannel(char* path, int channelNumber) {
 	Input input = this->getSignalHandler();
 	input.Open(path);
 	int numbOfChannels = input.GetNumberOfChannels();
@@ -147,35 +148,57 @@ Input* ResultKeeper::getInput()
 	input.Close();
 	return single;
 
- }
+}
 
 
- void ResultKeeper::setWaves(WavesResult* wr) {
+void ResultKeeper::setWaves(WavesResult* wr) {
 	this->wavesResult = wr;
- }
+}
 
- WavesResult* ResultKeeper:: getWaves() {
+WavesResult* ResultKeeper:: getWaves() {
 	return this->wavesResult;
- }
- //void ResultKeeper::setAtrialFibrillation(AtrfibrResult* atr) {
-	//this->atrialFibrillation = atr;
- //}
+}
+//void ResultKeeper::setAtrialFibrillation(AtrfibrResult* atr) {
+//this->atrialFibrillation = atr;
+//}
 
- void ResultKeeper::setSIG_EDR(SigEDResult* sig) {
+void ResultKeeper::setSIG_EDR(SigEDResult* sig) {
 	this->sigEDR = sig;
- }
- void ResultKeeper::setHeartClass(HeartClassResult* ptrHeartClassRes){
-	 this->heartClass = ptrHeartClassRes;
- }
+}
+void ResultKeeper::setHeartClass(HeartClassResult* ptrHeartClassRes){
+	this->heartClass = ptrHeartClassRes;
+}
 
- void ResultKeeper::setStSegmentResult(STSegmentResult *st) {
+void ResultKeeper::setStSegmentResult(STSegmentResult *st) {
 	this->stSegmentResult = st;
- }
+}
 
- void ResultKeeper:: setVCG(ResultVCG* vcg) {
+void ResultKeeper:: setVCG(ResultVCG* vcg) {
 	this->vcgResult = vcg;
- }
+}
 
- ResultVCG* ResultKeeper:: getVCG() {
- return vcgResult;
- }
+ResultVCG* ResultKeeper:: getVCG() {
+	return vcgResult;
+}
+
+vector<double> ResultKeeper::getTimeDomain()
+{
+	vector<double> rv;
+	int signalLength = handler.GetSignalLength();
+	int fs = handler.GetFs();
+
+	double dx = 1. / (double)fs;
+	double value = 0.;
+	for (int i = 0; i < signalLength; i++)
+	{
+		rv.push_back(value);
+		value += dx;
+	}
+
+	return rv;
+}
+
+MajorPlot &ResultKeeper::ecgBaselineGraph()
+{
+	return m_ecgBaselineGraph;
+}

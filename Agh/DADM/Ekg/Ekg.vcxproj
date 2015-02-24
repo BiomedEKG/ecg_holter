@@ -180,7 +180,6 @@
     <ClCompile Include="ModuleThread.cpp" />
     <ClCompile Include="ModuleTimer.cpp" />
     <ClCompile Include="MovingAverage.cpp" />
-    <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="MajorPlot.cpp" />
     <ClCompile Include="CurvePlot.cpp" />
     <ClCompile Include="HistogramPlot.cpp" />
@@ -370,7 +369,6 @@
     <ClInclude Include="MajorPlot.h" />
     <ClInclude Include="ModuleThread.h" />
     <ClInclude Include="ModuleTimer.h" />
-    <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PdfGenerator.h" />
     <ClInclude Include="RaportGenerator.h" />
     <ClInclude Include="Result.h" />
