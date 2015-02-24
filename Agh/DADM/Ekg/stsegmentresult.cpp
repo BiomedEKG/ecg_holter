@@ -1,5 +1,5 @@
 #include "stsegmentresult.h"
-
+using namespace std;
 
 STSegmentResult::STSegmentResult(void)
 {
@@ -24,4 +24,3 @@ map <string, vector<string>> STSegmentResult::GeSTSegmentResultData(void){
 void STSegmentResult::SetSTSegmentResultData(map <string, vector<string>> ComputedData){
 		STSegmentResultData = ComputedData;
 	}
-

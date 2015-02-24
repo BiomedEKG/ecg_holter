@@ -39,70 +39,202 @@
     <Filter Include="Modules\NowyFolderNaKazdyModul">
       <UniqueIdentifier>{be580e47-5a67-469d-bb91-c9b8a3710729}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\gui">
-      <UniqueIdentifier>{c7c77964-42ab-4e1b-b341-6f130b9815b1}</UniqueIdentifier>
+    <Filter Include="Modules\VisualizationModule">
+      <UniqueIdentifier>{f66e6bd9-3c47-40c5-bc20-9053aa447fef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\stsegment">
-      <UniqueIdentifier>{bff5276c-4716-4587-8eb6-9cbc7aac1a66}</UniqueIdentifier>
+    <Filter Include="Modules\GUI">
+      <UniqueIdentifier>{a71780aa-fa53-457b-b580-e7882ac02e90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Common">
+      <UniqueIdentifier>{e2e2d8d4-0bd2-49db-a31a-a93e96777b82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\I/O">
+      <UniqueIdentifier>{53e62d74-8ba7-4f63-91c0-5d59db56fec2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Engine">
+      <UniqueIdentifier>{b9b88387-f9a3-4cf8-a570-4bd3e67f374b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\AtrialFibrilation">
+      <UniqueIdentifier>{b835c4d0-4894-4495-aba0-3409ee3e8a17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Baseline">
+      <UniqueIdentifier>{7df171cb-1ab3-47a5-bd8a-83d4899e6830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\SigEDR">
+      <UniqueIdentifier>{f3d0237a-9b64-43b6-82ff-ee03b1a82e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Waves">
+      <UniqueIdentifier>{e030cbd9-ac55-4177-909e-2d9576180c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\HRV2">
+      <UniqueIdentifier>{75a0c724-9101-4c82-8868-4f5b17f6eab6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\RPeaks">
+      <UniqueIdentifier>{90a504a8-2ccd-40fa-afd2-787c20662060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\VCGLOOP">
+      <UniqueIdentifier>{e21689b0-6065-45ed-9012-421335b07df3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\STSegment">
+      <UniqueIdentifier>{b3696cd4-d99d-45b8-b5e9-733555dc789a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\SleepApnea">
+      <UniqueIdentifier>{0a68f4d7-b3b8-4086-b190-a5d9c2ad5b51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\HRV1">
+      <UniqueIdentifier>{7dd8ded6-e855-482c-8f3a-222dbf515046}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\T_Waves_Alt">
+      <UniqueIdentifier>{63b190b3-ee65-4c0e-a6ae-4dfdf73395f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\QTDisp">
+      <UniqueIdentifier>{d406fdb6-c56d-4304-a49f-1e0af5242795}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\HEART_CLASS">
+      <UniqueIdentifier>{b0003b83-3a17-47e0-b489-3027fa99ef61}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ekg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ekg.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ekg.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_graphswidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Modules\Common</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_graphswidget.cpp">
-      <Filter>Generated Files\Release</Filter>
+    <ClCompile Include="MajorPlot.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_mainwidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
+    <ClCompile Include="CurvePlot.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_mainwidget.cpp">
-      <Filter>Generated Files\Release</Filter>
+    <ClCompile Include="HistogramPlot.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
-      <Filter>Generated Files\Debug</Filter>
+    <ClCompile Include="ScatterPlot.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_mainwindow.cpp">
-      <Filter>Generated Files\Release</Filter>
+    <ClCompile Include="Input.cpp">
+      <Filter>Modules\I/O</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_selectmodulemenu.cpp">
-      <Filter>Generated Files\Debug</Filter>
+    <ClCompile Include="PdfGenerator.cpp">
+      <Filter>Modules\I/O</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_selectmodulemenu.cpp">
-      <Filter>Generated Files\Release</Filter>
+    <ClCompile Include="RaportGenerator.cpp">
+      <Filter>Modules\I/O</Filter>
     </ClCompile>
-    <ClCompile Include="gui\selectmodulesprivate.cpp">
-      <Filter>Modules\gui</Filter>
+    <ClCompile Include="AbstractModule.cpp">
+      <Filter>Modules\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="gui\selectmodulemenu.cpp">
-      <Filter>Modules\gui</Filter>
+    <ClCompile Include="AbstractResult.cpp">
+      <Filter>Modules\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="gui\mainwindow.cpp">
-      <Filter>Modules\gui</Filter>
+    <ClCompile Include="ModuleThread.cpp">
+      <Filter>Modules\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="gui\mainwidget.cpp">
-      <Filter>Modules\gui</Filter>
+    <ClCompile Include="ModuleTimer.cpp">
+      <Filter>Modules\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="gui\graphswidget.cpp">
-      <Filter>Modules\gui</Filter>
+    <ClCompile Include="Result.cpp">
+      <Filter>Modules\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultKeeper.cpp">
+      <Filter>Modules\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="TestModule.cpp">
+      <Filter>Modules\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="VAbstractModule.cpp">
+      <Filter>Modules\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="BaselineResult.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="ECGBaseline.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="Butterworth.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="Chebyshev.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="CubicSpline.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="LeastMeanSquares.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingAverage.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="SavitzkyGolay.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="Filter.cpp">
+      <Filter>Modules\Baseline</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RPeaks.cpp">
+      <Filter>Modules\RPeaks</Filter>
+    </ClCompile>
+    <ClCompile Include="RPeaksResult.cpp">
+      <Filter>Modules\RPeaks</Filter>
+    </ClCompile>
+    <ClCompile Include="PanTompkins.cpp">
+      <Filter>Modules\RPeaks</Filter>
+    </ClCompile>
+    <ClCompile Include="AtrFibr.cpp">
+      <Filter>Modules\AtrialFibrilation</Filter>
+    </ClCompile>
+    <ClCompile Include="AtrfibrResult.cpp">
+      <Filter>Modules\AtrialFibrilation</Filter>
+    </ClCompile>
+    <ClCompile Include="SIG_EDR.cpp">
+      <Filter>Modules\SigEDR</Filter>
+    </ClCompile>
+    <ClCompile Include="SigEDResult.cpp">
+      <Filter>Modules\SigEDR</Filter>
+    </ClCompile>
+    <ClCompile Include="Waves.cpp">
+      <Filter>Modules\Waves</Filter>
+    </ClCompile>
+    <ClCompile Include="WavesResult.cpp">
+      <Filter>Modules\Waves</Filter>
+    </ClCompile>
+    <ClCompile Include="stsegment.cpp">
+      <Filter>Modules\STSegment</Filter>
+    </ClCompile>
+    <ClCompile Include="stsegmentresult.cpp">
+      <Filter>Modules\STSegment</Filter>
+    </ClCompile>
+    <ClCompile Include="MajesticEngineOfGlory.cpp">
+      <Filter>Modules\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Hrv2.cpp">
+      <Filter>Modules\HRV2</Filter>
+    </ClCompile>
+    <ClCompile Include="Hrv2Result.cpp">
+      <Filter>Modules\HRV2</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepApnea.cpp">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepApneaResult.cpp">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClCompile>
+    <ClCompile Include="HRV1.cpp">
+      <Filter>Modules\HRV1</Filter>
+    </ClCompile>
+    <ClCompile Include="HRV1Calculate.cpp">
+      <Filter>Modules\HRV1</Filter>
+    </ClCompile>
+    <ClCompile Include="HRV1Result.cpp">
+      <Filter>Modules\HRV1</Filter>
     </ClCompile>
     <ClCompile Include="gui\channelsmenu.cpp">
-      <Filter>Modules\gui</Filter>
+      <Filter>Modules\GUI</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_channelsmenu.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -111,56 +243,379 @@
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="gui\channelsprivate.cpp">
-      <Filter>Modules\gui</Filter>
+      <Filter>Modules\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="stsegment.cpp">
-      <Filter>Modules\stsegment</Filter>
+    <ClCompile Include="gui\ECGFiltrationWidget.cpp">
+      <Filter>Modules\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="stsegmentresult.cpp">
-      <Filter>Modules\stsegment</Filter>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ECGFiltrationWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ECGFiltrationWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\graphswidget.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_graphswidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_graphswidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\mainwidget.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_mainwidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_mainwidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\mainwindow.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_mainwindow.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\PlotManager.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\RPeaksDetectionWidget.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_RPeaksDetectionWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RPeaksDetectionWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\selectmodulemenu.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_selectmodulemenu.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_selectmodulemenu.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\selectmodulesprivate.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\SleepApneaWidget.cpp">
+      <Filter>Modules\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SleepApneaWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SleepApneaWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="TWavesAlt.cpp">
+      <Filter>Modules\T_Waves_Alt</Filter>
+    </ClCompile>
+    <ClCompile Include="TWavesAltResult.cpp">
+      <Filter>Modules\T_Waves_Alt</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultVCG.cpp">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClCompile>
+    <ClCompile Include="VCGTLOOP.cpp">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClCompile>
+    <ClCompile Include="methodsVCG.cpp">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartClass.cpp">
+      <Filter>Modules\HEART_CLASS</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartClassResult.cpp">
+      <Filter>Modules\HEART_CLASS</Filter>
+    </ClCompile>
+    <ClCompile Include="Export2Pdf.cpp">
+      <Filter>Modules\I/O</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_MajesticEngineOfGlory.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_MajesticEngineOfGlory.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="plot3D.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_plot3D.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_plot3D.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Table.cpp">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="QTDispersion.cpp">
+      <Filter>Modules\QTDisp</Filter>
+    </ClCompile>
+    <ClCompile Include="QTDispResult.cpp">
+      <Filter>Modules\QTDisp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="ekg.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ekg.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="ekg.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="gui\selectmodulemenu.h">
-      <Filter>Modules\gui</Filter>
+    <CustomBuild Include="gui\channelsmenu.h">
+      <Filter>Modules\GUI</Filter>
     </CustomBuild>
-    <CustomBuild Include="gui\mainwindow.h">
-      <Filter>Modules\gui</Filter>
-    </CustomBuild>
-    <CustomBuild Include="gui\mainwidget.h">
-      <Filter>Modules\gui</Filter>
+    <CustomBuild Include="gui\ECGFiltrationWidget.h">
+      <Filter>Modules\GUI</Filter>
     </CustomBuild>
     <CustomBuild Include="gui\graphswidget.h">
-      <Filter>Modules\gui</Filter>
+      <Filter>Modules\GUI</Filter>
     </CustomBuild>
-    <CustomBuild Include="GeneratedFiles\ui_ekg.h">
-      <Filter>Generated Files</Filter>
+    <CustomBuild Include="gui\mainwidget.h">
+      <Filter>Modules\GUI</Filter>
     </CustomBuild>
-    <CustomBuild Include="gui\selectmodulesprivate.h">
-      <Filter>Modules\gui</Filter>
+    <CustomBuild Include="gui\mainwindow.h">
+      <Filter>Modules\GUI</Filter>
     </CustomBuild>
-    <CustomBuild Include="gui\channelsmenu.h">
-      <Filter>Modules\gui</Filter>
+    <CustomBuild Include="gui\RPeaksDetectionWidget.h">
+      <Filter>Modules\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\selectmodulemenu.h">
+      <Filter>Modules\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\SleepApneaWidget.h">
+      <Filter>Modules\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MajesticEngineOfGlory.h">
+      <Filter>Modules\Engine</Filter>
+    </CustomBuild>
+    <CustomBuild Include="plot3D.h">
+      <Filter>Modules\VisualizationModule</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CurvePlot.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="MajorPlot.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="ScatterPlot.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="HistogramPlot.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="Table.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Modules\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Modules\I/O</Filter>
+    </ClInclude>
+    <ClInclude Include="PdfGenerator.h">
+      <Filter>Modules\I/O</Filter>
+    </ClInclude>
+    <ClInclude Include="RaportGenerator.h">
+      <Filter>Modules\I/O</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractModule.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractResult.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleThread.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTimer.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Result.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultKeeper.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="TestModule.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="VAbstractModule.h">
+      <Filter>Modules\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="BaselineResult.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="ECGBaseline.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="Butterworth.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="Chebyshev.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="CubicSpline.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="LeastMeanSquares.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingAverage.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="SavitzkyGolay.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="Filter.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterType.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="RPeaks.h">
+      <Filter>Modules\RPeaks</Filter>
+    </ClInclude>
+    <ClInclude Include="RPeaksResult.h">
+      <Filter>Modules\RPeaks</Filter>
+    </ClInclude>
+    <ClInclude Include="PanTompkins.h">
+      <Filter>Modules\RPeaks</Filter>
+    </ClInclude>
+    <ClInclude Include="SIG_EDR.h">
+      <Filter>Modules\SigEDR</Filter>
+    </ClInclude>
+    <ClInclude Include="SigEDResult.h">
+      <Filter>Modules\SigEDR</Filter>
+    </ClInclude>
+    <ClInclude Include="Waves.h">
+      <Filter>Modules\Waves</Filter>
+    </ClInclude>
+    <ClInclude Include="WavesResult.h">
+      <Filter>Modules\Waves</Filter>
+    </ClInclude>
+    <ClInclude Include="Hrv2.h">
+      <Filter>Modules\HRV2</Filter>
+    </ClInclude>
+    <ClInclude Include="Hrv2Result.h">
+      <Filter>Modules\HRV2</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepApnea.h">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepApneaResult.h">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClInclude>
+    <ClInclude Include="StructApnea.h">
+      <Filter>Modules\SleepApnea</Filter>
+    </ClInclude>
+    <ClInclude Include="HRV1.h">
+      <Filter>Modules\HRV1</Filter>
+    </ClInclude>
+    <ClInclude Include="HRV1Calculate.h">
+      <Filter>Modules\HRV1</Filter>
+    </ClInclude>
+    <ClInclude Include="HRV1Result.h">
+      <Filter>Modules\HRV1</Filter>
+    </ClInclude>
     <ClInclude Include="gui\channelsprivate.h">
-      <Filter>Modules\gui</Filter>
+      <Filter>Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ECGFiltrationMethod.h">
+      <Filter>Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\PlotManager.h">
+      <Filter>Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\RPeaksDetectionAlgorithms.h">
+      <Filter>Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\selectmodulesprivate.h">
+      <Filter>Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\SleepApneaMetrics.h">
+      <Filter>Modules\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Methods.h">
+      <Filter>Modules\Baseline</Filter>
+    </ClInclude>
+    <ClInclude Include="AtrFibr.h">
+      <Filter>Modules\AtrialFibrilation</Filter>
+    </ClInclude>
+    <ClInclude Include="AtrfibrResult.h">
+      <Filter>Modules\AtrialFibrilation</Filter>
+    </ClInclude>
+    <ClInclude Include="TWavesAlt.h">
+      <Filter>Modules\T_Waves_Alt</Filter>
+    </ClInclude>
+    <ClInclude Include="TWavesAltResult.h">
+      <Filter>Modules\T_Waves_Alt</Filter>
     </ClInclude>
     <ClInclude Include="stsegment.h">
-      <Filter>Modules\stsegment</Filter>
+      <Filter>Modules\STSegment</Filter>
     </ClInclude>
     <ClInclude Include="stsegmentresult.h">
-      <Filter>Modules\stsegment</Filter>
+      <Filter>Modules\STSegment</Filter>
     </ClInclude>
+    <ClInclude Include="ResultVCG.h">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClInclude>
+    <ClInclude Include="VCGTLOOP.h">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClInclude>
+    <ClInclude Include="methodsVCG.h">
+      <Filter>Modules\VCGLOOP</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartClass.h">
+      <Filter>Modules\HEART_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartClassResult.h">
+      <Filter>Modules\HEART_CLASS</Filter>
+    </ClInclude>
+    <ClInclude Include="Export2Pdf.h">
+      <Filter>Modules\I/O</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>Modules\VisualizationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="QTDispersion.h">
+      <Filter>Modules\QTDisp</Filter>
+    </ClInclude>
+    <ClInclude Include="QTDispResult.h">
+      <Filter>Modules\QTDisp</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Ekg.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="SleepdanePCAProbek.txt">
+      <Filter>Modules\SleepApnea</Filter>
+    </Text>
+    <Text Include="Sleepetykiety.txt">
+      <Filter>Modules\SleepApnea</Filter>
+    </Text>
+    <Text Include="Sleepodchylenia.txt">
+      <Filter>Modules\SleepApnea</Filter>
+    </Text>
+    <Text Include="SleepPCAWspolczynniki.txt">
+      <Filter>Modules\SleepApnea</Filter>
+    </Text>
+    <Text Include="Sleepsrednie.txt">
+      <Filter>Modules\SleepApnea</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -1,8 +1,7 @@
 #ifndef STSEGMENT_H
 #define STSEGMENT_H
 
-
-#include <vector>
+#include <AbstractModule.h>
 #include <iterator>
 #include <iostream>
 #include <cstdlib>
@@ -18,7 +17,7 @@ using namespace std;
 
 class STSegment : public AbstractModule<STSegmentResult>
 {
-	private:
+	public:
 
 	vector<int> QRSonset ; 
 	vector<int> QRSend;
@@ -65,7 +64,7 @@ class STSegment : public AbstractModule<STSegmentResult>
 
 	public:
   
-	virtual STSegmentResult* STSegment::compute(ResultKeeper *rkp) override;
+	 STSegmentResult* compute(ResultKeeper *rkp) override;
 	
 															
 };

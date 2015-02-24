@@ -3,9 +3,10 @@
 
 #include <QWidget>
 
-class QProgressBar;
 class QTableWidget;
+class QTabWidget;
 class GraphsWidget;
+class PlotManager;
 
 class MainWidget : public QWidget
 {
@@ -15,12 +16,14 @@ public:
 
     GraphsWidget *getGraphsWidget();
     QTableWidget *getTableWidget();
-    QProgressBar *getProgressBar();
+	PlotManager  *getPlotManager();
+	QTabWidget   *getTabWidget();
 
 private:
     GraphsWidget *graphsWidget;
+	PlotManager  *plotManager;
     QTableWidget *tableWidget;
-    QProgressBar *progressBar;
+	QTabWidget   *tabWidget;
 };
 
 #endif // MAINWIDGET_H

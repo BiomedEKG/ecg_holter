@@ -2,26 +2,34 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QTableWidget>
-#include <QProgressBar>
+#include <QTabWidget>
+#include <QGroupBox>
+#include <QScrollArea>
 #include "graphswidget.h"
+#include "PlotManager.h"
 
 
 MainWidget::MainWidget(QWidget *parent) :
     QWidget(parent)
 {
     graphsWidget = new GraphsWidget(this);
-    progressBar = new QProgressBar(this);
+    plotManager = new PlotManager(this);
 
-    QVBoxLayout *leftPartLayout = new QVBoxLayout();
-    leftPartLayout->addWidget(graphsWidget);
-    leftPartLayout->addWidget(progressBar);
+	tabWidget = new QTabWidget(this);
+	tabWidget->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
-    tableWidget = new QTableWidget(this);
+	tableWidget = new QTableWidget(this);
+	tableWidget->setMinimumHeight(240);
+	tableWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-    QHBoxLayout *mainLayout = new QHBoxLayout(this);
+	QHBoxLayout *bottomLayout = new QHBoxLayout();
+	bottomLayout->addWidget(plotManager);
+	bottomLayout->addWidget(tabWidget);
+	bottomLayout->addWidget(tableWidget);
 
-    mainLayout->addLayout(leftPartLayout);
-    mainLayout->addWidget(tableWidget);
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+	mainLayout->addWidget(graphsWidget);
+	mainLayout->addLayout(bottomLayout);
 
     setLayout(mainLayout);
 }
@@ -36,7 +44,12 @@ QTableWidget *MainWidget::getTableWidget()
     return tableWidget;
 }
 
-QProgressBar *MainWidget::getProgressBar()
+QTabWidget   *MainWidget::getTabWidget()
 {
-    return progressBar;
+	return tabWidget;
+}
+
+PlotManager *MainWidget::getPlotManager()
+{
+	return plotManager;
 }
