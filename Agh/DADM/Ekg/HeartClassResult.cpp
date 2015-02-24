@@ -18,3 +18,14 @@ HeartClassResult* HeartClassResult::getResult(){
 	hcr->qrsClass = qrsClass;
 	return hcr;
 }
+
+map<string, double> HeartClassResult::getQrsParameters(){
+	return qrsParameters;
+}
+
+map<string, vector<int>> HeartClassResult::getQrsClassMap(){
+	return qrsClassificationMap;
+}
+string* HeartClassResult::getQrsUnits(){
+	return qrsUnits;
+}
