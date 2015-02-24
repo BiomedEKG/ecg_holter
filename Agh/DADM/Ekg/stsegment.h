@@ -1,8 +1,7 @@
 #ifndef STSEGMENT_H
 #define STSEGMENT_H
 
-
-#include <vector>
+#include <AbstractModule.h>
 #include <iterator>
 #include <iostream>
 #include <cstdlib>
@@ -12,29 +11,28 @@
 #include <fstream>
 #include <map>
 #include "stsegmentresult.h"
-#include "AbstractModule.h"
 
 using namespace std;
 
 
 class STSegment : public AbstractModule<STSegmentResult>
 {
-	private:
+	public:
 
-	vector< int> QRSonset ; 
-	vector< int> QRSend;
+	vector<int> QRSonset ; 
+	vector<int> QRSend;
 	vector<double> Signal;
-	vector< int> Tpeak;
-	vector< unsigned int> Rpeak;
+	vector<int> Tpeak;
+	vector<unsigned int> Rpeak;
 	int SizeVector;
 	double Frequency;
 
 
 	vector<double> HeartRate;
-	vector<unsigned int> J20;
-	vector< int> Ton;
-	vector<unsigned int> TE;
-	vector< int> TMax;
+	vector<int> J20;
+	vector<int> Ton;
+	vector<int> TE;
+	vector<int> TMax;
 	vector <double> SlopeTpeak;
 	vector <double> SlopeTon;
 	vector <double> SlopeSKST;
@@ -49,14 +47,15 @@ class STSegment : public AbstractModule<STSegmentResult>
 	double k1slope;
 	double k2slope;
 	double threshold;
+	map<string, vector<string>> Results;
 
 
-	vector<unsigned int>  computeJ20 ();
-	vector<double>  computeSlope (vector< int> TE);
-	vector <int> computeMaxDistanceIndex (vector <double> Slope,  vector<int> TE,vector<double>& MaxDistance);
+	vector< int>  computeJ20 ();
+	vector<double>  computeSlope (vector<int> TE);
+	vector<int> computeMaxDistanceIndex (vector <double> Slope,  vector< int> TE,vector<double>& MaxDistance);
 	vector<string> defineOffsetLevel ();
 	vector<double> correctSlopeorMaxDistanceForShapeST(vector<double> StraightTpeak,vector <double> StraighTon);
-	vector<unsigned int> correctTEForShapeST ();
+	vector< int> correctTEForShapeST ();
 	vector<string>  defineShapeST ();
 	vector<string>  defineTypeShapeST ();
 	vector <double> computeHeartRate ();
@@ -65,9 +64,7 @@ class STSegment : public AbstractModule<STSegmentResult>
 
 	public:
   
-
-	STSegmentResult* compute(ResultKeeper *rkp)override;
-
+	 STSegmentResult* compute(ResultKeeper *rkp) override;
 	
 															
 };

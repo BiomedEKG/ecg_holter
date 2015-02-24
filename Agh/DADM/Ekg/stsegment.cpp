@@ -1,16 +1,15 @@
-#include "stsegment.h"
-#include "stsegmentresult.h"
+ï»¿#include "stsegment.h"
+#include <ResultKeeper.h>
 //#include "stdafx.h"
 #include <math.h>
-#include "ResultKeeper.h"
 
-// czêstotliwoœæ w Hercach
-vector<unsigned int> STSegment:: computeJ20  ( )
+// czÃªstotliwoÅ“Ã¦ w Hercach
+vector< int> STSegment:: computeJ20  ( )
 {
 	int ms20= (double)(Frequency*0.001*20);
 	//int ms20= 2;
 	
-	vector <unsigned int> J20;
+	vector < int> J20;
 	
 	for(int i=0; i<50;i++)
 	{
@@ -20,7 +19,7 @@ vector<unsigned int> STSegment:: computeJ20  ( )
 	return J20;
 }
 
-vector<double> STSegment:: computeSlope (vector< int> TE)
+vector<double> STSegment:: computeSlope (vector<int> TE)
 {
 	vector <double> Slope;
 	
@@ -32,29 +31,25 @@ vector<double> STSegment:: computeSlope (vector< int> TE)
 }
 
 
-vector< int> STSegment :: computeMaxDistanceIndex (vector <double> Slope,  vector<int> TE,
+vector<int> STSegment :: computeMaxDistanceIndex (vector <double> Slope,  vector< int> TE,
 														   vector<double>& MaxDistance)
 {
 	int Size,End,IndeksMax;
 	double distance_numerator, distance_denumerator;
 	
-	vector < int> MaxDistanceIndex;
+	vector <int> MaxDistanceIndex;
 	
-	for(int i=0; i<TE.size()-1; i++)
+	for(int i=0; i<TE.size(); i++)
 	{
 		vector <double> Distance;
-		Size=TE[i]-J20[i];
-		if(Size <= 0){
-			End = 1;
-		}else {
+		
 		Size=TE[i]-J20[i];
 		End=Size;
-		}
-		if( i < Slope.size()) //szpachla
+		
 		distance_denumerator=sqrt(1+Slope[i]*Slope[i]);
-		for (int j=0; j<Slope.size()-1;j++)
+		for (int j=0; j<=Size;j++)
 		{
-			distance_numerator= abs(-Slope[j]*j+1*Signal[J20[j]+j]-Signal[J20[j]]);//szpachla
+			distance_numerator= abs(-Slope[i]*j+1*Signal[J20[i]+j]-Signal[J20[i]]);
 			Distance.push_back(distance_numerator/distance_denumerator);
 		}
 
@@ -63,13 +58,11 @@ vector< int> STSegment :: computeMaxDistanceIndex (vector <double> Slope,  vecto
 		
 		MaxDistance.push_back(*result);
 		IndeksMax=distance(Distance.begin(), result);
-		if( i < J20.size()){ //mega szpachla
-			MaxDistanceIndex.push_back(J20[i]+IndeksMax); 
-		}else MaxDistanceIndex.push_back(J20[J20.size()-1]+IndeksMax);
+		MaxDistanceIndex.push_back(J20[i]+IndeksMax);
 			
 	}
 
-	return MaxDistanceIndex; //Ton Ta funkcja jest tak naiwna, ze nie ma szans zebym to zdebugowa³
+	return MaxDistanceIndex; //Ton 
 }
 
 vector<string> STSegment :: defineOffsetLevel ( )
@@ -110,9 +103,9 @@ vector<double> STSegment :: correctSlopeorMaxDistanceForShapeST (vector <double>
 	return ForShapeST;
 }
 
-vector<unsigned int> STSegment :: correctTEForShapeST ()
+vector<int> STSegment :: correctTEForShapeST ()
 {
-	vector <unsigned int> ForShapeST;
+	vector < int> ForShapeST;
 	for(int i=0;i<OffsetLevel.size();i++)
 	{
 		if(OffsetLevel[i]=="higher") ForShapeST.push_back(Ton[i]);
@@ -213,15 +206,15 @@ void STSegment :: CorrectSize()
 	SizeVector=*min_element(begin(Size), end(Size));
 }
 
-STSegmentResult* STSegment:: compute(ResultKeeper *rkp)
+STSegmentResult* STSegment:: compute(ResultKeeper* rkp)
 {
-	this->Signal= rkp->getECGBaseline()->filteredSignal;	
-	this->Frequency=360; //rkp->getInput()->GetFs();
+	this->Signal = rkp->getECGBaseline()->getFilteredSignal();	
+	this->Frequency=360;
 	
-	this->QRSonset= rkp->getWaves()->GetWavesResultData()["QRS_ONSET"]; // zmieniæ nazwe klucza jeœli inna !!!
-	this->QRSend=rkp->getWaves()->GetWavesResultData()["QRS_END"];
-	this->Tpeak=rkp->getWaves()->GetWavesResultData()["T_PEAK"];
-	this->Rpeak=rkp->getRPeaks()->getRPeaks();
+	this->QRSonset= rkp->getWaves()->GetWavesResultData()["QRS_ONSET"]; // zmieniÃ¦ nazwe klucza jeÅ“li inna !!!
+	this->QRSend = rkp->getWaves()->GetWavesResultData()["QRS_END"];  
+	this->Tpeak = rkp->getWaves()->GetWavesResultData()["T_PEAKS"]; 
+	this->Rpeak = rkp->getRPeaks()->getRPeaks();
 	k1offset=-0.1;
 	k2offset=0.1;
 	threshold=0.15;
@@ -229,16 +222,12 @@ STSegmentResult* STSegment:: compute(ResultKeeper *rkp)
 	k2slope=0.15;
 	CorrectSize();
 	Run();
-	STSegmentResult b = STSegmentResult();
-	b.OffsetLevel = OffsetLevel;
-	b.ShapeST = ShapeST;
-	b.TypeShapeST = TypeShapeST;
-	b.QRSend = QRSend;
-	b.Ton = Ton;
-	
-	return b.getResult();
+
+	std::map <string, vector<string>>params;
+	params["OffsetLevel"] = OffsetLevel;
+	params["ShapeST"] = ShapeST;
+	params["TypeShapeST"] = TypeShapeST;
+	STSegmentResult *p = new STSegmentResult();       //(OffsetLevel,ShapeST,TypeShapeST,QRSend,Ton);
+	p->SetSTSegmentResultData(params);
+	return p;
 }
-
-
-
-

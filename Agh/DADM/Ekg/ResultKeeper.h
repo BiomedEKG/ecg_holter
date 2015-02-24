@@ -19,6 +19,7 @@
 #include "RPeaksDetectionAlgorithms.h"
 #include "SleepApneaMetrics.h"
 #include <ResultVCG.h>
+#include <QTDispResult.h>
 
 using namespace std;
 
