@@ -12,6 +12,7 @@
 #include "stsegment.h"
 #include "VCGTLOOP.h"
 #include "SelectModuleMenu.h"
+#include "QTDispersion.h"
 #include <QDebug>
 
 
@@ -94,7 +95,8 @@ void MajesticEngineOfGlory::run()
 
 			std::cout << "Waves done\n";
 		}
-
+		//qt_disp q = qt_disp();
+		//q.compute(rkp);
 		/*HeartClass heartClass;
 		rkp->setHeartClass(heartClass.compute(rkp));
 		HeartClassResult* heartClassRes = rkp ->getHeartClass();*/

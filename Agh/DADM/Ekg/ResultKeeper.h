@@ -59,6 +59,7 @@ class ResultKeeper
 	//	RaportGenerator* getRaportGenerator();
 		SigEDResult* getSIG_EDR();
 		ResultVCG* getVCG();
+		QTDispResult* getQTDispersion();
 
 		void setVCG(ResultVCG* vcg);
 		void setAtrialFibrillation(AtrfibrResult* atr);
@@ -69,6 +70,7 @@ class ResultKeeper
 		void setHRV1(HRV1Result *hrv1);
 		void setSleepApnea(SleepApneaResult *sleepApnea);
 		void setTWaves(TWavesAltResult *tWaves);
+		void setQTDispersion(QTDispResult* qtDisp);
 	//	EctopicBeat* getEctopicBeat();
 	
 	//	HRT* getHRT();
@@ -130,7 +132,7 @@ class ResultKeeper
 	
 	//	HRT *hrt;
 		
-		int qtDisp;  // ja chce jeszcze troche pozyc a nie peknac z nerwów
+		QTDispResult* qtDisp;  
 	//	Input *input;
 	//	RaportGenerator *raportGenerator;
 		SigEDResult *sigEDR;
