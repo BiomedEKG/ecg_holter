@@ -23,21 +23,21 @@ class HeartClass : public AbstractModule<HeartClassResult>{
 		map<int, vector<double> > yQRS;
 		map<int, vector<double> > samplesBetweenMax;
 
+		vector<double> artifactsClass;
+		vector<double> artifactsForClassification;
+		vector<double> goodQrsNumber;
+
 		vector<double> qrsMinAmplitudes;
 		vector<double> qrsMaxAmplitudes;
-		vector<int> qrsMinAmplitudesSamples;
-		vector<int> qrsMaxAmplitudesSamples;
-		
-		vector<double> leftMaxAmplitudeSamples;
-		vector<double> rightMaxAmplitudeSamples;
-		vector<double> leftMinAmplitudeSamples;
-		vector<double> rightMinAmplitudeSamples;
+		vector<double> qrsMinAmplitudesSamples;
+		vector<double> qrsMaxAmplitudesSamples;
 		
 		vector<double> maxArea;
 		vector<double> maxSamplesBetween;
 		vector<double> minSamplesBetween;
-		vector<int> qrsOnset;
-		vector<int> qrsEnd;
+		vector<double> qrsOnset;
+		vector<double> qrsEnd;
+		vector<double> signalFromEcg;
 		
 		double meanMaxAmplitude;
 		double meanMinAmplitude;
@@ -46,10 +46,11 @@ class HeartClass : public AbstractModule<HeartClassResult>{
 		double meanSamplesBetweenMin;
 		
 		HeartClassResult* compute(ResultKeeper* rkp);
+		HeartClass(ResultKeeper* rkp);
 		
-		void InputPrepare(ResultKeeper* rkp);
+		void InputPrepare();
 		double ComplexArea(vector<double>* tempArea);
-		void Amplitudes(vector<double>& temp);
+		void Amplitudes();
 		void FrameLocator();
 		void MeanAmplitude();
 		void SamplesBetween();

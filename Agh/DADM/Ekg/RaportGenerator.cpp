@@ -29,6 +29,15 @@ QStringList RaportGenerator::prepareDataForTable(const std::map<std::string, dou
 	}
 	return data;
 }
+ QStringList RaportGenerator::prepareDataForTable(const std::map<std::string, std::vector <int>>& paramValue){
+	QStringList data; 
+	//Wczytaj nag³owek 
+	data << "ECG component" << "No";
+	for (auto& x: paramValue){
+		data << QString::fromStdString(x.first) << QString::number(x.second.size());
+	}
+	return data;
+}
 //Rysuje sekcje dla Rpeaks -> ile Rpeaków wykryto + plot
 void RaportGenerator::drawRPeaks(QwtPlot* ptrPlot, int howManyRpeaks){
 	//Check whether at leat first object would fit in the page, so we can add subtitle 
@@ -71,12 +80,15 @@ void RaportGenerator::drawEDR(QwtPlot* ptrPlot){
 	addPlot(ptrPlot, true);
 }
 //Sekcja ST_SEGMENT -wykres
-void RaportGenerator::drawStSegment(QwtPlot* stPlot){
+void RaportGenerator::drawStSegment(QStringList dt){
 	//Check whether plot and text would fit in this page, if not skip to next page
-	if (isTooBig(stPlot -> size().height() + subTitleHeight))
+	int r = int((float) dt.size() / (float) noCols + 0.5);
+	r *= cellHeight;
+	//Check whether table and text would fit in this page, if not skip to next page
+	if (isTooBig(r + subTitleHeight))
 		createNewPage();
 	addSubtitle("ST Segment analysis results");
-	addPlot(stPlot,true);
+	addTable(dt, noCols, tableWidth, PdfGenerator::toBottom);
 }
 //Sekcja QT_DISP - jedna tabelka
 void RaportGenerator::drawQtDisp(QStringList dt){
@@ -85,7 +97,7 @@ void RaportGenerator::drawQtDisp(QStringList dt){
 	//Check whether table and text would fit in this page, if not skip to next page
 	if (isTooBig(r + subTitleHeight))
 		createNewPage();
-	addSubtitle("QT Dispersion");
+	addSubtitle("Dispersion of QT interval");
 	addTable(dt, noCols, tableWidth, PdfGenerator::toBottom);
 }
 //Sekcja HRT - jeden wykres + tabela
@@ -125,12 +137,15 @@ void RaportGenerator::drawVCG(QwtPlot* plot){
 
 }
 //Sekcja WAVES - jeden wykres
-void RaportGenerator::drawWaves(QwtPlot* plot){
-	//Check whether plot and text would fit in this page, if not skip to next page
-	if (isTooBig(plot -> size().height() + subTitleHeight))
+void RaportGenerator::drawWaves(QStringList tab){
+	int r = int((float) tab.size() / (float) noCols + 0.5);
+	r *= cellHeight;
+	//Check whether table and text would fit in this page, if not skip to next page
+	if (isTooBig(r + subTitleHeight))
 		createNewPage();
 	addSubtitle("ECG Waves Detection");
-	addPlot(plot, true);
+	addTable(tab, noCols, tableWidth, PdfGenerator::toBottom);
+
 }
 //Sekcja ATRIAL_FIBR - wykres, a pod spodem tableka
 void RaportGenerator::drawAtrialFibr(bool isDetected, QwtPlot* plot){

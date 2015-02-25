@@ -18,6 +18,7 @@ HeartClassResult* HeartClassResult::getResult(){
 	hcr->qrsClass = qrsClass;
 	return hcr;
 }
+
 map<string, double> HeartClassResult::getQrsParameters(){
 	return qrsParameters;
 }

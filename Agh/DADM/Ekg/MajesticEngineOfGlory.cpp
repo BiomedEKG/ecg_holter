@@ -55,45 +55,64 @@ void MajesticEngineOfGlory::run()
 			vector<unsigned int>xxx = r->getRPeaks();
 			std::cout << xxx.size() << "rozmiar po rpiksach" << endl;
 		}
-
-		//HRV1 hrv11 = HRV1();
-		//rkp->setHRV1(hrv11.compute(rkp));
-		//HRV1Result *hr1 = rkp->getHRV1();
-		//std::map<std::string, double> prvtimeParameters = hr1->prvtimeParameters;
-		//std::map<std::string, double> prvfreqParameters = hr1->prvfreqParameters;
-		//std::vector<double> powerHRV1 = hr1->prvpower;
-		//std::vector<double> freqHRV1 = hr1->prvfrequency;
-
-		//Hrv2 hrv2 = Hrv2();
-		//rkp->setHrv2(hrv2.compute(rkp));
-		//Hrv2Result*hr = rkp->getHrv2();
-		//map<string,double> paramsResult = hr->paramsResult;
-		//map<string,vector<double>> histResult = hr->histResult;
-		//map<string,vector<double>> poincareResult = hr->poincareResult;
-		//map<string,vector<double>> sdResult = hr->sdResult;
-		SIG_EDR sigEdr = SIG_EDR();
-		rkp->setSIG_EDR(sigEdr.compute(rkp));
-		//SigEDResult* sigRes = rkp->getSIG_EDR();
-		//SleepApnea sleepApnea = SleepApnea();
-		//rkp->setSleepApnea(sleepApnea.compute(rkp));
-		//SleepApneaResult* sleepApneaRes = rkp->getSleepApnea();
-		//std::cout << "sleep apnea: " << sleepApneaRes->Tend.size()<< endl;
-		//std::cout << "sleep apnea: " << sleepApneaRes->Tstart.size()<< endl;
-		//std::cout << "sleep apnea: " << sleepApneaRes->NrEp.size()<< endl;
-
-		if (selectModuleMenu->isModuleChecked(QRS_DETECTION_MODULE))
-		{
+		if (selectModuleMenu->isModuleChecked(FREQ_AND_TIME_DOMAIN_ANALYSIS_MODULE)){
+			HRV1 hrv1 = HRV1();
+			rkp->setHRV1(hrv1.compute(rkp));
+			//HRV1Result *hr1 = rkp->getHRV1();
+			//std::map<std::string, double> prvtimeParameters = hr1->prvtimeParameters;
+			//std::map<std::string, double> prvfreqParameters = hr1->prvfreqParameters;
+			//std::vector<double> powerHRV1 = hr1->prvpower;
+			//std::vector<double> freqHRV1 = hr1->prvfrequency;
+		}
+		if (selectModuleMenu->isModuleChecked(GEOMETRIC_ANALYSIS_MODULE)){
+			Hrv2 hrv2 = Hrv2();
+			rkp->setHrv2(hrv2.compute(rkp));
+			//Hrv2Result*hr = rkp->getHrv2();		
+			//map<string,double> paramsResult = hr->paramsResult;
+			//map<string,vector<double>> histResult = hr->histResult;
+			//map<string,vector<double>> poincareResult = hr->poincareResult;
+			//map<string,vector<double>> sdResult = hr->sdResult;
+			/*std::cout << paramsResult["apen"]<< endl;
+			std::cout << paramsResult["samen"]<<endl; 
+			std::cout << paramsResult["tinn"]<<endl;
+			std::cout << paramsResult["tri"]<<endl;
+			std::cout << paramsResult["sd1"]<<endl;
+			std::cout << paramsResult["sd2"] << " param hrv2" << endl;
+			std::cout << histResult["start_time"].size() << " hist size" << endl;
+			std::cout << poincareResult["x1"].size() << " poincare size" << endl;
+			std::cout << sdResult["sd1_x"].size() << " sdResult size" << endl;*/
+			//std::cout << histResult.size() << "rozmiar po rpiksach" << endl;
+			//std::cout << poincareResult.size() << "rozmiar po rpiksach" << endl;
+			//std::cout << sdResult.size() << "rozmiar po rpiksach" << endl;
+		}
+		if (selectModuleMenu->isModuleChecked(EDR_EXTRACTION_MODULE)){
+			SIG_EDR sigEdr = SIG_EDR();
+			rkp->setSIG_EDR(sigEdr.compute(rkp));
+			//SigEDResult* sigRes = rkp->getSIG_EDR();
+		}
+		if (selectModuleMenu->isModuleChecked(SLEEP_APNEA_MODULE)){
+			
+			SleepApnea sleepApnea = SleepApnea();
+			rkp->setSleepApnea(sleepApnea.compute(rkp));
+			//SleepApneaResult* sleepApneaRes = rkp->getSleepApnea(); //For debuging
+			//std::cout << "sleep apnea: " << sleepApneaRes->Tend.size()<< endl;
+			//std::cout << "sleep apnea: " << sleepApneaRes->Tstart.size()<< endl;
+			//std::cout << "sleep apnea: " << sleepApneaRes->NrEp.size()<< endl;
+		}
+		if (selectModuleMenu->isModuleChecked(QRS_DETECTION_MODULE)){
 			notifyCurrentModule("QRS detection");
 			Waves waves = Waves();
 			rkp->setWaves(waves.compute(rkp));
-			/*HeartClass heartClass;
-			rkp->setHeartClass(heartClass.compute(rkp));
-			HeartClassResult* heartClassRes = rkp ->getHeartClass();*/
-			/*map<string, double> qrsparam = heartClassRes->getQrsParameters();
-			std::cout << "vQRS:" << qrsparam["Number of ventricular QRS"] << endl;
-			std::cout << "artefakty" << qrsparam["Number of artifacts"] << endl;*/
-
 			std::cout << "Waves done\n";
+			
+		}
+		if (selectModuleMenu->isModuleChecked(QRS_CLASSIFICATION_MODULE)){
+			HeartClass heartClass(rkp);
+			rkp->setHeartClass(heartClass.compute(rkp));
+			//HeartClassResult* heartClassRes = rkp ->getHeartClass();
+			//map<string, double> qrsparam = heartClassRes->getQrsParameters();
+			//std::cout << "vQRS:" << qrsparam["Number of ventricular QRS"] << endl;
+			//std::cout << "artefakty" << qrsparam["Number of artifacts"] << endl;
 		}
 		//qt_disp q = qt_disp();
 		//q.compute(rkp);
@@ -130,18 +149,5 @@ void MajesticEngineOfGlory::run()
 			std::cout << "t waves: " << tWavesRes->startResult.size()<< endl;
 			std::cout << "t waves: " << tWavesRes->endResult.size()<< endl;
 		}
-
-		/*std::cout << paramsResult["apen"]<< endl;
-		std::cout << paramsResult["samen"]<<endl; 
-		std::cout << paramsResult["tinn"]<<endl;
-		std::cout << paramsResult["tri"]<<endl;
-		std::cout << paramsResult["sd1"]<<endl;
-		std::cout << paramsResult["sd2"] << " param hrv2" << endl;
-		std::cout << histResult["start_time"].size() << " hist size" << endl;
-		std::cout << poincareResult["x1"].size() << " poincare size" << endl;
-		std::cout << sdResult["sd1_x"].size() << " sdResult size" << endl;*/
-		//std::cout << histResult.size() << "rozmiar po rpiksach" << endl;
-		//std::cout << poincareResult.size() << "rozmiar po rpiksach" << endl;
-		//std::cout << sdResult.size() << "rozmiar po rpiksach" << endl;
 	}
 }

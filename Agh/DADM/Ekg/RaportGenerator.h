@@ -16,20 +16,21 @@ public:
 	explicit RaportGenerator(QString path2file);
 	~RaportGenerator(void);
 	//Funkcje do konwersji i przygotowania danych na tableki 
-	QStringList prepareDataForTable(const std::map<std::string, double>& paramValue, const std::string units[]);
-	QStringList prepareDataForTable(const std::map<std::string, double>& paramValue);
+	static QStringList prepareDataForTable(const std::map<std::string, double>& paramValue, const std::string units[]);
+	static QStringList prepareDataForTable(const std::map<std::string, double>& paramValue);
+	static QStringList prepareDataForTable(const std::map<std::string, std::vector <int>>& paramValue);
 	//Funkcje to rysowania poszczegolnych sekcji 
 	void drawRPeaks(QwtPlot* ptrPlot, int howManyRpeaks);
 	void drawHRV1(QwtPlot* ptrPlot, QStringList hrvTime, QStringList hrvFreqz);
 	void drawHRV2(QStringList nonlinear, QwtPlot* pointCare, QwtPlot* hist);
 	void drawEDR(QwtPlot* ptrPlot);
-	void drawStSegment(QwtPlot* dfa);
+	void drawStSegment(QStringList dt);
 	void drawQtDisp(QStringList dt);
 	void drawHrt(QStringList tabData, QwtPlot* hrtPlot);
 	void drawSleepApnea(QwtPlot* plot);
 	void drawTWaveAlt(QwtPlot* plot);
 	void drawVCG(QwtPlot* plot);
-	void drawWaves(QwtPlot* plot);
+	void drawWaves(QStringList tab);
 	void drawAtrialFibr(bool isDetected, QwtPlot* plot);
 	void drawHeartClass(QStringList tabData);
 	void drawEtiopic(QwtPlot* plot);

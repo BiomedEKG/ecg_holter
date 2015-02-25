@@ -52,7 +52,7 @@ private:
 	vector<vector<double>::const_iterator> p_end_it;
 	vector<vector<double>::const_iterator> t_onset_it;
 	vector<vector<double>::const_iterator> t_end_it;
-	//const vector<vector<double>::const_iterator> & get_qrs_begin(); // trzeba to sprawdzic w chuuuj
+	//const vector<vector<double>::const_iterator> & get_qrs_begin(); // trzeba to sprawdzic
 	//vector<vector<double>::const_iterator> p_onset_it;
 	//const vector<vector<double>::const_iterator> & get_p_onset();
 

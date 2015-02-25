@@ -34,18 +34,19 @@ const char* Export2Pdf(ResultKeeper* res, const char* filename){
 				delete mp.plotarea;
 
 			}
-			//WAVES - brak funkcji do wykresu
+			//WAVES - brak funkcji do wykresu, zmiana na tabelke
 			if (res->getWaves() != NULL){
 				//Tworzenie wykresu
-				//pdfWriter.drawWaves();
+				QStringList tab = RaportGenerator::prepareDataForTable(res->getWaves()->GetWavesResultData());
+				pdfWriter.drawWaves(tab);
 			}
 			//HRV1
 			if (res->getHRV1() != NULL){
 				//Tworzenie tabel
 				std::string tabtime[8] = {"ms", "ms", "ms", "-", "%", "ms", "ms", "ms"};
 				std::string tabfreq[6] = {"ms2", "ms2", "ms2", "ms2", "ms2", "-"};
-				QStringList hrvTime = pdfWriter.prepareDataForTable(res->getHRV1()->prvtimeParameters, tabtime);
-				QStringList hrvFreqz = pdfWriter.prepareDataForTable(res->getHRV1()->prvfreqParameters, tabfreq);
+				QStringList hrvTime = RaportGenerator::prepareDataForTable(res->getHRV1()->prvtimeParameters, tabtime);
+				QStringList hrvFreqz = RaportGenerator::prepareDataForTable(res->getHRV1()->prvfreqParameters, tabfreq);
 				//Tworzenie wykresu
 				MajorPlot mp;
 				HRV1_Visualization1(res->getHRV1()->prvfrequency, res->getHRV1()->prvpower, mp);
@@ -60,7 +61,7 @@ const char* Export2Pdf(ResultKeeper* res, const char* filename){
 				HRV2_Hist_Visualization(res->getHrv2()->histResult, mpHist);
 				//Tworzenie tabeli 
 				std::string units[] = {"-", "-", "ms", "-", "ms", "ms"}; 
-				QStringList data = pdfWriter.prepareDataForTable(res->getHrv2()->paramsResult, units);
+				QStringList data = RaportGenerator::prepareDataForTable(res->getHrv2()->paramsResult, units);
 				pdfWriter.drawHRV2(data, mpPointCare.plotarea, mpHist.plotarea);
 				delete mpHist.plotarea;
 				delete mpPointCare.plotarea;
@@ -85,14 +86,17 @@ const char* Export2Pdf(ResultKeeper* res, const char* filename){
 			}
 			//HEART_CLASS
 			if (res->getHeartClass() != NULL){
-				//pdfWriter.drawHeartClass();
+				QStringList tab = RaportGenerator::prepareDataForTable(res->getHeartClass()->getQrsParameters(), res->getHeartClass()->getQrsUnits());
+				pdfWriter.drawHeartClass(tab);
 			}
 			////EctopicBeat - nie do³¹czono
 			//if (res->getEctopicBeat() != NULL){
 			//	pdfWriter.drawEtiopic();
 			//}
-			//ST_SEGMENT
-			/*if (res->getSTSegmentResult() != NULL)
+			//ST_SEGMENT zamiana wykresu na tableke ^^, brak funkcji w result keeperze
+			/*if (res->getSTSegmentResult() != NULL){
+				QStringList tab = RaportGenerator::prepareDataForTable(res->getSTSegmentResult()->GeSTSegmentResultData());
+				pdfWriter.drawStSegment(tab);
 			}*/
 			//T ALT
 			if (res->getTWaves() != NULL){
@@ -111,10 +115,12 @@ const char* Export2Pdf(ResultKeeper* res, const char* filename){
 			if (res->getSleepApnea() != NULL){
 				//pdfWriter.drawSleepApnea();
 			}
-			//QT_DISP - nie do³aczono
-			/*if (res->getQTDisp() != NULL){
-				pdfWriter.drawQtDisp();
-			}*/
+			//QT_DISP
+			if (res->getQTDispersion()!= NULL){
+				QStringList tab;
+				tab << "QT Dispersion" << QString::number(res->getQTDispersion()->_iqrDispersion);
+				pdfWriter.drawQtDisp(tab);
+			}
 			
 		}
 	}
