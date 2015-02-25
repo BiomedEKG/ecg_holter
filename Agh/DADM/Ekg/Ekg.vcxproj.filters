@@ -90,6 +90,9 @@
     <Filter Include="Modules\HEART_CLASS">
       <UniqueIdentifier>{b0003b83-3a17-47e0-b489-3027fa99ef61}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\HRT">
+      <UniqueIdentifier>{e71d352a-48f9-4614-8715-7e3ff6a350d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
@@ -359,6 +362,21 @@
     <ClCompile Include="QTDispResult.cpp">
       <Filter>Modules\QTDisp</Filter>
     </ClCompile>
+    <ClCompile Include="HRT.cpp">
+      <Filter>Modules\HRT</Filter>
+    </ClCompile>
+    <ClCompile Include="HRTResult.cpp">
+      <Filter>Modules\HRT</Filter>
+    </ClCompile>
+    <ClCompile Include="PVC.cpp">
+      <Filter>Modules\HRT</Filter>
+    </ClCompile>
+    <ClCompile Include="TO.cpp">
+      <Filter>Modules\HRT</Filter>
+    </ClCompile>
+    <ClCompile Include="TS.cpp">
+      <Filter>Modules\HRT</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -584,6 +602,21 @@
     </ClInclude>
     <ClInclude Include="QTDispResult.h">
       <Filter>Modules\QTDisp</Filter>
+    </ClInclude>
+    <ClInclude Include="HRT.h">
+      <Filter>Modules\HRT</Filter>
+    </ClInclude>
+    <ClInclude Include="HRTResult.h">
+      <Filter>Modules\HRT</Filter>
+    </ClInclude>
+    <ClInclude Include="PVC.h">
+      <Filter>Modules\HRT</Filter>
+    </ClInclude>
+    <ClInclude Include="TO.h">
+      <Filter>Modules\HRT</Filter>
+    </ClInclude>
+    <ClInclude Include="TS.h">
+      <Filter>Modules\HRT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

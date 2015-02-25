@@ -14,7 +14,7 @@
 #include "SelectModuleMenu.h"
 #include "QTDispersion.h"
 #include <QDebug>
-
+#include "HRT.h"
 
 MajesticEngineOfGlory::MajesticEngineOfGlory() : QThread()
 {
@@ -109,10 +109,13 @@ void MajesticEngineOfGlory::run()
 		if (selectModuleMenu->isModuleChecked(QRS_CLASSIFICATION_MODULE)){
 			HeartClass heartClass(rkp);
 			rkp->setHeartClass(heartClass.compute(rkp));
-			//HeartClassResult* heartClassRes = rkp ->getHeartClass();
-			//map<string, double> qrsparam = heartClassRes->getQrsParameters();
-			//std::cout << "vQRS:" << qrsparam["Number of ventricular QRS"] << endl;
-			//std::cout << "artefakty" << qrsparam["Number of artifacts"] << endl;
+			HeartClassResult* heartClassRes = rkp ->getHeartClass();
+			map<string, double> qrsparam = heartClassRes->getQrsParameters();
+			std::cout << "vQRS:" << qrsparam["Number of ventricular QRS"] << endl;
+			std::cout << "artefakty" << qrsparam["Number of artifacts"] << endl;
+			HRT hrt;
+			rkp->setHRT(hrt.compute(rkp));
+
 		}
 		//qt_disp q = qt_disp();
 		//q.compute(rkp);

@@ -105,7 +105,9 @@ SigEDResult* ResultKeeper::getSIG_EDR() {
 HeartClassResult* ResultKeeper::getHeartClass(){
 	return heartClass;
 }
-
+HRTResult*  ResultKeeper::getHRT(){
+	return hrt;
+}
 void ResultKeeper::setECGBaseline(BaselineResult* baseline) {
 	this->ecgBaseline = baseline;
 }
@@ -179,7 +181,9 @@ void ResultKeeper:: setVCG(ResultVCG* vcg) {
 void ResultKeeper:: setQTDispersion(QTDispResult* qtDisp) {
 	this->qtDisp = qtDisp;
 }
-
+void ResultKeeper:: setHRT(HRTResult* hrtRes){
+	this->hrt = hrtRes;
+}
 
 QTDispResult* ResultKeeper::getQTDispersion() {
 	return qtDisp;

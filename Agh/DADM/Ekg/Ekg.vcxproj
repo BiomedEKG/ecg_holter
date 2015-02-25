@@ -167,6 +167,8 @@
     <ClCompile Include="gui\SleepApneaWidget.cpp" />
     <ClCompile Include="HeartClass.cpp" />
     <ClCompile Include="HeartClassResult.cpp" />
+    <ClCompile Include="HRT.cpp" />
+    <ClCompile Include="HRTResult.cpp" />
     <ClCompile Include="HRV1.cpp" />
     <ClCompile Include="HRV1Calculate.cpp" />
     <ClCompile Include="HRV1Result.cpp" />
@@ -186,6 +188,7 @@
     <ClCompile Include="PanTompkins.cpp" />
     <ClCompile Include="PdfGenerator.cpp" />
     <ClCompile Include="plot3D.cpp" />
+    <ClCompile Include="PVC.cpp" />
     <ClCompile Include="QTDispersion.cpp" />
     <ClCompile Include="QTDispResult.cpp" />
     <ClCompile Include="RaportGenerator.cpp" />
@@ -204,6 +207,8 @@
     <ClCompile Include="stsegmentresult.cpp" />
     <ClCompile Include="Table.cpp" />
     <ClCompile Include="TestModule.cpp" />
+    <ClCompile Include="TO.cpp" />
+    <ClCompile Include="TS.cpp" />
     <ClCompile Include="TWavesAlt.cpp" />
     <ClCompile Include="TWavesAltResult.cpp" />
     <ClCompile Include="VAbstractModule.cpp" />
@@ -314,6 +319,8 @@
     </CustomBuild>
     <ClInclude Include="HeartClass.h" />
     <ClInclude Include="HeartClassResult.h" />
+    <ClInclude Include="HRT.h" />
+    <ClInclude Include="HRTResult.h" />
     <ClInclude Include="HRV1.h" />
     <ClInclude Include="HRV1Calculate.h" />
     <ClInclude Include="HRV1Result.h" />
@@ -344,6 +351,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtPrintSupport"</Command>
     </CustomBuild>
+    <ClInclude Include="PVC.h" />
     <ClInclude Include="QTDispersion.h" />
     <ClInclude Include="QTDispResult.h" />
     <ClInclude Include="ResultVCG.h" />
@@ -358,6 +366,8 @@
     <ClInclude Include="stsegment.h" />
     <ClInclude Include="stsegmentresult.h" />
     <ClInclude Include="TestModule.h" />
+    <ClInclude Include="TO.h" />
+    <ClInclude Include="TS.h" />
     <ClInclude Include="TWavesAlt.h" />
     <ClInclude Include="TWavesAltResult.h" />
     <ClInclude Include="VAbstractModule.h" />

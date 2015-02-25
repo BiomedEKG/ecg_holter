@@ -18,6 +18,7 @@
 #include "ECGFiltrationMethod.h"
 #include "RPeaksDetectionAlgorithms.h"
 #include "SleepApneaMetrics.h"
+#include "HRTResult.h"
 #include <ResultVCG.h>
 #include <QTDispResult.h>
 #include "MajorPlot.h"
@@ -39,9 +40,9 @@ class ResultKeeper
 
 		//vector<double>* getRawSignalMV();
 		//void setRawSignalMV(vector<double>* signal);
-
+		char* pathToFile;
 		Input getSignalHandler();
-
+		Input* getInput();
 		AtrfibrResult* getAtrialFibrillation();
 		TWavesAltResult* getTWaves();		
 		Hrv2Result* getHrv2();
@@ -49,39 +50,27 @@ class ResultKeeper
 		HRV1Result* getHRV1();
 		HeartClassResult* getHeartClass();
 		BaselineResult* getECGBaseline();
-		char* pathToFile;
-	//	EctopicBeat* getEctopicBeat();
 		STSegmentResult* getSTSegmentResult();
-	//	HRT* getHRT();
+		HRTResult* getHRT();
 		SleepApneaResult* getSleepApnea();
-	//	QTDisp* getQTDisp();
-	//	Input* getInput();
-	//	RaportGenerator* getRaportGenerator();
 		SigEDResult* getSIG_EDR();
 		ResultVCG* getVCG();
 		QTDispResult* getQTDispersion();
-
+		WavesResult* getWaves();
+		//	EctopicBeat* getEctopicBeat();
 		void setVCG(ResultVCG* vcg);
 		void setAtrialFibrillation(AtrfibrResult* atr);
 		void setHrv2(Hrv2Result* hrv2);
 		void setRPeaks(RPeaksResult* rpr);
-	//	HeartClass* getHeartClass();
 		void setECGBaseline(BaselineResult *baseline);
 		void setHRV1(HRV1Result *hrv1);
 		void setSleepApnea(SleepApneaResult *sleepApnea);
 		void setTWaves(TWavesAltResult *tWaves);
 		void setQTDispersion(QTDispResult* qtDisp);
-	//	EctopicBeat* getEctopicBeat();
-	
-	//	HRT* getHRT();
-	//	QTDisp* getQTDisp();
-		Input* getInput();
 		void setWaves(WavesResult* wr);
 		void setHeartClass(HeartClassResult* ptrHeartClassRes);
-		WavesResult* getWaves();
-	//	RaportGenerator* getRaportGenerator();
 		void setSIG_EDR(SigEDResult* sigEdr);
-		
+		void setHRT(HRTResult* hrtRes);
 	
 		 vector<double>  getSingleChannel(char* path, int channelNumber);
 
@@ -122,22 +111,16 @@ class ResultKeeper
 		RPeaksResult *rPeaks;
 		HRV1Result *hrv1;
 		TWavesAltResult *tWaves;
-	//	HRV1 *hrv1;
 		HeartClassResult *heartClass;
 		BaselineResult *ecgBaseline;
 		WavesResult *wavesResult;
 		SleepApneaResult *sleepApnea;
 	//	EctopicBeat *ectopicBeat;
 		STSegmentResult *stSegmentResult;
-	
-	//	HRT *hrt;
-		
 		QTDispResult* qtDisp;  
-	//	Input *input;
-	//	RaportGenerator *raportGenerator;
 		SigEDResult *sigEDR;
-		ResultVCG* vcgResult;
-		
+		ResultVCG* vcgResult;	
+		HRTResult* hrt;
 };
 
 
