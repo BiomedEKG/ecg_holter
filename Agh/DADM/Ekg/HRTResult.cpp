@@ -12,7 +12,7 @@ HRTResult* HRTResult :: getResult(){
 	res->setTS_value(this->getTS_value());
 	res->setY(this->getY());
 	res->setX(this->getX());
-					//tutaj jakiœ enum czy co tam ma byæ =)
+	res->paramType = HRT;				//tutaj jakiœ enum czy co tam ma byæ =)
 
 	return res;
 }

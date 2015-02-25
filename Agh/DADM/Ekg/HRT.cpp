@@ -6,9 +6,9 @@
 
 HRTResult* HRT :: compute (ResultKeeper *rkp) const{
 
-	 double samplingFrequency = rkp->getNAZWAMODU£U.samplingFrequency;
-	 std::vector <double> R_peaks = rkp->getR_PEAKS.wektorRpeaksow;   //jeszcze nie wiem jak to bêdzie wygl¹daæ
-	 std::vector <double> R_class = rkp->getR_class.wektor_z_numerkami_klas;	//ani to...
+	 double samplingFrequency = rkp->getInput()->GetFs();
+	 std::vector <double> R_peaks = rkp->getRPeaks()->getRPeaks;   
+	 std::vector <double> R_class = rkp->getHeartClass().qrsClass;	//nie wiem czo to ma tutaj byæ...
 
 	 PVC a;
 

@@ -53,6 +53,10 @@ void PVC::findPVC(std::vector<double> R_peaks, std::vector<double> R_class){
 	std::vector<double>::iterator it;
 	std::vector<double>::iterator R_it = R_class.begin();
 
+	for(it=R_class.begin(); it!=R_class.end(); it++){
+		*it -= 1;
+	}
+
 	for(it=R_peaks.begin(); it!=R_peaks.end(); it++, R_it++, i++){
 		if(*R_it == PVCclass){
 			
@@ -173,7 +177,7 @@ void PVC::ArtefactsRemover(std::vector<std::vector<double>> QRSc, std::vector<st
 	for(i=0; i<tach.size(); i++){
 		for(tach_it = tach[i].begin(); tach_it != tach[i].end(); tach_it++, i++){
 			if(SUMvek[i]>1 || inRRrange[i]==false || inMeanRange[i]==false){
-				std::cout<< "rejected!!!";
+				
 				this->www.rejected.push_back(std::vector<double>());
 				this->www.rejected[i].insert(this->www.rejected[i].begin(), tach_it, tach[i].end()-1);
 				break;
@@ -186,7 +190,7 @@ void PVC::ArtefactsRemover(std::vector<std::vector<double>> QRSc, std::vector<st
 			}
 		}
 	}
-	std::cout<<"chujowo";
+	
 	if(this->accepted_counter!=0){
 		
 		i=0;
@@ -204,7 +208,7 @@ void PVC::ArtefactsRemover(std::vector<std::vector<double>> QRSc, std::vector<st
 		}
 	}
 
-	std::cout<< "SUMVEK     " << SUMvek[0] << std::endl << "inRRange   " << inRRrange[0] << std::endl << "MeanRange   " << RR_mean[0] << std::endl << "inMeanRange   " << inMeanRange[0] << std::endl;
+	//std::cout<< "SUMVEK     " << SUMvek[0] << std::endl << "inRRange   " << inRRrange[0] << std::endl << "MeanRange   " << RR_mean[0] << std::endl << "inMeanRange   " << inMeanRange[0] << std::endl;
 	
 
 }
