@@ -21,6 +21,7 @@
 #include "HRTResult.h"
 #include <ResultVCG.h>
 #include <QTDispResult.h>
+#include <EctopicBeatResult.h>
 #include "MajorPlot.h"
 
 using namespace std;
@@ -50,6 +51,7 @@ class ResultKeeper
 		HRV1Result* getHRV1();
 		HeartClassResult* getHeartClass();
 		BaselineResult* getECGBaseline();
+		EctopicBeatResult* getEctopicBeat();
 		STSegmentResult* getSTSegmentResult();
 		HRTResult* getHRT();
 		SleepApneaResult* getSleepApnea();
@@ -71,6 +73,7 @@ class ResultKeeper
 		void setHeartClass(HeartClassResult* ptrHeartClassRes);
 		void setSIG_EDR(SigEDResult* sigEdr);
 		void setHRT(HRTResult* hrtRes);
+		void setEctopicBeat(EctopicBeatResult* ectopicBeat);
 	
 		 vector<double>  getSingleChannel(char* path, int channelNumber);
 
@@ -121,6 +124,7 @@ class ResultKeeper
 		SigEDResult *sigEDR;
 		ResultVCG* vcgResult;	
 		HRTResult* hrt;
+		EctopicBeatResult* ectopicBeat;
 };
 
 

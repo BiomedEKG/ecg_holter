@@ -85,6 +85,8 @@
     <ClCompile Include="Chebyshev.cpp" />
     <ClCompile Include="CubicSpline.cpp" />
     <ClCompile Include="ECGBaseline.cpp" />
+    <ClCompile Include="EctopicBeatModule.cpp" />
+    <ClCompile Include="EctopicBeatResult.cpp" />
     <ClCompile Include="Export2Pdf.cpp" />
     <ClCompile Include="Filter.cpp" />
     <ClCompile Include="Functions.cpp" />
@@ -227,6 +229,8 @@
     <ClInclude Include="CubicSpline.h" />
     <ClInclude Include="CurvePlot.h" />
     <ClInclude Include="ECGBaseline.h" />
+    <ClInclude Include="EctopicBeatModule.h" />
+    <ClInclude Include="EctopicBeatResult.h" />
     <ClInclude Include="Export2Pdf.h" />
     <ClInclude Include="Filter.h" />
     <ClInclude Include="FilterType.h" />

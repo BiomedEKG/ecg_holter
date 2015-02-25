@@ -93,6 +93,9 @@
     <Filter Include="Modules\HRT">
       <UniqueIdentifier>{e71d352a-48f9-4614-8715-7e3ff6a350d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\EctopicBeat">
+      <UniqueIdentifier>{dd1778be-896a-492d-9ada-8eb5945b483c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_ekg.cpp">
@@ -377,6 +380,12 @@
     <ClCompile Include="TS.cpp">
       <Filter>Modules\HRT</Filter>
     </ClCompile>
+    <ClCompile Include="EctopicBeatModule.cpp">
+      <Filter>Modules\EctopicBeat</Filter>
+    </ClCompile>
+    <ClCompile Include="EctopicBeatResult.cpp">
+      <Filter>Modules\EctopicBeat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ekg.qrc">
@@ -617,6 +626,12 @@
     </ClInclude>
     <ClInclude Include="TS.h">
       <Filter>Modules\HRT</Filter>
+    </ClInclude>
+    <ClInclude Include="EctopicBeatModule.h">
+      <Filter>Modules\EctopicBeat</Filter>
+    </ClInclude>
+    <ClInclude Include="EctopicBeatResult.h">
+      <Filter>Modules\EctopicBeat</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

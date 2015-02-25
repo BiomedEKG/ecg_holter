@@ -13,6 +13,7 @@
 #include "VCGTLOOP.h"
 #include "SelectModuleMenu.h"
 #include "QTDispersion.h"
+#include "EctopicBeatModule.h"
 #include <QDebug>
 #include "HRT.h"
 
@@ -103,9 +104,22 @@ void MajesticEngineOfGlory::run()
 			notifyCurrentModule("QRS detection");
 			Waves waves = Waves();
 			rkp->setWaves(waves.compute(rkp));
-			std::cout << "Waves done\n";
-			
+		/*	EctopicBeatModule ectopic = EctopicBeatModule();
+			rkp->setEctopicBeat(ectopic.compute(rkp));
+			std::cout << "Ectopic done\n";*/
+			std::cout << "Waves done\n";	
 		}
+
+		//if (selectModuleMenu->isModuleChecked(ECTOPIC_BEAT_MODULE)){
+		//	// notifyCurrentModule("QRS detection");
+		//	EctopicBeatModule ectopic = EctopicBeatModule();
+		//	rkp->setEctopicBeat(ectopic.compute(rkp));
+		//	std::cout << "Ectopic done\n";	
+		//}
+
+
+
+
 		if (selectModuleMenu->isModuleChecked(QRS_CLASSIFICATION_MODULE)){
 			HeartClass heartClass(rkp);
 			rkp->setHeartClass(heartClass.compute(rkp));
@@ -114,7 +128,9 @@ void MajesticEngineOfGlory::run()
 			std::cout << "vQRS:" << qrsparam["Number of ventricular QRS"] << endl;
 			std::cout << "artefakty" << qrsparam["Number of artifacts"] << endl;
 			HRT hrt;
-			rkp->setHRT(hrt.compute(rkp));
+			//rkp->setHRT(hrt.compute(rkp));
+			EctopicBeatModule ectopic = EctopicBeatModule();
+			rkp->setEctopicBeat(ectopic.compute(rkp));
 
 		}
 		//qt_disp q = qt_disp();

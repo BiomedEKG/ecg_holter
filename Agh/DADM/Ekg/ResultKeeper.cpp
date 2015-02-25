@@ -70,6 +70,10 @@ AtrfibrResult* ResultKeeper::getAtrialFibrillation() {
 	return atrialFibrillation;
 }
 
+EctopicBeatResult* ResultKeeper::getEctopicBeat(){
+	return ectopicBeat;
+}
+
 BaselineResult* ResultKeeper::getECGBaseline(){
 	return ecgBaseline;
 }
@@ -183,6 +187,9 @@ void ResultKeeper:: setQTDispersion(QTDispResult* qtDisp) {
 }
 void ResultKeeper:: setHRT(HRTResult* hrtRes){
 	this->hrt = hrtRes;
+}
+void ResultKeeper:: setEctopicBeat(EctopicBeatResult* ectopicBeat){
+	this->ectopicBeat = ectopicBeat;
 }
 
 QTDispResult* ResultKeeper::getQTDispersion() {
