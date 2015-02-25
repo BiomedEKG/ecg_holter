@@ -35,7 +35,6 @@ private slots:
 	void rPeaksDetectionAlgorithmChanged(RPeaksDetectionAlgorithm algorithm, const QString &name);
 	void sleepApneaMethodChanged(SleepApneaMetrics method, const QString &name);
 	void graphZoomIn();
-	void graphZoomOut();
 	void graphHandCursor();
 	void graphPointerCursor();
 	void computationsStart();

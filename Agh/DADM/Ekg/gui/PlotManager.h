@@ -12,7 +12,6 @@ public:
 	PlotManager(QWidget *parent = 0);
 
 	QPushButton *zoomIn;
-	QPushButton *zoomOut;
 	QPushButton *handCursor;
 	QPushButton *pointerCursor;
 };

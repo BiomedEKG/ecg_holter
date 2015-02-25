@@ -50,7 +50,6 @@ MainWindow::MainWindow(QWidget *parent)
 	mainWidget = new MainWidget(this);
 
 	connect(mainWidget->getPlotManager()->zoomIn, SIGNAL(clicked()), this, SLOT(graphZoomIn()));
-	connect(mainWidget->getPlotManager()->zoomOut, SIGNAL(clicked()), this, SLOT(graphZoomOut()));
 	connect(mainWidget->getPlotManager()->handCursor, SIGNAL(clicked()), this, SLOT(graphHandCursor()));
 	connect(mainWidget->getPlotManager()->pointerCursor, SIGNAL(clicked()), this, SLOT(graphPointerCursor()));
 
@@ -336,25 +335,22 @@ void MainWindow::sleepApneaMethodChanged(SleepApneaMetrics method, const QString
 void MainWindow::graphZoomIn()
 {
 	ZoomIn(ResultKeeper::getInstance().ecgBaselineGraph());
-	statusBar()->showMessage("Graph: Zoom in", 2000);
-}
-
-void MainWindow::graphZoomOut()
-{
-	ZoomOut(ResultKeeper::getInstance().ecgBaselineGraph());
-	statusBar()->showMessage("Graph: Zoom out", 2000);
+	PickerOff(ResultKeeper::getInstance().ecgBaselineGraph());
+	PannerOff(ResultKeeper::getInstance().ecgBaselineGraph());
+	statusBar()->showMessage("Graph: Zoom", 2000);
 }
 
 void MainWindow::graphHandCursor()
 {
+	ZoomOut(ResultKeeper::getInstance().ecgBaselineGraph());
 	PickerOff(ResultKeeper::getInstance().ecgBaselineGraph());
 	PannerOn(ResultKeeper::getInstance().ecgBaselineGraph());
-
 	statusBar()->showMessage("Graph: Hand cursor", 2000);
 }
 
 void MainWindow::graphPointerCursor()
 {
+	ZoomOut(ResultKeeper::getInstance().ecgBaselineGraph());
 	PannerOff(ResultKeeper::getInstance().ecgBaselineGraph());
 	PickerOn(ResultKeeper::getInstance().ecgBaselineGraph());
 
@@ -371,10 +367,21 @@ void MainWindow::computationsEnd()
 	computeButton->setText(tr("Compute"));
 	statusBar()->showMessage(tr("Computing: Done"), 5000);
 
-	ResultKeeper *rkp = &ResultKeeper::getInstance();
-	vector<double> signal = rkp->getECGBaseline()->getFilteredSignal();
-	vector<double> timeDomain = rkp->getTimeDomain();
-	ECGBaselineVisualization(signal, timeDomain, rkp->ecgBaselineGraph(), "signal");
+	if (selectModuleMenu->isModuleChecked(ECG_FILTRATION_MODULE))
+	{
+		ResultKeeper *rkp = &ResultKeeper::getInstance();
+		vector<double> signal = rkp->getECGBaseline()->getFilteredSignal();
+		vector<double> timeDomain = rkp->getTimeDomain();
+		if (!selectModuleMenu->isModuleChecked(R_PEEKS_DETECTION_MODULE))
+		{
+			ECGBaselineVisualization(signal, timeDomain, rkp->ecgBaselineGraph(), "signal");
+		}
+		else
+		{
+			RPeaksResult*r =  rkp->getRPeaks();
+			RPeaksVisualization(signal, timeDomain, r->getRPeaks(), rkp->ecgBaselineGraph(), "signal");
+		}
+	}
 }
 
 void MainWindow::computingModuleSwitched(const QString &msg)
