@@ -32,7 +32,7 @@ QStringList RaportGenerator::prepareDataForTable(const std::map<std::string, dou
  QStringList RaportGenerator::prepareDataForTable(const std::map<std::string, std::vector <int>>& paramValue){
 	QStringList data; 
 	//Wczytaj nag³owek 
-	data << "ECG component" << "No";
+	data << "ECG_Component" << "No.";
 	for (auto& x: paramValue){
 		data << QString::fromStdString(x.first) << QString::number(x.second.size());
 	}
@@ -144,7 +144,7 @@ void RaportGenerator::drawWaves(QStringList tab){
 	if (isTooBig(r + subTitleHeight))
 		createNewPage();
 	addSubtitle("ECG Waves Detection");
-	addTable(tab, noCols, tableWidth, PdfGenerator::toBottom);
+	addTable(tab, 2, tableWidth, PdfGenerator::toBottom);
 
 }
 //Sekcja ATRIAL_FIBR - wykres, a pod spodem tableka
