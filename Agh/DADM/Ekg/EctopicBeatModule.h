@@ -25,7 +25,7 @@ class EctopicBeatModule : public AbstractModule<EctopicBeatResult>
         vector<double> ectopicBeat;
         map<string, vector<double> > classifiedBeats;
         vector<double> searchEctopic (vector<double> resultFromRPeaks);
-        map<string, vector<double> > classificationOfBeats (map<int, vector<double> > resultFromHeartClass, vector<double> ectopicBeat);
+        map<string, vector<double> > classificationOfBeats (map<string, vector<int> > resultFromHeartClass, vector<double> ectopicBeat);
 
         virtual ectopicBeatResult* compute(ResultKeeper* rkp) const override;
 };

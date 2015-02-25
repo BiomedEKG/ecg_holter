@@ -35,26 +35,26 @@ vector<double> EctopicBeatModule::searchEctopic (vector<double> resultFromRPeaks
     return ectopicBeat;
 }
 
-map<string, vector<double> > EctopicBeatModule::classificationOfBeats (map<int, vector<double> > resultFromHeartClass, vector<double> ectopicBeat) {
+map<string, vector<double> > EctopicBeatModule::classificationOfBeats (map<string, vector<int> > resultFromHeartClass, vector<double> ectopicBeat) {
     // zakladamy, ze HEART_CLASS bedzie wypluwac trzy klasy: 1(nadkomorowe), 2(komorowe) i 3(artefakty/inne)
 
-    for (vector<double>::size_type i = 0; i < resultFromHeartClass[1].size(); i++ ) {
+    for (vector<double>::size_type i = 0; i < resultFromHeartClass["NormalQRS"].size(); i++ ) {
         for (vector<double>::size_type j = 0; j < ectopicBeat.size(); j++ ) {
-            if (ectopicBeat [j] == resultFromHeartClass[1] [i]) {
-                classifiedBeats ["S"].push_back(resultFromHeartClass[1] [i]);
+            if (ectopicBeat [j] == resultFromHeartClass["NormalQRS"] [i]) {
+                classifiedBeats ["S"].push_back(resultFromHeartClass["NormalQRS"] [i]);
             }
             else {
-                classifiedBeats ["N"].push_back(resultFromHeartClass[1] [i]);
+                classifiedBeats ["N"].push_back(resultFromHeartClass["NormalQRS"] [i]);
             }
         }
     }
 
-    for (vector<double>::size_type i = 0; i < resultFromHeartClass[2].size(); i++ ) {
-        classifiedBeats ["V"].push_back(resultFromHeartClass[2] [i]);
+    for (vector<double>::size_type i = 0; i < resultFromHeartClass["VQRS"].size(); i++ ) {
+        classifiedBeats ["V"].push_back(resultFromHeartClass["VQRS"] [i]);
     }
 
-    for (vector<double>::size_type i = 0; i < resultFromHeartClass[3].size(); i++ ) {
-        classifiedBeats ["X"].push_back(resultFromHeartClass[3] [i]);
+    for (vector<double>::size_type i = 0; i < resultFromHeartClass["Artifacts"].size(); i++ ) {
+        classifiedBeats ["X"].push_back(resultFromHeartClass["Artifacts"] [i]);
     }
 
     return classifiedBeats;
