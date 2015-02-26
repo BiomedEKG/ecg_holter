@@ -6,7 +6,7 @@ SelectModulesPrivate::SelectModulesPrivate(QObject *parent)
 {
 	plotECG = new QAction("Plot ECG", parent);
 	ecgFiltration = new QAction("ECG filtration", parent);
-    rPeeksDetection = new QAction("R peeks detection", parent);
+    rPeeksDetection = new QAction("R peaks detection", parent);
     qrsDetection = new QAction("QRS detection", parent);
 	edrExtraction = new QAction("EDR extraction", parent);
 

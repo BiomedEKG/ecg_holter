@@ -6,7 +6,7 @@ class ModuleTimer {
 
 public:
 	ModuleTimer();
-	int measureModuleTimeOfExecution(VAbstractModule &vab, ResultKeeper &result, int rounds);
+	int measureModuleTimeOfExecution(VAbstractModule &vab, ResultKeeper* result, int rounds);
 };
 
 #endif

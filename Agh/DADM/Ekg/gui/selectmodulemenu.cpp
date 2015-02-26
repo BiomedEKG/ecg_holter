@@ -22,7 +22,7 @@ SelectModuleMenu::SelectModuleMenu(QWidget *parent) :
 	d->rPeeksDetectionGroup->append(d->hrv);
 	d->rPeeksDetectionGroup->append(d->qrsDetection);
 	d->rPeeksDetectionGroup->append(d->edrExtraction);
-	d->rPeeksDetectionGroup->append(d->vcg);
+	
 	addActions(*(d->rPeeksDetectionGroup));
 
 	QList<QAction *> hrvModules;
@@ -41,6 +41,7 @@ SelectModuleMenu::SelectModuleMenu(QWidget *parent) :
 	d->qrsDetectionGroup->append(d->qrsClassification);
 	d->qrsDetectionGroup->append(d->atrialFibrilation);
 	d->qrsDetectionGroup->append(d->sleepApnea);
+	d->qrsDetectionGroup->append(d->vcg);
 	addActions(*(d->qrsDetectionGroup));
 
 	QList<QAction *> qrsAnalysisModules;
